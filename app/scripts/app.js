@@ -12,32 +12,7 @@ var angularCmsApp = angular.module('angularCmsApp', ['ui'])
 
     $routeProvider
       .when('/', {
-        templateUrl: 'views/about.html',
-        controller: 'MainCtrl',
-        resolve: routeResolver
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        resolve: routeResolver
-      })
-      .when('/portfolio', {
-        templateUrl: 'views/portfolio.html',
-        controller: 'PortfolioCtrl',
-        resolve: routeResolver
-      })
-      .when('/contact', {
-        templateUrl: 'views/contact.html',
-        controller: 'ContactCtrl',
-        resolve: routeResolver
-      })
-      .when('/manage', {
-        templateUrl: 'views/manage.html',
-        controller: 'ManageCtrl',
-        resolve: routeResolver
-      })
-	  .when('/code', {
-        templateUrl: 'views/code.html',
+        templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         resolve: routeResolver
       })
@@ -87,9 +62,9 @@ angularCmsApp.controller('AppCtrl', function($scope, $rootScope, $http, $compile
 		sitetitle: 'angular-cms',
 		menu: {
 			nav: [
-			//	{id: null, href: '#/', title: 'Jonnie Spratley'},
-			//	{id: null, href: '#/about', title: 'About'},
-			//	{id: null, href: '#/portfolio', title: 'Portfolio'},
+		//		{id: null, href: '#/', title: 'Home'},
+				//{id: null, href: '#/', title: 'About'},
+				{id: null, href: '#/settings', title: 'Settings'},
 			//	{id: null, href: '#/code', title: 'Code'},
 			//	{id: null, href: '#/contact', title: 'Contact'}
 			]
