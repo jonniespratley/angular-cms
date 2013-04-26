@@ -1,7 +1,24 @@
 {
   "name": "angular-cms",
-  "version": "0.0.0",
-  "dependencies": {},
+  "version": "0.0.1",
+	"dependencies": {
+    "mongodb": "1.1.x",
+    "mongoose": "3.3.x",
+    "request": "2.0.x",
+    "express": "3.x",
+    "url": "0.7.x",
+	"http-proxy": "0.8.x",
+	"socket.io" : "0.9.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonniespratley/angular-cms.git"
+  },
+  "author": {
+    "name": "Jonnie Spratley",
+    "email": "jonnie@appmatrixinc.com",
+    "url": "http://blog.myappmatrix.com"
+  },
   "devDependencies": {
     "grunt": "0.4.0rc7",
     "grunt-contrib-copy": "0.4.0rc7",
@@ -27,5 +44,12 @@
   },
   "engines": {
     "node": ">=0.8.0"
+  },
+ "scripts": {
+    "start": "node ./server.js;",
+    "test": "vows --spec --isolate",
+    "debug": "node server ./server.js -debug",
+    "predeploy": "echo This will be run before deploying the app",
+    "postdeploy": "echo This will be run after deploying the app"
   }
 }
