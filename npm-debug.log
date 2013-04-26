@@ -1,0 +1,351 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'easy_rackimg' ]
+2 info using npm@1.2.14
+3 info using node@v0.8.22
+4 verbose read json /WWW/2013Projects/angular-cms/package.json
+5 warn package.json angular-cms@0.0.1 No README.md file found!
+6 verbose read json /WWW/2013Projects/angular-cms/node_modules/cloudfiles/package.json
+7 verbose read json /WWW/2013Projects/angular-cms/node_modules/colors/package.json
+8 verbose read json /WWW/2013Projects/angular-cms/node_modules/easyimage/package.json
+9 verbose read json /WWW/2013Projects/angular-cms/node_modules/express/package.json
+10 verbose read json /WWW/2013Projects/angular-cms/node_modules/generator-angular/package.json
+11 verbose read json /WWW/2013Projects/angular-cms/node_modules/generator-testacular/package.json
+12 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt/package.json
+13 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-bower-hooks/package.json
+14 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-clean/package.json
+15 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-coffee/package.json
+16 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-compass/package.json
+17 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-concat/package.json
+18 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-connect/package.json
+19 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-copy/package.json
+20 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-htmlmin/package.json
+21 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-imagemin/package.json
+22 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-jshint/package.json
+23 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-livereload/package.json
+24 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-mincss/package.json
+25 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-uglify/package.json
+26 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-google-cdn/package.json
+27 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-ngmin/package.json
+28 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-open/package.json
+29 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-regarde/package.json
+30 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-usemin/package.json
+31 verbose read json /WWW/2013Projects/angular-cms/node_modules/gruntacular/package.json
+32 verbose read json /WWW/2013Projects/angular-cms/node_modules/http-proxy/package.json
+33 verbose read json /WWW/2013Projects/angular-cms/node_modules/jquery-file-upload-middleware/package.json
+34 verbose read json /WWW/2013Projects/angular-cms/node_modules/matchdep/package.json
+35 verbose read json /WWW/2013Projects/angular-cms/node_modules/mongodb/package.json
+36 verbose read json /WWW/2013Projects/angular-cms/node_modules/mongoose/package.json
+37 verbose read json /WWW/2013Projects/angular-cms/node_modules/racker/package.json
+38 verbose read json /WWW/2013Projects/angular-cms/node_modules/request/package.json
+39 verbose read json /WWW/2013Projects/angular-cms/node_modules/socket.io/package.json
+40 verbose read json /WWW/2013Projects/angular-cms/node_modules/testacular/package.json
+41 verbose read json /WWW/2013Projects/angular-cms/node_modules/url/package.json
+42 warn package.json grunt-contrib-htmlmin@0.1.1rc7 No README.md file found!
+43 warn package.json grunt-contrib-imagemin@0.1.1rc8 No README.md file found!
+44 warn package.json grunt-contrib-livereload@0.1.0rc8 No README.md file found!
+45 verbose from cache /WWW/2013Projects/angular-cms/package.json
+46 verbose readDependencies using package.json deps
+47 verbose cache add [ 'easy_rackimg', null ]
+48 verbose cache add name=undefined spec="easy_rackimg" args=["easy_rackimg",null]
+49 verbose parsed url { pathname: 'easy_rackimg',
+49 verbose parsed url   path: 'easy_rackimg',
+49 verbose parsed url   href: 'easy_rackimg' }
+50 silly lockFile 61a23fef-easy-rackimg easy_rackimg
+51 verbose lock easy_rackimg /Users/jonniespratley/.npm/61a23fef-easy-rackimg.lock
+52 silly lockFile 61a23fef-easy-rackimg easy_rackimg
+53 silly lockFile 61a23fef-easy-rackimg easy_rackimg
+54 verbose addNamed [ 'easy_rackimg', '' ]
+55 verbose addNamed [ null, '' ]
+56 silly lockFile 99bece09-easy-rackimg easy_rackimg@
+57 verbose lock easy_rackimg@ /Users/jonniespratley/.npm/99bece09-easy-rackimg.lock
+58 silly addNameRange { name: 'easy_rackimg', range: '', hasData: false }
+59 verbose url raw easy_rackimg
+60 verbose url resolving [ 'https://registry.npmjs.org/', './easy_rackimg' ]
+61 verbose url resolved https://registry.npmjs.org/easy_rackimg
+62 info trying registry request attempt 1 at 18:07:59
+63 http GET https://registry.npmjs.org/easy_rackimg
+64 http 200 https://registry.npmjs.org/easy_rackimg
+65 silly registry.get cb [ 200,
+65 silly registry.get   { vary: 'Accept',
+65 silly registry.get     server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+65 silly registry.get     etag: '"DJJVM068MFMQKESZXMKN7ZP0P"',
+65 silly registry.get     date: 'Fri, 26 Apr 2013 01:07:59 GMT',
+65 silly registry.get     'content-type': 'application/json',
+65 silly registry.get     'content-length': '10035' } ]
+66 silly addNameRange number 2 { name: 'easy_rackimg', range: '', hasData: true }
+67 silly addNameRange versions [ 'easy_rackimg',
+67 silly addNameRange   [ '0.0.0',
+67 silly addNameRange     '0.0.1',
+67 silly addNameRange     '0.0.2',
+67 silly addNameRange     '0.0.3',
+67 silly addNameRange     '0.0.4',
+67 silly addNameRange     '0.0.5',
+67 silly addNameRange     '0.0.6',
+67 silly addNameRange     '0.0.7',
+67 silly addNameRange     '0.0.8' ] ]
+68 verbose addNamed [ 'easy_rackimg', '0.0.8' ]
+69 verbose addNamed [ '0.0.8', '0.0.8' ]
+70 silly lockFile f44ce812-easy-rackimg-0-0-8 easy_rackimg@0.0.8
+71 verbose lock easy_rackimg@0.0.8 /Users/jonniespratley/.npm/f44ce812-easy-rackimg-0-0-8.lock
+72 silly lockFile 88c45a5d-y-rackimg-easy-rackimg-0-0-8-tgz https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz
+73 verbose lock https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz /Users/jonniespratley/.npm/88c45a5d-y-rackimg-easy-rackimg-0-0-8-tgz.lock
+74 verbose addRemoteTarball [ 'https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz',
+74 verbose addRemoteTarball   '76bed4ab1294384f7a21cc56cc7104fe33635196' ]
+75 info retry fetch attempt 1 at 18:07:59
+76 verbose fetch to= /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/tmp.tgz
+77 http GET https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz
+78 http 200 https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz
+79 silly shasum updated bytes 40960
+80 silly shasum updated bytes 40960
+81 silly shasum updated bytes 40960
+82 silly shasum updated bytes 40960
+83 silly shasum updated bytes 40960
+84 silly shasum updated bytes 40960
+85 silly shasum updated bytes 40960
+86 silly shasum updated bytes 40960
+87 silly shasum updated bytes 40960
+88 silly shasum updated bytes 40960
+89 silly shasum updated bytes 40960
+90 silly shasum updated bytes 40960
+91 silly shasum updated bytes 31786
+92 info shasum 76bed4ab1294384f7a21cc56cc7104fe33635196
+92 info shasum /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/tmp.tgz
+93 verbose tar unpack /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/tmp.tgz
+94 silly lockFile 765c8cc4-9795-0-11185610410757363-package /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package
+95 verbose lock /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package /Users/jonniespratley/.npm/765c8cc4-9795-0-11185610410757363-package.lock
+96 silly lockFile c8218877-9795-0-11185610410757363-tmp-tgz /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/tmp.tgz
+97 verbose lock /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/tmp.tgz /Users/jonniespratley/.npm/c8218877-9795-0-11185610410757363-tmp-tgz.lock
+98 silly gunzTarPerm modes [ '755', '644' ]
+99 silly gunzTarPerm extractEntry package.json
+100 silly gunzTarPerm extractEntry index.js
+101 silly gunzTarPerm extractEntry easy_rackimg.js
+102 silly gunzTarPerm extractEntry img.jpg
+103 silly gunzTarPerm extractEntry img_config.json
+104 verbose read json /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package/package.json
+105 warn package.json easy_rackimg@0.0.8 No README.md file found!
+106 silly lockFile 765c8cc4-9795-0-11185610410757363-package /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package
+107 silly lockFile 765c8cc4-9795-0-11185610410757363-package /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package
+108 silly lockFile c8218877-9795-0-11185610410757363-tmp-tgz /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/tmp.tgz
+109 silly lockFile c8218877-9795-0-11185610410757363-tmp-tgz /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/tmp.tgz
+110 verbose from cache /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package/package.json
+111 verbose tar pack [ '/Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz',
+111 verbose tar pack   '/var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package' ]
+112 verbose tarball /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+113 verbose folder /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package
+114 silly lockFile 765c8cc4-9795-0-11185610410757363-package /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package
+115 verbose lock /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package /Users/jonniespratley/.npm/765c8cc4-9795-0-11185610410757363-package.lock
+116 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+117 verbose lock /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz /Users/jonniespratley/.npm/614ce1e3-m-easy-rackimg-0-0-8-package-tgz.lock
+118 silly lockFile 765c8cc4-9795-0-11185610410757363-package /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package
+119 silly lockFile 765c8cc4-9795-0-11185610410757363-package /var/folders/mz/45_gqj796617htnbqlxzk4440000gn/T/npm-4865/1366938479795-0.11185610410757363/package
+120 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+121 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+122 silly lockFile e69022fe-y-npm-easy-rackimg-0-0-8-package /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package
+123 verbose lock /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package /Users/jonniespratley/.npm/e69022fe-y-npm-easy-rackimg-0-0-8-package.lock
+124 silly lockFile e69022fe-y-npm-easy-rackimg-0-0-8-package /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package
+125 silly lockFile e69022fe-y-npm-easy-rackimg-0-0-8-package /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package
+126 verbose tar unpack /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+127 silly lockFile e69022fe-y-npm-easy-rackimg-0-0-8-package /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package
+128 verbose lock /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package /Users/jonniespratley/.npm/e69022fe-y-npm-easy-rackimg-0-0-8-package.lock
+129 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+130 verbose lock /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz /Users/jonniespratley/.npm/614ce1e3-m-easy-rackimg-0-0-8-package-tgz.lock
+131 silly gunzTarPerm modes [ '755', '644' ]
+132 silly gunzTarPerm extractEntry package.json
+133 silly gunzTarPerm extractEntry easy_rackimg.js
+134 silly gunzTarPerm extractEntry index.js
+135 silly gunzTarPerm extractEntry img.jpg
+136 silly gunzTarPerm extractEntry img_config.json
+137 verbose read json /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package/package.json
+138 silly lockFile e69022fe-y-npm-easy-rackimg-0-0-8-package /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package
+139 silly lockFile e69022fe-y-npm-easy-rackimg-0-0-8-package /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package
+140 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+141 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+142 silly shasum updated bytes 40960
+143 silly shasum updated bytes 40960
+144 silly shasum updated bytes 40960
+145 silly shasum updated bytes 40960
+146 silly shasum updated bytes 40960
+147 silly shasum updated bytes 40960
+148 silly shasum updated bytes 40960
+149 silly shasum updated bytes 40960
+150 silly shasum updated bytes 40960
+151 silly shasum updated bytes 40960
+152 silly shasum updated bytes 40960
+153 silly shasum updated bytes 40960
+154 silly shasum updated bytes 31798
+155 info shasum b721abd9292367b7454524a46a4293e86f7df71d
+155 info shasum /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+156 verbose from cache /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package/package.json
+157 verbose chmod /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz 644
+158 verbose chown /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz [ 501, 20 ]
+159 silly lockFile 88c45a5d-y-rackimg-easy-rackimg-0-0-8-tgz https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz
+160 silly lockFile 88c45a5d-y-rackimg-easy-rackimg-0-0-8-tgz https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz
+161 silly lockFile f44ce812-easy-rackimg-0-0-8 easy_rackimg@0.0.8
+162 silly lockFile f44ce812-easy-rackimg-0-0-8 easy_rackimg@0.0.8
+163 silly lockFile 99bece09-easy-rackimg easy_rackimg@
+164 silly lockFile 99bece09-easy-rackimg easy_rackimg@
+165 silly resolved [ { name: 'easy_rackimg',
+165 silly resolved     version: '0.0.8',
+165 silly resolved     description: 'A simple way to resize, crop images and to update to rackspace cloudfiles',
+165 silly resolved     main: 'easy_rackimg.js',
+165 silly resolved     dependencies:
+165 silly resolved      { fs: '~0.0.0',
+165 silly resolved        easyimage: '~0.1.3',
+165 silly resolved        imagemagick: '~0.1.3',
+165 silly resolved        express: '~3.0.3',
+165 silly resolved        alleup: '~0.1.1',
+165 silly resolved        rackit: '~0.0.9' },
+165 silly resolved     devDependencies: {},
+165 silly resolved     scripts:
+165 silly resolved      { test: 'echo "Error: no test specified" && exit 1',
+165 silly resolved        start: 'node server.js' },
+165 silly resolved     repository: '',
+165 silly resolved     keywords: [ 'rackspace', 'cloudfiles', 'images' ],
+165 silly resolved     author: { name: 'Amigo Perfecto' },
+165 silly resolved     license: 'BSD',
+165 silly resolved     _id: 'easy_rackimg@0.0.8',
+165 silly resolved     readme: 'ERROR: No README.md file found!',
+165 silly resolved     dist: { shasum: 'b721abd9292367b7454524a46a4293e86f7df71d' },
+165 silly resolved     _from: 'easy_rackimg@',
+165 silly resolved     _resolved: 'https://registry.npmjs.org/easy_rackimg/-/easy_rackimg-0.0.8.tgz' } ]
+166 info install easy_rackimg@0.0.8 into /WWW/2013Projects/angular-cms
+167 info installOne easy_rackimg@0.0.8
+168 verbose from cache /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package/package.json
+169 info /WWW/2013Projects/angular-cms/node_modules/easy_rackimg unbuild
+170 verbose read json /WWW/2013Projects/angular-cms/node_modules/easy_rackimg/package.json
+171 verbose tar unpack /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+172 silly lockFile 6bd93eb2-ar-cms-node-modules-easy-rackimg /WWW/2013Projects/angular-cms/node_modules/easy_rackimg
+173 verbose lock /WWW/2013Projects/angular-cms/node_modules/easy_rackimg /Users/jonniespratley/.npm/6bd93eb2-ar-cms-node-modules-easy-rackimg.lock
+174 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+175 verbose lock /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz /Users/jonniespratley/.npm/614ce1e3-m-easy-rackimg-0-0-8-package-tgz.lock
+176 silly gunzTarPerm modes [ '755', '644' ]
+177 silly gunzTarPerm extractEntry package.json
+178 silly gunzTarPerm extractEntry easy_rackimg.js
+179 silly gunzTarPerm extractEntry index.js
+180 silly gunzTarPerm extractEntry img.jpg
+181 silly gunzTarPerm extractEntry img_config.json
+182 verbose read json /WWW/2013Projects/angular-cms/node_modules/easy_rackimg/package.json
+183 silly lockFile 6bd93eb2-ar-cms-node-modules-easy-rackimg /WWW/2013Projects/angular-cms/node_modules/easy_rackimg
+184 silly lockFile 6bd93eb2-ar-cms-node-modules-easy-rackimg /WWW/2013Projects/angular-cms/node_modules/easy_rackimg
+185 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+186 silly lockFile 614ce1e3-m-easy-rackimg-0-0-8-package-tgz /Users/jonniespratley/.npm/easy_rackimg/0.0.8/package.tgz
+187 info preinstall easy_rackimg@0.0.8
+188 verbose from cache /WWW/2013Projects/angular-cms/node_modules/easy_rackimg/package.json
+189 verbose readDependencies using package.json deps
+190 verbose from cache /WWW/2013Projects/angular-cms/node_modules/easy_rackimg/package.json
+191 verbose readDependencies using package.json deps
+192 verbose cache add [ 'fs@~0.0.0', null ]
+193 verbose cache add name=undefined spec="fs@~0.0.0" args=["fs@~0.0.0",null]
+194 verbose parsed url { pathname: 'fs@~0.0.0', path: 'fs@~0.0.0', href: 'fs@~0.0.0' }
+195 verbose cache add name="fs" spec="~0.0.0" args=["fs","~0.0.0"]
+196 verbose parsed url { pathname: '~0.0.0', path: '~0.0.0', href: '~0.0.0' }
+197 verbose addNamed [ 'fs', '~0.0.0' ]
+198 verbose addNamed [ null, '>=0.0.0- <0.1.0-' ]
+199 silly lockFile 0040ddb9-fs-0-0-0 fs@~0.0.0
+200 verbose lock fs@~0.0.0 /Users/jonniespratley/.npm/0040ddb9-fs-0-0-0.lock
+201 verbose cache add [ 'imagemagick@~0.1.3', null ]
+202 verbose cache add name=undefined spec="imagemagick@~0.1.3" args=["imagemagick@~0.1.3",null]
+203 verbose parsed url { pathname: 'imagemagick@~0.1.3',
+203 verbose parsed url   path: 'imagemagick@~0.1.3',
+203 verbose parsed url   href: 'imagemagick@~0.1.3' }
+204 verbose cache add name="imagemagick" spec="~0.1.3" args=["imagemagick","~0.1.3"]
+205 verbose parsed url { pathname: '~0.1.3', path: '~0.1.3', href: '~0.1.3' }
+206 verbose addNamed [ 'imagemagick', '~0.1.3' ]
+207 verbose addNamed [ null, '>=0.1.3- <0.2.0-' ]
+208 silly lockFile 76ce6179-imagemagick-0-1-3 imagemagick@~0.1.3
+209 verbose lock imagemagick@~0.1.3 /Users/jonniespratley/.npm/76ce6179-imagemagick-0-1-3.lock
+210 silly addNameRange { name: 'fs', range: '>=0.0.0- <0.1.0-', hasData: false }
+211 silly addNameRange { name: 'imagemagick',
+211 silly addNameRange   range: '>=0.1.3- <0.2.0-',
+211 silly addNameRange   hasData: false }
+212 verbose url raw fs
+213 verbose url resolving [ 'https://registry.npmjs.org/', './fs' ]
+214 verbose url resolved https://registry.npmjs.org/fs
+215 info trying registry request attempt 1 at 18:08:01
+216 http GET https://registry.npmjs.org/fs
+217 verbose cache add [ 'express@~3.0.3', null ]
+218 verbose cache add name=undefined spec="express@~3.0.3" args=["express@~3.0.3",null]
+219 verbose parsed url { pathname: 'express@~3.0.3',
+219 verbose parsed url   path: 'express@~3.0.3',
+219 verbose parsed url   href: 'express@~3.0.3' }
+220 verbose cache add name="express" spec="~3.0.3" args=["express","~3.0.3"]
+221 verbose parsed url { pathname: '~3.0.3', path: '~3.0.3', href: '~3.0.3' }
+222 verbose addNamed [ 'express', '~3.0.3' ]
+223 verbose addNamed [ null, '>=3.0.3- <3.1.0-' ]
+224 silly lockFile 20f80903-express-3-0-3 express@~3.0.3
+225 verbose lock express@~3.0.3 /Users/jonniespratley/.npm/20f80903-express-3-0-3.lock
+226 verbose cache add [ 'alleup@~0.1.1', null ]
+227 verbose cache add name=undefined spec="alleup@~0.1.1" args=["alleup@~0.1.1",null]
+228 verbose parsed url { pathname: 'alleup@~0.1.1',
+228 verbose parsed url   path: 'alleup@~0.1.1',
+228 verbose parsed url   href: 'alleup@~0.1.1' }
+229 verbose cache add name="alleup" spec="~0.1.1" args=["alleup","~0.1.1"]
+230 verbose parsed url { pathname: '~0.1.1', path: '~0.1.1', href: '~0.1.1' }
+231 verbose addNamed [ 'alleup', '~0.1.1' ]
+232 verbose addNamed [ null, '>=0.1.1- <0.2.0-' ]
+233 silly lockFile 15299d14-alleup-0-1-1 alleup@~0.1.1
+234 verbose lock alleup@~0.1.1 /Users/jonniespratley/.npm/15299d14-alleup-0-1-1.lock
+235 verbose cache add [ 'rackit@~0.0.9', null ]
+236 verbose cache add name=undefined spec="rackit@~0.0.9" args=["rackit@~0.0.9",null]
+237 verbose parsed url { pathname: 'rackit@~0.0.9',
+237 verbose parsed url   path: 'rackit@~0.0.9',
+237 verbose parsed url   href: 'rackit@~0.0.9' }
+238 verbose cache add name="rackit" spec="~0.0.9" args=["rackit","~0.0.9"]
+239 verbose parsed url { pathname: '~0.0.9', path: '~0.0.9', href: '~0.0.9' }
+240 verbose addNamed [ 'rackit', '~0.0.9' ]
+241 verbose addNamed [ null, '>=0.0.9- <0.1.0-' ]
+242 silly lockFile 5ac99b70-rackit-0-0-9 rackit@~0.0.9
+243 verbose lock rackit@~0.0.9 /Users/jonniespratley/.npm/5ac99b70-rackit-0-0-9.lock
+244 silly addNameRange { name: 'express', range: '>=3.0.3- <3.1.0-', hasData: false }
+245 silly addNameRange { name: 'alleup', range: '>=0.1.1- <0.2.0-', hasData: false }
+246 silly addNameRange { name: 'rackit', range: '>=0.0.9- <0.1.0-', hasData: false }
+247 verbose url raw alleup
+248 verbose url resolving [ 'https://registry.npmjs.org/', './alleup' ]
+249 verbose url resolved https://registry.npmjs.org/alleup
+250 info trying registry request attempt 1 at 18:08:01
+251 http GET https://registry.npmjs.org/alleup
+252 verbose url raw rackit
+253 verbose url resolving [ 'https://registry.npmjs.org/', './rackit' ]
+254 verbose url resolved https://registry.npmjs.org/rackit
+255 info trying registry request attempt 1 at 18:08:01
+256 http GET https://registry.npmjs.org/rackit
+257 verbose url raw imagemagick
+258 verbose url resolving [ 'https://registry.npmjs.org/', './imagemagick' ]
+259 verbose url resolved https://registry.npmjs.org/imagemagick
+260 info trying registry request attempt 1 at 18:08:01
+261 verbose etag "9I1RQO1JZW8UBN7HVHN95FCMW"
+262 http GET https://registry.npmjs.org/imagemagick
+263 verbose url raw express
+264 verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+265 verbose url resolved https://registry.npmjs.org/express
+266 info trying registry request attempt 1 at 18:08:01
+267 verbose etag "49SIDJ5N8AJ0VQNOGSK3MMYWX"
+268 http GET https://registry.npmjs.org/express
+269 http 404 https://registry.npmjs.org/fs
+270 silly registry.get cb [ 404,
+270 silly registry.get   { server: 'CouchDB/1.3.0 (Erlang OTP/R15B03)',
+270 silly registry.get     date: 'Fri, 26 Apr 2013 01:08:01 GMT',
+270 silly registry.get     'content-type': 'application/json',
+270 silly registry.get     'content-length': '52',
+270 silly registry.get     'cache-control': 'must-revalidate' } ]
+271 silly lockFile 0040ddb9-fs-0-0-0 fs@~0.0.0
+272 silly lockFile 0040ddb9-fs-0-0-0 fs@~0.0.0
+273 verbose about to build /WWW/2013Projects/angular-cms/node_modules/easy_rackimg
+274 info /WWW/2013Projects/angular-cms/node_modules/easy_rackimg unbuild
+275 verbose from cache /WWW/2013Projects/angular-cms/node_modules/easy_rackimg/package.json
+276 info preuninstall easy_rackimg@0.0.8
+277 info uninstall easy_rackimg@0.0.8
+278 verbose true,/WWW/2013Projects/angular-cms/node_modules,/WWW/2013Projects/angular-cms/node_modules unbuild easy_rackimg@0.0.8
+279 info postuninstall easy_rackimg@0.0.8
+280 error 404 'fs' is not in the npm registry.
+280 error 404 You should bug the author to publish it
+280 error 404
+280 error 404 Note that you can also install from a
+280 error 404 tarball, folder, or http url, or git url.
+281 error System Darwin 12.3.0
+282 error command "node" "/usr/local/bin/npm" "install" "easy_rackimg"
+283 error cwd /WWW/2013Projects/angular-cms
+284 error node -v v0.8.22
+285 error npm -v 1.2.14
+286 error code E404
+287 verbose exit [ 1, true ]

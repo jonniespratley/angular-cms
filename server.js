@@ -3,7 +3,13 @@
  * @file /WWW/AppMatrixEngine/ame-angular/server.js
  * @object
  */
-var fs = require('fs'), util = require('util'), https = require('https'), http = require('http'), sio = require('socket.io'), httpProxy = require('http-proxy'), request = require('request'), inspect = require('util').inspect;
+var fs = require('fs'), util = require('util'), 
+https = require('https'), 
+http = require('http'), sio = require('socket.io'), 
+httpProxy = require('http-proxy'), 
+request = require('request'), 
+inspect = require('util').inspect;
+
 var colors = require('colors');
 colors.setTheme({
 	silly : 'rainbow',
@@ -26,8 +32,8 @@ console.log("this is a warning".warn);
  *
  * This is the location of your https cert and key.
  */
-var httpsKey = fs.readFileSync('./config/myappmatrix.key').toString();
-var httpsCert = fs.readFileSync('./config/myappmatrix.crt').toString();
+var httpsKey = fs.readFileSync('./config/apache.key').toString();
+var httpsCert = fs.readFileSync('./config/apache.crt').toString();
 var httpServer = null;
 var httpsServer = null;
 /*
@@ -54,31 +60,32 @@ var options = {
 
 /* ======================[ @TODO: Dynamic REST API ]====================== */
 var rest = require('./routes/rest').rest;
-	rest.init(3000);
+	rest.init(9000);
 
 
 
-var smartpass = require('./routes/smartpass').smartpass;
-	smartpass.init(3535);
+//var smartpass = require('./routes/smartpass').smartpass;
+//	smartpass.init(3535);
 
 
 
 
 //test push
-var amePusher = require('./routes/ame-pusher');
-	amePusher.AppMatrixPusher.initServer(3434);
+//var amePusher = require('./routes/ame-pusher');
+//	amePusher.AppMatrixPusher.initServer(3434);
 	
 	//init the server
-
+	/*
 	amePusher.AppMatrixPusher.init({
 		live : false,
 		cert : './files/Aps/com_myappmatrix_app_dev_cert.pem',
 		key : './files/Aps/com_myappmatrix_app_dev_key.pem',
 		passphrase : 'fred'
 	}); 
+	*/
  
 	//send test push
-	amePusher.AppMatrixPusher.send('eb52b4ec270ae7460b54100281626668ca1362cdb4df24cd4093b4b15e46cfed', 'rich', 'ame server booted!', 0, {url: 'http://myappmatrix.com'});
+	//amePusher.AppMatrixPusher.send('eb52b4ec270ae7460b54100281626668ca1362cdb4df24cd4093b4b15e46cfed', 'rich', 'ame server booted!', 0, {url: 'http://myappmatrix.com'});
 
 
 
@@ -86,13 +93,15 @@ var amePusher = require('./routes/ame-pusher');
 
 /* @TODO: Proxy Server */
 proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
+	
 	// console.log('proxyServer', options);
 	if (req.url.match(/^\/api\//)) {
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
-			port : 3000
+			port : 9000
 		});
 		console.log('Routing request: API server'.warn);
+		
 		//Match v1 api calls
 	} else if (req.url.match(/^\/v1\//)) {
 		proxy.proxyRequest(req, res, {
@@ -107,7 +116,7 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 	} else if (req.url.match(/^\/aps\//)) {
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
-			port : 3434
+			port : 9595
 		});
 		console.log('Routing request: Pusher Server'.warn);
 		
@@ -120,6 +129,8 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 			port : 3535
 		});
 		console.log('Routing request: Passbook Server'.warn);
+		
+		
 		//Match any /public dir and route to apache
 	} else if (req.url.match(/^\/public\//)) {
 		/* Default express server */
@@ -128,11 +139,13 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 			port : 78
 		});
 		console.log('Routing request: Apache Server'.warn);
+		
+		
 	} else {
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
-			port : 3000
+			port : 9000
 		});
 		console.log('Routing request: App Server'.warn);
 	}
@@ -143,7 +156,9 @@ httpsServer = https.createServer(options, function (req, res) {
 	});
 	res.write('Request proxied ' + JSON.stringify(req.headers));
 	res.end();
-}).listen(8081);
+}).listen(9091);
+
+
 ////////////////////////////
 //## Socket Server
 //This is a socket server implementation for "real" time analytics and other data.
@@ -295,7 +310,7 @@ var AmeSocketServer = {
 AmeSocketServer.init(proxyServer);
 
 //Start the proxy server
-proxyServer.listen(8080);
+proxyServer.listen(9090);
 //Test insert
 //curl -d '{ "name" : "This is a name" }' -H "Content-Type: application/json" http://dev.appmatrix.us:3000/myappmatrix/posts
 /* @TODO: Live REST */
