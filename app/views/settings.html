@@ -1,184 +1,195 @@
-<form id="SettingsForm" ng-controller="SettingsCtrl" class="form-horizontal" ng-submit="App.Settings.save(App.settings);">
 
-	
-			<legend>
-				General
-			</legend>
-			<div id="settings">
-				<formitem title="Site Title:">
-					<input type="text" ng-model="App.settings.sitetitle"/>
-				</formitem>
-				<formitem title="Tagline:">
-					<input type="text" ng-model="App.settings.sitedesc"/>
-				</formitem>
-				<formitem title="Site URL:">
-					<input type="text" ng-model="App.settings.baseurl"/>
-				</formitem>
-				<formitem title="Email Address:">
-					<input type="email" ng-model="App.settings.email"/>
-					<span class="help-inline">This address is used for admin purposes, like new user notification.</span>
-				</formitem>
-				<formitem title="Timezone:">
-					<input type="text" ng-model="App.settings.config.timezone"/>
-					<span class="help-inline">Choose a city in the same timezone as you.</span>
-				</formitem>
-				<formitem title="Date Format:">
-					<select ng-selected="App.settings.config.dateformat"
-					ng-model="App.settings.config.dateformat"
-					ng-options="date for date in App.settings.config.dateformats"></select>
-					<span class="help-inline">{{App.settings.config.currentdate | date:App.settings.config.dateformat}}</span>
-				</formitem>
-				<formitem title="Time Format:">
-					<select
-					   ng-model="App.settings.config.timeformat"
-					   ng-options="date for date in App.settings.config.timeformats"></select>
-					<span class="help-inline"> {{App.settings.config.currentdate | date:App.settings.config.timeformat}} </span>
-				</formitem>
-				
-				
-			</div>
-			<legend>
-				Display
-			</legend>
-			<div id="settings-display">
-				<formitem title="Theme:">
-					<select 
-					ng-model="App.settings.theme" 
-					ng-options="item.title for item in App.settings.options.themes">
-
-					</select>
-				</formitem>
-				<formitem title="Background:">
-					<select 
-						ng-model="App.settings.background" 
-						ng-options="item.title for item in App.settings.options.backgrounds">
-					</select>
-
-				</formitem>
-				<formitem title="Layout:">
-					<select 
-						ng-model="App.settings.layout" 
-						ng-options="item.name for item in App.settings.options.layouts">
-					</select>
-				</formitem>
-				<formitem title="Navbar:">
-					<select 
-						ng-model="App.settings.navbar" 
-						ng-options="item.name for item in App.settings.options.navbars">
-					</select>
-				</formitem>
-				<formitem title="Sidebar:">
-					<select 
-						ng-model="App.settings.sidebar" 
-						ng-options="item.name for item in App.settings.options.sidebars">
-					</select>
-				</formitem>
-			</div>
-			<legend>
-				CDN
-			</legend>
-			<div id="setings-cdn">
-				<formitem title="HTTP CDN:">
-					<input type="url" ng-model="App.settings.config.cdns.http" class="span12"/>
-					<span class="help-block">Use public cdn instead of the assets folder.</span>
-				</formitem>
-				<formitem title="HTTPS CDN:">
-					<input type="url" ng-model="App.settings.config.cdns.https" class="span12"/>
-					<span class="help-block">Use secure cdn instead of the assets folder.</span>
-				</formitem>
-				<formitem title="Streaming CDN:">
-					<input type="url" ng-model="App.settings.config.cdns.streaming" class="span12"/>
-					<span class="help-block">Use a streaming cdn instead of the assets folder.</span>
-				</formitem>
-				<formitem title="iOS CDN:">
-					<input type="url" ng-model="App.settings.config.cdns.iosstreaming" class="span12"/>
-					<span class="help-block">Use a iOS streaming cdn instead of the assets folder.</span>
-				</formitem>
-			</div>
-			<legend>
-				Customize
-			</legend>
-			<div id="settings-customize">
-				<formitem title="Footer JS:">
-					<textarea ng-model="App.settings.scripts" name="scripts" rows="4" class="span12"></textarea>
-					<span class="help-block">This will get injected right before the end of the body tag.</span>
-				</formitem>
-				<formitem title="Custom CSS:">
-					<textarea ng-model="App.settings.css" name="css" rows="4" class="span12"></textarea>
-					<span class="help-block">This will get injected right before the end of the head tag.</span>
-				</formitem>
-				
-				<formitem title="Login Logo:">
-                    <input type="text" ng-model="App.settings.login.logo"/>
-                    <span class="help-inline">Image on the login page above the form.</span>
-                </formitem>
-                <formitem title="Login Message:">
-                    <input type="text" ng-model="App.settings.login.message"/>
-                    <span class="help-inline">The flash message after user authentication.</span>
-                </formitem>
-                <formitem title="Login Redirect:">
-                    <input type="text" ng-model="App.settings.login.redirect"/>
-                    <span class="help-inline">The page to display after user authentication.</span>
-                </formitem>
-                
-                <formitem title="Logout Message:">
-                    <input type="text" ng-model="App.settings.logout.message"/>
-                    <span class="help-inline">The flash message after user signs off.</span>
-                </formitem>
-                <formitem title="Logout Redirect:">
-                    <input type="text" ng-model="App.settings.logout.redirect"/>
-                    <span class="help-inline">The page to display after a user signs off.</span>
-                </formitem>
-			    
-			</div>
-			<legend>
-				Configuration
-			</legend>
-			<div id="settings-config">
-
-                
-				<formitem title="API Version:">
-					<input type="text" class="" ng-model="App.settings.config.api.version"/>
-					<span class="help-inline">The version of the API endpoint.</span>
-				</formitem>
-				<formitem title="API Endpoint:">
-					<input type="text" class="" ng-model="App.settings.config.api.endpoint"/>
-					<span class="help-inline">The location of the API endpoint.</span>
-				</formitem>
-				<formitem title="Datasource Host:">
-					<input type="text" class="" ng-model="App.settings.config.database.host"/>
-					<span class="help-inline">The location of the data source endpoint.</span>
-				</formitem>
-				<formitem title="Datasouce Name:">
-					<input type="text" class="" ng-model="App.settings.config.database.name"/>
-					<span class="help-inline">The location of the data source endpoint.</span>
-				</formitem>
-				<formitem title="Network:">
-					<input type="checkbox" ng-model="App.settings.config.network.online"/>
-					<span class="help-inline">Turn on or off network connectivity.</span>
-				</formitem>
-				<formitem title="Global Caching:">
-					<input type="checkbox" ng-model="App.settings.config.network.cache"/>
-					<span class="help-inline">Turn on or off site wide caching.</span>
-				</formitem>
-				<formitem title="Global Debug:">
-					<input type="checkbox" ng-model="App.settings.debug"/>
-					<span class="help-inline">Turn on or off site debugging.</span>
-				</formitem>
-			</div>
-		
-
-
-	<div class="form-actions">
-		<button class="btn" type="reset" ng-click="App.Settings.clear();">
-			Clear
-		</button>
-		<button class="btn" type="button" ng-click="App.Settings.loadDefaultSettings();">
-			Load Default
-		</button>
-		<button type="submit" class="btn btn-primary">
-			Update
-		</button>
+<div id="settings-row" class="row-fluid">
+	<div class="span2">
+		<ul class="well nav nav-list">
+			
+			
+		</ul>
 	</div>
-	 
-</form>
+	<div class="span10">
+		<form id="SettingsForm" ng-controller="SettingsCtrl" class="form-horizontal" ng-submit="App.Settings.save(App.settings);">
+
+
+					<legend>
+						General
+					</legend>
+					<div id="settings" class="well">
+						<formitem title="Site Title:">
+							<input type="text" ng-model="App.settings.sitetitle"/>
+						</formitem>
+						<formitem title="Tagline:">
+							<input type="text" ng-model="App.settings.sitedesc"/>
+						</formitem>
+						<formitem title="Site URL:">
+							<input type="text" ng-model="App.settings.baseurl"/>
+						</formitem>
+						<formitem title="Email Address:">
+							<input type="email" ng-model="App.settings.email"/>
+							<span class="help-block">This address is used for admin purposes, like new user notification.</span>
+						</formitem>
+						<formitem title="Timezone:">
+							<input type="text" ng-model="App.settings.config.timezone"/>
+							<span class="help-block">Choose a city in the same timezone as you.</span>
+						</formitem>
+						<formitem title="Date Format:">
+							<select ng-selected="App.settings.config.dateformat"
+							ng-model="App.settings.config.dateformat"
+							ng-options="date for date in App.settings.config.dateformats"></select>
+							<span class="help-block">{{App.settings.config.currentdate | date:App.settings.config.dateformat}}</span>
+						</formitem>
+						<formitem title="Time Format:">
+							<select
+							   ng-model="App.settings.config.timeformat"
+							   ng-options="date for date in App.settings.config.timeformats"></select>
+							<span class="help-block"> {{App.settings.config.currentdate | date:App.settings.config.timeformat}} </span>
+						</formitem>
+
+
+					</div>
+					<legend>
+						Display
+					</legend>
+					<div id="settings-display" class="well">
+						<formitem title="Theme:">
+							<select 
+							ng-model="App.settings.theme" 
+							ng-options="item.title for item in App.settings.options.themes">
+
+							</select>
+						</formitem>
+						<formitem title="Background:">
+							<select 
+								ng-model="App.settings.background" 
+								ng-options="item.title for item in App.settings.options.backgrounds">
+							</select>
+
+						</formitem>
+						<formitem title="Layout:">
+							<select 
+								ng-model="App.settings.layout" 
+								ng-options="item.name for item in App.settings.options.layouts">
+							</select>
+						</formitem>
+						<formitem title="Navbar:">
+							<select 
+								ng-model="App.settings.navbar" 
+								ng-options="item.name for item in App.settings.options.navbars">
+							</select>
+						</formitem>
+						<formitem title="Sidebar:">
+							<select 
+								ng-model="App.settings.sidebar" 
+								ng-options="item.name for item in App.settings.options.sidebars">
+							</select>
+						</formitem>
+					</div>
+					<legend>
+						CDN
+					</legend>
+					<div id="setings-cdn" class="well">
+						<formitem title="HTTP CDN:">
+							<input type="url" ng-model="App.settings.config.cdns.http" class="span12"/>
+							<span class="help-block">Use public cdn instead of the assets folder.</span>
+						</formitem>
+						<formitem title="HTTPS CDN:">
+							<input type="url" ng-model="App.settings.config.cdns.https" class="span12"/>
+							<span class="help-block">Use secure cdn instead of the assets folder.</span>
+						</formitem>
+						<formitem title="Streaming CDN:">
+							<input type="url" ng-model="App.settings.config.cdns.streaming" class="span12"/>
+							<span class="help-block">Use a streaming cdn instead of the assets folder.</span>
+						</formitem>
+						<formitem title="iOS CDN:">
+							<input type="url" ng-model="App.settings.config.cdns.iosstreaming" class="span12"/>
+							<span class="help-block">Use a iOS streaming cdn instead of the assets folder.</span>
+						</formitem>
+					</div>
+					<legend>
+						Customize
+					</legend>
+					<div id="settings-customize" class="well">
+						<formitem title="Footer JS:">
+							<textarea ng-model="App.settings.scripts" name="scripts" rows="4" class="span12"></textarea>
+							<span class="help-block">This will get injected right before the end of the body tag.</span>
+						</formitem>
+						<formitem title="Custom CSS:">
+							<textarea ng-model="App.settings.css" name="css" rows="4" class="span12"></textarea>
+							<span class="help-block">This will get injected right before the end of the head tag.</span>
+						</formitem>
+
+						<formitem title="Login Logo:">
+		                    <input type="text" ng-model="App.settings.login.logo"/>
+		                    <span class="help-block">Image on the login page above the form.</span>
+		                </formitem>
+		                <formitem title="Login Message:">
+		                    <input type="text" ng-model="App.settings.login.message"/>
+		                    <span class="help-block">The flash message after user authentication.</span>
+		                </formitem>
+		                <formitem title="Login Redirect:">
+		                    <input type="text" ng-model="App.settings.login.redirect"/>
+		                    <span class="help-block">The page to display after user authentication.</span>
+		                </formitem>
+
+		                <formitem title="Logout Message:">
+		                    <input type="text" ng-model="App.settings.logout.message"/>
+		                    <span class="help-block">The flash message after user signs off.</span>
+		                </formitem>
+		                <formitem title="Logout Redirect:">
+		                    <input type="text" ng-model="App.settings.logout.redirect"/>
+		                    <span class="help-block">The page to display after a user signs off.</span>
+		                </formitem>
+
+					</div>
+					<legend>
+						Configuration
+					</legend>
+					<div id="settings-config" class="well">
+
+
+						<formitem title="API Version:">
+							<input type="text" class="" ng-model="App.settings.config.api.version"/>
+							<span class="help-block">The version of the API endpoint.</span>
+						</formitem>
+						<formitem title="API Endpoint:">
+							<input type="text" class="" ng-model="App.settings.config.api.endpoint"/>
+							<span class="help-block">The location of the API endpoint.</span>
+						</formitem>
+						<formitem title="Datasource Host:">
+							<input type="text" class="" ng-model="App.settings.config.database.host"/>
+							<span class="help-block">The location of the data source endpoint.</span>
+						</formitem>
+						<formitem title="Datasouce Name:">
+							<input type="text" class="" ng-model="App.settings.config.database.name"/>
+							<span class="help-block">The location of the data source endpoint.</span>
+						</formitem>
+						<formitem title="Network:">
+							<input type="checkbox" ng-model="App.settings.config.network.online"/>
+							<span class="help-block">Turn on or off network connectivity.</span>
+						</formitem>
+						<formitem title="Global Caching:">
+							<input type="checkbox" ng-model="App.settings.config.network.cache"/>
+							<span class="help-block">Turn on or off site wide caching.</span>
+						</formitem>
+						<formitem title="Global Debug:">
+							<input type="checkbox" ng-model="App.settings.debug"/>
+							<span class="help-block">Turn on or off site debugging.</span>
+						</formitem>
+					</div>
+
+
+
+			<div class="form-actions">
+				<button class="btn" type="reset" ng-click="App.Settings.clear();">
+					Clear
+				</button>
+				<button class="btn" type="button" ng-click="App.Settings.loadDefaultSettings();">
+					Load Default
+				</button>
+				<button type="submit" class="btn btn-primary">
+					Update
+				</button>
+			</div>
+
+		</form>
+	</div>	
+</div>

@@ -54,8 +54,8 @@ angularCmsApp.controller('AppCtrl', function($scope, $rootScope, $http, $compile
 
 		},
 		localProjects: function(){
-			$http.get('/projects.json').success(function(data){
-				$rootScope.App.content.portfolio.data = data;
+			$http.get('/assets/packages.json').success(function(data){
+				$rootScope.App.content.packages.data = data;
 				return data;
 			});
 		},
@@ -134,10 +134,20 @@ angularCmsApp.controller('AppCtrl', function($scope, $rootScope, $http, $compile
 					{ id: null, title: 'Web Design', type: 'section', body:'' },
 					{ id: null, title: 'Advanced Guide to Flex', type: 'post', image: '/assets/jonnie/images/post_acdguide1.png', body:'' }
 				]
+			},			
+			settings: {
+				title: '',
+				body: '',
+				data: [
+					{ id: null, title: 'Web Design', type: 'section', body:'' },
+					{ id: null, title: 'Advanced Guide to Flex', type: 'post', image: '/assets/jonnie/images/post_acdguide1.png', body:'' }
+				]
 			}
 		},
-		init: function(){
+		init: function(config){
+			this.settings = config;
 			this.localProjects();
+			return this;
 		},
 		project:null,
 		loadReadme: function(where, el){
@@ -161,6 +171,7 @@ angularCmsApp.controller('AppCtrl', function($scope, $rootScope, $http, $compile
 		//	pageTracker._trackPageview();
 	});
 
-	window.App = $rootScope.App;
-	App.init();
+	window.App = $rootScope.App.init(AppConfig);
+	
+	
 });
