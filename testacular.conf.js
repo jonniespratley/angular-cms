@@ -7,12 +7,14 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'app/components/angular/angular.js',
-  'app/components/angular-mocks/angular-mocks.js',
-  'app/scripts/*.js',
-  'app/scripts/**/*.js',
-  'test/mock/**/*.js',
-  'test/spec/**/*.js'
+	'app/scripts/vendor/jquery.min.js',
+	'app/components/angular/angular.js',
+	'app/components/angular-mocks/angular-mocks.js',
+	//'app/scripts/vendor/*.js',
+	'app/scripts/*.js',
+	'app/scripts/**/*.js',
+	'test/mock/**/*.js',
+	'test/spec/**/*.js'
 ];
 
 // list of files to exclude

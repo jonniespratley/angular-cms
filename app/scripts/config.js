@@ -2,13 +2,14 @@
  * globaly for the entire backend.
  */
 'use strict';
+
 var AppConfig = {
     baseurl: document.location.origin,
     sitetitle: 'angular-cms',
     sitedesc: 'This is a customizable CMS built with Angular.js',
     email: 'jonniespratley@me.com',
     debug: false,
-    session: $.jStorage.get('App.session'),
+    session: null,
     sidebar: {
         value: 'sidebar',
         url: '/views/partials/sidebar.html'
@@ -375,6 +376,7 @@ var AppConfig = {
         message: 'Welcome {{user.username}}'
     }
 };
+
 var addToHomeConfig = {
     animationIn: 'bubble',
     animationOut: 'drop',
