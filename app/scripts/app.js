@@ -20,6 +20,22 @@ var angularCmsApp = angular.module('angularCmsApp', ['ui'])
         templateUrl: 'views/settings.html',
         controller: 'SettingsCtrl'
       })
+      .when('/server', {
+        templateUrl: 'views/server.html',
+        controller: 'ServerCtrl'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl'
+      })
+      .when('/forgot', {
+        templateUrl: 'views/forgot.html',
+        controller: 'ForgotCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

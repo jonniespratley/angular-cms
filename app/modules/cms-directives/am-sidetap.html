@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/osatig/19/edit
+-->
+<head>
+ 
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.3/angular.min.js"></script>
+
+<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="am-sidetap.css" rel="stylesheet" type="text/css" />
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
+  
+<script src="http://myappmatrix.com:8080/scripts/vendor/sidetap.js"></script>
+  
+<meta name="description" content="Angular Sidetap Directive" />
+<meta charset=utf-8 />
+<title>JS Bin</title>
+
+ 
+</head>
+<body ng-controller="MainCtrl">
+
+
+  <am-sidetap id="mobile-app">
+      <am-sidetap-content title="Page 1" id="page1" icon="home">
+
+        
+        
+      </am-sidetap-content>   
+     
+  </am-sidetap>
+  
+
+  
+<script>
+/**
+ Mobile Sidetap Directive
+ */
+
+var App = angular.module('App', []);
+
+/**
+
+ */
+App.directive('amSidetap', function() {
+  return {
+    scope:{
+      id: '@',
+      title: '@',
+      image: '@',
+      headerbtn: '@',
+      rightbtn: '@',
+      selected: '@',      
+      handles: '@'
+    },
+    controller : function($scope, $element) {
+      var panes = $scope.panes = [];
+
+			$scope.select = function(pane) {
+				angular.forEach(panes, function(pane) {
+					pane.selected = false;
+				});
+				pane.selected = true;
+			};
+
+			this.addPane = function(pane) {
+				if (panes.length === 0)
+					$scope.select(pane);
+				panes.push(pane);
+			};
+    },
+    template: '<div class="sidetap">'+
+      '<div class="stp-nav">'+
+      '  <div class="stp-nav-inner">'+
+      '    <nav class="stp-nav-list">'+
+    '      <a href="#{{pane.id}}" ng-repeat="pane in panes" ng-click="select(pane)"><i class="icon-{{pane.icon}}"></i> {{pane.title}}</a>'+
+      '    </nav>'+
+      '  </div>'+
+      '</div>'+
+      '<div class="stp-content" id="content">'+
+      '  <header class="stp-fake-header">&nbsp;</header>'+
+      '  <div class="stp-overlay nav-toggle">&nbsp;</div>'+
+      ' <div ng-transclude></div> '+
+      '</div>'+
+    '</div>'+
+      '',
+    restrict: 'E',
+    replace: true,
+    transclude: true
+  };
+}).directive('amSidetapContent', function() {
+  return {
+    require : '^amSidetap',
+    scope:{
+      id: '@',
+      title: '@',
+      leftbtn: '@',
+      rightbtn: '@',
+      selected: '@',      
+      handles: '@'
+    },
+    template: '<div id="{{id}}" ng-class="stp-content-panel"><header class="stp-header">'+
+          ''+
+          '<a href="javascript:void(0)" class="header-button icon menu"><span>{{rightbtn}}</span></a>'+
+          '<h1>{{title}}</h1>'+
+    //'<a href="javascript:void(0)" class="header-button cancel right">{{rightbtn}}</a>'+
+          '<a href="javascript:void(0)" class="header-button icon brand right"><span>{{rightbtn}}</span></a>'+
+          '</header>'+
+          '<div class="stp-content-frame">'+
+            '<div class="stp-content-body">'+
+              '<div ng-transclude>'+
+                'Content goes here.'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+        '</div>',
+    restrict: 'E',
+    replace: true,
+    transclude: true,
+    link: function postLink(scope, element, attrs, stCtrl) {
+       var st = new sidetap();
+      angular.element('.header-button.menu').bind('click', st.toggle_nav);
+      stCtrl.addPane(scope);
+      
+      console.log('Linking function', scope, element, attrs);
+    }
+  };
+});
+
+
+
+
+ 
+
+
+
+
+
+function MainCtrl($scope, $http){
+  
+  
+  $scope.App = {
+    settings:{
+      sitetitle: 'Mobile App'
+    }
+  };
+
+   
+  
+  
+}
+</script>
+</body>
+</html>

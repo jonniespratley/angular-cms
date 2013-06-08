@@ -1,0 +1,76 @@
+
+
+@import url("http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/dist/css/myappmatrix-1.0.css");
+
+.am-img-cropper {
+	display: block;
+	float: left;
+}
+
+.am-img-cropper-target{
+  
+}
+.am-img-cropper-target, 
+.am-img-cropper-preview{
+  padding:1px;
+  background:#eee;
+   max-height:98%;
+    max-width:98%;
+  margin-left:10px;
+  border: 1px solid #ccc;
+ float: left;
+ }
+
+#imgcrop am-img-cropper-form {
+display: block;
+clear: both;
+padding: 5px;	
+}
+
+#am-img-cropper-img{
+ 
+}
+
+.am-img-cropper img{
+  margin-bottom:15px;
+ 
+
+}
+
+.imgareaselect-border1 {
+	background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-v.gif) repeat-y left top;
+}
+
+.imgareaselect-border2 {
+    background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-h.gif) repeat-x left top;
+}
+
+.imgareaselect-border3 {
+    background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-v.gif) repeat-y right top;
+}
+
+.imgareaselect-border4 {
+    background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-h.gif) repeat-x left bottom;
+}
+
+.imgareaselect-border1, .imgareaselect-border2,
+.imgareaselect-border3, .imgareaselect-border4 {
+    filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.imgareaselect-handle {
+    background-color: #fff;
+    border: solid 1px #000;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.imgareaselect-outer {
+    background-color: #000;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.imgareaselect-selection {  
+}

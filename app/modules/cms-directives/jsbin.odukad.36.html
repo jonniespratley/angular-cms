@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/odukad/36/edit
+-->
+<head>
+<script src="https://raw.github.com/odyniec/imgareaselect/master/distfiles/scripts/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.3/angular.min.js"></script>
+ 
+<link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
+  
+   
+  <script src="https://raw.github.com/odyniec/imgareaselect/master/jquery.imgareaselect.dev.js"></script>
+<meta name="description" content="Image Cropper Directive" />
+<meta charset=utf-8 /> 
+<title>JS Bin</title>
+
+<style id="jsbin-css">
+ @import url("https://raw.github.com/odyniec/imgareaselect/master/distfiles/css/imgareaselect-default.css");
+
+@import url("http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/dist/css/myappmatrix-1.0.css");
+/* @override 
+	
+	http://localhost:8080/modules/am-img-cropper.css
+*/
+
+.am-img-cropper {
+	display: block;
+	float: left;
+}
+
+.am-img-cropper-target{
+  
+}
+.am-img-cropper-target, 
+.am-img-cropper-preview{
+  padding:1px;
+  background:#eee;
+   max-height:98%;
+    max-width:98%;
+  margin-left:10px;
+  border: 1px solid #ccc;
+ float: left;
+ }
+
+#imgcrop am-img-cropper-form {
+display: block;
+clear: both;
+padding: 5px;	
+}
+
+#am-img-cropper-img{
+ 
+}
+
+.am-img-cropper img{
+  margin-bottom:15px;
+ 
+
+}
+
+body{
+  padding:20px;
+}
+/*
+ * imgAreaSelect default style
+ */
+
+.imgareaselect-border1 {
+	background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-v.gif) repeat-y left top;
+}
+
+.imgareaselect-border2 {
+    background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-h.gif) repeat-x left top;
+}
+
+.imgareaselect-border3 {
+    background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-v.gif) repeat-y right top;
+}
+
+.imgareaselect-border4 {
+    background: url(http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com/img/border-anim-h.gif) repeat-x left bottom;
+}
+
+.imgareaselect-border1, .imgareaselect-border2,
+.imgareaselect-border3, .imgareaselect-border4 {
+    filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.imgareaselect-handle {
+    background-color: #fff;
+    border: solid 1px #000;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.imgareaselect-outer {
+    background-color: #000;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+
+.imgareaselect-selection {  
+}
+</style>
+</head>
+<body ng-controller="MainCtrl">
+
+  
+  
+  
+  <legend>Img Cropper Directive</legend>
+  
+  
+ <am-imgcropper id="imgcrop"
+    maxwidth="500"
+    maxheight="400"
+    handles="true"
+    ng-model="coords"
+    coords="{{coords}}"
+    aspectratio="1:1"
+    submit="/api/imagecrop"
+    upload="true"
+    ng-model="coords"    image="http://myappmatrix.com:8080/files/uploads/com.appmatrixinc.my/Photo%20Feb%2017,%2010%2029%2052%20PM.png">  
+   
+ </am-imgcropper>
+  
+   
+  <hr/>
+  <form ng-submit="cropImage(image)">
+			<input name="x1" ng-model="image.x1" class="span1"/>
+			<input name="y1" ng-model="image.y1" class="span1"/>
+			<input name="x2" ng-model="image.x2" class="span1"/>
+			<input name="y2" ng-model="image.y2" class="span1"/>
+			<button type="submit">Submit</button>
+		</form>		  
+	 
+  <pre id="log">image: {{image || json}}</pre>
+   
+  
+  
+  
+  
+  
+  
+<script>
+var App = angular.module('App', []);
+
+
+
+/**
+ * I am a image cropper directive, I take a image and use the jquery lib imgAreaSelect 
+ * to get the coords for a image crop.
+ 
+ <am-imgcropper 
+    maxwidth="500"
+    maxheight="400"
+    handles="true"
+    aspectratio="1:1"
+    image="http://placehold.it/500">  
+   
+ </am-imgcropper>
+ */
+App.directive('amImgcropper', function() {
+  return {
+    scope:{
+      id: '@',
+      title: '@',
+      image: '@',
+      maxwidth: '@',
+      maxheight: '@',
+      aspectratio: '@',      
+      handles: '@',
+      x1: '@',
+      y1: '@',
+      x2: '@',
+      y2: '@',
+      action: '@',      
+      coords: '@'
+    },
+    template: '<form id="am-img-cropper-form" ng-submit="handleSubmit()"  class="form-d">'+
+              '<div class="clearfix">'+
+             
+              '	<div class="control-group">'+
+			  
+			  '	<div class="controls">'+
+			  '		<input type="file" id="am-img-uploader-file"/>'+
+			  '	</div>'+
+			  '</div> '+
+              '<div id="{{id}}" class="am-img-cropper">'+
+              '   <img id="am-img-cropper-img" ng-src="{{image}}" alt="{{title}}" class="am-img-cropper-target"/>'+
+              '</div>'+
+              '<div class="am-img-cropper-preview">'+
+              '   <img id="am-img-cropper-preview-img" ng-src="{{image}}" />'+
+              '<div>'+
+              '</div>' +
+              '</form>',
+    
+    
+    restrict: 'E',  
+    replace: true,
+    transclude: true,
+    post: function linkFn(scope, element, attrs) {
+ 
+      var x1 = scope.$eval(attrs.x1),
+          x2 = scope.$eval(attrs.x2),
+          y1 = scope.$eval(attrs.y1),
+          y2 = scope.$eval(attrs.y2);
+ 
+   
+    },
+    //Linking function to setup the cropper and elements
+    link: function postLink(scope, element, attrs, ctrl) {
+ 
+      
+      
+      //Add the hidden input fields to post to the server side image cropper      
+      var cropperInputs = '<div clas="btn-toolbar">' +
+                          '<button class="am-img-cropper-browse btn btn-" type="button">Browse</button> '+
+                          '<button class="am-img-cropper-submit btn btn-" type="submit">Crop</button>'+
+                          '</div>' +
+                          '<input type="hidden" name="x1" value="" class="span1"/>'+
+                          '<input type="hidden" name="y1" value="" class="span1"/>'+
+                          '<input type="hidden" name="x2" value="" class="span1"/>'+
+                          '<input type="hidden" name="y2" value="" class="span1"/>';
+
+      
+    $(element).prepend(cropperInputs);
+      angular.element('#am-img-uploader-file').css({ opacity: 0, display: 'none' });
+      
+      
+      
+    //Store the image crop coords in a variable
+    var cropCoords = {
+      x1: null, y1: null, x2: null, y2: null
+    };
+      
+      
+   //Listen for browse button to be clicked and open the file dialog
+      angular.element('.am-img-cropper-browse').bind('click', function(e){
+        angular.element('#am-img-uploader-file').trigger('click',function(e){
+        
+        });
+      });
+      
+      
+      
+      
+      
+      
+      //Handle reading the selected file        
+      var handleRead = function(theFile) {
+        uploadFile(theFile, 'com.appmatrixinc.my', function(data){
+          scope.$emit('fileUploaded', {data: data});
+        });
+        return function (e) {
+          $('#am-img-cropper-img').attr('src', e.target.result);
+          $('#am-img-cropper-preview-img').attr('src', e.target.result);
+      };
+    };
+    
+      
+      
+      
+      
+      //Handle uploading the file
+      function uploadFile(file, appid, callback) {
+			var form = new FormData ();
+			form.append('file', file);
+			var xhr = new XMLHttpRequest ();
+			xhr.onload = function (e) {
+				console.log('fileuploaded', this.responseText);
+				if (callback) {
+					callback(angular.fromJson(this.responseText));
+				}
+			};
+			xhr.open('POST', '/api/v2/upload?appid=' + appid, true);
+			xhr.send(form);
+		}
+ 
+
+      
+ 
+  //Handle when the file is selected
+  angular.element('#am-img-uploader-file').bind('change', function (e) {
+      var files = e.currentTarget.files;
+    
+	for (var i = 0; i < files.length; i++) {
+      var f = files[i];
+			if (!f.type.match('image.*')) {
+				continue;
+			}
+			var reader = new FileReader ();
+            reader.onload = handleRead(f);
+            reader.readAsDataURL(f);
+		}
+	});
+      
+      
+      
+      //Handle submitting the form
+      function handleSubmit(e){
+         alert(e); 
+      }
+      
+
+      
+   // observe changes to interpolated attribute
+   attrs.$observe('ngModel', function(value) {
+      console.log('link - ngModel has changed value to ' + JSON.stringify(value));
+      scope.$emit('coords', {data: value});
+ 
+  });
+      
+      
+ 
+    
+     //Handle when the selection changes
+    function preview(img, selection) {
+      var scaleX = 100 / (selection.width);
+      var scaleY = 100 / (selection.height);
+ 
+      
+      //Set the styles on the preview image
+      $('#am-img-cropper-preview-img').css({
+          width: Math.round(scaleX * 500) + 'px',
+          height: Math.round(scaleY * 375) + 'px',
+          marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+          marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
+        });
+          
+          cropCoords.x1 = selection.x1;
+          cropCoords.y1 = selection.y1;
+          cropCoords.x2 = selection.x2;
+          cropCoords.y2 = selection.y2;
+          cropCoords.width = selection.width;
+          cropCoords.height = selection.height;
+      
+        // change the attribute
+        attrs.$set('ngModel', cropCoords);
+   
+        
+            $('input[name="x1"]').val(cropCoords.x1);
+            $('input[name="y1"]').val(cropCoords.y1);
+            $('input[name="x2"]').val(cropCoords.x2);
+            $('input[name="y2"]').val(cropCoords.y2); 
+        
+      }
+      
+      
+      
+     
+      
+      
+      //Set the styles on the preview
+      $('.am-img-cropper-preview').css({
+            float: 'left',
+            position: 'relative',
+            overflow: 'hidden',
+            width: '115px',
+            height: '115px'
+        }).insertAfter($('.am-img-cropper-form'));
+
+      
+      
+     
+    //Handle when the crop button is submitted
+    $('.am-img-cropper-submit').bind('click', function(e){ 
+       
+      scope.$emit('coords', {data: cropCoords}); 
+       attrs.$set('coords', cropCoords);
+        scope.$apply(function () {
+           attrs.$set('ngModel', cropCoords);
+        });
+  
+    });
+      
+             
+     //Init the image select area
+    $('img.am-img-cropper-target').imgAreaSelect({  
+      handles: true,
+      aspectRatio: '1:1',
+      onSelectChange: preview
+    });
+      
+      
+    
+      
+      console.log('Linking function', scope, element, attrs);
+    }
+  };
+});
+
+
+
+function MainCtrl($scope, $http){
+  
+ 
+  $scope.$on('coords', function(e){
+    $scope.coords = e.data;
+   // alert(e.data);
+ //   console.log(e);
+  });   
+  
+  $scope.image = {};
+  $scope.cropImage = function(img){
+			var options = {
+				params: {
+					callback: 'JSON_CALLBACK',
+					x1: img.x1,
+					y1: img.y1,
+					x2: img.x2,
+					y2: img.y2,
+					path: img.path
+				}
+			};
+			$http.jsonp('/api/v2/imagecrop', options).success(function(data){
+				$scope.image = data;
+			});
+			
+			
+			
+			console.log('cropImage', img);
+		};
+		
+
+
+	$scope.$on('coords', function(e){
+		console.log(e);
+		$scope.image = e.targetScope.coords;
+	});
+ 
+}
+</script>
+</body>
+</html>
