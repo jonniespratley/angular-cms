@@ -1,5 +1,5 @@
 #
-# @author Jonnie Spratley - AppMatrix, Inc.
+# @author Jonnie Spratley 
 # @note This file contains tasks to help with deployment to live server, building the scripts, and cleaning up files.
 #
 
@@ -21,7 +21,7 @@ task :deploy_d => :build do
   require 'net/ssh'
   require 'net/scp'
 
-  server = 'dev.myappmatrix.com'
+  server = 'jonniespratley.me'
   login = 'jonnie'
 
   Net::SSH.start(server, login, :password => "fred3212") do |ssh|
@@ -39,7 +39,7 @@ task :deploy_t => :build do
   require 'net/ssh'
   require 'net/scp'
 
-  server = 'dev.myappmatrix.com'
+  server = 'jonniespratley.me'
   login = 'jonnie'
 
   Net::SSH.start(server, login, :password => "fred3212") do |ssh|
@@ -73,7 +73,7 @@ task :deploy_scripts => :build do
   require 'net/ssh'
   require 'net/scp'
 
-  server = 'myappmatrix.com'
+  server = 'jonniespratley.me'
   login = 'jonnie'
 
   Net::SSH.start(server, login, :password => "fred3212") do |ssh|
@@ -89,7 +89,7 @@ task :deploy_htacess => :build do
   require 'net/ssh'
   require 'net/scp'
 
-  server = 'dev.myappmatrix.com'
+  server = 'jonniespratley.me'
   login = 'jonnie'
 
   Net::SSH.start(server, login, :password => "fred3212") do |ssh|

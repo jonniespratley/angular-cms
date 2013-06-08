@@ -5,7 +5,7 @@
 
 
 /**
- * @author Jonnie Spratley, AppMatrix
+ * @author Jonnie Spratley,
  * @created 10/23/12
  * REST METHODS:
  *
@@ -17,9 +17,6 @@
  * PUT      update          http://localhost:3000/api/v2/database/table/:id
  * DELETE   destroy         http://localhost:3000/api/v2/database/table/:id
  */
-
-
-
 
 //## Required Modules
 var mongo = require('mongodb');
@@ -47,13 +44,13 @@ var racker = require('racker');
 //### Cloud Files Config
 var cloudfilesConfig = {
 	auth : {
-    	username: 'siteappmatrix',
+    	username: 'siteadmin',
 		apiKey: '778f7d67bcebf9bf15d872b6f77b3d8b',
 		host : 'lon.auth.api.rackspacecloud.com'
 	},
 	servicenet: true
 };
-racker.set('user', 'siteappmatrix').set('key', '778f7d67bcebf9bf15d872b6f77b3d8b').set('host', 'us');
+racker.set('user', 'siteadmin').set('key', '778f7d67bcebf9bf15d872b6f77b3d8b').set('host', 'us');
 
 //### Colors Config
 colors.setTheme({

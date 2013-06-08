@@ -1,6 +1,5 @@
 /**
- * Server - This is the AppMatrixEngine Node.js Server.
- * @file /WWW/AppMatrixEngine/ame-angular/server.js
+ * Server - This is the Node.js Server.
  * @object
  */
 var fs = require('fs'), util = require('util'), 
@@ -47,12 +46,8 @@ var options = {
 	host : '127.0.0.1',
 	key : httpsKey,
 	cert : httpsCert,
-	hostnameOnly : true,
+	hostncmsOnly : true,
 	router : {
-		'www.myappmatrix.com' : '127.0.0.1:443',
-		'app.myappmatrix.com' : '127.0.0.1:8080',
-		'api.myappmatrix.com' : '127.0.0.1:3000',
-		'pusher.myappmatrix.com' : '127.0.0.1:3002'
 	}
 };
 
@@ -63,29 +58,6 @@ var rest = require('./routes/rest').rest;
 	rest.init(9000);
 
 
-
-//var smartpass = require('./routes/smartpass').smartpass;
-//	smartpass.init(3535);
-
-
-
-
-//test push
-//var amePusher = require('./routes/ame-pusher');
-//	amePusher.AppMatrixPusher.initServer(3434);
-	
-	//init the server
-	/*
-	amePusher.AppMatrixPusher.init({
-		live : false,
-		cert : './files/Aps/com_myappmatrix_app_dev_cert.pem',
-		key : './files/Aps/com_myappmatrix_app_dev_key.pem',
-		passphrase : 'fred'
-	}); 
-	*/
- 
-	//send test push
-	//amePusher.AppMatrixPusher.send('eb52b4ec270ae7460b54100281626668ca1362cdb4df24cd4093b4b15e46cfed', 'rich', 'ame server booted!', 0, {url: 'http://myappmatrix.com'});
 
 
 
@@ -167,17 +139,17 @@ httpsServer = https.createServer(options, function (req, res) {
 // ### Server Channels
 //These are the events that this socket server dispatches.
 //
-//1. ame:authorization
-//2. ame:client:message
-//3. ame:client:connect
-//4. ame:client:disconnect
-//5. ame:server:message
-//6. ame:server:disconnect
-//7. ame:server:connect
-//8. ame:
+//1. cms:authorization
+//2. cms:client:message
+//3. cms:client:connect
+//4. cms:client:disconnect
+//5. cms:server:message
+//6. cms:server:disconnect
+//7. cms:server:connect
+//8. cms:
 //
 //sio = require('socket.io'),
-var AmeSocketServer = {
+var SocketServer = {
 	
 	//###init(app)
 	//I setup the socket server and listen for any routing requests from the express app.
@@ -194,24 +166,24 @@ var AmeSocketServer = {
 		});
 		
 		
-		//Hold the names of events that this socket server listens for and emits
-		var AmeSocket = {
+		//Hold the ncmss of events that this socket server listens for and emits
+		var CmsSocket = {
 			events : {
 				session : {
-					pageView : 'ame:session:pageView',
-					hashChange : 'ame:session:hashChange',
-					login: 'ame:session:login',
-					logout: 'ame:session:logout'
+					pageView : 'cms:session:pageView',
+					hashChange : 'cms:session:hashChange',
+					login: 'cms:session:login',
+					logout: 'cms:session:logout'
 				},
 				server : {
-					message : 'ame:server:message',
-					connected : 'ame:server:connect',
-					disconnected : 'ame:server:disconnect'
+					message : 'cms:server:message',
+					connected : 'cms:server:connect',
+					disconnected : 'cms:server:disconnect'
 				},
 				client : {
-					message : 'ame:client:message',
-					connected : 'ame:client:connect',
-					disconnected : 'ame:client:disconnect'
+					message : 'cms:client:message',
+					connected : 'cms:client:connect',
+					disconnected : 'cms:client:disconnect'
 				}
 			}
 		};
@@ -235,28 +207,28 @@ var AmeSocketServer = {
 			
 		 	
 			//Publish the server connected event
-			io.sockets.emit(AmeSocket.events.server.connected, {
+			io.sockets.emit(CmsSocket.events.server.connected, {
 				data : connections.length
 			});
 			
 			
 			//Listen for client connected
-			socket.on(AmeSocket.events.client.connected, function (msg) {
-				console.log(AmeSocket.events.client.connected, msg);
+			socket.on(CmsSocket.events.client.connected, function (msg) {
+				console.log(CmsSocket.events.client.connected, msg);
 			});
 			
 			
 			//Listen for any messages from the client
-			socket.on(AmeSocket.events.client.message, function (content) {
+			socket.on(CmsSocket.events.client.message, function (content) {
 				
-				console.log(AmeSocket.events.client.message, JSON.stringify(content).debug);
+				console.log(CmsSocket.events.client.message, JSON.stringify(content).debug);
 				
 				//Broadcast the event 
-				socket.emit(AmeSocket.events.server.message, {
+				socket.emit(CmsSocket.events.server.message, {
 					id : socket.id,
 					data : content
 				});
-				socket.broadcast.emit(AmeSocket.events.server.message, {
+				socket.broadcast.emit(CmsSocket.events.server.message, {
 					id : socket.id,
 					data : content
 				});
@@ -265,14 +237,14 @@ var AmeSocketServer = {
 			
 			
 			//Listen for any pageView events from the client
-			socket.on(AmeSocket.events.session.pageView, function (message) {
-				console.log(AmeSocket.events.session.pageView + message);
+			socket.on(CmsSocket.events.session.pageView, function (message) {
+				console.log(CmsSocket.events.session.pageView + message);
 				
 				ip = socket.handshake.address.address;
 				url = message;
 				
 				//Broadcast the event
-				io.sockets.emit(AmeSocket.events.session.pageView, {
+				io.sockets.emit(CmsSocket.events.session.pageView, {
 					'connections' : Object.keys(io.connected).length,
 					'ip' : ip,
 					'url' : url,
@@ -288,16 +260,12 @@ var AmeSocketServer = {
 			socket.on('disconnect', function () {
 				console.log("Socket disconnected");
 				
-				io.sockets.emit('ame:session:pageview', {
+				io.sockets.emit('cms:session:pageview', {
 					'connections' : Object.keys(io.connected).length
 				});
 				
 			});
-			
-			
-			
-			
-		
+
 			
 			
 			
@@ -307,26 +275,7 @@ var AmeSocketServer = {
 
 
 //Start the websocket server
-AmeSocketServer.init(proxyServer);
+SocketServer.init(proxyServer);
 
 //Start the proxy server
 proxyServer.listen(9090);
-//Test insert
-//curl -d '{ "name" : "This is a name" }' -H "Content-Type: application/json" http://dev.appmatrix.us:3000/myappmatrix/posts
-/* @TODO: Live REST */
-/* @TODO: Devices
- var devices = require('./routes/api/devices');
- app.get('/myappmatrix/devices', devices.Resource.findAll);
- app.post('/myappmatrix/devices', devices.Resource.add);
- app.put('/myappmatrix/devices/:id', devices.Resource.update);
- app.get('/myappmatrix/devices/:id', devices.Resource.findById);
- app.post('/myappmatrix/devices/:id', devices.Resource.destroy);
- */
-/* @TODO: Analytics
- var analytics = require('./routes/api/analytics');
- app.get('/myappmatrix/analytics', analytics.Resource.findAll);
- app.post('/myappmatrix/analytics', analytics.Resource.add);
- app.put('/myappmatrix/analytics/:id', analytics.Resource.update);
- app.get('/myappmatrix/analytics/:id', analytics.Resource.findById);
- app.post('/myappmatrix/analytics/:id', analytics.Resource.destroy);
- */
