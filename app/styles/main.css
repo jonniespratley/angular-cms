@@ -1,6 +1,0 @@
-/* @override http://localhost:9000/styles/main.css */
-
-/* Will be compiled down to a single stylesheet with your sass files */
-body{
-padding-top: 60px;
-}
