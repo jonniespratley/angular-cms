@@ -84,7 +84,7 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc'
       },
       all: [
-        'Gruntfile.js',
+        //'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js'
       ]
     },
@@ -252,7 +252,19 @@ module.exports = function (grunt) {
     'connect:test',
     'testacular'
   ]);
-
+	grunt.registerTask('build:f', [
+    'clean:dist',
+    'jshint',
+    'test',
+    'coffee',
+    'compass:dist',
+    'concat',
+    'copy',
+    'cdnify',
+    'usemin',
+    'ngmin',
+    'uglify'
+  ]);
   grunt.registerTask('build', [
     'clean:dist',
     'jshint',
