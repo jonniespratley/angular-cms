@@ -1,9 +1,10 @@
-'use strict'
+'use strict';
 
 angular.module('angularCmsApp')
-  .controller 'MainCtrl', ($scope) ->
+  .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
-    ]
+    ];
+  });

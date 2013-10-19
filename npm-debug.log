@@ -1,0 +1,193 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.2.14
+3 info using node@v0.8.22
+4 verbose read json /WWW/2013Projects/angular-cms/package.json
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/WWW/2013Projects/angular-cms',
+6 verbose install   [ 'grunt',
+6 verbose install     'grunt-contrib-copy',
+6 verbose install     'grunt-contrib-concat',
+6 verbose install     'grunt-contrib-coffee',
+6 verbose install     'grunt-contrib-uglify',
+6 verbose install     'grunt-contrib-compass',
+6 verbose install     'grunt-contrib-jshint',
+6 verbose install     'grunt-contrib-cssmin',
+6 verbose install     'grunt-contrib-connect',
+6 verbose install     'grunt-contrib-clean',
+6 verbose install     'grunt-contrib-htmlmin',
+6 verbose install     'grunt-contrib-imagemin',
+6 verbose install     'grunt-contrib-livereload',
+6 verbose install     'grunt-bower-requirejs',
+6 verbose install     'grunt-usemin',
+6 verbose install     'grunt-regarde',
+6 verbose install     'grunt-rev',
+6 verbose install     'grunt-karma',
+6 verbose install     'grunt-open',
+6 verbose install     'matchdep',
+6 verbose install     'grunt-google-cdn',
+6 verbose install     'grunt-ngmin' ] ]
+7 verbose from cache /WWW/2013Projects/angular-cms/package.json
+8 info preinstall angular-cms@0.0.0
+9 verbose read json /WWW/2013Projects/angular-cms/node_modules/bower/package.json
+10 verbose read json /WWW/2013Projects/angular-cms/node_modules/generator-angular/package.json
+11 verbose read json /WWW/2013Projects/angular-cms/node_modules/generator-karma/package.json
+12 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt/package.json
+13 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-bower-requirejs/package.json
+14 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-clean/package.json
+15 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-coffee/package.json
+16 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-compass/package.json
+17 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-concat/package.json
+18 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-connect/package.json
+19 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-copy/package.json
+20 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-cssmin/package.json
+21 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-htmlmin/package.json
+22 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-imagemin/package.json
+23 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-jshint/package.json
+24 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-livereload/package.json
+25 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-uglify/package.json
+26 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-google-cdn/package.json
+27 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-karma/package.json
+28 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-ngmin/package.json
+29 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-open/package.json
+30 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-regarde/package.json
+31 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-rev/package.json
+32 verbose read json /WWW/2013Projects/angular-cms/node_modules/grunt-usemin/package.json
+33 verbose read json /WWW/2013Projects/angular-cms/node_modules/matchdep/package.json
+34 verbose from cache /WWW/2013Projects/angular-cms/package.json
+35 verbose readDependencies using package.json deps
+36 verbose from cache /WWW/2013Projects/angular-cms/node_modules/bower/package.json
+37 verbose from cache /WWW/2013Projects/angular-cms/node_modules/generator-angular/package.json
+38 verbose from cache /WWW/2013Projects/angular-cms/node_modules/generator-karma/package.json
+39 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt/package.json
+40 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-bower-requirejs/package.json
+41 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-clean/package.json
+42 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-coffee/package.json
+43 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-compass/package.json
+44 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-concat/package.json
+45 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-connect/package.json
+46 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-copy/package.json
+47 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-cssmin/package.json
+48 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-htmlmin/package.json
+49 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-imagemin/package.json
+50 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-jshint/package.json
+51 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-livereload/package.json
+52 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-contrib-uglify/package.json
+53 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-google-cdn/package.json
+54 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-karma/package.json
+55 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-ngmin/package.json
+56 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-open/package.json
+57 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-regarde/package.json
+58 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-rev/package.json
+59 verbose from cache /WWW/2013Projects/angular-cms/node_modules/grunt-usemin/package.json
+60 verbose from cache /WWW/2013Projects/angular-cms/node_modules/matchdep/package.json
+61 verbose already installed skipping grunt@~0.4.1 /WWW/2013Projects/angular-cms
+62 verbose already installed skipping grunt-contrib-copy@~0.4.0 /WWW/2013Projects/angular-cms
+63 verbose already installed skipping grunt-contrib-concat@~0.1.3 /WWW/2013Projects/angular-cms
+64 verbose already installed skipping grunt-contrib-coffee@~0.6.4 /WWW/2013Projects/angular-cms
+65 verbose already installed skipping grunt-contrib-uglify@~0.2.0 /WWW/2013Projects/angular-cms
+66 verbose already installed skipping grunt-contrib-compass@~0.1.3 /WWW/2013Projects/angular-cms
+67 verbose already installed skipping grunt-contrib-jshint@~0.3.0 /WWW/2013Projects/angular-cms
+68 verbose already installed skipping grunt-contrib-cssmin@~0.5.0 /WWW/2013Projects/angular-cms
+69 verbose already installed skipping grunt-contrib-connect@~0.2.0 /WWW/2013Projects/angular-cms
+70 verbose already installed skipping grunt-contrib-clean@~0.4.0 /WWW/2013Projects/angular-cms
+71 verbose already installed skipping grunt-contrib-imagemin@~0.1.2 /WWW/2013Projects/angular-cms
+72 verbose already installed skipping grunt-contrib-htmlmin@~0.1.1 /WWW/2013Projects/angular-cms
+73 verbose already installed skipping grunt-contrib-livereload@~0.1.2 /WWW/2013Projects/angular-cms
+74 verbose already installed skipping grunt-bower-requirejs@~0.4.1 /WWW/2013Projects/angular-cms
+75 verbose already installed skipping grunt-usemin@~0.1.10 /WWW/2013Projects/angular-cms
+76 verbose already installed skipping grunt-rev@~0.1.0 /WWW/2013Projects/angular-cms
+77 verbose already installed skipping grunt-regarde@~0.1.1 /WWW/2013Projects/angular-cms
+78 verbose already installed skipping grunt-karma@~0.3.0 /WWW/2013Projects/angular-cms
+79 verbose already installed skipping grunt-open@~0.2.0 /WWW/2013Projects/angular-cms
+80 verbose already installed skipping grunt-google-cdn@~0.1.1 /WWW/2013Projects/angular-cms
+81 verbose already installed skipping matchdep@~0.1.1 /WWW/2013Projects/angular-cms
+82 verbose already installed skipping grunt-ngmin@~0.0.2 /WWW/2013Projects/angular-cms
+83 silly resolved []
+84 info build /WWW/2013Projects/angular-cms
+85 verbose from cache /WWW/2013Projects/angular-cms/package.json
+86 verbose linkStuff [ false, false, false, '/WWW/2013Projects' ]
+87 info linkStuff angular-cms@0.0.0
+88 verbose linkBins angular-cms@0.0.0
+89 verbose linkMans angular-cms@0.0.0
+90 verbose rebuildBundles angular-cms@0.0.0
+91 verbose rebuildBundles [ '.bin',
+91 verbose rebuildBundles   'bower',
+91 verbose rebuildBundles   'generator-angular',
+91 verbose rebuildBundles   'generator-karma',
+91 verbose rebuildBundles   'grunt',
+91 verbose rebuildBundles   'grunt-bower-requirejs',
+91 verbose rebuildBundles   'grunt-contrib-clean',
+91 verbose rebuildBundles   'grunt-contrib-coffee',
+91 verbose rebuildBundles   'grunt-contrib-compass',
+91 verbose rebuildBundles   'grunt-contrib-concat',
+91 verbose rebuildBundles   'grunt-contrib-connect',
+91 verbose rebuildBundles   'grunt-contrib-copy',
+91 verbose rebuildBundles   'grunt-contrib-cssmin',
+91 verbose rebuildBundles   'grunt-contrib-htmlmin',
+91 verbose rebuildBundles   'grunt-contrib-imagemin',
+91 verbose rebuildBundles   'grunt-contrib-jshint',
+91 verbose rebuildBundles   'grunt-contrib-livereload',
+91 verbose rebuildBundles   'grunt-contrib-uglify',
+91 verbose rebuildBundles   'grunt-google-cdn',
+91 verbose rebuildBundles   'grunt-karma',
+91 verbose rebuildBundles   'grunt-ngmin',
+91 verbose rebuildBundles   'grunt-open',
+91 verbose rebuildBundles   'grunt-regarde',
+91 verbose rebuildBundles   'grunt-rev',
+91 verbose rebuildBundles   'grunt-usemin',
+91 verbose rebuildBundles   'matchdep' ]
+92 verbose rebuild bundle /WWW/2013Projects/angular-cms/node_modules/bower
+93 info build /WWW/2013Projects/angular-cms/node_modules/bower
+94 verbose from cache /WWW/2013Projects/angular-cms/node_modules/bower/package.json
+95 info preinstall bower@0.9.2
+96 verbose linkStuff [ false,
+96 verbose linkStuff   false,
+96 verbose linkStuff   false,
+96 verbose linkStuff   '/WWW/2013Projects/angular-cms/node_modules' ]
+97 info linkStuff bower@0.9.2
+98 warn prefer global bower@0.9.2 should be installed with -g
+99 verbose linkBins bower@0.9.2
+100 verbose link bins [ { bower: 'bin/bower' },
+100 verbose link bins   '/WWW/2013Projects/angular-cms/node_modules/.bin',
+100 verbose link bins   false ]
+101 verbose linkMans bower@0.9.2
+102 verbose rebuildBundles bower@0.9.2
+103 verbose rebuildBundles [ '.bin',
+103 verbose rebuildBundles   'abbrev',
+103 verbose rebuildBundles   'archy',
+103 verbose rebuildBundles   'async',
+103 verbose rebuildBundles   'colors',
+103 verbose rebuildBundles   'fstream',
+103 verbose rebuildBundles   'glob',
+103 verbose rebuildBundles   'hogan.js',
+103 verbose rebuildBundles   'lodash',
+103 verbose rebuildBundles   'mkdirp',
+103 verbose rebuildBundles   'nopt',
+103 verbose rebuildBundles   'promptly',
+103 verbose rebuildBundles   'rc',
+103 verbose rebuildBundles   'read-package-json',
+103 verbose rebuildBundles   'request',
+103 verbose rebuildBundles   'rimraf',
+103 verbose rebuildBundles   'semver',
+103 verbose rebuildBundles   'stable',
+103 verbose rebuildBundles   'tar',
+103 verbose rebuildBundles   'tmp',
+103 verbose rebuildBundles   'unzip',
+103 verbose rebuildBundles   'update-notifier' ]
+104 error Error: EACCES, unlink '/WWW/2013Projects/angular-cms/node_modules/.bin/bower'
+104 error  { [Error: EACCES, unlink '/WWW/2013Projects/angular-cms/node_modules/.bin/bower']
+104 error   errno: 3,
+104 error   code: 'EACCES',
+104 error   path: '/WWW/2013Projects/angular-cms/node_modules/.bin/bower' }
+105 error Please try running this command again as root/Administrator.
+106 error System Darwin 12.5.0
+107 error command "node" "/usr/local/bin/npm" "install"
+108 error cwd /WWW/2013Projects/angular-cms
+109 error node -v v0.8.22
+110 error npm -v 1.2.14
+111 error path /WWW/2013Projects/angular-cms/node_modules/.bin/bower
+112 error code EACCES
+113 error errno 3
+114 error stack Error: EACCES, unlink '/WWW/2013Projects/angular-cms/node_modules/.bin/bower'
+115 verbose exit [ 3, true ]
