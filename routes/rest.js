@@ -1,9 +1,6 @@
 //# REST 
 // This is the resource object that contains all of the REST api methods for a full CRUD on a mongo account document.
 
-
-
-
 /**
  * @author Jonnie Spratley,
  * @created 10/23/12
@@ -44,13 +41,13 @@ var racker = require('racker');
 //### Cloud Files Config
 var cloudfilesConfig = {
 	auth : {
-    	username: 'siteadmin',
-		apiKey: '778f7d67bcebf9bf15d872b6f77b3d8b',
+    	username: '',
+		apiKey: '',
 		host : 'lon.auth.api.rackspacecloud.com'
 	},
 	servicenet: true
 };
-racker.set('user', 'siteadmin').set('key', '778f7d67bcebf9bf15d872b6f77b3d8b').set('host', 'us');
+racker.set('user', 'siteadmin').set('key', '').set('host', 'us');
 
 //### Colors Config
 colors.setTheme({
@@ -72,7 +69,7 @@ colors.setTheme({
 var config = {
 	version : 'v2',
 	security : {
-		salt : 'a58e325c6df628d07a18b673a3420986'
+		salt : ''
 	},
 	db : {
 		username : 'amadmin',
@@ -398,14 +395,14 @@ var Resource = {
 var RestResource = {
 	useversion : 'v1',
 	urls : {
-		v1 : 'https://www.myappmatrix.com',
+		v1 : 'https://www..com',
 		v2 : '/api/v2/'
 	},
 	//### index
 	//I handle displaying a message with the version for this api.
 	index : function (req, res, next) {
 		res.json({
-			message : 'AppMatrix REST API Server ' + RestResource.useversion
+			message : ' REST API Server ' + RestResource.useversion
 		});
 	},
 	//### v1index
@@ -539,7 +536,7 @@ var RestResource = {
 	v2index : function (req, res, next) {
 		RestResource.version = 'v2';
 		res.json({
-			message : 'AppMatrix REST API Server ' + RestResource.useversion
+			message : ' REST API Server ' + RestResource.useversion
 		});
 	},
 	//### login

@@ -1,6 +1,6 @@
 /**
  * accounts Resource
- * @author Jonnie Spratley, AppMatrix
+ * @author Jonnie Spratley, 
  * @created 10/23/12
  *
  */
@@ -13,7 +13,7 @@ var Server = mongo.Server;
 var Db = mongo.Db;
 
 //Connect to the database
-mongoose.connect('mongodb://localhost:27017/myappmatrix');
+mongoose.connect('mongodb://localhost:27017/my');
 
 /* ======================[ @TODO: Modal Schema ]====================== */
 
