@@ -2,12 +2,7 @@
  * Server - This is the Node.js Server.
  * @object
  */
-var fs = require('fs'), util = require('util'), 
-https = require('https'), 
-http = require('http'), sio = require('socket.io'), 
-httpProxy = require('http-proxy'), 
-request = require('request'), 
-inspect = require('util').inspect;
+var fs = require('fs'), util = require('util'), https = require('https'), http = require('http'), sio = require('socket.io'), httpProxy = require('http-proxy'), request = require('request'), inspect = require('util').inspect;
 
 var colors = require('colors');
 colors.setTheme({
@@ -51,68 +46,54 @@ var options = {
 	}
 };
 
-
-
 /* ======================[ @TODO: Dynamic REST API ]====================== */
 var rest = require('./routes/rest').rest;
-	rest.init(9000);
-
-
-
-
-
-
+rest.init(9000);
 
 /* @TODO: Proxy Server */
-proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
-	
+proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
+
 	// console.log('proxyServer', options);
-	if (req.url.match(/^\/api\//)) {
+	if(req.url.match(/^\/api\//)) {
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
 			port : 9000
 		});
 		console.log('Routing request: API server'.warn);
-		
+
 		//Match v1 api calls
-	} else if (req.url.match(/^\/v1\//)) {
+	} else if(req.url.match(/^\/v1\//)) {
 		proxy.proxyRequest(req, res, {
 			host : 'www.myappmatrix.com',
 			port : 443
 		});
 		console.log('Routing request: v1 API server'.warn);
-		
-		
-		
+
 		//Match pusher server calls
-	} else if (req.url.match(/^\/aps\//)) {
+	} else if(req.url.match(/^\/aps\//)) {
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
 			port : 9595
 		});
 		console.log('Routing request: Pusher Server'.warn);
-		
-		
-		
+
 		//Custom server with yeoman and socketio
-	} else if (req.url.match(/^\/smartpass\//)) {
+	} else if(req.url.match(/^\/smartpass\//)) {
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
 			port : 3535
 		});
 		console.log('Routing request: Passbook Server'.warn);
-		
-		
+
 		//Match any /public dir and route to apache
-	} else if (req.url.match(/^\/public\//)) {
+	} else if(req.url.match(/^\/public\//)) {
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
 			port : 78
 		});
 		console.log('Routing request: Apache Server'.warn);
-		
-		
+
 	} else {
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
@@ -122,14 +103,13 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 		console.log('Routing request: App Server'.warn);
 	}
 });
-httpsServer = https.createServer(options, function (req, res) {
+httpsServer = https.createServer(options, function(req, res) {
 	res.writeHead(200, {
 		'Content-type' : 'text/plain'
 	});
 	res.write('Request proxied ' + JSON.stringify(req.headers));
 	res.end();
 }).listen(9091);
-
 
 ////////////////////////////
 //## Socket Server
@@ -150,30 +130,28 @@ httpsServer = https.createServer(options, function (req, res) {
 //
 //sio = require('socket.io'),
 var SocketServer = {
-	
+
 	//###init(app)
 	//I setup the socket server and listen for any routing requests from the express app.
-	init : function (app) {
+	init : function(app) {
 		var io = sio.listen(app);
-		io.configure(function () {
-			io.set('authorization', function (handshakeData, callback) {
-				if (handshakeData.xdomain) {
+		io.configure(function() {
+			io.set('authorization', function(handshakeData, callback) {
+				if(handshakeData.xdomain) {
 					callback('Cross-domain connections are not allowed');
 				} else {
 					callback(null, true);
 				}
 			});
 		});
-		
-		
 		//Hold the ncmss of events that this socket server listens for and emits
 		var CmsSocket = {
 			events : {
 				session : {
 					pageView : 'cms:session:pageView',
 					hashChange : 'cms:session:hashChange',
-					login: 'cms:session:login',
-					logout: 'cms:session:logout'
+					login : 'cms:session:login',
+					logout : 'cms:session:logout'
 				},
 				server : {
 					message : 'cms:server:message',
@@ -187,43 +165,31 @@ var SocketServer = {
 				}
 			}
 		};
-		
-		
+
 		//Store a list of the connected clients
 		var connections = [];
-		
-		
-		
-		
+
 		//Handle when a client is connected.
-		io.sockets.on('connection', function (socket) {
-			
-			
-			
-			
-			
+		io.sockets.on('connection', function(socket) {
+
 			//push to connections array
 			connections.push(socket);
-			
-		 	
+
 			//Publish the server connected event
 			io.sockets.emit(CmsSocket.events.server.connected, {
 				data : connections.length
 			});
-			
-			
+
 			//Listen for client connected
-			socket.on(CmsSocket.events.client.connected, function (msg) {
+			socket.on(CmsSocket.events.client.connected, function(msg) {
 				console.log(CmsSocket.events.client.connected, msg);
 			});
-			
-			
 			//Listen for any messages from the client
-			socket.on(CmsSocket.events.client.message, function (content) {
-				
+			socket.on(CmsSocket.events.client.message, function(content) {
+
 				console.log(CmsSocket.events.client.message, JSON.stringify(content).debug);
-				
-				//Broadcast the event 
+
+				//Broadcast the event
 				socket.emit(CmsSocket.events.server.message, {
 					id : socket.id,
 					data : content
@@ -233,46 +199,33 @@ var SocketServer = {
 					data : content
 				});
 			});
-			
-			
-			
 			//Listen for any pageView events from the client
-			socket.on(CmsSocket.events.session.pageView, function (message) {
+			socket.on(CmsSocket.events.session.pageView, function(message) {
 				console.log(CmsSocket.events.session.pageView + message);
-				
 				ip = socket.handshake.address.address;
 				url = message;
-				
+
 				//Broadcast the event
 				io.sockets.emit(CmsSocket.events.session.pageView, {
 					'connections' : Object.keys(io.connected).length,
 					'ip' : ip,
 					'url' : url,
 					'xdomain' : socket.handshake.xdomain,
-					'timestamp' : new Date ()
+					'timestamp' : new Date()
 				});
 			});
-			
-			
-			
-			
 			//handle disconnections
-			socket.on('disconnect', function () {
+			socket.on('disconnect', function() {
 				console.log("Socket disconnected");
-				
+
 				io.sockets.emit('cms:session:pageview', {
 					'connections' : Object.keys(io.connected).length
 				});
-				
-			});
 
-			
-			
-			
+			});
 		});
 	}
 };
-
 
 //Start the websocket server
 SocketServer.init(proxyServer);
