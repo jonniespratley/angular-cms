@@ -294,7 +294,7 @@ module.exports = function (grunt) {
       }
     }
   });
-
+grunt.loadNpmTasks('grunt-karma');
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);

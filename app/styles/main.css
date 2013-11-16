@@ -2,10 +2,9 @@
 
 body {
 	background: #fafafa;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #333;
 }
-
 .hero-unit {
 	margin: 50px auto 0 auto;
 	width: 300px;
@@ -16,74 +15,86 @@ body {
 	border-radius: 6px;
 	padding: 60px;
 }
-
 .hero-unit h1 {
 	font-size: 60px;
 	line-height: 1;
 	letter-spacing: -1px;
 }
-
 html {
 	overflow-x: hidden;
-
-/* Prevent scroll on narrow devices */
+	/* Prevent scroll on narrow devices */
 }
-
 footer {
 	padding: 30px 0;
 }
-
 /*
  * Off Canvas
  * --------------------------------------------------
  */
 
-@media screen and(max-width:767px) {
+@media screen and (max-width: 767px) {
 
-.row-offcanvas {
+	.row-offcanvas {
+		position: relative;
+		-webkit-transition: all 0.25s ease-out;
+		-moz-transition: all 0.25s ease-out;
+		transition: all 0.25s ease-out;
+	}
+	.row-offcanvas-right
+	.sidebar-offcanvas {
+		right: -50%;
+		/* 6 columns */
+	}
+	.row-offcanvas-left
+	.sidebar-offcanvas {
+		left: -50%;
+		/* 6 columns */
+	}
+	.row-offcanvas-right.active {
+		right: 50%;
+		/* 6 columns */
+	}
+	.row-offcanvas-left.active {
+		left: 50%;
+		/* 6 columns */
+	}
+	.sidebar-offcanvas {
+		position: absolute;
+		top: 0;
+		width: 50%;
+		/* 6 columns */
+	}
+}
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
+.form-signin .checkbox {
+	font-weight: normal;
+}
+.form-signin .form-control {
 	position: relative;
-	-webkit-transition: all 0.25s ease-out;
-	-moz-transition: all 0.25s ease-out;
-	transition: all 0.25s ease-out;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
-
-.row-offcanvas-right
-	.sidebar-offcanvas {
-	right: -50%;
-
-
-/* 6 columns */
+.form-signin .form-control:focus {
+	z-index: 2;
 }
-
-.row-offcanvas-left
-	.sidebar-offcanvas {
-	left: -50%;
-
-
-/* 6 columns */
+.form-signin input[type="text"] {
+	margin-bottom: -1px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
-
-.row-offcanvas-right.active {
-	right: 50%;
-
-
-/* 6 columns */
-}
-
-.row-offcanvas-left.active {
-	left: 50%;
-
-
-/* 6 columns */
-}
-
-.sidebar-offcanvas {
-	position: absolute;
-	top: 0;
-	width: 50%;
-
-
-/* 6 columns */
-}
-
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }

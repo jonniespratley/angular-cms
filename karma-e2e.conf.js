@@ -11,6 +11,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+    	ANGULAR_SCENARIO,
+			ANGULAR_SCENARIO_ADAPTER,
       'test/e2e/**/*.js'
     ],
 
