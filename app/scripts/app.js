@@ -5,6 +5,11 @@ var app = angular.module('angularCmsBaseApp', []);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
+
+
+
+
+
 		//TODO - Make configurable via settings > hash mode
     $locationProvider.html5Mode(true);
     
@@ -44,11 +49,28 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 /**
  * Global app ctr
  */
-angular.module('angularCmsBaseApp').controller('AppCtrl', function ($rootScope, $http) {
-    $rootScope.App = {
+angular.module('angularCmsBaseApp').controller('AppCtrl', function ($rootScope, $http, $route, $location, $routeParams, $log) {
+    var App = {
+    		route: $routeParams,
+    		location: $location,
         config: {
             title: 'Angular-CMS'
         }
 
     };
+    
+    
+    $rootScope.$on('$routeChangeStart', function(event, next, current){
+    	console.dir(event, next, current);
+    });
+    
+    
+    
+    
+    $rootScope.App = App;
+    
+    console.log($rootScope.App);
+    
+    
+    
 });
