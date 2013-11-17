@@ -17,7 +17,16 @@ colors.setTheme({
 	debug : 'blue',
 	error : 'red'
 });
+
 // outputs red text
+console.log("this is an silly".silly);
+console.log("this is an input".input);
+console.log("this is an verbose".verbose);
+console.log("this is an prompt".prompt);
+console.log("this is an info".info);
+console.log("this is an data".data);
+console.log("this is an help".help);
+console.log("this is an debug".debug);
 console.log("this is an error".error);
 // outputs yellow text
 console.log("this is a warning".warn);

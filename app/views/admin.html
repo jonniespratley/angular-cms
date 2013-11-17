@@ -1,15 +1,84 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-3">
-			<aside class=" well-sm">
-				<ul class="nav nav-stacked">
-					<li class="nav-header">Users</li>
-					<li><a href="#">All Users</a></li>
-					<li><a href="#">Add User</a></li>
-					<li><a href="#">Your Profile</a></li>
+<div class="view">
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+			<div class="well well-sm sidebar-nav">
+				<ul class="nav">
+					<li class="nav-header">
+						Customize
+					</li>
+					<li class="active">
+						<a href="#">Themes</a>
+					</li>
+					<li>
+						<a href="#">Plugins</a>
+					</li>
+					<li>
+						<a href="#">Widgets</a>
+					</li>
+					<li class="nav-header">
+						Settings
+					</li>
+					<li>
+						<a href="#">Link</a>
+					</li>
+					<li>
+						<a href="#">Link</a>
+					</li>
+					<li>
+						<a href="#">Link</a>
+					</li>
+					<li class="nav-header">
+						Users
+					</li>
+					<li>
+						<a href="#">All Users</a>
+					</li>
+					<li>
+						<a href="#">Add User</a>
+					</li>
 				</ul>
-			</aside>
+			</div>
+			<!--/.well -->
 		</div>
-		<div class="col-md-9"></div>
+		<!--/span-->
+		<div class="col-xs-12 col-sm-10">
+			<p class="pull-left visible-xs">
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">
+					Toggle nav
+				</button>
+			</p>
+			<div class="alert alert-info">
+				<p>
+					This is an example to show the potential of an offcanvas layout pattern in Bootstrap.&nbsp;
+				</p>
+			</div>
+			<ul class="row list-unstyled sortable">
+				<li class="col-6 col-sm-6 col-lg-4">
+					<cms-panel id="panel" title="Panel">
+						Content
+					</cms-panel>
+				</li><!--/span-->
+				<li class="col-6 col-sm-6 col-lg-4">
+					<cms-panel id="panel" title="Panel">
+						Content
+					</cms-panel>
+				</li><!--/span-->
+				<li class="col-6 col-sm-6 col-lg-4">
+					<cms-panel id="panel" title="Panel">
+						Content
+					</cms-panel>
+				</li><!--/span-->
+				<li class="col-6 col-sm-6 col-lg-4">
+					<cms-panel id="panel" title="Panel">
+						Content
+					</cms-panel>
+				</li><!--/span-->
+				
+			</ul>
+			<!--/row-->
+		</div>
+		<!--/span-->
 	</div>
+
 </div>
+<!--/.container-->

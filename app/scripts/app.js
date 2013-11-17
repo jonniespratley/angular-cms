@@ -6,7 +6,7 @@ var app = angular.module('angularCmsBaseApp', []);
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
 		//TODO - Make configurable via settings > hash mode
-    $locationProvider.html5Mode(false);
+    $locationProvider.html5Mode(true);
     
     //TODO - Make configurable via settings > routes
     $routeProvider
