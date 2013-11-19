@@ -1024,7 +1024,10 @@ app.put('/api/v2/:db/:collection/:id', RestResource.edit);
 app.delete ('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 
-
+//Readme
+app.get('/api/v2/README', function(res, req){
+	getFile(__dirname + '/../README.md', null, req);
+});
 
 
 
@@ -1033,17 +1036,7 @@ app.delete ('/api/v2/:db/:collection/:id', RestResource.destroy);
 //### rackspaceUpload
 //Upload a image file and create thumbnail and send to Rackspace Cloud Files.
 function rackspaceUpload(localPath, targetPath, filename, cb){
-		racker
-			.upload(localPath)
-			.to('myappmatrix/'+targetPath)
-			.as(filename)
-			.end(function (err, result) {
-				console.log(err, result);
-				if(cb){
-					cb(result);
-				}
-		});
-				
+	
 				 
 	
 };
@@ -1063,17 +1056,20 @@ function hashPassword (pass) {
 //### getFile   
 //Get file contents from a file.
 function getFile (localPath, mimeType, res) {
-	fs.readFile(localPath, function (err, contents) {
-		if (!err) {
+
+	fs.readFile(localPath,  'utf8', function (err, data) {
+		if (err) {
+			res.end('There was an error.');
+		    return console.log(err);
+		  } else {
 			res.writeHead(200, {
-				"Content-Type" : mimeType,
-				"Content-Length" : contents.length
+				"Content-Type" : 'utf8',
+				"Content-Length" : data.length
 			});
-			res.end(contents);
-		} else {
-			res.writeHead(500);
-			res.end();
+			res.end(data);
 		}
+		  console.log(data);
+
 	});
 };
 

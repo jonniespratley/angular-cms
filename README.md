@@ -3,7 +3,7 @@ This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
 ## Features
 
-
+_(Coming soon)_
 
 
 ### Must Have
@@ -32,14 +32,7 @@ This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/jonniespratley/jquery-angular-rickshaw-directive/master/dist/angular-angular-rickshaw-directive.min.js
-[max]: https://raw.github.com/jonniespratley/jquery-angular-rickshaw-directive/master/dist/angular-angular-rickshaw-directive.js
-
-In your web page:
-
-	<script src="angular.js"></script>
-	<script src="dist/angular-rickshaw-directive.min.js"></script>
-
+_(Coming soon)_
 
 ## Documentation
 _(Coming soon)_

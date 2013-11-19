@@ -17,8 +17,10 @@
 		<!-- build:css(.tmp) styles/main.css -->
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-		<!-- Optional theme -->
+		<!-- Optional theme 
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+		-->
+		
 		<link rel="stylesheet" href="styles/main.css">
 		<!-- endbuild -->
 	</head>
@@ -33,7 +35,15 @@
 		<![endif]-->
 		<!-- Add your site or application content here -->
 		<header data-ng-include src="'views/_header.html'"></header>
-		<div class="container" data-ng-view=""></div>
+		<div class="" data-ng-view=""></div>
+		<div class="container footer">
+			<hr>
+			<footer>
+				<p>
+					&copy; Company 2013
+				</p>
+			</footer>
+		</div>
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 		<script>
 			(function(i, s, o, g, r, a, m) {
@@ -57,6 +67,8 @@
 		<script src="bower_components/jquery/jquery.js"></script>
 		<script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
 		<script src="bower_components/angular/angular.js"></script>
+		
+		<script src="bower_components/jquery.tocify.js/src/javascripts/jquery.tocify.js"></script>
 		<script src="bower_components/markdown.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 		<!-- <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>

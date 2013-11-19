@@ -57,7 +57,7 @@ var options = {
 
 /* ======================[ @TODO: Dynamic REST API ]====================== */
 var rest = require('./routes/rest').rest;
-rest.init(9000);
+rest.init(8181);
 
 /* @TODO: Proxy Server */
 proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
@@ -66,25 +66,9 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 	if(req.url.match(/^\/api\//)) {
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
-			port : 9000
+			port : 8181
 		});
 		console.log('Routing request: API server'.warn);
-
-		//Match v1 api calls
-	} else if(req.url.match(/^\/v1\//)) {
-		proxy.proxyRequest(req, res, {
-			host : 'www.myappmatrix.com',
-			port : 443
-		});
-		console.log('Routing request: v1 API server'.warn);
-
-		//Match pusher server calls
-	} else if(req.url.match(/^\/aps\//)) {
-		proxy.proxyRequest(req, res, {
-			host : '127.0.0.1',
-			port : 9595
-		});
-		console.log('Routing request: Pusher Server'.warn);
 
 		//Custom server with yeoman and socketio
 	} else if(req.url.match(/^\/smartpass\//)) {
@@ -93,15 +77,6 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 			port : 3535
 		});
 		console.log('Routing request: Passbook Server'.warn);
-
-		//Match any /public dir and route to apache
-	} else if(req.url.match(/^\/public\//)) {
-		/* Default express server */
-		proxy.proxyRequest(req, res, {
-			host : '127.0.0.1',
-			port : 78
-		});
-		console.log('Routing request: Apache Server'.warn);
 
 	} else {
 		/* Default express server */
@@ -112,13 +87,14 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 		console.log('Routing request: App Server'.warn);
 	}
 });
+//HTTPS Server - will get prompted in browser if keys are not real.
 httpsServer = https.createServer(options, function(req, res) {
 	res.writeHead(200, {
 		'Content-type' : 'text/plain'
 	});
 	res.write('Request proxied ' + JSON.stringify(req.headers));
 	res.end();
-}).listen(9091);
+}).listen(8282);
 
 ////////////////////////////
 //## Socket Server
@@ -240,4 +216,4 @@ var SocketServer = {
 SocketServer.init(proxyServer);
 
 //Start the proxy server
-proxyServer.listen(9090);
+proxyServer.listen(8080);

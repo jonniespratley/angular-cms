@@ -7,7 +7,8 @@
     "jquery": "~1.9.1",
     "bootstrap-sass": "~2.3.1",
     "es5-shim": "~2.0.8",
-    "jquery-ui": "~1.10.3"
+    "jquery-ui": "~1.10.3",
+    "jquery.tocify.js": "~1.9.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
