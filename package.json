@@ -49,6 +49,27 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
-  }
+    "test": "grunt test",
+    "start": "node server.js"
+  },
+  "description": "This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonniespratley/angular-cms.git"
+  },
+  "keywords": [
+    "angular",
+    "cms",
+    "generator"
+  ],
+  "author": "Jonnie Spratley",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jonniespratley/angular-cms/issues"
+  },
+  "homepage": "https://github.com/jonniespratley/angular-cms"
 }
