@@ -43,7 +43,18 @@
     "grunt-google-cdn": "~0.2.0",
     "grunt-ngmin": "~0.0.2",
     "time-grunt": "~0.1.0",
-    "grunt-karma": "~0.6.2"
+    "grunt-karma": "~0.6.2",
+    "grunt-docular": "~0.1.2",
+    "grunt-ngdocs": "~0.1.7",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-jasmine": "~0.1.3",
+    "karma-requirejs": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma": "~0.10.5"
   },
   "engines": {
     "node": ">=0.8.0"

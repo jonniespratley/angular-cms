@@ -5,10 +5,47 @@ The purpose of this CMS is for many reasons, the most important reason is this i
 The book is going to be published during the 2nd quarter of the new year by Packt Publishing. Each piece has to do with a corresponding chapter in the book that I am writing.
 
 
+## Server
+The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints.
+
+Base URL: `http://localhost:8181/api/v2`
+
+
+HTTP  | METHOD | ENDPOINT
+------------ | ------------- | ------------
+ GET   |   findAll     |   /database/table
+ GET   |   findById    |   /database/table/:id
+ POST  |   add         |   /database/table
+ PUT   |   update      |   /database/table/:id
+ DELETE |  destroy     |   /database/table/:id
+
+### Socket Server
+This is a socket server implementation for "real" time analytics and other data.
+This is for use with geo analytics and other backend data from the app. listen for connected clients
+
+### Socket Server Channels
+These are the events that this socket server dispatches.
+
+
+1. cms:authorization
+2. cms:client:message
+3. cms:client:connect
+4. cms:client:disconnect
+5. cms:server:message
+6. cms:server:disconnect
+7. cms:server:connect
+8. cms:
 
 ## Features
 
+
+
+
 _(Coming soon)_
+
+
+
+
 
 
 ### Must Have
