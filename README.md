@@ -1,6 +1,11 @@
 # Angular CMS
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
+The purpose of this CMS is for many reasons, the most important reason is this is the CMS that the Learning Yeoman book is going to revolve around.
+The book is going to be published during the 2nd quarter of the new year by Packt Publishing. Each piece has to do with a corresponding chapter in the book that I am writing.
+
+
+
 ## Features
 
 _(Coming soon)_
