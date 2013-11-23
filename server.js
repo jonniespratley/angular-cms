@@ -2,9 +2,12 @@
  * Server - This is the Node.js Server.
  * @object
  */
-var fs = require('fs'), util = require('util'), https = require('https'), http = require('http'), sio = require('socket.io'), httpProxy = require('http-proxy'), request = require('request'), inspect = require('util').inspect;
-
-var colors = require('colors');
+var fs = require('fs'),
+util = require('util'), 
+sio = require('socket.io'), 
+httpProxy = require('http-proxy'), 
+request = require('request'), 
+colors = require('colors');
 colors.setTheme({
 	silly : 'rainbow',
 	input : 'grey',
