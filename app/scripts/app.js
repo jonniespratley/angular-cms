@@ -3,6 +3,7 @@
 var app = angular.module('angularCmsBaseApp', []);
 
 
+
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
 

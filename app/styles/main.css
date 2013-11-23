@@ -2,7 +2,8 @@
 	http://127.0.0.1:9000/styles/main.css
 	http://localhost:9090/styles/main.css
 */
-@import url('/bower_components/jquery.tocify.js/src/stylesheets/jquery.tocify.css');
+
+@import url('../bower_components/jquery.tocify.js/src/stylesheets/jquery.tocify.css');
 body {
 	background:#fafafa;
 	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;

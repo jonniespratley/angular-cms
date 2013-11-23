@@ -46,8 +46,18 @@ var httpsServer = null;
  *
  */
 var options = {
-	port : 8080,
-	host : '127.0.0.1',
+	host : {
+		hostname : 'localhost',
+		port : process.env.PORT || 5000,
+	},
+	proxy : {
+		hostname : 'localhost',
+		port : 5001
+	},
+	api : {
+		hostname : 'localhost',
+		port : 5151
+	},
 	key : httpsKey,
 	cert : httpsCert,
 	hostncmsOnly : true,
@@ -57,7 +67,7 @@ var options = {
 
 /* ======================[ @TODO: Dynamic REST API ]====================== */
 var rest = require('./routes/rest').rest;
-rest.init(8181);
+rest.init(options.api.port);
 
 /* @TODO: Proxy Server */
 proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
@@ -66,35 +76,29 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 	if(req.url.match(/^\/api\//)) {
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
-			port : 8181
+			port : options.api.port
 		});
 		console.log('Routing request: API server'.warn);
-
-		//Custom server with yeoman and socketio
-	} else if(req.url.match(/^\/smartpass\//)) {
-		proxy.proxyRequest(req, res, {
-			host : '127.0.0.1',
-			port : 3535
-		});
-		console.log('Routing request: Passbook Server'.warn);
 
 	} else {
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
-			port : 9000
+			port : options.host.port
 		});
 		console.log('Routing request: App Server'.warn);
 	}
 });
 //HTTPS Server - will get prompted in browser if keys are not real.
+/*
 httpsServer = https.createServer(options, function(req, res) {
-	res.writeHead(200, {
-		'Content-type' : 'text/plain'
-	});
-	res.write('Request proxied ' + JSON.stringify(req.headers));
-	res.end();
+res.writeHead(200, {
+'Content-type' : 'text/plain'
+});
+res.write('Request proxied ' + JSON.stringify(req.headers));
+res.end();
 }).listen(8282);
+*/
 
 ////////////////////////////
 //## Socket Server
@@ -216,4 +220,4 @@ var SocketServer = {
 SocketServer.init(proxyServer);
 
 //Start the proxy server
-proxyServer.listen(8080);
+proxyServer.listen(options.host.port);

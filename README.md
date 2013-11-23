@@ -5,6 +5,41 @@ The purpose of this CMS is for many reasons, the most important reason is this i
 The book is going to be published during the 2nd quarter of the new year by Packt Publishing. Each piece has to do with a corresponding chapter in the book that I am writing.
 
 
+
+## Features
+
+### Database
+The database of choice is Mongo, its fast, easy and scalable.
+
+### Server
+The server of choice is Node, its JavaScript, its fast and scalable.
+
+### AngularJS 
+The client-side framework of choice is Angular, its a full-stack, just what we need.
+
+### Responsive
+The client-side ui of choice is Twitter Bootstrap, its updated and clean.
+
+### HTML5
+Using HTML5 in every way to make a better user experience.
+
+### Customizable
+Using a modular approach you can easily extend the core to your application.
+
+
+
+_(Coming soon)_
+
+
+
+
+
+
+
+
+
+
+
 ## Server
 The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints.
 
@@ -35,13 +70,6 @@ These are the events that this socket server dispatches.
 6. cms:server:disconnect
 7. cms:server:connect
 8. cms:
-
-## Features
-
-
-
-
-_(Coming soon)_
 
 
 
@@ -78,6 +106,37 @@ _(Coming soon)_
 
 ## Documentation
 _(Coming soon)_
+
+
+### Themes
+Themes will be installed via bower, we will have a ui for searching and installing angular-cms themes searching by tag angular-cms.
+
+##### Theme Structure
+This is the structure of the themes.
+
+	my-theme/
+		package.json
+		bower.json
+		css/
+			my-theme.css
+		js/
+			my-theme.js
+		index.html
+		partials/
+			header.html
+			sidebar.html
+			footer.html
+			content.html
+		
+
+
+
+### Plugins
+Plugins will be installed via bower as well, keywords angular-cms.
+
+
+
+
 
 
 
