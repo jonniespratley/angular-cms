@@ -1,6 +1,6 @@
 {
   "name": "angular-cms",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -35,6 +35,29 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
-  }
+    "test": "grunt test",
+    "start": "node server.js"
+  },
+  "description": "This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.",
+  "main": "Gruntfile.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonniespratley/angular-cms.git"
+  },
+  "keywords": [
+    "angular",
+    "grunt",
+    "angular-cms",
+    "yeoman"
+  ],
+  "author": "Jonnie Spratley",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/jonniespratley/angular-cms/issues"
+  },
+  "homepage": "https://github.com/jonniespratley/angular-cms"
 }
