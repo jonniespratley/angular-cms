@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('angularCmsBaseApp')
+angular.module('angularCmsApp')
   .filter 'markdown', () ->
     (input) ->
       markdown.toHTML(input)

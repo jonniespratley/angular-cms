@@ -364,3 +364,14 @@ var Resource = {
 		return doc;
 	}
 };
+
+
+//### v1 API
+//v1 cakephp rest api - These routes handle the version 1 api calls
+app.get('/api', RestResource.index);
+app.get('/api/v1', RestResource.v1index);
+app.get('/api/v1/:db/method/:method?', RestResource.v1method);
+app.get('/api/v1/:db/:model?', RestResource.v1get);
+app.put('/api/v1/:db/:collection/:id?', RestResource.v1add);
+app.post('/api/v1/:db/:collection', RestResource.v1add);
+
