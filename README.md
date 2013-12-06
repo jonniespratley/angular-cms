@@ -1,5 +1,5 @@
 # Angular CMS 
-[![Build Status](https://travis-ci.org/[jonniespratley]/[angular-cms].png)](https://travis-ci.org/[jonniespratley]/[angular-cms])
+[![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
 
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
