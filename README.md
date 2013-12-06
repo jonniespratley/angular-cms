@@ -1,4 +1,6 @@
-# Angular CMS
+# Angular CMS 
+[![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
+
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
 The purpose of this CMS is for many reasons, the most important reason is this is the CMS that the Learning Yeoman book is going to revolve around.

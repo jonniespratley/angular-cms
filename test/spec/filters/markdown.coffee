@@ -3,7 +3,7 @@
 describe 'Filter: markdown', () ->
 
   # load the filter's module
-  beforeEach module 'angularCmsBaseApp'
+  beforeEach module 'angularCmsApp'
 
   # initialize a new instance of the filter before each test
   markdown = {}
@@ -11,5 +11,5 @@ describe 'Filter: markdown', () ->
     markdown = $filter 'markdown'
 
   it 'should return the input prefixed with "markdown filter:"', () ->
-    text = 'angularjs'
-    expect(markdown text).toBe ('markdown filter: ' + text)
+    text = '#H1'
+    expect(markdown text).toBe ('<h1>H1</h1>')
