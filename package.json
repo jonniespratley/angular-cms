@@ -1,7 +1,18 @@
 {
   "name": "angular-cms",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "js-yaml": "~2.1.3",
+    "cloudfiles": "~0.3.4",
+    "jquery-file-upload-middleware": "~0.1.0",
+    "easyimage": "~0.1.6",
+    "url": "~0.7.9",
+    "racker": "0.0.1-alpha3",
+    "mongoose": "~3.8.1",
+    "mongodb": "~1.3.19",
+    "express": "~3.4.6",
+    "connect": "~2.11.2"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
@@ -29,7 +40,9 @@
     "time-grunt": "~0.2.1",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-ng-scenario": "~0.1.0",
-    "grunt-karma": "~0.6.2"
+    "grunt-karma": "~0.6.2",
+    "grunt-ngdocs": "~0.1.7",
+    "grunt-contrib-jasmine": "~0.5.2"
   },
   "engines": {
     "node": ">=0.8.0"
