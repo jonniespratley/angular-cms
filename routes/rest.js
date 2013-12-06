@@ -58,81 +58,6 @@ colors.setTheme({
 	error : 'red'
 });
 
-//### Socket.io Config
-//This is for use with geo analytics and other backend data from the app. listen for connected clients
-var config = {
-	version : 'v2',
-	security : {
-		salt : ''
-	},
-	db : {
-		username : 'amadmin',
-		password : 'fred',
-		host : 'localhost',
-		port : 27017
-	},
-	staticDir : './app',
-	publicDir : __dirname + '/www',
-	uploadsTmpDir : '.temp',
-	uploadsDestDir : 'www/cms-content/uploads',
-	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'
-};
-
-var publicPath = config.publicDir;
-var uploadsTmpDir = config.uploadsTmpDir;
-var uploadDestDir = config.uploadDestDir;
-
-
-
-upload.fileHandler({
-	uploadDir : config.uploadsDestDir,
-	uploadUrl : 'www/cms-content/uploads',
-	imageVersions : {
-		thumbnail : {
-			width : 125,
-			height : 125
-		}
-	}
-});
-
-//### Express Config
-//Configure the express app server.
-app.configure(function() {
-	app.use(express.static(config.staticDir));
-	app.use(express.directory(config.staticDir));
-	app.use(express.logger(config.logFormat));
-	app.use("jsonp callback", true);
-
-	app.use(function(err, req, res, next) {
-		console.error(err);
-		res.send(500, 'Something broke!');
-	});
-
-
-
-	//Upload config
-	app.use('/api/v2/upload', upload.fileHandler());
-	app.use('/api/v2/uploads', function(req, res, next){
-		upload.fileManager().getFiles(function (files) {
-			res.json(files);
-		});
-	});
-
-	app.use(express.bodyParser());
-	
-});
-
-
- // events
-        upload.on('begin', function (fileInfo) { 
-        	console.log(fileInfo);
-        });
-        upload.on('abort', function (fileInfo) {  });
-        upload.on('end', function (fileInfo) {  });
-        upload.on('delete', function (fileInfo) {  });
-        upload.on('error', function (e) {
-            console.log(e.message);
-        });
 
 //# Class Objects
 
@@ -811,13 +736,78 @@ app.get('/api/v2/smartpass/sign', function(req, res) {
 	res.header('Content-Type', 'application/json');
 	res.jsonp(200, result);
 });
+
+
+var config = {};
+var publicPath = config.publicDir;
+var uploadsTmpDir = config.uploadsTmpDir;
+var uploadDestDir = config.uploadDestDir;
 //Export to public api
 exports.rest = {
 	RestResource : RestResource,
 	app : app,
 	express : express,
-	init : function(port) {
-		app.listen(port);
-		console.log('Server Listening on port: ' + port);
+	init : function(options) {
+
+		config = options;
+		//### Socket.io Config
+//This is for use with geo analytics and other backend data from the app. listen for connected clients
+
+
+
+
+upload.fileHandler({
+	uploadDir : config.uploadsDestDir,
+	uploadUrl : 'www/cms-content/uploads',
+	imageVersions : {
+		thumbnail : {
+			width : 125,
+			height : 125
+		}
+	}
+});
+
+//### Express Config
+//Configure the express app server.
+app.configure(function() {
+	app.use(express.static(config.staticDir));
+	app.use(express.directory(config.staticDir));
+	app.use(express.logger(config.logFormat));
+	app.use("jsonp callback", true);
+
+	app.use(function(err, req, res, next) {
+		console.error(err);
+		res.send(500, 'Something broke!');
+	});
+
+
+
+	//Upload config
+	app.use('/api/v2/upload', upload.fileHandler());
+	app.use('/api/v2/uploads', function(req, res, next){
+		upload.fileManager().getFiles(function (files) {
+			res.json(files);
+		});
+	});
+
+	app.use(express.bodyParser());
+	
+});
+
+
+ // events
+        upload.on('begin', function (fileInfo) { 
+        	console.log(fileInfo);
+        });
+        upload.on('abort', function (fileInfo) {  });
+        upload.on('end', function (fileInfo) {  });
+        upload.on('delete', function (fileInfo) {  });
+        upload.on('error', function (e) {
+            console.log(e.message);
+        });
+
+		app.listen(options.port);
+
+		console.log('Server Listening on port: ' + options.port);
 	}
 };

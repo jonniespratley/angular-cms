@@ -65,11 +65,29 @@ var options = {
 	}
 };
 
+var config = {
+	port: 5151,
+	version : 'v2',
+	security : {
+		salt : ''
+	},
+	db : {
+		username : 'amadmin',
+		password : 'fred',
+		host : 'localhost',
+		port : 27017
+	},
+	staticDir : __dirname +'/dist',
+	publicDir : __dirname + '/www',
+	uploadsTmpDir : '.temp',
+	uploadsDestDir : 'www/cms-content/uploads',
+	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'
+};
 
 
 //Start the reset server
 var rest = require('./routes/rest').rest;
-	rest.init(options.api.port);
+	rest.init(config);
 
 
 
@@ -92,6 +110,7 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 			host : '127.0.0.1',
 			port : options.host.port
 		});
+
 		console.log('Routing request: App Server'.warn);
 	}
 });

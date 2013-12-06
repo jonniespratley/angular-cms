@@ -14,5 +14,8 @@ angular.module('angularCmsApp', [
       .when '/docs',
         templateUrl: 'views/docs.html'
         controller: 'DocsCtrl'
+      .when '/admin',
+        templateUrl: 'views/admin.html'
+        controller: 'AdminCtrl'
       .otherwise
         redirectTo: '/'
