@@ -66,7 +66,7 @@ var options = {
 };
 
 var config = {
-	port: 5151,
+	port:  process.env.PORT || 8181,
 	version : 'v2',
 	security : {
 		salt : ''

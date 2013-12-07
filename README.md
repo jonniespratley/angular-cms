@@ -10,6 +10,7 @@ The book is going to be published during the 2nd quarter of the new year by Pack
 
 ## Features
 
+
 ### Database
 The database of choice is Mongo, its fast, easy and scalable.
 
@@ -103,6 +104,22 @@ These are the events that this socket server dispatches.
 ## Getting Started
 
 Download the [production version][min] or the [development version][max].
+
+
+### Start the server
+To start the node server you should start the mongo instance first. 
+
+To start mongodb execute the following command:
+
+	$ sudo sh ./bin/db.sh
+	
+To start node execute the following command:
+
+	$ node server
+	
+Open up the default host localhost:8181
+
+
 
 _(Coming soon)_
 

@@ -66,7 +66,7 @@ colors.setTheme({
 //## Rest Resource
 //I am a RESTful resource object for handling CRUD operations on v1 or v2 api.
 var RestResource = {
-	useversion : 'v1',
+	useversion : 'v2',
 	urls : {
 		v1 : 'https://www..com',
 		v2 : '/api/v2/'
@@ -75,7 +75,7 @@ var RestResource = {
 	//I handle displaying a message with the version for this api.
 	index : function(req, res, next) {
 		res.json({
-			message : ' REST API Server ' + RestResource.useversion
+			message : 'REST API Server ' + RestResource.useversion
 		});
 	},
 	//### v1index
@@ -771,7 +771,7 @@ upload.fileHandler({
 //Configure the express app server.
 app.configure(function() {
 	app.use(express.static(config.staticDir));
-	app.use(express.directory(config.staticDir));
+	app.use(express.directory(config.publicDir));
 	app.use(express.logger(config.logFormat));
 	app.use("jsonp callback", true);
 

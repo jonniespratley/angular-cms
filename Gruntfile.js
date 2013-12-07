@@ -383,6 +383,25 @@ module.exports = function (grunt) {
         configFile: 'karma-e2e.conf.js',
         singleRun: true
       }
+    },
+    jasmine_node: {
+      options: {
+        coffee: true,
+        match: '.',
+        matchall: true,
+        extensions: '.coffee',
+        specNameMatcher: "Spec", // load only specs containing specNameMatcher
+        projectRoot: ".",
+        requirejs: false,
+        forceExit: true,
+        jUnit: {
+          report: false,
+          savePath : "./build/reports/jasmine/",
+          useDotNotation: true,
+          consolidate: true
+        }
+      },
+      all: ['test/routes/']
     }
   });
 
