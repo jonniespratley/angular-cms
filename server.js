@@ -48,7 +48,7 @@ var httpsCert = fs.readFileSync('./config/apache.crt').toString();
 var options = {
 	host : {
 		hostname : 'localhost',
-		port : process.env.PORT,
+		port : 8181,
 	},
 	proxy : {
 		hostname : 'localhost',
@@ -115,11 +115,13 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 	}
 });
 
+
+
+proxyServer.on('listening',function(){
+    console.log('ok, server is running');
+});
 //Start the proxy server
 proxyServer.listen(options.host.port);
-
-
-
 
 
 
