@@ -48,7 +48,7 @@ var httpsCert = fs.readFileSync('./config/apache.crt').toString();
 var options = {
 	host : {
 		hostname : 'localhost',
-		port : process.env.PORT || 5000,
+		port : process.env.PORT,
 	},
 	proxy : {
 		hostname : 'localhost',

@@ -806,7 +806,8 @@ app.configure(function() {
             console.log(e.message);
         });
 
-		app.listen(options.port);
+
+		app.listen(options.port || process.env.PORT);
 
 		console.log('Server Listening on port: ' + options.port);
 	}
