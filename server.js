@@ -78,7 +78,7 @@ var config = {
 		port : 27017
 	},
 	staticDir : __dirname +'/dist',
-	publicDir : __dirname + '/www',
+	publicDir : __dirname + '/dist',
 	uploadsTmpDir : '.temp',
 	uploadsDestDir : 'www/cms-content/uploads',
 	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'
