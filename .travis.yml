@@ -5,7 +5,7 @@ node_js:
 before_script:
   - 'npm install -g bower grunt-cli'
   - 'bower install'
-  - 'sudo sh ./bin/db.sh'
-  - sleep 3
-  - 'node server'
-  - sleep 3
+#  - 'sudo sh ./bin/db.sh'
+#  - sleep 3
+#  - 'node server'
+#  - sleep 3
