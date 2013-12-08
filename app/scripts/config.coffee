@@ -140,15 +140,15 @@ Settings =
     database:
       host: "127.1.0.1"
       port: 27017
-      name: "myappmatrix"
+      name: "angular-cms"
 
     
     #API configuration.
     api:
-      url: "https://www.myappmatrix.com"
-      endpoint: "127.1.0.1:8080/api/"
-      version: "v1"
-      versions: ["v1", "v2", "v3"]
+      url: ""
+      endpoint: "/api/"
+      version: "v2"
+      versions: ["v1", "v2"]
 
     live: false
     debug: true
