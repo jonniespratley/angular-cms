@@ -25,6 +25,7 @@ body {
 	background-color:#eee;
 	border-radius:6px;
 	padding:60px;
+	overflow: hidden;
 }
 
 .navbar-inverse{

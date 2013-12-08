@@ -7,6 +7,14 @@ angular.module('angularCmsApp', [
   'ngRoute'
 ])
   .config ($routeProvider) ->
+    
+    routeResolver = 
+      # I will cause a 1 second delay
+      delay: ($q, $timeout) ->
+        delay = $q.defer()
+        $timeout delay.resolve, 1000
+        delay.promise
+
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'

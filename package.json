@@ -44,7 +44,8 @@
     "grunt-ngdocs": "~0.1.7",
     "grunt-contrib-jasmine": "~0.5.2",
     "jasmine-node": "~1.11.0",
-    "grunt-jasmine-node": "~0.1.0"
+    "grunt-jasmine-node": "~0.1.0",
+    "karma-coverage": "~0.1.4"
   },
   "engines": {
     "node": ">=0.8.0"

@@ -46,6 +46,7 @@ var httpsCert = fs.readFileSync('./config/apache.crt').toString();
  * This object holds options used for creating a proxy server.
  */
 var options = {
+	port:  null,
 	host : {
 		hostname : 'localhost',
 		port : 8181,
@@ -66,7 +67,7 @@ var options = {
 };
 
 var config = {
-	port:  process.env.PORT || 8181,
+	port:  8181,
 	version : 'v2',
 	security : {
 		salt : ''
@@ -78,7 +79,7 @@ var config = {
 		port : 27017
 	},
 	staticDir : __dirname +'/dist',
-	publicDir : __dirname + '/dist',
+	publicDir : __dirname + '/www',
 	uploadsTmpDir : '.temp',
 	uploadsDestDir : 'www/cms-content/uploads',
 	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'
@@ -116,12 +117,22 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 });
 
 
+// print process.argv - check if any options match options
+process.argv.forEach(function(val, index, array) {
+	if(array[index] === options[array[index]]){
+		options[array[index]] = val;
+	}
+	console.log(index + ': ' + val);
+});
 
 proxyServer.on('listening',function(){
     console.log('ok, server is running');
 });
+
+
+console.log(options);
 //Start the proxy server
-proxyServer.listen(options.host.port);
+proxyServer.listen(options.port);
 
 
 
