@@ -1,3 +1,4 @@
+		/* jshint camelcase:false */
 // Generated on 2013-12-06 using generator-angular 0.6.0-rc.2
 'use strict';
 
@@ -390,13 +391,13 @@ module.exports = function (grunt) {
         match: '.',
         matchall: true,
         extensions: '.coffee',
-        specNameMatcher: "Spec", // load only specs containing specNameMatcher
-        projectRoot: ".",
+        specNameMatcher: 'Spec', // load only specs containing specNameMatcher
+        projectRoot: '.',
         requirejs: false,
         forceExit: true,
         jUnit: {
           report: false,
-          savePath : "./build/reports/jasmine/",
+          savePath : './build/reports/jasmine/',
           useDotNotation: true,
           consolidate: true
         }
