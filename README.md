@@ -3,8 +3,6 @@
 
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
-The purpose of this CMS is for many reasons, the most important reason is this is the CMS that the Learning Yeoman book is going to revolve around.
-The book is going to be published during the 1st quarter of the new year by Packt Publishing. Each piece has to do with a corresponding chapter in the book that I am writing.
 
 
 
@@ -125,6 +123,40 @@ _(Coming soon)_
 
 ## Documentation
 _(Coming soon)_
+
+Current work in progress diagrams.
+
+### Anataomy
+
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/anatomy.png)
+
+
+### View Outline
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/views.png)
+
+
+### Home View
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-home.png)
+
+### Login View
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-login.png)
+
+### Register View
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-register.png)
+
+### Dashboard View
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-dashboard.png)
+
+### Media View
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-media.png)
+
+### Themes View
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-themes.png)
+
+
+
+
+
 
 
 ### Themes
