@@ -126,33 +126,9 @@ _(Coming soon)_
 
 Current work in progress diagrams.
 
-### Anataomy
-
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/anatomy.png)
-
-
-### View Outline
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/views.png)
-
-
-### Home View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-home.png)
-
-### Login View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-login.png)
-
-### Register View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-register.png)
-
-### Dashboard View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-dashboard.png)
-
-### Media View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-media.png)
-
-### Themes View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-themes.png)
-
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set.png)
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set-1.png)
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set-2.png)
 
 
 
