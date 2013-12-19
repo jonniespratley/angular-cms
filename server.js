@@ -73,6 +73,7 @@ var config = {
 		salt : ''
 	},
 	db : {
+		name: 'angular-cms',
 		username : 'amadmin',
 		password : 'fred',
 		host : 'localhost',
