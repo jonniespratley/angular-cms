@@ -263,7 +263,15 @@ module.exports = function (grunt) {
           // removeRedundantAttributes: true,
           // useShortDoctype: true,
           // removeEmptyAttributes: true,
-          // removeOptionalTags: true*/
+          // removeOptionalTags: true
+            collapseBooleanAttributes:      true,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          true,
+            removeComments:                 true, // Only if you don't use comment directives!
+            removeEmptyAttributes:          true,
+            removeRedundantAttributes:      true,
+            removeScriptTypeAttributes:     true,
+            removeStyleLinkTypeAttributes:  true
         },
         files: [{
           expand: true,
@@ -403,6 +411,21 @@ module.exports = function (grunt) {
         }
       },
       all: ['test/routes/']
+    },
+
+    //https://npmjs.org/package/grunt-angular-templates
+    ngtemplates:  {
+      app:        {
+        src:      '<%=yeoman.app %>/views/**.html',
+        dest:     '<%=yeoman.app %>/scripts/template.js',
+        options:  {
+          module: 'cms.Templates',
+          //url: '',
+          //prefix: '',
+          htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
+        //  usemin: 'dist/vendors.js' // <~~ This came from the <!-- build:js --> block
+        }
+      }
     }
   });
 
