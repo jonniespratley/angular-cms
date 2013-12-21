@@ -6,9 +6,98 @@
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
 
+## Documentation
+_(Coming soon)_
+
+Current work in progress diagrams.
+
+ 
+
+
+#### 1.  Scenario: CMS Login
+
+* **Start**: Tom goes to the local farmers market to sell his products. Tom uses a CMS to manage his sales.
+* **Step 1**: Tom sells a burger for $10, Tom needs to add the sale to his records.  
+* **Step 2**: Tom opens his tablets web browser and enters the url of his cms, clicks the sign in link and is presented with a login form.
+* **Step 3**: Tom enters his email and password then clicks the login button.
+* **Step 4**: Tom is then directed to the Dashboard to add the sale. 
+
+
+#### 2. Scenario: CMS Registration
+
+* Start: Tom has hired a new employee Joe, to help manage the sales of Tom’s products. Tom uses a CMS to manage his employees sales.
+* Step 1: Joe needs to register his credentials  so he can add new sales to Tom’s records.
+* Step 2: Joe opens his tablets web browser and enters the url of the cms, clicks the sign up link and is presented with a registration form.
+* Step 3: Joe enters his email and password, agrees to the terms then clicks the register button.
+* Step 4: Joe is then redirected back to the cms login page to sign in.
+
+
+#### 3. Scenario: CMS Forgot Password
+
+* Start: Tom’s new employee Joe just sold a burger for $10, he needs to login to the CMS to add his sale.
+* Step 1: Joe needs to reset his password so he can add the new sale to Tom’s records.
+* Step 2: Joe opens his tablets web browser and enters the url of the cms, clicks the sign in link and is presented with a login form, but Joe forgot his password. He clicks the forgot password link and is presented with a reset password form.
+* Step 3: Joe enters his email and clicks the reset button.
+* Step 4: Joe is then presented with a message to check his email and follow the reset instructions.
+
+
+#### 4. Scenario: CMS Reset Password
+
+* Start: Tom’s new employee Joe receives an email to reset his password for the CMS.
+* Step 1: Joe clicks the link in his email and his web browser opens and is presented with a reset password form.
+* Step 2: Joe verifies his email matches the email input, then enters his new password twice to ensure they match.
+* Step 3: Joe then clicks the update button to save his new password.
+* Step 4: Joe is then directed to the CMS sign in page to login with his new credentials.
+
+
+#### 5. Scenario - CMS Dashboard
 
 
 
+
+
+
+View
+
+ role - admin
+ route - #/admin/dashboard
+ file - /views/admin/dashboard.html
+
+
+
+#### Scenario - Media
+
+
+**Model:**
+
+```
+  defaults: 
+    title:string
+    size:int
+    path:string
+    url:string
+    mimetype:string
+```
+
+**View:**
+
+ * role - admin
+ * route - #/admin/media
+  * file - /views/admin/media.html 
+
+**Controller:**
+
+```
+ $scope:
+  uploaded:[] - Holds current uploaded files
+  files:[] - Holds current pending files
+  upload:(file) - Starts a upload
+  deleteUpload:(file) - Removes a file from uploaded files.
+  deleteFile:(file) - Removes a file from pending files
+  clearFiles() - Removes all files from pending files.
+  clearUploads - Removes all files from uploaded files
+  isUploading:boolean - Whether or not a file is being uploaded.
+```
 
 
 ## Getting Started
@@ -138,17 +227,6 @@ These are the events that this socket server dispatches.
 
 
 _(Coming soon)_
-
-## Documentation
-_(Coming soon)_
-
-Current work in progress diagrams.
-
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set.png)
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set-1.png)
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set-2.png)
-
-
 
 
 
