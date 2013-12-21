@@ -352,7 +352,7 @@ module.exports = function (grunt) {
         'copy:styles',
         'imagemin',
         'svgmin',
-        'htmlmin'
+        //'htmlmin'
       ]
     },
 
