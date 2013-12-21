@@ -43,7 +43,8 @@
     "grunt-contrib-jasmine": "~0.5.2",
     "jasmine-node": "~1.11.0",
     "grunt-jasmine-node": "~0.1.0",
-    "karma-coverage": "~0.1.4"
+    "karma-coverage": "~0.1.4",
+    "grunt-angular-templates": "~0.5.1"
   },
   "devDependencies": {},
   "engines": {

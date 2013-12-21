@@ -4,7 +4,8 @@ angular.module('angularCmsApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  #'cms.Templates'
 ])
   .config ($routeProvider) ->
     

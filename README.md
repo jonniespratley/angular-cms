@@ -1,100 +1,12 @@
 # Angular CMS 
+
 [![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
 
 
-
-## Features
-
-
-### Database
-The database of choice is Mongo, its fast, easy and scalable.
-
-### Server
-The server of choice is Node, its JavaScript, its fast and scalable.
-
-### AngularJS 
-The client-side framework of choice is Angular, its a full-stack, just what we need.
-
-### Responsive
-The client-side ui of choice is Twitter Bootstrap, its updated and clean.
-
-### HTML5
-Using HTML5 in every way to make a better user experience.
-
-### Customizable
-Using a modular approach you can easily extend the core to your application.
-
-
-
-_(Coming soon)_
-
-
-
-
-
-
-
-
-
-
-
-## Server
-The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints.
-
-Base URL: `http://localhost:8181/api/v2`
-
-
-HTTP  | METHOD | ENDPOINT
------------- | ------------- | ------------
- GET   |   findAll     |   /database/table
- GET   |   findById    |   /database/table/:id
- POST  |   add         |   /database/table
- PUT   |   update      |   /database/table/:id
- DELETE |  destroy     |   /database/table/:id
-
-### Socket Server
-This is a socket server implementation for "real" time analytics and other data.
-This is for use with geo analytics and other backend data from the app. listen for connected clients
-
-### Socket Server Channels
-These are the events that this socket server dispatches.
-
-
-1. cms:authorization
-2. cms:client:message
-3. cms:client:connect
-4. cms:client:disconnect
-5. cms:server:message
-6. cms:server:disconnect
-7. cms:server:connect
-8. cms:
-
-
-
-
-
-
-### Must Have
-* user management & user roles
-* action and view permissions
-* content versioning and audit
-* some form of workflow and notifications
-* i18n support on literals and object versions
-* normalized database schema design
-* some form of content import-export
-* assets management and thumbnail generation for uploads
-* Valid XHTML (compressed with GZIP)
-* Rich text editing (e.g FCKeditor) which generates accessible markup
-* Valid and minified CSS and javascript (e.g using YUI)
-* automatically generated sitemaps.org document
-* integration with Google Analytics
-* automatic RSS feeds
-* open search support
-* print css and/or print versions of content
-* SEO consideration for duplicate content (e.g use of canonical tag)
 
 
 
@@ -117,6 +29,112 @@ To start node execute the following command:
 	
 Open up the default host localhost:8181
 
+## RESTful Server
+The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints.
+
+Base URL: `http://localhost:8181/api/v2`
+
+#### Routes
+
+HTTP  | METHOD | ENDPOINT
+------------ | ------------- | ------------
+ GET   |   findAll     |   /database/table
+ GET   |   findById    |   /database/table/:id
+ POST  |   add         |   /database/table
+ PUT   |   update      |   /database/table/:id
+ DELETE |  destroy     |   /database/table/:id
+ 
+ 
+ 
+ 
+#### Login
+This is an example request to authenticate against the default database.users collection.
+
+Default users created are: 
+
+**Superadmin** - Access to everything. 
+
+* **email:** superadmin@email.com 
+* **pass:** admin1234
+
+
+**Admin** - Access to manage users, etc.. 
+
+* **email:** admin@email.com 
+* **pass:** admin1234
+
+
+**Request:**
+
+	POST /api/v2/angular-cms/users/login HTTP/1.1
+	Host: localhost:8181
+	Content-Type: application/json
+	
+	{ "email": "admin@email.com", "password": "admin1234" }
+ 
+ 
+ **Response:**
+ 
+	{
+	    "status": true,
+	    "results": {
+	        "user": {
+	            "_activation": "",
+	            "_id": "52b25f190364e61067660a24",
+	            "_key": "",
+	            "active": true,
+	            "created": "2013-11-19T03:31:18.934Z",
+	            "email": "admin@email.com",
+	            "groups": "admin",
+	            "id": 0,
+	            "metadata": {
+	                "avatar": "",
+	                "name": "Joe User"
+	            },
+	            "modified": "2013-11-19T03:31:18.934Z",
+	            "password": "b7aa9e253f709fb3710fe05300d3056186ce92f7"
+	        }
+	    }
+	} 
+
+
+
+#### Register
+This is an example request to register a user with the default database.users collection.
+Passwords are hashed in SHA1 against configurations salt.
+
+**Request:**
+
+```
+..
+```
+
+**Response:**
+
+
+```
+
+..
+
+```
+
+
+## Socket Server
+This is a socket server implementation for "real" time analytics and other data.
+This is for use with geo analytics and other backend data from the app. listen for connected clients
+
+#### Socket Server Channels
+These are the events that this socket server dispatches.
+
+
+1. cms:authorization
+2. cms:client:message
+3. cms:client:connect
+4. cms:client:disconnect
+5. cms:server:message
+6. cms:server:disconnect
+7. cms:server:connect
+8. cms:
 
 
 _(Coming soon)_
@@ -126,33 +144,9 @@ _(Coming soon)_
 
 Current work in progress diagrams.
 
-### Anataomy
-
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/anatomy.png)
-
-
-### View Outline
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/views.png)
-
-
-### Home View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-home.png)
-
-### Login View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-login.png)
-
-### Register View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-register.png)
-
-### Dashboard View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-dashboard.png)
-
-### Media View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-media.png)
-
-### Themes View
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/screen-themes.png)
-
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set.png)
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set-1.png)
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/set-2.png)
 
 
 
