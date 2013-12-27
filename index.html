@@ -1,274 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Angular-cms by jonniespratley</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Angular-cms : A light weight CMS built with Angular.js and Yeoman." />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Angular-cms</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Angular-cms</h1>
-        <p>A light weight CMS built with Angular.js and Yeoman.</p>
 
-        <p class="view"><a href="https://github.com/jonniespratley/angular-cms">View the Project on GitHub <small>jonniespratley/angular-cms</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jonniespratley/angular-cms">View on GitHub</a>
 
+          <h1 id="project_title">Angular-cms</h1>
+          <h2 id="project_tagline">A light weight CMS built with Angular.js and Yeoman.</h2>
 
-        <ul>
-          <li><a href="https://github.com/jonniespratley/angular-cms/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/jonniespratley/angular-cms/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/jonniespratley/angular-cms">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jonniespratley/angular-cms/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jonniespratley/angular-cms/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
-<a name="angular-cms" class="anchor" href="#angular-cms"><span class="octicon octicon-link"></span></a>Angular CMS</h1>
-
-<p><a href="https://travis-ci.org/jonniespratley/angular-cms"><img src="https://travis-ci.org/jonniespratley/angular-cms.png" alt="Build Status"></a></p>
-
-<p>This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.</p>
-
-<p>The purpose of this CMS is for many reasons, the most important reason is this is the CMS that the Learning Yeoman book is going to revolve around.
-The book is going to be published during the 1st quarter of the new year by Packt Publishing. Each piece has to do with a corresponding chapter in the book that I am writing.</p>
-
-<h2>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h2>
-
-<h3>
-<a name="database" class="anchor" href="#database"><span class="octicon octicon-link"></span></a>Database</h3>
-
-<p>The database of choice is Mongo, its fast, easy and scalable.</p>
-
-<h3>
-<a name="server" class="anchor" href="#server"><span class="octicon octicon-link"></span></a>Server</h3>
-
-<p>The server of choice is Node, its JavaScript, its fast and scalable.</p>
-
-<h3>
-<a name="angularjs" class="anchor" href="#angularjs"><span class="octicon octicon-link"></span></a>AngularJS</h3>
-
-<p>The client-side framework of choice is Angular, its a full-stack, just what we need.</p>
-
-<h3>
-<a name="responsive" class="anchor" href="#responsive"><span class="octicon octicon-link"></span></a>Responsive</h3>
-
-<p>The client-side ui of choice is Twitter Bootstrap, its updated and clean.</p>
-
-<h3>
-<a name="html5" class="anchor" href="#html5"><span class="octicon octicon-link"></span></a>HTML5</h3>
-
-<p>Using HTML5 in every way to make a better user experience.</p>
-
-<h3>
-<a name="customizable" class="anchor" href="#customizable"><span class="octicon octicon-link"></span></a>Customizable</h3>
-
-<p>Using a modular approach you can easily extend the core to your application.</p>
-
-<p><em>(Coming soon)</em></p>
-
-<h2>
-<a name="server-1" class="anchor" href="#server-1"><span class="octicon octicon-link"></span></a>Server</h2>
-
-<p>The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints.</p>
-
-<p>Base URL: <code>http://localhost:8181/api/v2</code></p>
-
-<table>
-<thead><tr>
-<th>HTTP</th>
-<th>METHOD</th>
-<th>ENDPOINT</th>
-</tr></thead>
-<tbody>
-<tr>
-<td>GET</td>
-<td>findAll</td>
-<td>/database/table</td>
-</tr>
-<tr>
-<td>GET</td>
-<td>findById</td>
-<td>/database/table/:id</td>
-</tr>
-<tr>
-<td>POST</td>
-<td>add</td>
-<td>/database/table</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td>update</td>
-<td>/database/table/:id</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td>destroy</td>
-<td>/database/table/:id</td>
-</tr>
-</tbody>
-</table><h3>
-<a name="socket-server" class="anchor" href="#socket-server"><span class="octicon octicon-link"></span></a>Socket Server</h3>
-
-<p>This is a socket server implementation for "real" time analytics and other data.
-This is for use with geo analytics and other backend data from the app. listen for connected clients</p>
-
-<h3>
-<a name="socket-server-channels" class="anchor" href="#socket-server-channels"><span class="octicon octicon-link"></span></a>Socket Server Channels</h3>
-
-<p>These are the events that this socket server dispatches.</p>
-
-<ol>
-<li>cms:authorization</li>
-<li>cms:client:message</li>
-<li>cms:client:connect</li>
-<li>cms:client:disconnect</li>
-<li>cms:server:message</li>
-<li>cms:server:disconnect</li>
-<li>cms:server:connect</li>
-<li>cms:</li>
-</ol><h3>
-<a name="must-have" class="anchor" href="#must-have"><span class="octicon octicon-link"></span></a>Must Have</h3>
+<a name="learning-yeoman---angular" class="anchor" href="#learning-yeoman---angular"><span class="octicon octicon-link"></span></a>￼Learning Yeoman - Angular</h1>
 
 <ul>
-<li>user management &amp; user roles</li>
-<li>action and view permissions</li>
-<li>content versioning and audit</li>
-<li>some form of workflow and notifications</li>
-<li>i18n support on literals and object versions</li>
-<li>normalized database schema design</li>
-<li>some form of content import-export</li>
-<li>assets management and thumbnail generation for uploads</li>
-<li>Valid XHTML (compressed with GZIP)</li>
-<li>Rich text editing (e.g FCKeditor) which generates accessible markup</li>
-<li>Valid and minified CSS and javascript (e.g using YUI)</li>
-<li>automatically generated sitemaps.org document</li>
-<li>integration with Google Analytics</li>
-<li>automatic RSS feeds</li>
-<li>open search support</li>
-<li>print css and/or print versions of content</li>
-<li>SEO consideration for duplicate content (e.g use of canonical tag)</li>
+<li>Preface</li>
+<li>Chapter 1: Modern Workflows for Modern WebApps</li>
+<li>Chapter 2: Get Started</li>
+<li>Chapter 3: My Angular Project</li>
+<li>Chapter 4: Routes, Views &amp; Controllers</li>
+<li>Chapter 5: Factories &amp; Services</li>
+<li>Chapter 6: Custom Generator’s</li>
+<li>Chapter 7: Custom Library’s </li>
+<li>Chapter 8: Tasks with Grunt</li>
+<li>Chapter 9: Tips &amp; Tricks</li>
+<li>Appendix: Resources</li>
 </ul><h2>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+<a name="preface" class="anchor" href="#preface"><span class="octicon octicon-link"></span></a>Preface</h2>
 
-<p>Download the [production version][min] or the [development version][max].</p>
+<p>￼￼This book provides you with the opportunity to discover all three core tools that the Yeoman workflow has to offer but also gives you an insight into its advanced features. </p>
 
-<h3>
-<a name="start-the-server" class="anchor" href="#start-the-server"><span class="octicon octicon-link"></span></a>Start the server</h3>
+<p>The book will focus on what kind of applications can be built using Yeoman and what kind of frameworks that can be used easily with it. </p>
 
-<p>To start the node server you should start the mongo instance first. </p>
-
-<p>To start mongodb execute the following command:</p>
-
-<pre><code>$ sudo sh ./bin/db.sh
-</code></pre>
-
-<p>To start node execute the following command:</p>
-
-<pre><code>$ node server
-</code></pre>
-
-<p>Open up the default host localhost:8181</p>
-
-<p><em>(Coming soon)</em></p>
-
-<h2>
-<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
-
-<p><em>(Coming soon)</em></p>
-
-<h3>
-<a name="themes" class="anchor" href="#themes"><span class="octicon octicon-link"></span></a>Themes</h3>
-
-<p>Themes will be installed via bower, we will have a ui for searching and installing angular-cms themes searching by tag angular-cms.</p>
-
-<h5>
-<a name="theme-structure" class="anchor" href="#theme-structure"><span class="octicon octicon-link"></span></a>Theme Structure</h5>
-
-<p>This is the structure of the themes.</p>
-
-<pre><code>my-theme/
-    package.json
-    bower.json
-    css/
-        my-theme.css
-    js/
-        my-theme.js
-    index.html
-    partials/
-        header.html
-        sidebar.html
-        footer.html
-        content.html
-</code></pre>
-
-<h3>
-<a name="plugins" class="anchor" href="#plugins"><span class="octicon octicon-link"></span></a>Plugins</h3>
-
-<p>Plugins will be installed via bower as well, keywords angular-cms.</p>
-
-<h2>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
-
-<p><em>(Coming soon)</em></p>
+<p>In order to demonstrate how it can speed up development time, we'll build a application from scratch, integrating with the AngularJS framework with as many functionalities as needed by any modern web application.
+￼
+Given that Yeoman can be used with both JavaScript and CoffeeScript, you'll be introduced to the CoffeScript programming language. However, most of the examples are in JavaScript.</p>
 
 <h1>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h1>
+<a name="chapter-1-modern-workflows-for-modern-webapps" class="anchor" href="#chapter-1-modern-workflows-for-modern-webapps"><span class="octicon octicon-link"></span></a>Chapter 1: Modern Workflows for Modern WebApps</h1>
 
-<h2>
-<a name="important-notes" class="anchor" href="#important-notes"><span class="octicon octicon-link"></span></a>Important notes</h2>
-
-<p>Please don't edit files in the <code>dist</code> subdirectory as they are generated via Grunt. You'll find source code in the <code>src</code> subdirectory!</p>
+<p>This chapter will discuss the three core tools that make up the Yeoman workflow, how to use these tools in development and how to incorporate this workflow into new or existing projects.</p>
 
 <h3>
-<a name="code-style" class="anchor" href="#code-style"><span class="octicon octicon-link"></span></a>Code style</h3>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
 
-<p>Regarding code style like indentation and whitespace, <strong>follow the conventions you see used in the source already.</strong></p>
+<p>The phrase '<em>Modern WebApps</em>' is a relatively new thing since the web is still in its infancy stage. But as the web matures so does the need for its tools and workflows, thanks to some modern-day web pioneers over at Google; Paul Irish and Addy Osmani have developed a modern workflow that goes by the name of Yeoman. </p>
+
+<p>The Yeoman workflow is a collection of three tools for improving developers productivity when build a web application: <code>yo</code> the scaffolding tool, <code>grunt</code> the build tool and <code>bower</code> the package tool.</p>
+
+<ul>
+<li>
+<strong>Yo</strong> is used to scaffold new projects; project files and other generators.</li>
+<li>
+<strong>Grunt</strong> is used for task management; compilation, optimization and testing.</li>
+<li>
+<strong>Bower</strong> is used for package management; installing packages, managing dependencies.</li>
+</ul><blockquote>
+<p>Welcome to Learning Yeoman: The content of this book is up to date with Yeoman 1.0.</p>
+</blockquote>
 
 <h3>
-<a name="phantomjs" class="anchor" href="#phantomjs"><span class="octicon octicon-link"></span></a>PhantomJS</h3>
+<a name="features-of-yeoman" class="anchor" href="#features-of-yeoman"><span class="octicon octicon-link"></span></a>Features of Yeoman</h3>
 
-<p>While Grunt can run the included unit tests via <a href="http://phantomjs.org/">PhantomJS</a>, this shouldn't be considered a substitute for the real thing. Please be sure to test the <code>test/*.html</code> unit test file(s) in <em>actual</em> browsers.</p>
+<p>Before we dig deep into using each tool of the workflow, let us take a look at some of the Yeoman tooling features that would help you in your next project.</p>
 
-<h2>
-<a name="modifying-the-code" class="anchor" href="#modifying-the-code"><span class="octicon octicon-link"></span></a>Modifying the code</h2>
-
-<p>First, ensure that you have the latest <a href="http://nodejs.org/">Node.js</a> and <a href="http://npmjs.org/">npm</a> installed.</p>
-
-<p>Test that Grunt's CLI and Bower are installed by running <code>grunt --version</code> and <code>bower --version</code>.  If the commands aren't found, run <code>npm install -g grunt-cli bower</code>.  For more information about installing the tools, see the <a href="http://gruntjs.com/getting-started">getting started with Grunt guide</a> or <a href="http://bower.io/">bower.io</a> respectively.</p>
-
-<ol>
-<li>Fork and clone the repo.</li>
-<li>Run <code>npm install</code> to install all build dependencies (including Grunt).</li>
-<li>Run <code>bower install</code> to install the front-end dependencies.</li>
-<li>Run <code>grunt</code> to grunt this project.</li>
-</ol><p>Assuming that you don't see any red, you're ready to go. Just be sure to run <code>grunt</code> after making any changes, to ensure that nothing is broken.</p>
-
-<h2>
-<a name="submitting-pull-requests" class="anchor" href="#submitting-pull-requests"><span class="octicon octicon-link"></span></a>Submitting pull requests</h2>
-
-<ol>
-<li>Create a new branch, please don't work in your <code>master</code> branch directly.</li>
-<li>Add failing tests for the change you want to make. Run <code>grunt</code> to see the tests fail.</li>
-<li>Fix stuff.</li>
-<li>Run <code>grunt</code> to see if the tests pass. Repeat steps 2-4 until done.</li>
-<li>Open <code>test/*.html</code> unit test file(s) in actual browser to ensure tests pass everywhere.</li>
-<li>Update the documentation to reflect any changes.</li>
-<li>Push to your fork and submit a pull request.</li>
-</ol>
+<ul>
+<li>
+<strong>Scaffolding</strong> - Easy to use scaffolding tool for creating new projects or files from templates.</li>
+<li>
+<strong>Package Management</strong> - Search, install and manage project dependencies via the command line. </li>
+<li>
+<strong>Automation</strong> - Simple watch process to compile CoffeeScript or LESS and reload browser on changes.</li>
+<li>
+<strong>Build Process</strong> - Tasks for minification, concatenation, compilation, optimization and testing.</li>
+<li>
+<strong>Linting</strong> - Scripts are run against JSHint to ensure language best practices.</li>
+<li>
+<strong>Optimization</strong> - Images are optimized using OptiPNG and JPEGTran, HTML is optimized using HTML Minifier.</li>
+<li>
+<strong>Testing</strong> - Run Jasmine, QUnit, Mocha and just any other testing framework headless with PhantomJS or Karma.</li>
+</ul><blockquote>
+<p>Features are dependent on what the individual generators provide via Grunt tasks.</p>
+</blockquote>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/jonniespratley">jonniespratley</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Angular-cms maintained by <a href="https://github.com/jonniespratley">jonniespratley</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
