@@ -1,18 +1,31 @@
-<div id="main" class="view">
-	<div class="jumbotron">
-			<div class="container">
-					<h1>A Lightweight CMS</h1>
-					<p>
-						Use this as a starting point when creating a content management system of some sort.
-					</p>
-					<p>
-						<a class="btn btn-primary btn-lg" href="/docs">Learn more &raquo;</a>
-					</p>
-			</div>
+
+	<div id="header" ng-include src="'views/_header.html'">
+		
 	</div>
 
+  <div id="main" class="row view">
+
+
+    
+    <div class="jumbotron">
+    	<div class="container">
+    		<div class="row">
+    			  <div class="center">
+			      		<h1>Lightweight CMS</h1>
+			      		<p class="lead">
+			      			Use this as a starting point when creating a content management system of some sort.
+			      		</p>
+			      		<!--p>
+			      			<a class="btn btn-success btn-lg" href="#/docs">View</a>
+
+			      		</p-->
+			      </div>
+    		</div>
+    	</div>
+    </div>
+    
     <div class="container">
-      	<div class="row clearfix">
+		<div class="row clearfix">
 		       <!-- ngRepeat: item in HomePage.features -->
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ng-scope" >
 		          <img ng-src="images/feature-html5.png" class="feature pull-left img-circle" src="images/feature-html5.png">
@@ -53,10 +66,21 @@
 		          <p class="ng-binding">Build process managed with GruntJS JavaScript task runner.</p>
 		        </div><!-- end ngRepeat: item in HomePage.features -->
 		      </div>
-      <hr>
-      <footer>
+	<!--
+	
+      <div class="row clearfix">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ng-repeat="item in HomePage.features">
+          <img ng-src="{{item.image}}" class="feature pull-left img-circle">
+          <h4>{{item.title}}</h4>
+          <p>{{item.body}}</p>
+        </div>
+      </div>
+	-->
+      <div class="footer">
         <p>&copy; Company 2013</p>
-      </footer>
-    </div>
-    <!-- /container -->
-</div>
+      </div>
+
+    </div> <!-- /container -->
+</div> <!-- /view -->
+
+

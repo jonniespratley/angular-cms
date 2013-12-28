@@ -23,7 +23,8 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: 'dist',
+			tmp: '.tmp'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -413,20 +414,72 @@ module.exports = function (grunt) {
       all: ['test/routes/']
     },
 
+		ngdocs: {
+		  options: {
+		    dest: 'app/docs',
+		    html5Mode: false,
+		    startPage: '/',
+		    title: "Angular-CMS Docs",
+		  //  image: "path/to/my/image.png",
+				imageLink: "http://my-domain.com",
+		    titleLink: "/",
+		    bestMatch: true,
+		    analytics: {
+		          account: 'UA-08150815-0',
+		          domainName: 'my-domain.com'
+		    },
+		    discussions: {
+		          shortName: 'my',
+		          url: 'http://my-domain.com',
+		          dev: false
+		    }
+		  },
+		  tutorial: {
+		    src: ['content/tutorial/*.ngdoc'],
+		    title: 'Tutorial'
+		  },
+		  api: {
+		    src: [
+					'.tmp/scripts/**/*.js'
+					],
+		    title: 'API'
+		  }
+		},
+
     //https://npmjs.org/package/grunt-angular-templates
     ngtemplates:  {
       app:        {
         src:      '<%=yeoman.app %>/views/**.html',
-        dest:     '<%=yeoman.app %>/scripts/template.js',
+        dest:     '.tmp/scripts/template.js',
         options:  {
-          module: 'cms.Templates',
-          //url: '',
-          //prefix: '',
+          module: 'angularCmsApp',
+          //url: 'views',
+					url:    function(url) { return url.replace('app/', ''); },
+          prefix: '',
           htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
         //  usemin: 'dist/vendors.js' // <~~ This came from the <!-- build:js --> block
         }
       }
-    }
+    },
+
+
+		/* ======================[ @TODO: Bower Install ]====================== */
+		'bower-install': {
+		  app: {
+
+		    // Point to the files that should be updated when
+		    // you run `grunt bower-install`
+		    src: ['app/index.html'],
+
+		    // Optional:
+		    // ---------
+		    cwd: '',
+		    ignorePath: '',
+		    exclude: [],
+		    fileTypes: {}
+		  }
+		}
+
   });
 
 

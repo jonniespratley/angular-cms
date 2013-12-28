@@ -1,5 +1,21 @@
 'use strict'
-
+###
+ * @ngdoc directive
+ * @name rfx.directive:rAutogrow
+ * @element textarea
+ * @function
+ *
+ * @description
+ * Resize textarea automatically to the size of its text content.
+ *
+ * @example
+   <example module="rfx">
+     <file name="index.html">
+         <textarea ng-model="text" r-autogrow class="input-block-level"></textarea>
+         <pre>{{text}}</pre>
+     </file>
+   </example>
+###
 angular.module('angularCmsApp', [
   'ngCookies',
   'ngResource',
@@ -26,5 +42,11 @@ angular.module('angularCmsApp', [
       .when '/admin',
         templateUrl: 'views/admin.html'
         controller: 'AdminCtrl'
+      .when '/login',
+        templateUrl: 'views/login.html'
+        controller: 'LoginCtrl'
+      .when '/profile',
+        templateUrl: 'views/profile.html'
+        controller: 'ProfileCtrl'
       .otherwise
         redirectTo: '/'
