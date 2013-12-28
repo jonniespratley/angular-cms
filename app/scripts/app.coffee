@@ -48,5 +48,29 @@ angular.module('angularCmsApp', [
       .when '/profile',
         templateUrl: 'views/profile.html'
         controller: 'ProfileCtrl'
+      .when '/plugins',
+        templateUrl: 'views/plugins.html'
+        controller: 'PluginsCtrl'
+      .when '/themes',
+        templateUrl: 'views/themes.html'
+        controller: 'ThemesCtrl'
+      .when '/widgets',
+        templateUrl: 'views/widgets.html'
+        controller: 'WidgetsCtrl'
+      .when '/media',
+        templateUrl: 'views/media.html'
+        controller: 'MediaCtrl'
+      .when '/settings',
+        templateUrl: 'views/settings.html'
+        controller: 'SettingsCtrl'
       .otherwise
         redirectTo: '/'
+
+angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', ($scope, $rootScope, $http) ->
+	App = 
+		config: Config
+	
+	$rootScope.App = App;
+	
+	window.App = $rootScope.App;
+]

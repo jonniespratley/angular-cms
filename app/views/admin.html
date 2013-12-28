@@ -1,7 +1,99 @@
+<!doctype html>
 
-    <div class="container view">
+<html>
+  
+  <head>
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+      /*       * Style tweaks       * --------------------------------------------------       */
+      body {
+        padding-top: 70px;
+      }
+      footer {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      /*       * Off Canvas       * --------------------------------------------------       */
+      @media screen and(max-width: 768px) {
+        .row-offcanvas {
+          position: relative;
+          -webkit-transition: all 0.25s ease-out;
+          -moz-transition: all 0.25s ease-out;
+          transition: all 0.25s ease-out;
+        }
+        .row-offcanvas-right .sidebar-offcanvas {
+          right: -50%;
+          /* 6 columns */
+        }
+        .row-offcanvas-left .sidebar-offcanvas {
+          left: -50%;
+          /* 6 columns */
+        }
+        .row-offcanvas-right.active {
+          right: 50%;
+          /* 6 columns */
+        }
+        .row-offcanvas-left.active {
+          left: 50%;
+          /* 6 columns */
+        }
+        .sidebar-offcanvas {
+          position: absolute;
+          top: 0;
+          width: 50%;
+          /* 6 columns */
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">angular-cms</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+      
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">              <img src="https://www.gravatar.com/avatar/b4c0fecb38a48d57acf43350ee318107?s=20" class="img-circle">              <span>jonniedollas</span>                              <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="#">My Profile</a>
+                </li>
+                <li>
+                  <a href="#">Settings</a>
+                </li>
+                <li>
+                  <a href="#">Help</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.nav-collapse -->
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.navbar -->
+    <div class="container">
       <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="sidebar-offcanvas col-xs-4 col-sm-3 col-md-2" id="sidebar" role="navigation">
           <div class="well well-sm sidebar-nav">
             <ul class="nav">
               <li class="nav-header">
@@ -42,30 +134,29 @@
           <!--/.well -->
         </div>
         <!--/span-->
-        <div class="col-xs-12 col-sm-10">
+        <div class="col-xs-8 col-sm-9 col-md-10">
           <p class="pull-left visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button></p>
-          <div class="well">
+          <div class="well well-sm">
             <button type="button" class="close" aria-hidden="true">
               <small>&times;</small>
             </button>
-            <h1>Welcome to Angular-CMS!</h1>
-            <p>Here are some links to help get you started:</p>
-<br/>
+            <h2>Welcome to Angular-CMS!</h2>
+            <p>Here are some links to help get you started:</p><br>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-xs-4 col-sm-4 col-md-4 hidden-xs">
                 <p><strong>Get Started</strong></p>
-                <p><a href="#" class="btn btn-primary btn-lg">Customize Your Site</a></p>
+                <p><a href="#" class="btn btn-primary btn-lg hidden-sm">Customize Your Site</a></p>
               </div>
-              <div class="col-md-4">
+              <div class="col-xs-6 col-sm-4 col-md-4">
                 <p><strong>Next Steps</strong></p>
                 <p><i class="glyphicon glyphicon-edit"></i> <a href="#"> Add some page</a></p>
                 <p><i class="glyphicon glyphicon-upload"></i> <a href="#"> Upload media</a></p>
               </div>
-              <div class="col-md-4">
+              <div class="col-xs-6 col-sm-4 col-md-4">
                 <p><strong>More Actions</strong></p>
                 <p><i class="glyphicon glyphicon-user"></i> <a href="#"> Manage Users</a></p>
-                <p><i class="glyphicon glyphicon-cog"></i> <a href="#"> Configure Settings</a></p>
+                <p><i class="glyphicon glyphicon-cog"></i> <a href="#"> Site Settings</a></p>
               </div>
             </div>
           </div>
@@ -77,25 +168,34 @@
                   <div class="row">
                     <div class="col-6 col-sm-6">
                       <legend>Content</legend>
-                      <ul>
-                        <li>1 Page</li>
-                        <li>1 Category</li>
-                        <li>0 Tags</li>
-                        <li>0 Files</li>
+                      <ul class="list-unstyled">
+                        <li>
+                          <span class="badge">42</span> Pages</li>
+                        <li>
+                          <span class="badge">2</span> Categories</li>
+                        <li>
+                          <span class="badge">5</span> Tags</li>
+                        <li>
+                          <span class="badge">23</span> Files</li>
+                        <li>
+                          <span class="badge">5</span> Plugins</li>
                       </ul>
                     </div>
                     <div class="col-6 col-sm-6">
                       <legend>System</legend>
-                      
                     </div>
                   </div>
                   <p>You are using <strong>Angular-CMS 0.1.0</strong></p>
                 </section>
+                <div class="panel-footer clearfix">
+                  <button class="btn pull-left hidden-sm btn-default" type="reset">Check for Update</button>
+                  <button class="btn btn-primary pull-right">Install Plugin</button>
+                </div>
               </div>
               <p></p>
             </div>
             <!--/span-->
-            <div class="col-6 col-sm-6 col-lg-6">
+            <div class="col-6 col-sm-6 col-mg-6 col-lg-6">
               <div class="panel panel-default">
                 <div class="panel-heading">Quick Post
                 </div>
@@ -118,9 +218,8 @@
                     </div>
                   </form>
                 </div>
-                <div class="panel-footer">
-                  <button class="btn btn-default" type="button">Save Draft</button>
-                  <button class="btn btn-default" type="reset">Reset</button>
+                <div class="panel-footer clearfix">
+                  <button class="btn pull-left btn-default" type="button">Save Draft</button>
                   <button class="btn btn-primary pull-right">Publish</button>
                 </div>
               </div>
@@ -132,3 +231,19 @@
         <!--/span-->
       </div>
       <!--/row-->
+      <hr>
+      <footer>
+        <p class="text-muted">&copy; Company 2013</p>
+      </footer>
+      <!--/.container-->
+      <script>
+        $(document).ready(function() {
+          $('[data-toggle=offcanvas]').click(function() {
+            $('.row-offcanvas').toggleClass('active');
+          });
+        });
+      </script>
+    </div>
+  </body>
+
+</html>

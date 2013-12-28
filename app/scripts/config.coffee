@@ -1,4 +1,4 @@
-Settings =
+window.Config =
   baseurl: document.location.origin
   sitetitle: "AngularCMS"
   sitedesc: "This is the description"
@@ -35,19 +35,19 @@ Settings =
   menu:
     admin: [
       id: 1
-      title: "Settings"
-      href: "/settings"
-      icon: "cog"
+      title: "Plugins"
+      href: "/plugins"
+      icon: "folder-open"
     ,
+     id: 1
+     title: "Widgets"
+     href: "/widgets"
+     icon: "puzzle-piece"
+   	,
       id: 1
       title: "Modules"
       href: "/modules"
       icon: "cogs"
-    ,
-      id: 1
-      title: "Server"
-      href: "/server"
-      icon: "cloud"
     ,
       id: 1
       title: "Users"
@@ -58,6 +58,11 @@ Settings =
       title: "Themes"
       href: "/themes"
       icon: "picture"
+    ,
+      id: 1
+      title: "Settings"
+      href: "/settings"
+      icon: "cog"
     ]
     pub: [
       id: 1
@@ -174,6 +179,3 @@ Settings =
     logo: "https://7fd8f70e662929940bdd-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.ssl.cf1.rackcdn.com/img/logo-login-med.png"
     redirect: "/#/home"
     message: "Welcome {{user.username}}"
-    
-window.AngularCMS = 
-	settings: Settings

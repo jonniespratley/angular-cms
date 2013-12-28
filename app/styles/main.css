@@ -4,92 +4,89 @@
 */
 
 @import url('bootstrap.css');
+
 body {
-	background:#fafafa;
-	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-	color:#333;
-	padding-top: 65px;
+        background:#fefefe;
+        font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        color:#333;
+ 
+}
+.sidebar-nav.well{
+  padding:0;
+}
+.nav .nav-header{
+  padding:8px 10px;
+  color:#999;
+  font-size:11px;
+ text-transform: uppercase; 
+}
+.nav .active{
+  background:#428bca;
+}
+.nav .active a{
+  color:#fff;
+}
+.drop-container{
+  border: 3px dashed #ccc;
+  text-align: center;
+  padding:55px;
+  color:#999;
+  margin-bottom:25px;
+}
+.drop-container h4{
+  
+  font-size:180%;
 }
 .nav-header {
-	font-weight:bold;
+        font-weight:bold;
 }
 .feature {
-	margin:5px 10px;
+        margin:5px 10px;
 }
 .hero-unit {
-	margin:50px auto 0 auto;
-	width:300px;
-	font-size:18px;
-	font-weight:200;
-	line-height:30px;
-	background-color:#eee;
-	border-radius:6px;
-	padding:60px;
-	overflow: hidden;
+        margin:50px auto 0 auto;
+        width:300px;
+        font-size:18px;
+        font-weight:200;
+        line-height:30px;
+        background-color:#eee;
+        border-radius:6px;
+        padding:60px;
+        overflow: hidden;
 }
 
 .navbar-inverse{
-	border-bottom: 1px solid #444;
+        border-bottom: 1px solid #444;
 }
 div.jumbotron {
-	border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
 }
 .hero-unit h1 {
-	font-size:60px;
-	line-height:1;
-	letter-spacing:-1px;
+        font-size:60px;
+        line-height:1;
+        letter-spacing:-1px;
 }
 html {
-	overflow-x:hidden;
+        overflow-x:hidden;
 }
 footer {
-	padding:30px 0;
-	font-size: .8em;
-	color: #777;
-	text-align: center;
+        padding:30px 0;
+        font-size: .8em;
+        color: #777;
+        text-align: center;
 }
-/*
- * Off Canvas
- * --------------------------------------------------
- */
-@media screen and(max-width:767px) {
-	.row-offcanvas {
-		position:relative;
-		-webkit-transition:all 0.25s ease-out;
-		-moz-transition:all 0.25s ease-out;
-		transition:all 0.25s ease-out;
-	}
-	.row-offcanvas-right
-	.sidebar-offcanvas {
-		right:-50%;
-		/* 6 columns */
-	}
-	.row-offcanvas-left
-	.sidebar-offcanvas {
-		left:-50%;
-		/* 6 columns */
-	}
-	.row-offcanvas-right.active {
-		right:50%;
-		/* 6 columns */
-	}
-	.row-offcanvas-left.active {
-		left:50%;
-		/* 6 columns */
-	}
-	.sidebar-offcanvas {
-		position:absolute;
-		top:0;
-		width:50%;
-		/* 6 columns */
-	}
+ 
+ 
+.placeholder{
+  border:1px dashed #ccc;
+  color:#999;
+  padding: 10px;
+  background:#eee;
+  border-radius: 4px;
 }
-
-
-
-html body{
-  background-color:#ddd;
-}
+ 
+ 
+ 
 .input-group{position:relative;display:table;border-collapse:separate}.input-group.col{float:none;padding-left:0;padding-right:0}
 .input-group .form-control{width:100%;margin-bottom:0}
 .input-group-lg>.form-control,.input-group-lg>.input-group-addon,.input-group-lg>.input-group-btn>.btn{height:45px;padding:10px 16px;font-size:18px;line-height:1.33;border-radius:6px}select.input-group-lg>.form-control,select.input-group-lg>.input-group-addon,select.input-group-lg>.input-group-btn>.btn{height:45px;line-height:45px}

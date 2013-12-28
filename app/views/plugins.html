@@ -49,18 +49,18 @@
     <!-- /.navbar -->
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-left">
-        <div class="col-xs-3 col-sm-2 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
           <div class="well well-sm sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Menu</li>
               <li>
                 <a href="#">Dashboard</a>
               </li>
-              <li class="active">
+              <li>
                 <a href="#">Profile</a>
               </li>
               <li class="nav-header">Admin</li>
-              <li>
+              <li class="active">
                 <a href="#">Plugins</a>
               </li>
               <li>
@@ -84,39 +84,50 @@
         </div>
         <!--/span-->
         <div class="col-xs-12 col-sm-9 col-md-10">
-          <h1><i class="fa fa-1x fa-user">&nbsp;My Profile</i></h1>
+          <h1><i class="fa fa-1x fa-folder-open"></i> Plugins</h1>
           <hr>
+          
+            <table class="table table-bordered table-condensed table-hover">
+              <thead>
+                <tr>
+                  <th><input type="checkbox"></th>
+                  <th>Plugin</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td>Google Chart Widgets</td>
+                  <td>
+                    This plugin brings Google Charts to the dashboard, configurable settings to visualize any content type.
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"></td>
+                  <td>Twitter Widget</td>
+                  <td>This plugin enables your Twitter feed on your dashboard and public stream widgets for your pages.</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>Rich Content Editor</td>
+                  <td>This plugin enables all text area inputs in the content editor view will be a Rich Text Editor.</td>
+               </tr>
+               <tr>
+                  <td><input type="checkbox"/></td>
+                  <td>
+                    ACL User Management
+                  </td>
+                  <td>
+                    This plugin enables ACL manage for the users of the CMS, easily configure actions to user roles to more control.
+                  </td>
+               </tr>
+              </tbody>
+            </table>
+          
           <div class="row">
-            <div class="col-sm-7">
-              <form class="form-horizontal">
-                <div class="form-group">
-                  <label class="control-label col-sm-2">Email</label>
-                  <div class="controls col-sm-10">
-                    <input type="email" class="form-control" placeholder="jonniespratley@gmail.com">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-2">Name</label>
-                  <div class="controls col-sm-10">
-                    <input type="text" class="form-control" placeholder="Jonnie Spratley">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-2">About</label>
-                  <div class="controls col-sm-10">
-                    <textarea class="form-control" placeholder="Enter 200 words or less..."></textarea>
-                  </div>
-                </div>
-                <div class="form-group tr">
-                  <button class="btn">Save</button>
-                  <button class="btn">Cancel</button>
-                </div>
-              </form>
-            </div>
-            <div class="col-sm-5">
-              <aside class="profile-pic center">
-                <img src="http://jonniespratley.me/assets/jonnie/avatar.png" class="img-polaroid" height="200">
-              </aside><br></div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6"></div>
           </div>
         </div>
         <!--/span-->
