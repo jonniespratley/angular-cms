@@ -93,47 +93,7 @@
     <!-- /.navbar -->
     <div class="container">
       <div class="row row-offcanvas row-offcanvas-left">
-        <div class="sidebar-offcanvas col-xs-4 col-sm-3 col-md-2" id="sidebar" role="navigation">
-          <div class="well well-sm sidebar-nav">
-            <ul class="nav">
-              <li class="nav-header">
-                <i class="glyphicon glyphicon-picture"></i> Appearance</li>
-              <li class="active">
-                <a href="#">Themes</a>
-              </li>
-              <li>
-                <a href="#">Customize</a>
-              </li>
-              <li>
-                <a href="#">Widgets</a>
-              </li>
-              <li>
-                <a href="#">Menus</a>
-              </li>
-              <li class="nav-header">
-                <i class="glyphicon glyphicon-cog"></i> Settings</li>
-              <li>
-                <a href="#">General</a>
-              </li>
-              <li>
-                <a href="#">Permissions</a>
-              </li>
-              <li>
-                <a href="#">Media</a>
-              </li>
-              <li class="nav-header">
-                <i class="glyphicon glyphicon-user"></i> Users</li>
-              <li>
-                <a href="#">All Users</a>
-              </li>
-              <li>
-                <a href="#">Add User</a>
-              </li>
-            </ul>
-          </div>
-          <!--/.well -->
-        </div>
-        <!--/span-->
+        <div class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" ng-include src="'views/_sidebar.html'"></div>
         <div class="col-xs-8 col-sm-9 col-md-10">
           <p class="pull-left visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button></p>

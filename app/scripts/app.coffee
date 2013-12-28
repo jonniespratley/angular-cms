@@ -63,14 +63,22 @@ angular.module('angularCmsApp', [
       .when '/settings',
         templateUrl: 'views/settings.html'
         controller: 'SettingsCtrl'
+      .when '/dashboard',
+        templateUrl: 'views/dashboard.html'
+        controller: 'DashboardCtrl'
+      .when '/users',
+        templateUrl: 'views/users.html'
+        controller: 'UsersCtrl'
       .otherwise
         redirectTo: '/'
 
-angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', ($scope, $rootScope, $http) ->
+angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', ($scope, $rootScope, $http, $log) ->
 	App = 
 		config: Config
 	
 	$rootScope.App = App;
 	
 	window.App = $rootScope.App;
+	
+	$log.info($rootScope);
 ]

@@ -4,7 +4,13 @@ window.Config =
   sitedesc: "This is the description"
   email: "jonniespratley@me.com"
   debug: false
-  session: null
+  session: 
+    #FOr Demo
+    user:
+      email: 'jonniespratley@gmail.com'
+      username: 'admin'
+      password: 'fred'
+      role: 3
   sidebar:
     value: "sidebar"
     url: "/views/partials/sidebar.html"
@@ -43,11 +49,11 @@ window.Config =
      title: "Widgets"
      href: "/widgets"
      icon: "puzzle-piece"
-   	,
-      id: 1
-      title: "Modules"
-      href: "/modules"
-      icon: "cogs"
+    ,
+     id: 1
+     title: "Media"
+     href: "/media"
+     icon: "file-upload"
     ,
       id: 1
       title: "Users"

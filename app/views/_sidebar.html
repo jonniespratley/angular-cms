@@ -1,0 +1,19 @@
+<div class="well well-sm sidebar-nav">
+  <ul class="nav nav-list">
+    <li class="nav-header">Menu</li>
+    <li>
+      <a href="#/dashboard">Dashboard</a>
+    </li>
+    <li>
+      <a href="#/profile">Profile</a>
+    </li>
+    <li class="nav-header">Admin</li>
+    <li ng-repeat="item in App.config.menu.admin">
+      <a ng-href="#{{item.href}}">
+      	{{item.title}}
+      </a>
+    </li>
+
+  </ul>
+</div>
+<!--/.well -->
