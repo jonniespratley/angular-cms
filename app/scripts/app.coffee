@@ -73,12 +73,11 @@ angular.module('angularCmsApp', [
         redirectTo: '/'
 
 angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', ($scope, $rootScope, $http, $log) ->
-	App = 
-		config: Config
+	App = Config
 	
-	$rootScope.App = App;
+	$rootScope.angularCmsApp = App;
 	
-	window.App = $rootScope.App;
+	window.angularCmsApp = $rootScope.angularCmsApp;
 	
 	$log.info($rootScope);
 ]

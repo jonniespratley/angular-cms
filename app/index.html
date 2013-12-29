@@ -2,12 +2,13 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <!--<![endif]-->
+<html data-ng-app="angularCmsApp" class="no-js"> 
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AngularCMS</title>
-    <meta name="description" content="">
+    <title>{{angularCmsApp.sitetitle}}</title>
+    <meta name="description" content="{{angularCmsApp.sitedesc}}">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -28,7 +29,7 @@
 		
         <!-- endbuild -->
 </head>
-  <body data-ng-app="angularCmsApp" data-ng-controller="AppCtrl">
+  <body data-ng-controller="AppCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -40,15 +41,15 @@
 
 
 
-			<div id="header" ng-include src="'views/_header.html'"></div>
+			
 
-
+	<div id="header" ng-include src="angularCmsApp.navbar.url"></div>
 	<div class="container">
 
 		<div id="app" class="row">
-	   		<div class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" ng-include src="'views/_sidebar.html'"></div>
+	   		<div class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" ng-include src="angularCmsApp.sidebar.url"></div>
 			<div class="col-xs-12 col-sm-9 col-md-10">
-	<div class="container-fluid" data-ng-view=""></div>				    	
+				<div class="container-fluid" data-ng-view=""></div>				    	
 			</div>
 	   	</div>
 	   	
