@@ -9,7 +9,14 @@ NG_DOCS={
       "id": "index",
       "shortName": "Index",
       "type": "overview",
-      "keywords": "able about actions all an and android angular angular-seed angularjs any app application apps are as at be better between binding boot-strap browser browsers build building can catalog change check class client-side common construction couple create creates data day define dependency details device devices diagram differences digging displays document dom dynamic each easier end end-to-end entire examples experiments extensions filter finish for frameworks get getting go great guides height hours how identify if img immediately in including index injection interest into introduced introduction is it javascript learn learning lets list listeners looking make makes manipulation may misc modification more need of on only or out overview own pleasant plug-ins png process project projects provide quickly re really resources response run running see services shorter simple smarter spend src started step such suggestions tasks test tests that the then this through to tutorial understand unit use user view views walks want way web when which whole width will without work works writing you your"
+      "keywords": "about add add-apt-repository additional advanced advantage alias all allowing allows along also alternate an and angular angular-generator angularjs annotate another any anything api apis app appendix application applications apt-get are as asset associated at auto-completion automate autoprefixer available base basic be behind below besides between binary binding bisect book books both bower branch branches browser bug build building built but by cache can cdn cdnify change changes chapter checkout clean cli clone code coffee coffeescript coffescript colored com combine command commands commit commits common community compass compile component components concat concatenate concepts concurrent concurrently conf config configuration connect consumable content contents controllers copy core count cover coverage covered create creating css cssmin current custom debugging decorators default delete demonstrate dependencies dependency deployed deploying developers developing development diff different directives directory disable discover discuss display do documentation doing download downloading each easily empty enable environment error errors estimated etc everywhere examples exe execute existing exiting exposes expressions extend extra extraneous factories factory fatal favorite favorited features fetch few file files filters find focus folder folders following for force forceful forward-port framework frameworks friends from full functionalities generate generator generator-angular generator-backbone generator-ember generator-generator generator-webapp generators generic get getting git given gives go going google googlecode gpg grep grunt grunt-cli grunt-li gruntfile guides has hash have head help histories hit home homepage hosted how however html htmlmin https imagemin images implement implementation important in include includes including incorporate incorporation index info information init insight install installation installer installing installs integrating interactively into introduced io is it its jasmine javascript join jpeg jquery js js-via-package-manager jshint json karama-coverage karma kind knowledge language large learned learning level library lines link list listed ll local locally log logs look lookup lot make makes manage management manager many markup matching merge methods minification minify mode modern module modules more most move msi mv my name names need needed network new ng ngmin node nodejs non-minified not npm npm-installed object objects of offer often on one only opens opportunity options or order org other our output overview package packages page parse particular party past path paths pattern pkg plugin plugins png popular ppa predefined preface prefix prefixes previewing primary print problems programming project projects properties provides prune pull purpose push puts python python-software-properties rebase record reference references refs register reinitialize remote remove removes rename replace replaces report repository required requires reset resources reusable rev rm root route router routes rules run runner running sass scan scratch scripts search see serve server service services set setting setup several shell show signed simple since small socket solutions solve some somewhere source specified specify speed stable stack start started state static status stylesheets sub such sudo summary support svg svgmin symlink systems tag take task tasks tba test testing text that the their them then there these they things this three time tips to together tool tools top topics trace tree tricks tutorial two type types ubuntu uglify uglifyjs uninstall up update updated upstream url usage use used useful usemin useminprepare using validate values various vendor verbose verify version versions view views want warning warnings watch watched way we web webapps website well what when whenever where will with work workflow workflows working wrap writing yeoman yo you your"
+    },
+    {
+      "section": "tutorial",
+      "id": "angularcms",
+      "shortName": "AngularCMS",
+      "type": "overview",
+      "keywords": "$10 $scope _activation _actual_ _id _key able about above access accessing account activate active actual add adding address aditional adjust admin admin1234 administor after against agrees alert algorithm all allow along already also an analytics and angular angular-cms angularcms any api app appear application are aren as assuming authenticate authentication avatar b7aa9e253f709fb3710fe05300d3056186ce92f7 back backend base be being bootstrap bower branch broken browser browsers build built burger but button by calls can catalog cdn ch3 change changes channels check checkbox choose clearfiles clearuploads cli click clicks clients clone cms code collection com command commands configurations configure connected considered constructed content content-type contributing conventions create created creating credentials css current daily dashboard data database datagrid date default defaults delete deletefile deleteupload dependencies describes design destroy development diagram diagrams dialog directed directly dispatches dist documentation don done download drag drop dropboxusercontent dynamic e2e each edit email employee employees enable enabled endpoint endpoints ensure enter enters epic etc events everything everywhere example examples execute exisiting explain fail failing farmers features file files find findall findbyid first fix follow following footer for forgot fork form formats found from front-end functionality generated geo get getting github global go goes groups grunt grunt-cli gui guide has hashed have he header help hired his holds host how html http id if implementation important in included incoming indentation index information input install installed installing instance instructions io is issue isuploading joe js json just keywords latest lightweight like link listen ll local localhost locations login look make making manage management manager market master match matches media members message metadata method mimetype mock-up mock-ups modified modifying modules mongo mongodb more multiple must my my-plugin my-theme name needs new node not notes nothing notified npm occur of only open opens or orders org other overview package page pages partials pass password passwords path pending phantomjs place please plugin plugins png post presented process product products project public pull push put quick quickly re ready real receives records red redirected reflect regarding register registration removes repeat repo request requests required reset resource respectively restful results rights role route routes run running sale sales salt save scenario searching see select sell sells server settings sh sha1 should shouldn show sidebar sign signed size so socket sold soon source src start started starts stating stats status stay steps story storyboard structure stuff style subdirectory submit submitting substitute successful sudo superadmin supports sure system tablets tag take terms test testing tests textual that the them theme themes then these they thing this those time title to tom toms tools true tutorial twice twitter type ui unit until up update upload uploaded url use used user users uses valid verifies verify version via view visual visualizing want wants way we web website well what when whether which while whitespace who widgets will with work you your"
     },
     {
       "section": "tutorial",
@@ -27,10 +34,52 @@ NG_DOCS={
     },
     {
       "section": "tutorial",
-      "id": "example",
-      "shortName": "MVC",
+      "id": "chapter3",
+      "shortName": "Routes, Views & Controllers",
       "type": "overview",
-      "keywords": "$index $location $rootscope $scope $watch above all allows and angular any api are as available back be because behavior between black board border browser button by call calls can cell cellstyle center changes changing class clean click code col connection controller cookbook copy cursor deep-linking defined diagonal droppiece easy element example execute expect for foreach from function functions game grade grafted has hash height html if in injected instantiate instantiated into invokes is isolation it javascript join just listener logic makes methods_ middle model mvc needed next nextmove ng-click ng-controller ng-repeat ng-show ng-style no notice object objects of one onto overview piece play player pointer primitives projection properties push readurl reference referenced rendering reset return row rows same scope search see separation set seturl share should simply since so solid split state steps still stored style td template test testable text text-align that the there things this tictactoecntl to toequal tr track tutorial undo up url value var variable vertical-align very view when which width will winner without won"
+      "keywords": "controllers overview routes tutorial views"
+    },
+    {
+      "section": "tutorial",
+      "id": "chapter4",
+      "shortName": "Factories & Services",
+      "type": "overview",
+      "keywords": "factories overview services tutorial"
+    },
+    {
+      "section": "tutorial",
+      "id": "chapter5",
+      "shortName": "Custom Generator’s",
+      "type": "overview",
+      "keywords": "custom generator overview tutorial"
+    },
+    {
+      "section": "tutorial",
+      "id": "chapter6",
+      "shortName": "Custom Library’s",
+      "type": "overview",
+      "keywords": "custom library overview tutorial"
+    },
+    {
+      "section": "tutorial",
+      "id": "chapter7",
+      "shortName": "Tasks with Grunt",
+      "type": "overview",
+      "keywords": "grunt overview tasks tutorial with"
+    },
+    {
+      "section": "tutorial",
+      "id": "chapter8",
+      "shortName": "Tips & Tricks",
+      "type": "overview",
+      "keywords": "overview tips tricks tutorial"
+    },
+    {
+      "section": "tutorial",
+      "id": "chapter9",
+      "shortName": "9-Resources",
+      "type": "overview",
+      "keywords": "overview tutorial"
     }
   ],
   "apis": {

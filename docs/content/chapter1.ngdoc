@@ -177,9 +177,6 @@ Most web applications connect to some API service that handles all of the databa
 Here are the steps:
 1. Open the default test spec that the generator created `(test/spec/controllers/main.js)` and at about line 10 create a three variables; one to reference a mock backend, one to hold a mock response and another to hold the endpoint location to the API.
 
-<doc:example>
-  <doc:source>
-    <script>
 
 	var httpBackend,
 	  endpoint = [
@@ -194,10 +191,7 @@ Here are the steps:
 	      { id: 1, images: { thumbnail: { url: '' } } }
 	    ]
 	  };
-	
-	</script>
-	<doc:source>
-</doc:example>
+
 
 2. Then around line 20, inside of the beforeEach function lets setup the mock backend to respond with our mock data when a JSONP request is made.
 
