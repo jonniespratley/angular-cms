@@ -44,12 +44,11 @@
 			
 
 	<div id="header" ng-include src="angularCmsApp.navbar.url"></div>
-	<div class="container">
-
+	<div class="" ng-class="angularCmsApp.layout.value">
 		<div id="app" class="row">
 	   		<div class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" ng-include src="angularCmsApp.sidebar.url"></div>
 			<div class="col-xs-12 col-sm-9 col-md-10">
-				<div class="container-fluid" data-ng-view=""></div>				    	
+				<div data-ng-view=""></div>				    	
 			</div>
 	   	</div>
 	   	

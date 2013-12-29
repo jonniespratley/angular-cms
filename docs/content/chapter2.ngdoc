@@ -1,0 +1,514 @@
+@ngdoc overview
+@name My Angular Project
+@description
+
+#My Angular Project
+
+This chapter will cover creating applications with Yeoman using the AngularJS framework. By the end of the chapter you will have learned how to use Yeoman and the AngularJS generator to streamline AngularJS applications, and the basic concepts behind the framework.
+
+Topics covered in this chapter:
+
+* AngularJS Concepts
+* Application Directory Structure
+* Application Anatomy
+* Application Scope
+* Development Process
+
+By the end of this chapter you should have a firm understanding of AngularJS’s core concepts, how it fits into a web app and the three-tier software architecture pattern of a modern single-page web app.
+
+## Overview
+This project is slated to be a tutorial walkthrough of a web developer’s workflow using Yeoman, Grunt, and Bower with the AngularJS framework to create a modern web application. The idea is to mimic the workflow of a real project as closely as possible. Before we get into developing with AngularJS, we need to explore the AngularJS concepts and how these fit into our application. 
+
+
+## AngularJS Concepts
+There are a few important concepts that we are going to use in the following chapters and it is very important that when developing with Angular, a developer understands the terminology.
+
+
+####  Scope 
+In Angular the scope is an object, which refers to the application model that ties a view (DOM) to the controller. In the Model-View-Controller (MVC) pattern the scope provides an execution context that is bound to the view (DOM) and its children. 
+
+Here are some characteristics of scope:
+
+1.	Scopes can observe the model.
+2.	Scopes can propagate model changes through the application into the view.
+3.	Scopes can be nested to isolate the application components and provide access to shared model properties.
+4.	Scopes provide context against which expressions are evaluated.
+
+> The word scope refers to $scope in AngularJS
+
+#### Models 
+A model is the data in the application. In Angular a model is a JavaScript object with properties and/or methods, models are defined on the scope of the controller. 
+
+Creating a model is very straight-forward:
+
+```
+  $scope.inbox = {
+    updated: null,
+    messages:[]
+  };
+```
+In the example above:
+
+1. A inbox object is declared with some general properties on the $scope.
+
+Angular does the rest by making sure that whenever the models properties change it is reflected throughout the scope of the view.
+
+
+####  Views
+A view is the visual representation of a model in an application. In Angular, the view is made up of plain HTML with angular-specific elements, attributes and directives. 
+
+Take a look at the following:
+
+	<body ng-app>
+	    <section ng-controller="MainCtrl">
+	    	<div ng-include src="'inbox.html'"></div>  
+	    </section>
+	</body>    
+
+
+1. The `ng-app` directive on the body tag bootstraps a new angular application.
+2. The `ng-controller` directive has set the `MainCtrl` as the controller.
+3. The `ng-include` directive specifies the template that should be rendered.
+3. The `inbox.html` container can access the `$scope` by using double curly braces `{{  }}`.
+
+
+
+
+####  Controller
+A controller is the business logic that manages the relationship between the model and the view, In Angular controllers are attached to the DOM by the `ng-controller` directive or the applications router, Angular will create a new $scope instance in the controller using the constructor function.
+
+Use Controllers for:
+
+* Setting the initial state to the $scope.
+* Adding behavior to the $scope.
+	
+A controller is just a function with dependencies as arguments that get injected with the proper dependencies when angular creates a new instance, for example:
+	
+```
+function MainCtrl($scope){
+  $scope.inbox = {
+    updated: null,
+    messages:[]
+  };
+  $scope.getMessages = function(){
+  };
+}
+```
+
+In the example above:
+
+1. A inbox object is set on the `$scope` with the updated property set to null and messages property set to an empty array.
+2. A function named `getMessages` which can be used to fetch data from the server, inject mock data or whatever logic is required.
+
+
+
+
+####  Templates
+A template is just plain HTML that constructs the user interface for display in a view, In Angular a template is the declarative specification that uses expressions to display model data and invoke controller methods, templates can be either an external HTML `.html` file or as an inline script tag with type `text/ng-template`. 
+
+```
+ <script id="inbox.html" type="text/ng-template">
+    <legend>Inbox</legend>
+    <!-- Content -->
+ </script>
+ ```
+
+Above we use angular-specific attribute directives that add behavior which instructs Angular to transform the template into a dynamic view that gets injected into the DOM.
+
+
+
+####  Directives
+A directive in Angular is a reusable declarative HTML component with custom attributes and/or elements with self-contained logic that instructs Angular's HTML compiler to attach the specified behavior to that DOM element or transform the DOM element and it's children. Angular comes with many directives that help define the view, here are some frequently used directives:
+
+| Directive | Description | Usage |
+| ------------ | ------------- | ------------ |
+| **ng-app** | Auto-bootstraps an AngularJS application. |  `<html ng-app="myApp">` |
+| **ng-click** | Specifies custom behavior when an element is clicked. | `<ELEMENT ng-click="func()">` |
+| **ng-controller** | Attaches a controller class to the view. | `<ELEMENT ng-controller="MainCtrl">` |
+| **ng-form** | Nestable alias of the form element. | `<ELEMENT ng-form="LoginForm">` |
+| **ng-include**  | Fetches, compiles and includes external or inline HTML fragment. | `<ng-include src="path.html">` |
+| **ng-init** | Evaluates an expression in the current scope. | `<ELEMENT ng-init="fetch()">` |
+| **ng-model** | Binds a input value to a property on the scope. | `<input ng-model="msg.title"/>` |
+| **ng-repeat** | Instantiates a element once per item in collection. | `<ELEMENT ng-repeat="key in col">` |
+| **ng-src** | Fetches from URL expression is evaluated. | `<img ng-src="gravatar.com/avatar/{{username}}"/>` |
+| **ng-submit** | Prevents default action and binds expression to `onsubmit` event | `<form ng-submit="{expression}">` |
+
+
+
+
+
+
+
+####  Expressions
+An expression provides the view access to variables and methods on the scope, In Angular expressions are JavaScript-like code snippets that are placed in Angular bindings as `{{ expression }}`. The following is an example of how to use expressions in a view:
+
+
+	<p>You have {{ inbox.messages.length }} messages.</p>
+
+In the example above:
+
+1. Using dot notation to reference the number of messages in the inbox from the controller’s scope.
+
+Angular can support various expressions including:
+
+| Operator | Description | Usage |
+| ------------ | ------------- | ------------ |
+| **Arithmetic** | Takes numerical values as their operands and return a single numerical value. | `(+, -, /, *, %)` |
+| **Comparison** | Compares its operands and returns a logical value based on whether the comparison is true. | `(==, !-, >, <, >=, <=)` |
+| **Logical** | Used with boolean (logical) values, and when they are, they return a boolean value. | `(&&, ||, !)` |
+| **Bitwise** | Bitwise operators treat their operands as a set of 32 bits (zeros and ones) and return standard JavaScript numerical value | `(\^, &, |)` |
+| **Function** | Used to invoke functions set on the controllers scope. | `{{ func() }}` |
+| **Array** | Provides access for referencing values from index of array | `{{ user.messages[1] }}` |
+| **Object** | Provides access for referencing values from object using dot (.) notation. | `{{ user.email }}`
+
+
+
+####  Filters
+A filter formats the data for display to the user. In Angular, filters are used in expressions, which can be used in templates, controllers or services. The following is an example of how to use filters in a view:
+
+	<p>Last updated @ {{inbox.updated | date:'mediumTime'}}</p>
+
+The example above:
+
+1.	Is using the date filter to display formatted time from a Unix timestamp. 
+
+Angular includes many filters for formatting various types of data, which include:
+
+
+| Name | Description | Usage |
+| ------------ | ------------- | ------------ |
+| **currency** | Formats a number as a currency.  | `{{amount | currency:"USD$"}}` |
+| **date** | Formats a date to a string based on specified argument. | ` {{ expression | date:'MM/dd/yyyy @ h:mma' }}`
+| **filter** | Filters items from array and returns new array. | `msg in User.messages | filter:searchText`
+| **json** | Converts a JavaScript object into a JSON string. | `{{ {'name':'value'} | json }}`
+| **limitTo** | Creates new array/string containing specified number of elements. | `{{ User.messages | limitTo:5 }}`
+| **lowercase** | Converts a string to lowercase. | `{{ expression | lowercase }}`
+| **number** | Formats a number as text. | `{{ expression | number[:fractionSize] }}`
+| **orderBy** | Orders the specified array by the expression predicate. | `item in user.messages | orderBy:'date'`
+| **uppercase** | Converts a string to uppercase. | `{{ expression | uppercase }}`
+| **linky** | Finds links from text and converts into html links. | `<span ng-bind-html="expression | linky"></span>`
+	
+			
+####  Data Binding
+Data binding is the automatic syncing of data between a model and the view components. Angular implements two-way data-binding with double curly braces `{{ }}`. The view is a visual representation of the model at all times, when the model changes the view reflects the change and vice versa. Take a look at the following example of data binding:
+
+**In the controller:**
+
+	$scope.getMessages = function(){
+		$scope.inbox.messages.push({ 
+	     date:Date.now(), 
+	     body:'This is a message' 
+	   });
+	   $scope.inbox.updated = Date.now();
+	};
+
+1. The `getMessages` function simply pushes a mocked message object into the `inbox.messages` array that is defined on the scope.
+2. Then the `inbox.updated` property on the controllers scope is updated to the current timestamp.
+
+
+**In the view:**
+
+
+	<ul>
+	   <li ng-repeat="item in inbox.messages | orderBy:'date'">
+	     {{ item.body }}
+	   </li>
+	 </ul>
+	<p>Last checked @ {{ inbox.updated | date:'mediumTime' }}</p>
+	<button ng-click="getMessages()">Refresh</button>
+
+
+The code above: 
+
+1.	The `li` element has the `ng-repeat` directive which tell angular to repeat the element for each item in the collection.
+2.	Inside the element, using double curly braces `{{ }}` the value of the `body` property is retrieved from the current item being repeated.
+3.	After the list, inside the paragraph element, using data-binding syntax and an Angular filter, the timestamp is formatted for display.
+4. Finally a simple button is used with the `ng-click` directive to trigger the `getMessages` function defined in the controller
+
+> Usually you make a request for real data, this is just an example of data binding.
+
+
+	
+
+####  Services
+A service is a reusable piece of business logic independent of views. In Angular, services are singletons objects or functions that contain methods common with web applications, Angular has a number of built in services that simplify various tasks within a web application, Angular also supports custom services which allow a developer to create reusable modules with ease. 
+
+	$scope.getMessages = function(){
+		$http.get('/messages').success(function(data){
+			$scope.inbox.messages = data;
+			$scope.inbox.updated = Date.now();
+		});
+	};
+	
+
+The code above:
+
+1. Uses Angular's `$http` service that provides access to the browser's XMLHttpRequest object for making requests.
+2. The success function then set the results from the response on the scopes `inbox.messages` property. 
+3. Then the inbox.updated property is updated to the current timestamp.
+
+Angular provides many services, here are some frequently used service modules:
+
+
+Name | Descriptions | Methods
+------------ | ------------- | ------------
+`$cookieStore` | Provides a key-value storage that falls back to session cookies. | `get` `put` `remove`
+`$http` | Provides communication with remote HTTP servers via the XMLHttpRequest object or via JSONP.  | `head` `get` `post` `put` `delete` `jsonp`
+`$location` | Parses the URL in the browsers address bar and makes the URL available to the application. | `absUrl` `hash` `host` `path` `port` `replace` `search` `url`
+`$log` | Provides logging in the browsers console (if supported). | `debug` `error` `info` `log` `warn`
+`$resource` | Creates a resource object to interact with RESTful server-side data sources. | `get` `save` `query` `remove` `delete`
+`$q` | Provides a promise/deferred implementation. | `all` `defer` `resolve` `reject` `notify` `then` `when` 
+
+> Methods are invoked in the form of `service.method` for example `$log.info('Hello')`
+
+
+
+
+
+####  Dependency Injection
+Dependency injection (DI) is a software design pattern that handles how a application manages its dependencies. Angular automatically creates and connects objects and functions together when a dependency is needed and provides an instance of that dependency. One of the simplest ways to use Angular's dependency injection is to pass the name of the dependency as the parameter name in the constructor function. 
+
+Here are ways for using dependency injection:
+
+**1. Inferring** - Use parameter names as names of service dependencies:
+
+```
+function MainCtrl($scope, $http, Custom) {
+     // Business logic...
+     Custom.method()
+}
+```
+
+
+**2. Annotation** - Use the $inject property which is a array of service names:
+
+```
+var MainCtrl = function(scope, api, custom) {
+  // Business logic...
+}
+MainCtrl['$inject'] = ['$scope', '$http', 'Custom'];
+```
+
+
+**3. Inline** - Use an array of service names before the function:
+
+```
+someModule.controller('MainCtrl', ['$scope',  '$http', 'Custom', function($scope, $http, Custom) {
+  // Business logic...
+}]);
+```
+
+
+
+
+
+
+
+### Summary
+
+All of these concepts make AngularJS a truly powerful web application framework, with two-way data binding, client-side templating, dependency injection, services, filters, expressions, directives and model-view-controller principles make AngularJS a great choice for developing just about any size web app.
+
+
+
+
+
+
+
+
+
+## New Angular Project
+Now it is time to start using AngularJS to build a real-world web application that uses all of Angular's features to provide a robust scalable single-page-application.
+Since you already know how to get started creating AngularJS projects with Yo, let's scaffold a new project. 
+
+1. First, create a folder named `angular-cms` then make that the current working directory.
+2. Second, use the `yo angular:app` command to generate a new project.
+
+
+
+
+
+### Directory structure
+Take a look at the directory structure for the project that Yeoman created:
+
+
+1. **app:** Contains all of the front-end code; HTML, JS, CSS, images and dependencies.
+	a. **/bower_components:** Contains all libraries the application depends on.
+	b. **/images:** Contains images for the application.
+	c. **/scripts:** The main AngularJS codebase, this folder includes all the business logic.
+		0. **/app.coffee** Main entry point of application module definition and routing logic.
+		1. **/controllers:** Custom controllers go here.
+		2. **/directives:** Custom directives go here.
+		3. **/filters:** Custom filters go here.
+		4. **/services:** Reusable application services go here.
+	d. **/styles:** Contains all CSS/LESS/SASS files.
+	e. **/views:** The HTML partials for the views and the directives used in the application.
+* **node_modules:** Contains all project dependencies as node modules.
+* **routes:** Contains routes for the NodeJS server.
+* **test:** Contains all of the tests for the application
+	a. **/e2e:** Contains the e2e Angular Scenario tests.
+	b. **/routes:** Contains the unit tests for the server routes.
+	c. **/spec:** Contains the unit tests mirroring the structure of the app/scripts folder.
+* **www:** Contains all public assets.
+
+
+
+
+> The folder additions for this project are the **routes** and **www** folder, this is where the middle tier of the application is going to live.
+
+
+
+
+### Application Anatomy
+Web applications are usually broken into logic chunks called 'tiers' where each tier handles a specific part of the processing, this application will use the Three-tier software architecture pattern which is broken down into the following:
+
+
+#### 1. Presentation tier
+The presentation layer will handle displaying data to the user and allow the user to manipulate data, the application will use AngularJS as the client-side framework of choice to manage keeping the data in sync with the view. Angular incorporates the basic principles of the MVC pattern into how it builds client-side web applications. 
+ 
+##### Model-View-Controller 
+Generally in a single page application (SPA) you create modules that contain a set of functionality, such as a view to display data, a model to store data and a controller to manage the relationship between the two and handle the business logic. 
+
+The MVC pattern is composed of three core components:
+
+* **Model** - The model is the data in an application which is displayed to the user, they are not concerned about the user interface (UI) or the business logic, a model has properties which get set on the scope; scopes are attached to the DOM by the controller and accessed by the View through expressions.
+
+* **View** - The view is the visual representation of a model, since views need to display data to the user they are not concerned with controller logic nor model logic, views usually know little information about the model and/or controller, views consist of HTML with directives and expressions; either as an external .html file or inline script tag.
+
+* **Controller** - The controller is responsible for setting the initial state of the model and augmenting the scope with methods to control behavior, the controller does not store the state its purpose is to manage the model. [EDIT]
+
+The reusable business logic will be in the form of Angular services, pieces of the user interface will also be broken down into directives to further simplify the logic of reusable components.
+
+
+
+#### 2. Middle tier
+The software in the middle tier is often called the middleware, there are a lot of good middleware solutions: ColdFusion, PHP, J2EE, Ruby on Rails, just to name a few. One of the solutions for this project will be NodeJS, which is a software platform used to build scalable network applications.
+
+**NodeJS features:** 
+
+* JavaScript is its scripting language.
+* Event-driven and non-blocking I/O model.
+* Single-threaded with built in HTTP server.
+
+
+##### Install Node
+Node offers a built-in HTTP web server that can handle serving our application just fine, but web application choosing a framework to aid with development is a good choice.
+
+```
+$ sudo install node
+```
+
+[ Discuss what just happened ]
+
+##### Install Express
+We are going to use Express, which is a minimal and flexible Node.js application framework providing a robust set of features for a building single and multi-page applications. 
+
+```
+$ npm install express --save
+```
+
+[ Discuss what just happened ]
+
+Express is going to handle the server side routes that produce a dynamic REST API that this project will leverage. 
+
+##### Install Socket.io
+Another middleware library we will use will be Socket.IO, which is a JavaScript library for realtime web applications which include both client/server components, and is event driven like NodeJS.
+
+
+```
+$ npm install socket.io --save
+```
+
+ All of these technologies together will make up the middle tier which will power the application. 
+ 
+
+
+
+
+#### 3. Data tier
+The software that is going to power the data store will be MongoDB, which is an open-source NoSQL database.
+
+**MongoDB features:**
+
+* **Document-Oriented** - JSON style documents with dynamic schemas
+* **Full index** - Index any attribute
+* **Replication** - Mirror across LANs and WANs
+* **Auto-sharding** - Scale horizontally without loosing functionality
+* **Map/Reduce** - Flexible aggregation and data processing.
+* **GridFS** - Store files of any size
+
+
+
+##### Install MongoDB
+To install MongoDB open up the terminal and enter the following:
+
+
+Download the latest release:
+
+	$ curl -O http://downloads.mongodb.org/osx/mongodb-osx-x86_64-2.4.8.tgz
+	
+
+Extract MongoDB from archive:
+
+	$ tar -zxvf mongodb-osx-x86_64-2.4.8.tgz
+	
+Copy MongoDB to target directory:
+
+	$ mkdir -p ~/mongodb
+	$ cp -R -n mongodb-osx-x86_64-2.4.8/ ~/mongodb/
+	
+	
+Add MongoDB system path:
+
+	$ vi ~/.bash_profile
+	$ source ~/.bash_profile 
+	$ echo $PATH
+	
+
+Test your installation:
+
+	$ mongod
+	
+
+
+
+
+### Application Scope
+The application we are going to create will be a light-weight content management system (CMS) for managing different types of data, the CMS will be able to handle basic user authentication and a registration system for new users. The administrators of the CMS will have the ability to create new content types for management and manage the users of the application. 
+
+There are three (3) types of users: 
+
+1. **Public** - Visitors of the site are classified as public until authenticated.
+2. **Member** - Registered users are classified as members with limited access to content.
+3. **Admin** - Admin users have control over all registered users and content.
+
+Once a user has be authenticated with the CMS they will be directed to the CMS dashboard where the user will be able to manage and view content, the content is to be displayed in widgets on the dashboard, users will be associated with roles which allow actions to be enabled per role.
+
+
+
+
+### Development Process
+The development process is going to be based on the Story-driven modeling approach which includes:
+
+1. **Textual scenario** - Each story will have a textual scenario that describes what should occur.
+2. **GUI mock-up** - Visual mock-ups of the story will show how the UI should look. 
+3. **Storyboard** - Along with the mock-ups, steps in the process will make up a storyboard. 
+4. **Class diagram** - Diagrams of how modules should be constructed.
+5. **Algorithm design** - Textual algorithm design will explain how the implementation should work.
+6. **Implementation** - The actual development of the code will take place.
+7. **Testing** - Unit and e2e testing will then verify the implementation of the story.
+ 
+## Summary
+In this chapter we learned about the core concepts of AngularJS and how they work by examining some code examples, we also explored some commonly used AngularJS directives like:
+
+* The `ng-repeat` directive, which repeats a block of content for each item in a collection
+* The `ng-src` directive, which prevents the web browser from fetching URLs that have yet to be evaluated by AngularJS which fixes broken links in the application while it is being initialized.
+
+We also covered topics regarding a new angular application and the directory structure, as well as the applications anatomy that we are going to build which includes:
+
+1. Presentation tier
+2. Middle tier
+3. Data tier
+
+We also discussed the scope of the application we are going to create and the process that is going to be used while in development, which includes scenarios, mock-ups, storyboards, class diagrams, algorithm design, implementation and testing. 
+
+Next chapter we will get our hands dirty by implementing some stories in the project, so get ready to start developing with a process used by modern web developers.

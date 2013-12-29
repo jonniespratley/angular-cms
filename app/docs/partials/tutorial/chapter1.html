@@ -1,0 +1,427 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h1 id="modernworkflowsformodernwebapps">Modern Workflows for Modern WebApps</h2>
+
+<p>This chapter will discuss the three core tools that make up the Yeoman workflow, how to use these tools in development and how to incorporate this workflow into new or existing projects.</p>
+
+<p>In this chapter, you will learn:</p>
+
+<ul>
+<li>Downloading and installing Yeoman</li>
+<li>Features of Yeoman</li>
+<li>Using the Yeoman tools</li>
+</ul>
+
+<h2 id="overview">Overview</h3>
+
+<p>The phrase Modern WebApps is a relatively new thing since the web is still in its infancy stage. As the web matures so does the need for developer tools and workflows, thanks to some modern-day web pioneers over at Google; Paul Irish and Addy Osmani have developed a modern workflow that goes by the name of Yeoman. 
+The Yeoman workflow is a collection of three tools for improving developers’ productivity when build a web application: Yo the scaffolding tool, Grunt the build tool and Bower the package tool.</p>
+
+<ul>
+<li>Yo is used to scaffold new projects; project files and other generators.</li>
+<li>Grunt is used for task management, compilation, optimization and testing.</li>
+<li>Bower is used for package management; installing packages, managing dependencies.</li>
+</ul>
+
+<h2 id="featuresofyeoman">Features of Yeoman</h3>
+
+<p>Before we dig deep into using each tool of the workflow, let us take a look at some of the Yeoman tooling features that would help you in your next project.</p>
+
+<ul>
+<li><strong>Quick Install</strong>  - Easily install all 3 workflow tools from NPM with one command.</li>
+<li><strong>Scaffolding</strong> - Fast and easy-to-use scaffolding tool for creating new projects or files from templates that individual generators provide.</li>
+<li><strong>Build Process</strong> - Tasks for minification, concatenation, compilation, optimization and testing.</li>
+<li><strong>Preview Server</strong> - Built-in preview server to run your application in the browser with one command.</li>
+<li><strong>Testing</strong> - Run Jasmine, QUnit or Mocha frameworks with Karma Test Runner in a headless WebKit with PhantomJS.</li>
+<li><strong>Code Linting</strong> - Scripts are run against JSHint to ensure language best practices.</li>
+<li><strong>Automation</strong> - Simple watch process to compile CoffeeScript, LESS or SASS and reload browser on changes.</li>
+<li><strong>Package Management</strong> - Search, install and manage project dependencies via the command line. </li>
+<li><strong>Optimization</strong>     - Images are optimized using OptiPNG and JPEGTran; HTML is optimized using HTML Minifier.
+Note: Features are dependent on what the individual generators provide via Grunt tasks.</li>
+</ul>
+
+<h2 id="quickinstallation">Quick Installation</h3>
+
+<p>Modern tools usually means more tools to learn, but learning the tools of the Yeoman workflow is easier than you think. To demonstrate by example, here is how easy it is to get a modern web application up and running - all from the command line.</p>
+
+<h3 id="installyeomanandfriends">Install Yeoman and friends</h4>
+
+<p>To install all three tools in the Yeoman workflow, just execute the following command in the terminal. </p>
+
+<pre><code>$ sudo npm install yo –g
+</code></pre>
+
+<p>This command will install yo, grunt, and bower into your systems path.     </p>
+
+<blockquote>
+  <p>This installation process assumes that you have the latest Git and NodeJS installed with NPM version >= 0.8</p>
+</blockquote>
+
+<h3 id="installagenerator">Install a generator</h4>
+
+<p>To install generators for Yo you must use the NodeJS package manager <code>npm</code>. All Yeoman generators on NPM are prefixed with <code>generator-</code>. Let’s install the Angular generator, execute the following command:</p>
+
+<pre><code>$ sudo npm install generator-angular -g
+</code></pre>
+
+<p>This command will install the AngularJS generator globally, allowing you to use the yo angular:* generator command anywhere, easily letting you create new projects and files within any directory of your choice.</p>
+
+<h2 id="buildprocess">Build Process</h3>
+
+<p>Yeoman includes Grunt, a task-based command-line tool for JavaScript projects. It can be used to build projects, but also exposes several commands, which you will want to use in your workflow. Yeoman automatically creates and configures a <code>Gruntfile.js</code> that has many tasks to take care of the necessary things that are common among modern web applications. </p>
+
+<p>These commands are used together for a seamless development workflow:</p>
+
+<pre><code>yo angular:*
+grunt serve
+grunt test
+grunt
+</code></pre>
+
+<h2 id="scaffolding">Scaffolding</h3>
+
+<p>Yeoman includes a powerful command line utility that can scaffold files based on individual generator templates, allowing you to save time creating files from scratch. There are over 50 community generators on NPM, to search and install just use the following commands:</p>
+
+<ol>
+<li><code>npm  search generator-[name]</code></li>
+<li><code>npm install generator-[name] -g</code></li>
+</ol>
+
+<h3 id="createtheproject">Create the project</h4>
+
+<p>All Yeoman commands work off the current working directory, so we need to create and change into that directory. Execute the following command:</p>
+
+<pre><code>$ mkdir hello-yeoman &amp;&amp; cd hello-yeoman
+</code></pre>
+
+<p>This command simply creates a new folder named hello-yeoman and changes the current location into that directory.</p>
+
+<h3 id="invokethegenerator">Invoke the generator</h4>
+
+<p>Now it’s time to use the first tool of the workflow, Yo the scaffold tool will easily setup all configuration, files and folders needed for a modern angular web application, execute the following command:</p>
+
+<pre><code>$ yo angular:app
+</code></pre>
+
+<p>This command does many things: first off it’s going to ask you a few questions about your new project, such as to include Twitter Bootstrap with or without SASS and some frequently used angular modules. </p>
+
+<pre><code>[?] Would you like to include Twitter Bootstrap? Yes
+[?] Would you like to use the SCSS version of Twitter Bootstrap with the Compass CSS Authoring Framework? Yes
+[?] Which modules would you like to include? (Press &lt;space&gt; to select)
+❯⬢ angular-resource.js
+ ⬢ angular-cookies.js
+ ⬢ angular-sanitize.js
+ ⬢ angular-route.js
+</code></pre>
+
+<p>After answering the questions you will see the build log output in the terminal, Yeoman is performing all of the magic right before your eyes. </p>
+
+<p>If you run into any errors during the initial build processes, try executing:</p>
+
+<ol>
+<li><code>sudo bower install</code></li>
+<li><code>sudo npm install</code></li>
+</ol>
+
+<h3 id="directorystructure">Directory structure</h4>
+
+<p>Do not be overwhelmed by the number of files generated, take a minute and examine the directory structure that Yeoman produces. You will notice how organized the 
+directory structure is:</p>
+
+<pre><code>.
+├── app
+│   ├── 404.html
+│   ├── favicon.ico
+│   ├── bower_components
+│   ├── images
+│   │   └── yeoman.png
+│   ├── index.html
+│   ├── robots.txt
+│   ├── scripts
+│   │   ├── app.js
+│   │   └── controllers
+│   │       └── main.js
+│   ├── styles
+│   │   └── main.scss
+│   └── views
+│       └── main.html
+├── bower.json
+├── Gruntfile.js
+├── karma.conf.js
+├── karma-e2e.conf.js
+├── package.json
+├── README.md
+└── test
+    ├── runner.html
+    └── spec
+        └── controllers
+            └── main.js
+</code></pre>
+
+<p>Just think of Yeoman as a helpful robot who does all the hard work for you, creating all the necessary files and folders to get started with development.</p>
+
+<h2 id="previewserver">Preview Server</h3>
+
+<p>Now that we have the initial files and folders for our application, we can really start to see the power of Yeoman. </p>
+
+<p>To preview the application, execute the following command:</p>
+
+<pre><code>$ grunt serve
+</code></pre>
+
+<p>The serve task does a few things:</p>
+
+<ol>
+<li>First it removes all files in the .tmp directory via the clean task. </li>
+<li>Then compiles the SASS style sheets in the applications styles folder to the.tmp/styles folder via the compass task.</li>
+<li>Then starts the Connect LiveReload server located at 127.0.0.1:9000 and opens Google Chrome, via the connect task.</li>
+<li>Then finally runs the watch task that monitors the projects source files, executing sub-tasks on changes.</li>
+</ol>
+
+<p><img src="https://dl.dropboxusercontent.com/u/26906414/learning_yeoman/1380OS_01/1380OS_01_01.png" alt="image" title="" /></p>
+
+<p>Your default browser should have opened up displaying the page above.</p>
+
+<h2 id="testing">Testing</h3>
+
+<p>If testing is not a part of your workflow, it should be! Yeoman makes it incredibly easy to test your application, setting up a testing environment with the Jasmine Framework and PhantomJS (a headless WebKit). That little helpful robot just saved hours of development time by creating all the necessary configuration files during the initial project scaffold. </p>
+
+<h3 id="unittests">Unit Tests</h4>
+
+<p>Most web applications connect to some API service that handles all of the database logic and exposes methods to create or retrieve data via a REST web service. But being able to test if your application is handling the data correctly has always been an issue. Well, let’s create a spec that expects our controller to make a JSONP HTTP request to the Instagram API to fetch the most recent media uploaded, then set the results of that web service on the scope of the view, rendering the correct number of images that we expect to display: </p>
+
+<p>Here are the steps:
+1. Open the default test spec that the generator created <code>(test/spec/controllers/main.js)</code> and at about line 10 create a three variables; one to reference a mock backend, one to hold a mock response and another to hold the endpoint location to the API.</p>
+
+<pre><code>var httpBackend,
+  endpoint = [
+    'https://api.instagram.com/v1/media/popular?',
+    'callback=JSON_CALLBACK',
+    '&amp;client_id=ef2bd67b7dfb4bf8899999d61386d567'
+  ].join('');
+
+  var MockResponse = {
+    data:[
+      { id: 0, images: { thumbnail: { url: '' } } },
+      { id: 1, images: { thumbnail: { url: '' } } }
+    ]
+  };
+</code></pre>
+
+<ol>
+<li>Then around line 20, inside of the beforeEach function lets setup the mock backend to respond with our mock data when a JSONP request is made.</li>
+</ol>
+
+<pre><code> beforeEach(inject(function ($ctrl, $rootScope, $httpBackend) {
+   httpBackend = $httpBackend;
+   httpBackend.whenJSONP(endpoint).respond(201, MockResponse);
+
+   scope = $rootScope.$new();
+   MainCtrl = $ctrl('MainCtrl', {
+     $scope: scope
+   });
+ }));
+</code></pre>
+
+<ol>
+<li>Now lets create 2 cases where the controller should have the API endpoint, Instagram client id and an init method that initializes the HTTP request and makes a call to the endpoint we specified, then properly sets the results on the scope of the controller.</li>
+</ol>
+
+<pre><code>it('should have settings on the scope', function(){
+    expect(scope.clientid).toBeDefined();
+    expect(scope.endpoint).toBeDefined();
+    expect(scope.init).toBeDefined();
+});
+
+it('should set recent media from API on scope', function () {
+   expect(scope.data.length).toBe(0);
+   httpBackend.flush();
+   expect(scope.data.length).toBe(2);
+});
+</code></pre>
+
+<ol>
+<li>To run the tests use the following command:</li>
+</ol>
+
+<pre><code>$ grunt test
+</code></pre>
+
+<p>As we can see from the output, the configuration of Karma and PhantomJS is already taken care of; it nicely starts the Karma server and launches the PhantomJS browser, after connecting to the socket the tests begin to run, logging failing or passing tests as they go. The tests should fail because there is no logic inside of the controller yet, and yes we are writing tests before writing code like all great developers should do.</p>
+
+<h3 id="e2etests">e2e Tests</h4>
+
+<p>The generator-angular creates the End-2-End (e2e) testing configuration out of the box, but there are a few minor changes you will need to make in order to get AngularJS e2e tests running. </p>
+
+<ol>
+<li>Open up the Gruntfile.js in the projects directory.</li>
+<li>Add the following code at around line 350:</li>
+</ol>
+
+<pre><code>karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      },
+      e2e: {
+        configFile: 'karma-e2e.conf.js',
+        singleRun: true
+      }
+    },
+</code></pre>
+
+<ol>
+<li>Now create a folder named <code>e2e</code> inside of the test directory, and a file named <code>app.js</code> inside the e2e folder. Add the following code, which simply checks to see if the API call from Instagram contains what the user interface is expecting, which is 16 of the most recent images.</li>
+</ol>
+
+<pre><code>describe('Angular App', function() {
+    it('should show a list of images', function() {
+        browser().navigateTo('/index.html');
+        expect(repeater('.row li').count()).toEqual(16);
+    }); 
+});
+</code></pre>
+
+<ol>
+<li>To run the e2e tests start your web app with the grunt serve task then open a new console and execute:</li>
+</ol>
+
+<p><code>grunt karma:e2e</code></p>
+
+<ol>
+<li>Google Chrome will open up displaying the karma runner with a debug button on the top right, clicking the debug button opens the AngularJS Scenario test runner that runs automation tests against your app </li>
+</ol>
+
+<p><img src="https://dl.dropboxusercontent.com/u/26906414/learning_yeoman/1380OS_01/1380OS_01_02.png" alt="image" title="" /></p>
+
+<h2 id="codelinting">Code Linting</h3>
+
+<p>Yeoman includes JSHint, which is a tool that helps developers detect errors and potential problems in their JavaScript code. This is very useful when working with a large code base or in a team environment.</p>
+
+<p>To demonstrate the automatic JSHint code linting feature lets add some logic to the applications only controller. When you save the file while you should see the console output the JSHint results, if your code passes the linting test, the browser is refreshed, and if it does not, the console will output the error with line number references to that file. </p>
+
+<p>To get the applications tests to pass we need to add some logic inside the controller, open the <code>app/scripts/controllers/main.js</code> file that was created during the initial project scaffold and add a JSHint option to turn camel case checking off because the URL parameters need to include client_id, the good thing about JSHint is that you can set options in individual files to allow code linting to pass without any errors.</p>
+
+<ol>
+<li><p>At the very top of the file add the following: 
+<code>/* jshint camelcase: false */</code></p></li>
+<li><p>At about line 6 add a variable to store the endpoint to the API service we are consuming and some HTTP options that will be passed to the request method.</p></li>
+</ol>
+
+<pre><code>$scope.endpoint = 'https://api.instagram.com/v1/media/popular';
+$scope.clientid = 'ef2bd67b7dfb4bf8899999d61386d567';
+$scope.options = {
+  cache: false,
+  params: {
+     client_id: $scope.clientid,
+     callback: 'JSON_CALLBACK'
+  }
+};
+</code></pre>
+
+<ol>
+<li>Now add a variable that is an Array to store the data from the HTTP request:</li>
+</ol>
+
+<p><code>$scope.data = [];</code></p>
+
+<ol>
+<li>After that at around line 18 add an initialize function that starts the request process and handles the results:</li>
+</ol>
+
+<pre><code>$scope.init = function(){
+$http.jsonp($scope.endpoint, $scope.options)
+       .success(function(results){
+        $scope.data = results.data;
+       });
+ };
+ ```
+
+
+5. Lastly invoke that method to get the data and make our tests pass:
+
+    `$scope.init();`
+
+
+The code above is pretty straightforward, at the top we configure a JSHint option to turn camel case off, then our applications module is defined followed by our controller definition.
+
+
+Then we setup a local variable to hold the endpoint and client id for the Instagram API. We declare a data property on the `$scope` (more on `$scope` later), followed by some options that our JSONP call will use.
+
+
+Then the init function will make a HTTP call to the Instagram API, and set the results.data on the `$scope.data` property, finally we invoke that method to kick off the app.
+
+## Automation
+To see how useful the LiveReload feature really is, lets add some changes to the default main.html view that was created during the initial scaffold. Remove the about and help a elements in the header and replace the contents inside of the main div element with some user interface elements that will display a list of images from the Instagram API.
+</code></pre>
+
+<pre><code>&lt;div class="row marketing"&gt;
+  &lt;ul class="list-unstyled"&gt;
+    &lt;li ng-repeat="item in data" class="col-sm-3 col-md-3"&gt;
+        &lt;a href="" class="thumbnail"&gt;
+          &lt;img 
+            ng-src="{{item.images.thumbnail.url}}" 
+            alt="{{item.caption.text}}"/&gt;
+        &lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<pre><code>The html above is using AngularJS data binding syntax `{{ }}`, here we have a simple un-ordered list that has one child li element with a `ng-repeat` attribute that tells AngularJS to 'repeat this element' for each item in the data array on the controllers `$scope`. 
+
+
+We are using Twitter Bootstrap as our UI framework so attaching the proper classes makes our images appear in a grid, inside the `li` element we have a `img` element that has two attributes, the first one `ng-src` is a built-in Angular directive that allows our image to bind to the value of the `item.images.thumbnail.url` property once populated and the second attribute `alt` references the caption of the repeated item.
+
+
+Save the file and you will see your browser automatically reload with something similar to the image below.
+
+![image](https://dl.dropboxusercontent.com/u/26906414/learning_yeoman/1380OS_01/1380OS_01_03.png)
+
+&gt; Applications must be registered with Instagram to make API calls. To register your application visit http://instagram.com/develop
+
+
+## Package Management
+Yeoman includes an excellent tool called Bower, which is a package manager for the web and allows you to easily manage dependencies for your projects. Packages include assets such as JavaScript images and CSS. Twitter and the open-source community actively maintain it. 
+
+Here are some of the available `bower &lt;cmd&gt;` commands:
+
+1.    `search` - Search for a dependency in the Bower registry.
+2.    `install` - Installs one or more dependencies.
+3.    `list` – Lists all dependencies installed in project.
+4.    `update` – Updates a dependency to the latest version.
+
+## Optimization
+The default grunt task takes care of optimizing your entire project by doing the following:
+
+
+1.    Compiling and concatenating all style sheets together
+2.    Minifies all referenced 3rd-party libraries into a separate file
+3.    Groups Angular modules into a separate minimized file 
+4.    Then combines all application scripts into one separate file, 
+5.    All HTML files and images are processed thru there corresponding optimizer
+6.    All processed files have a revision number appended to the filename
+7.    All built files are located in the `dist` directory, making your application ready for deployment, to preview what your application runs like once optimized, execute the following command:
+    `$ grunt serve:dist`
+8.    Open the `dist/index.html` file and take a look: 
+9.    
+</code></pre>
+
+<pre><code>&lt;link rel="stylesheet" href="styles/f55987ac.main.css"/&gt;
+&lt;script src="scripts/8a9f835c.plugins.js"&gt;&lt;/script&gt;
+&lt;script src="scripts/304f35e4.modules.js"&gt;&lt;/script&gt;
+&lt;script src="scripts/409cd740.scripts.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>Your application is fully optimized - with fewer requests your application loads much faster in the browser.</p>
+
+<h2 id="summary">Summary</h3>
+
+<p>That was a lot to take in for the first chapter, but we have a lot to cover. In this chapter we learnt how to install all of the tools in the Yeoman workflow with one easy command: <code>npm install yo -g</code>. We learned about the commands that Bower, Grunt and the Yo Angular generator has to offer, also getting see the LiveReload server in action while making changes to the generated files. </p>
+
+<p>We were able to make sure our coding syntax was error free via JSHint. We also got our hands dirty writing some tests for the application: a unit test to make sure the controller is functioning properly, and an e2e test to make sure that our user interfaces is displaying correctly. We wrapped it up by taking a look at the optimization that takes place when your project is ready to ship. </p>
+
+<p>We are going to turn it up a notch next, by introducing all of the angular sub-generators, installing some 3rd-party libraries and adding some grunt tasks to generate documentation and code coverage for our project.</p></div>

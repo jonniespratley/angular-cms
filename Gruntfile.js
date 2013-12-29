@@ -57,7 +57,12 @@ module.exports = function (grunt) {
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
-      }
+      },
+			//docs
+			ngdocs: {
+				files: ['docs/**/*'],
+				tasks: ['ngdocs']
+			}
     },
 
     // The actual grunt server settings
@@ -419,7 +424,7 @@ module.exports = function (grunt) {
 		    dest: 'app/docs',
 		    html5Mode: false,
 		    startPage: '/',
-		    title: "Angular-CMS Docs",
+		    title: "AngularCMS",
 		  //  image: "path/to/my/image.png",
 				imageLink: "http://my-domain.com",
 		    titleLink: "/",
@@ -435,12 +440,13 @@ module.exports = function (grunt) {
 		    }
 		  },
 		  tutorial: {
-		    src: ['content/tutorial/*.ngdoc'],
-		    title: 'Tutorial'
+		    src: ['docs/content/*.ngdoc'],
+		    title: 'Learning Yeoman Book'
 		  },
 		  api: {
 		    src: [
-					'.tmp/scripts/**/*.js'
+					'.tmp/scripts/**/*.js',
+					'app/scripts/**/*.coffee'
 					],
 		    title: 'API'
 		  }
