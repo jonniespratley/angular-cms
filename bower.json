@@ -11,7 +11,10 @@
     "es5-shim": "~2.1.0",
     "jquery": "~1.10.2",
     "bootstrap": "~3.0.3",
-    "font-awesome": "~4.0.3"
+    "font-awesome": "~4.0.3",
+    "angular-ui": "~0.4.0",
+    "angular-ui-router": "~0.2.7",
+    "angular-ui-bootstrap3": "~0.6.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

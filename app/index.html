@@ -24,6 +24,8 @@
 -->
    	
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+		
         <!-- endbuild -->
 </head>
   <body data-ng-app="angularCmsApp" data-ng-controller="AppCtrl">
@@ -36,17 +38,34 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+
+
+			<div id="header" ng-include src="'views/_header.html'"></div>
+
+
 	<div class="container">
-		<div id="header" ng-include src="'views/_header.html'"></div>
+
 		<div id="app" class="row">
 	   		<div class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" ng-include src="'views/_sidebar.html'"></div>
 			<div class="col-xs-12 col-sm-9 col-md-10">
-		    	<div class="container-fluid" data-ng-view=""></div>		
+	<div class="container-fluid" data-ng-view=""></div>				    	
 			</div>
 	   	</div>
 	   	
 	</div>
 
+
+	<div id="footer" class="container">
+		<hr/>
+		 <div class="footer tc">
+	        <p>&copy; Company 2013</p>
+	      </div>
+	</div>
+
+<!--
+
+
+-->
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -68,12 +87,10 @@
 		<script src="/bower_components/jquery/jquery.js"></script>
 		<script src="/bower_components/es5-shim/es5-shim.js"></script>
 		<script src="/bower_components/angular/angular.js"></script>
-		<script src="/bower_components/angular-resource/angular-resource.js"></script>
-		<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-		<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-		<script src="/bower_components/angular-route/angular-route.js"></script>
+
 		<script src="/bower_components/json3/lib/json3.min.js"></script>
 		<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 		<!-- endbower -->
 
         <!-- endbuild -->
