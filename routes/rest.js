@@ -31,6 +31,20 @@ var upload = require('jquery-file-upload-middleware');
 var colors = require('colors');
 var easyimg = require('easyimage');
 var sio = require('socket.io');
+var Deferred = require("promised-io/promise").Deferred;
+var when = require("promised-io/promise");
+
+function delay(ms, value){
+    // create a new Deferred
+    var deferred = new Deferred();
+    setTimeout(function(){
+        // fulfill the deferred/promise, all listeners to the promise will be notified, and 
+        // provided the value as the value of the promise 
+        deferred.resolve(value);
+    }, ms);
+    // return the promise that is associated with the Deferred object
+    return deferred.promise;
+}
 
 //## Configuration
 
@@ -224,8 +238,8 @@ var RestResource = {
 		var query = {
 			email : req.body.email,
 			//Hashing on client side
-			password : req.body.password
-			//password : RestResource.hashPassword(req.body.password, 'angular-cms')
+			//password : req.body.password
+			password : RestResource.hashPassword(req.body.password, req.body.email)
 		};
 
 
@@ -263,26 +277,27 @@ var RestResource = {
 		});
 	},
 	register: function(req, res, next){
-		
-
-		if(RestResource.insert(req.body)) {
-			res.header('Content-Type', 'application/json');
-				res.jsonp(200, {
-					status : true,
-					results : 'User created'
+		var data = req.body;
+			data.password = RestResource.hashPassword(req.body.password, req.body.email)
+		when(RestResource.insert('users', data), function(result){
+				res.header('Content-Type', 'application/json');
+					res.jsonp(200, {
+						status : true,
+						results : 'User created'
+					});
+		}, function(error){
+				res.jsonp(404, {
+					status : false,
+					message : 'There was an error, please try again.'
 				});
-		} else {
-			res.jsonp(404, {
-				status : false,
-				message : 'There was an error, please try again.'
-			});
-		}
-
+			console.log(error.warn);
+		});
 	},
 	session: function(req, res, next){},
 
 	insert:function(collection, data){
 		console.log(data);
+		var deferred = new Deferred();
 		//Open db
 		var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {
 			'auto_reconnect' : false,
@@ -293,14 +308,15 @@ var RestResource = {
 				collection.insert(data, function(err, docs) {
 					console.log(err, docs);
 					if(!err) {
-						return true;
+						deferred.resolve(true);
 					} else {
-						return false;
+						deferred.reject(false);
 					}
 					db.close();
 				});
 			});
 		});
+		return deferred.promise;
 	},
 	//### upload
 	//I handled processing a uploaded file on the v2 server.
@@ -650,7 +666,7 @@ var RestResource = {
 		var params = {
 			_id : new BSON.ObjectID(req.params.id)
 		};
-		console.log('Delete by id ' + req.params.id);
+		console.log('Delete by id ' + req.params);
 		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
 			auto_reconnect : true,
 			safe : true
@@ -737,7 +753,7 @@ app.post('/api/v2/:db/users/session', express.bodyParser(), RestResource.session
 app.get('/api/v2/:db/:collection/:id?', RestResource.get);
 app.post('/api/v2/:db/:collection', express.bodyParser(), RestResource.add);
 app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
-app.delete ('/api/v2/:db/:collection/:id', RestResource.destroy);
+app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 //Readme
 app.get('/api/v2/README', function(res, req) {
@@ -850,7 +866,7 @@ exports.rest = {
 
 					app.use(function(err, req, res, next) {
 						console.error(req.body, err);
-						res.send(500, '{"jsonrpc": "2.0", "error": {"code": -32700, "message": "Parse error"}, "id": null}');
+						res.send(500, req.body);
 					});
 
 

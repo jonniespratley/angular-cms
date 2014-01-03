@@ -145,6 +145,7 @@ module.exports = function (grunt) {
     coffee: {
       options: {
         sourceMap: true,
+				bare:true,
         sourceRoot: ''
       },
       dist: {
@@ -440,8 +441,11 @@ module.exports = function (grunt) {
 		    }
 		  },
 		  tutorial: {
-		    src: ['docs/content/*.ngdoc'],
-		    title: 'Learning Yeoman Book'
+		    src: [
+					'content/*.ngdoc',
+					'content/tutorial/*.ngdoc'
+				],
+		    title: 'Learning Yeoman'
 		  },
 		  api: {
 		    src: [

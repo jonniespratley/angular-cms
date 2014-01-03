@@ -195,18 +195,49 @@ Passwords are hashed in SHA1 against configurations salt.
 **Request:**
 
 ```
-..
+POST /api/v2/angular-cms/users/register HTTP/1.1
+Host: localhost:8181
+Content-Type: application/json
+
+{ 
+ "email": "jonniedollas@email.com", 
+ "password": "fred", 
+ "metadata": { "avatar": "", "name": "Jonnie Dollas" } 
+}
 ```
 
 **Response:**
 
 
 ```
-
-..
+{
+    "email": "jonniedollas@email.com",
+    "password": "fred",
+    "metadata": {
+        "avatar": "",
+        "name": "Jonnie Dollas"
+    }
+}
 
 ```
 
+
+
+#### Get Users
+
+	GET /api/v2/angular-cms/users HTTP/1.1
+	Host: localhost:8181
+	Cache-Control: no-cache
+	Postman-Token: 2d8327e9-bf4d-7425-04d6-677da2b67673
+
+
+### Create User
+
+	POST /api/v2/angular-cms/users HTTP/1.1
+	Host: localhost:8181
+	Content-Type: application/json
+	
+	{"id":0,"email":"","password":"","active":false,"groups":"visitor","_activation":"","_key":"","created":"2013-11-19T03:31:18.934Z","modified":"2013-11-19T03:31:18.934Z","metadata":{"avatar":"","name":"Joe User"}}
 
 ## Socket Server
 This is a socket server implementation for "real" time analytics and other data.

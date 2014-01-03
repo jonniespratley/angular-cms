@@ -46,7 +46,8 @@
     "grunt-jasmine-node": "~0.1.0",
     "karma-coverage": "~0.1.4",
     "grunt-angular-templates": "~0.5.1",
-    "grunt-bower-install": "~0.8.0"
+    "grunt-bower-install": "~0.8.0",
+    "promised-io": "~0.3.4"
   },
   "devDependencies": {},
   "engines": {
