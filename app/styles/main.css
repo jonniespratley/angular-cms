@@ -69,7 +69,7 @@ color:#fff;
 }
 .jumbotron {
         border-bottom: 1px solid #444;
-        background: #111 url(https://dl.dropboxusercontent.com/u/26906414/angular-cms/img/angular-cms-bg.png);
+        background: #111 url(/images/angular-cms-bg.png);
 	color: #fff;
 }
 .hero-unit h1 {
@@ -85,10 +85,12 @@ footer {
         font-size: .8em;
         color: #777;
         text-align: center;
+
 }
  
  
 .placeholder{
+			margin:5px;
   border:1px dashed #ccc;
   color:#999;
   padding: 10px;
