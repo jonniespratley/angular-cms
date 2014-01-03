@@ -21,6 +21,7 @@ angular.module('angularCmsApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
+  '$strap.directives'
   #'cms.Templates'
 ])
   .config ($routeProvider) ->
@@ -72,12 +73,19 @@ angular.module('angularCmsApp', [
       .otherwise
         redirectTo: '/'
 
-angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', ($scope, $rootScope, $http, $log) ->
+angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', '$route', '$location', '$routeParams', ($scope, $rootScope, $http, $log, $route, $location, $routeParams) ->
 	App = Config
+	App.route = $routeParams;
 	
 	$rootScope.angularCmsApp = App;
+	$rootScope.App = App;
+	$rootScope.$route = $route;
+	$rootScope.$location = $location;
+	$rootScope.$routeParams = $routeParams;
 	
 	window.angularCmsApp = $rootScope.angularCmsApp;
 	
 	$log.info($rootScope);
+	
+
 ]

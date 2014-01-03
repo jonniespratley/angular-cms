@@ -12,6 +12,13 @@ body {
         color:#333;
  
 }
+.0sidebar-nav{
+	position:fixed;
+	left: 0;
+	top: 52px;
+	border-radius:0px;
+	
+} 
 .sidebar-nav.well{
   padding:0;
 }
@@ -21,8 +28,9 @@ body {
   font-size:11px;
  text-transform: uppercase; 
 }
-.nav .active{
+.nav .active, .nav > li > a:hover, .nav > li > a:focus{
   background:#428bca;
+color:#fff;
 }
 .nav .active a{
   color:#fff;
@@ -59,8 +67,10 @@ body {
 .navbar-inverse{
         border-bottom: 1px solid #444;
 }
-div.jumbotron {
-        border-bottom: 1px solid #ccc;
+.jumbotron {
+        border-bottom: 1px solid #444;
+        background: #111 url(https://dl.dropboxusercontent.com/u/26906414/angular-cms/img/angular-cms-bg.png);
+	color: #fff;
 }
 .hero-unit h1 {
         font-size:60px;
