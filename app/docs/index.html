@@ -11,7 +11,7 @@
                  Declarative templates with data-binding, MVC, dependency injection and great
                  testability story all implemented with pure client-side JavaScript!">
   <meta name="fragment" content="!">
-  <title ng-bind-template="My Awesome Docs: {{partialTitle}}">Docs</title>
+  <title ng-bind-template="AngularCMS: {{partialTitle}}">Docs</title>
   <script type="text/javascript">
     // dynamically add base tag as well as css and javascript files.
     // we can't add css/js the usual way, because some browsers (FF) eagerly prefetch resources
@@ -30,7 +30,7 @@
       addTag('link', {rel: 'stylesheet', href: 'css/animations.css', type: 'text/css'});
       
       
-        addTag('script', {src: '../app.min.js'}, sync);
+        addTag('script', {src: 'js/angular.min.js'}, sync);
       
       addTag('script', {src: 'js/angular-bootstrap.min.js'}, sync);
       addTag('script', {src: 'js/angular-bootstrap-prettify.min.js'}, sync);
@@ -82,7 +82,7 @@
         <div class="container">
           
           
-            <a  href="/api"  class="brand">My Awesome Docs</a>
+            <a  href="/"  class="brand">AngularCMS</a>
           
           <ul class="nav">
             <li ng-repeat="(url, name) in sections" ng-class="{active: isActivePath(url)}">
@@ -137,39 +137,39 @@
           <div class="spacer"></div>
 
           <ul class="nav nav-list well" ng-show="pages">
-            <li ng-repeat="page in pages" ng-class="navClass(page)" class="api-list-item">
+            <li ng-repeat="page in pages track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
               <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
             </li>
           </ul>
 
-          <ul class="nav nav-list well" ng-repeat="module in modules" class="api-list-item">
+          <ul class="nav nav-list well" ng-repeat="module in modules track by module.url" class="api-list-item">
             <li class="nav-header module">
               <a class="guide">module</a>
               <a class="code" href="{{module.url}}">{{module.name}}</a>
             </li>
 
-            <li ng-repeat="page in module.others" ng-class="navClass(page)" class="api-list-item">
+            <li ng-repeat="page in module.others track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
               <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
             </li>
 
             <li class="nav-header section" ng-show="module.directives">
               <a class="guide">directive</a>
             </li>
-            <li ng-repeat="page in module.directives" ng-class="navClass(page)" class="api-list-item">
+            <li ng-repeat="page in module.directives track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
               <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
             </li>
 
             <li class="nav-header section" ng-show="module.filters">
               <a class="guide">filter</a>
             </li>
-            <li ng-repeat="page in module.filters" ng-class="navClass(page)" class="api-list-item">
+            <li ng-repeat="page in module.filters track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
               <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
             </li>
 
             <li class="nav-header section" ng-show="module.services">
               <a class="guide">service</a>
             </li>
-            <li ng-repeat="service in module.services" ng-class="navClass(service.instance, service.provider)" class="api-list-item">
+            <li ng-repeat="service in module.services track by service.instance.url" ng-animate="'expand'" ng-class="navClass(service.instance, service.provider)" class="api-list-item">
               <a ng-show="service.provider" class="pull-right" href="{{service.provider.url}}" tabindex="2"><i class="icon-cog"></i></a>
               <a href="{{service.instance.url}}" tabindex="2">{{service.name}}</a>
             </li>
@@ -177,7 +177,7 @@
             <li class="nav-header section" ng-show="module.types">
               <a class="guide">Types</a>
             </li>
-            <li ng-repeat="page in module.types" ng-class="navClass(page)" class="api-list-item">
+            <li ng-repeat="page in module.types track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
               <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
             </li>
 
@@ -185,7 +185,7 @@
               <a class="global guide">global APIs</a>
               &nbsp;
             </li>
-            <li ng-repeat="page in module.globals" ng-class="navClass(page)" class="api-list-item">
+            <li ng-repeat="page in module.globals track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
               <a href="{{page.url}}" tabindex="2">{{page.id}}</a>
             </li>
 

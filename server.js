@@ -73,13 +73,14 @@ var config = {
 		salt : ''
 	},
 	db : {
+		name: 'angular-cms',
 		username : 'amadmin',
 		password : 'fred',
 		host : 'localhost',
 		port : 27017
 	},
-	staticDir : __dirname +'/dist',
-	publicDir : __dirname + '/www',
+	staticDir : __dirname +'/app',
+	publicDir : __dirname + '/app',
 	uploadsTmpDir : '.temp',
 	uploadsDestDir : 'www/cms-content/uploads',
 	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'

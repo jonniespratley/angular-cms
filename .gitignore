@@ -6,3 +6,4 @@ node_modules
 .editorconfig
 .project
 app/bower_components
+db/mongod.lock 

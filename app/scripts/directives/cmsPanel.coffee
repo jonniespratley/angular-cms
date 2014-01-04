@@ -1,5 +1,20 @@
-'use strict'
+###
+@ngdoc directive
+@name cmsPanel
+@description This is a panel for angular-cms.
+@example
 
+`<example module="ogApp" > `
+
+    `<file name="jdx.html" >`
+
+        HTML example come here ==> `<div class="lior" ></div >`
+
+    `</file >`
+
+`</example >`
+###
+'use strict'
 angular.module('angularCmsApp').directive('cmsPanel', () ->
 	transclude: true
 	replace: true

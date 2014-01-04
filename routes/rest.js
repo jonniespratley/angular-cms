@@ -31,6 +31,20 @@ var upload = require('jquery-file-upload-middleware');
 var colors = require('colors');
 var easyimg = require('easyimage');
 var sio = require('socket.io');
+var Deferred = require("promised-io/promise").Deferred;
+var when = require("promised-io/promise");
+
+function delay(ms, value){
+    // create a new Deferred
+    var deferred = new Deferred();
+    setTimeout(function(){
+        // fulfill the deferred/promise, all listeners to the promise will be notified, and 
+        // provided the value as the value of the promise 
+        deferred.resolve(value);
+    }, ms);
+    // return the promise that is associated with the Deferred object
+    return deferred.promise;
+}
 
 //## Configuration
 
@@ -206,19 +220,41 @@ var RestResource = {
 			message : ' REST API Server ' + RestResource.useversion
 		});
 	},
+	//### hashPassword
+	//Hash password using basic sha1 hash.
+	hashPassword: function(pass, salt) {
+		var shasum = crypto.createHash('sha1');
+			shasum.update(salt + pass);
+		
+		return shasum.digest('hex');
+	},
 	//### login
 	//I handle trying to authorized a user with the v1 myappmatrix api server.
 	login : function(req, res, next) {
+
+		console.log(req.body);
+
+		//TODO: Need to make this externalized.
+		var query = {
+			email : req.body.email,
+			//Hashing on client side
+			//password : req.body.password
+			password : RestResource.hashPassword(req.body.password, req.body.email)
+		};
+
+
+
+		console.log('Login Query: ', query);
+
+
+		//Open db
 		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
 			'auto_reconnect' : true,
 			'safe' : true
 		}));
 		db.open(function(err, db) {
-			db.collection(req.params.collection, function(err, collection) {
-				var query = {
-					email : req.param('email'),
-					password : hashPassword(req.param('password'))
-				};
+			db.collection('users', function(err, collection) {
+				
 				var options = req.params.options || {};
 				collection.findOne(query, options, function(err, cursor) {
 					if(cursor != null) {
@@ -239,6 +275,48 @@ var RestResource = {
 				});
 			});
 		});
+	},
+	register: function(req, res, next){
+		var data = req.body;
+			data.password = RestResource.hashPassword(req.body.password, req.body.email)
+		when(RestResource.insert('users', data), function(result){
+				res.header('Content-Type', 'application/json');
+					res.jsonp(200, {
+						status : true,
+						results : 'User created'
+					});
+		}, function(error){
+				res.jsonp(404, {
+					status : false,
+					message : 'There was an error, please try again.'
+				});
+			console.log(error.warn);
+		});
+	},
+	session: function(req, res, next){},
+
+	insert:function(collection, data){
+		console.log(data);
+		var deferred = new Deferred();
+		//Open db
+		var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {
+			'auto_reconnect' : false,
+			'safe' : true
+		}));
+		db.open(function(err, db) {
+			db.collection('users', function(err, collection) {
+				collection.insert(data, function(err, docs) {
+					console.log(err, docs);
+					if(!err) {
+						deferred.resolve(true);
+					} else {
+						deferred.reject(false);
+					}
+					db.close();
+				});
+			});
+		});
+		return deferred.promise;
 	},
 	//### upload
 	//I handled processing a uploaded file on the v2 server.
@@ -562,6 +640,10 @@ var RestResource = {
 			'auto_reconnect' : true,
 			'safe' : true
 		}));
+
+		console.log('Upating: ' + JSON.stringify(req.body).warn);
+
+
 		db.open(function(err, db) {
 			db.collection(req.params.collection, function(err, collection) {
 				collection.update(spec, req.body, true, function(err, docs) {
@@ -584,7 +666,7 @@ var RestResource = {
 		var params = {
 			_id : new BSON.ObjectID(req.params.id)
 		};
-		console.log('Delete by id ' + req.params.id);
+		console.log('Delete by id ' + req.params);
 		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
 			auto_reconnect : true,
 			safe : true
@@ -660,11 +742,18 @@ var RestResource = {
 app.get('/api/v2', RestResource.v2index);
 app.post('/api/v1/imagecrop', RestResource.imageCrop);
 app.post('/api/v2/cloudupload', RestResource.cloudupload);
-app.get('/api/v2/:db/:collection/login', RestResource.login);
+
+
+//Always users table
+app.post('/api/v2/:db/users/login', express.bodyParser(), RestResource.login);
+app.post('/api/v2/:db/users/register', express.bodyParser(), RestResource.register);
+app.post('/api/v2/:db/users/session', express.bodyParser(), RestResource.session);
+
+
 app.get('/api/v2/:db/:collection/:id?', RestResource.get);
-app.post('/api/v2/:db/:collection', RestResource.add);
-app.put('/api/v2/:db/:collection/:id', RestResource.edit);
-app.delete ('/api/v2/:db/:collection/:id', RestResource.destroy);
+app.post('/api/v2/:db/:collection', express.bodyParser(), RestResource.add);
+app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
+app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 //Readme
 app.get('/api/v2/README', function(res, req) {
@@ -678,15 +767,9 @@ function rackspaceUpload(localPath, targetPath, filename, cb) {
 
 };
 
-//### hashPassword
-//Hash password using basic sha1 hash.
-function hashPassword(pass) {
-	var shasum = crypto.createHash('sha1');
-	shasum.update(config.security.salt + pass);
-	var out = shasum.digest('hex');
-	console.log(out);
-	return out;
-};
+
+
+
 
 //### getFile
 //Get file contents from a file.
@@ -748,67 +831,73 @@ exports.rest = {
 	app : app,
 	express : express,
 	init : function(options) {
-
+		
+		console.log('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + ''.warn);
 		config = options;
-		//### Socket.io Config
-//This is for use with geo analytics and other backend data from the app. listen for connected clients
+				
+
+				upload.fileHandler({
+					uploadDir : config.uploadsDestDir,
+					uploadUrl : 'www/cms-content/uploads',
+					imageVersions : {
+						thumbnail : {
+							width : 125,
+							height : 125
+						}
+					}
+				});
+
+				//### Express Config
+				//Configure the express app server.
+				app.configure(function() {
+					app.use(express.static(config.staticDir));
+					app.use(express.directory(config.publicDir));
+					
+					app.use("jsonp callback", true);
+					//app.use(express.json());
+					//app.use(express.urlencoded());
+					app.use(express.bodyParser());
+					
+					// simple logger
+					app.use(function(req, res, next){
+					  console.log('%s %s', req.method, req.body, req.url);
+					  next();
+					});
+
+					app.use(function(err, req, res, next) {
+						console.error(req.body, err);
+						res.send(500, req.body);
+					});
 
 
 
+					//Upload config
+					app.use('/api/v2/upload', upload.fileHandler());
+					app.use('/api/v2/uploads', function(req, res, next){
+						upload.fileManager().getFiles(function (files) {
+							res.json(files);
+						});
+					});
 
-upload.fileHandler({
-	uploadDir : config.uploadsDestDir,
-	uploadUrl : 'www/cms-content/uploads',
-	imageVersions : {
-		thumbnail : {
-			width : 125,
-			height : 125
-		}
-	}
-});
-
-//### Express Config
-//Configure the express app server.
-app.configure(function() {
-	app.use(express.static(config.staticDir));
-	app.use(express.directory(config.publicDir));
-	app.use(express.logger(config.logFormat));
-	app.use("jsonp callback", true);
-
-	app.use(function(err, req, res, next) {
-		console.error(err);
-		res.send(500, 'Something broke!');
-	});
+					
+					
+				});
 
 
-
-	//Upload config
-	app.use('/api/v2/upload', upload.fileHandler());
-	app.use('/api/v2/uploads', function(req, res, next){
-		upload.fileManager().getFiles(function (files) {
-			res.json(files);
-		});
-	});
-
-	app.use(express.bodyParser());
-	
-});
+				 		// events
+				        upload.on('begin', function (fileInfo) { 
+				        	console.log(fileInfo);
+				        });
+				        upload.on('abort', function (fileInfo) {  });
+				        upload.on('end', function (fileInfo) {  });
+				        upload.on('delete', function (fileInfo) {  });
+				        upload.on('error', function (e) {
+				            console.log(e.message);
+				        });
 
 
- // events
-        upload.on('begin', function (fileInfo) { 
-        	console.log(fileInfo);
-        });
-        upload.on('abort', function (fileInfo) {  });
-        upload.on('end', function (fileInfo) {  });
-        upload.on('delete', function (fileInfo) {  });
-        upload.on('error', function (e) {
-            console.log(e.message);
-        });
+						app.listen(options.port || process.env.PORT);
 
-
-		app.listen(options.port || process.env.PORT);
-
-		console.log('Server Listening on port: ' + options.port);
+						console.log('Server Listening on port: ' + options.port);
 	}
 };
