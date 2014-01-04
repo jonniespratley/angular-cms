@@ -70,6 +70,12 @@ angular.module('angularCmsApp', [
       .when '/users',
         templateUrl: 'views/users.html'
         controller: 'UsersCtrl'
+      .when '/register',
+        templateUrl: 'views/register.html'
+        controller: 'RegisterCtrl'
+      .when '/pages',
+        templateUrl: 'views/pages.html'
+        controller: 'PagesCtrl'
       .otherwise
         redirectTo: '/'
 
