@@ -21,7 +21,7 @@ angular.module('angularCmsApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  '$strap.directives'
+  #'$strap.directives'
   #'cms.Templates'
 ])
   .config ($routeProvider) ->
