@@ -129,11 +129,6 @@ window.Config =
 		#Public menu
 		pub: [
 			id: 1
-			title: "What's New"
-			icon: "star"
-			href: "/index"
-		,
-			id: 2
 			title: "Docs"
 			icon: "book"
 			href: "/docs"

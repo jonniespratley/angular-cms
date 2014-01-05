@@ -15,6 +15,32 @@ Follow these steps when adding features to this project.
 7. **Testing** - Unit and e2e testing will then verify the implementation of the story. 
 
 
+## Parse.com
+We are going to use parse for our data store.
+
+#### Sign Up
+
+	POST /1/users HTTP/1.1
+	Host: api.parse.com
+	Content-Type: application/json
+	X-Parse-Application-Id: fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB
+	X-Parse-REST-API-Key: G9ALilrUgXH0F2XwFErB7MCWf3rt0xMgb8u2icpK
+	
+	{ "username": "jonniespratley", "email": "jonniespratley@gmail.com", "password": "fred", "name": "Jonnie" }
+
+#### Login
+
+	GET /1/login?username=jonniespratley&password=fred HTTP/1.1
+	Host: api.parse.com
+	Content-Type: application/json
+	X-Parse-Application-Id: fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB
+	X-Parse-REST-API-Key: G9ALilrUgXH0F2XwFErB7MCWf3rt0xMgb8u2icpK
+	Cache-Control: no-cache
+	Postman-Token: 67d3ce51-dcf4-84c2-6e0e-b607767e831f
+
+
+
+
 ##Authentication System
 
 ####  Story: User Login

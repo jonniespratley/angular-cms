@@ -44,12 +44,6 @@ angular.module('angularCmsApp', [
 			.when '/admin',
 				templateUrl: 'views/admin.html'
 				controller: 'AdminCtrl'
-			.when '/login',
-				templateUrl: 'views/login.html'
-				controller: 'LoginCtrl'
-			.when '/profile',
-				templateUrl: 'views/profile.html'
-				controller: 'ProfileCtrl'
 			.when '/plugins',
 				templateUrl: 'views/plugins.html'
 				controller: 'PluginsCtrl'
@@ -65,43 +59,37 @@ angular.module('angularCmsApp', [
 			.when '/settings',
 				templateUrl: 'views/settings.html'
 				controller: 'SettingsCtrl'
-			.when '/dashboard',
-				templateUrl: 'views/dashboard.html'
-				controller: 'DashboardCtrl'
 			.when '/users',
 				templateUrl: 'views/users.html'
 				controller: 'UsersCtrl'
+			.when '/login',
+				templateUrl: 'views/login.html'
+				controller: 'LoginCtrl'
 			.when '/register',
 				templateUrl: 'views/register.html'
 				controller: 'RegisterCtrl'
+			.when '/dashboard',
+				templateUrl: 'views/dashboard.html'
+				controller: 'DashboardCtrl'
+			.when '/profile',
+				templateUrl: 'views/profile.html'
+				controller: 'ProfileCtrl'
 			.when '/pages',
 				templateUrl: 'views/pages.html'
 				controller: 'PagesCtrl'
 			.otherwise
 				redirectTo: '/'
 
-angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', '$route', '$location', '$routeParams', ($scope, $rootScope, $http, $log, $route, $location, $routeParams) ->
+angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', '$route', '$location', '$routeParams', '$cookieStore', ($scope, $rootScope, $http, $log, $route, $location, $routeParams, $cookieStore) ->
 	App = Config
 	App.route = $routeParams;
-
-	#Login Method to set the session
-	App.login = (user)->
-		$location.path('/dashboard')
-		this.session.user = user
-
-	#Logout method to clear the session
-	App.logout = ()->
-		$location.path('/')
-		this.session.user = null
-
-	$rootScope.App = App;
-	$rootScope.$route = $route;
-	$rootScope.$location = $location;
-	$rootScope.$routeParams = $routeParams;
+	App.session.user = $cookieStore.get('App.session.user')
 	
-	window.App = $rootScope.App;
+	App.route = $route
+	App.location = $location
+	App.routeParams = $routeParams
 	
-	
+	window.App = $rootScope.App = App
 	angular.element(document).ready(()->
 		$log.info('Document ready', this);
 		angular.element('.sidebar-nav').bind('click', 'a', (e)->

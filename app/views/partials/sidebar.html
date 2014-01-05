@@ -4,14 +4,5 @@
 	<li ng-repeat="item in App.menu.user" ng-include src="'menu-item.html'"></li>
 	<li class="nav-header">Admin</li>
 	<li ng-repeat="item in App.menu.admin" ng-include src="'menu-item.html'"></li>
-	<li class="nav-divider"></li>
-	<li ng-repeat="item in App.menu.pub" ng-include src="'menu-item.html'"></li>
   </nav>
 </div>
-
-<script id="menu-item.html" type="text/ng-template">
-	<a ng-href="#{{item.href}}">
-		<i class="fa fa-1x fa-{{item.icon}}"></i>
-		{{item.title}}
-	</a>
-</script>
