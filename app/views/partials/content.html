@@ -1,6 +1,6 @@
 	<div data-ng-class="App.layout.value">
 		<div id="app" class="row">
-			<div ng-if="App.session.user">
+			<div ng-if="App.session.user" class="animate-if">
 					<aside 
 						id="sidebar" 
 						role="navigation" 
@@ -10,7 +10,7 @@
 						<article data-ng-view=""></article>
 					</section>
 			</div>
-			<div ng-if="!App.session.user">
+			<div ng-if="!App.session.user" class="animate-if">
 				<section class="col-xs-12 col-sm-12 col-md-12">
 						<article data-ng-view=""></article>
 					</section>
