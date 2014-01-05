@@ -1,0 +1,21 @@
+	<div data-ng-class="App.layout.value">
+		<div id="app" class="row">
+			<div ng-if="App.session.user">
+					<aside 
+						id="sidebar" 
+						role="navigation" 
+						ng-include src="App.sidebar.url"
+						class="col-xs-3 col-sm-3 col-md-2"></aside>
+					<section class="col-xs-12 col-sm-9 col-md-10">
+						<article data-ng-view=""></article>
+					</section>
+			</div>
+			<div ng-if="!App.session.user">
+				<section class="col-xs-12 col-sm-12 col-md-12">
+						<article data-ng-view=""></article>
+					</section>
+				</ng-switch-default>
+			</div>
+		</div>
+	</div>
+

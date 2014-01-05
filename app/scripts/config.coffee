@@ -1,7 +1,9 @@
 window.Config =
 	baseurl: document.location.origin
-	sitetitle: "AngularCMS"
+	sitetitle: "angular-cms"
 	sitedesc: "This is the description"
+	sitecopy: "2014 "
+	version: '0.1'
 	email: "jonniespratley@me.com"
 	debug: false
 
@@ -40,22 +42,34 @@ window.Config =
 	
 	#I hold the current session data
 	session: 
-		user:
-			email: 'jonniespratley@gmail.com'
-			username: 'admin'
-			password: 'fred'
-			role: 3
-	
-	#I hold the sidebar that should be used
-	sidebar:
-		value: "sidebar"
-		url: "/views/partials/sidebar.html"
+		user: null
+		#user:
+		#	name: 'Jonnie'
+		#	email: 'jonniespratley@gmail.com'
+		#	username: 'admin'
+		#	password: 'fred'
+		#	role: 3
 
 	#I hold the navbar that should be used
 	navbar:
 		value: "navbar"
 		url: "/views/partials/navbar.html"
 
+	#I hold the sidebar that should be used
+	sidebar:
+		value: "sidebar"
+		url: "/views/partials/sidebar.html"
+
+	#I hold the content that should be used
+	content:
+		value: "content"
+		url: "/views/partials/content.html"
+	
+	#I hold the footer that should be used
+	footer:
+		value: "footer"
+		url: "/views/partials/footer.html"
+	
 	#I hold the current layout that should be used
 	layout:
 		id: 0
@@ -78,6 +92,8 @@ window.Config =
 
 	#I hold the contents of the applications menus
 	menu:
+		
+		#Admin menu
 		admin: [
 			id: 1
 			title: "Plugins"
@@ -109,6 +125,8 @@ window.Config =
 			href: "/settings"
 			icon: "cog"
 		]
+
+		#Public menu
 		pub: [
 			id: 1
 			title: "What's New"
@@ -120,6 +138,8 @@ window.Config =
 			icon: "book"
 			href: "/docs"
 		]
+
+		#User menu
 		user: [
 			id: 1
 			title: "Dashboard"
@@ -131,9 +151,6 @@ window.Config =
 			icon: "user"
 			href: "/profile"
 		]
-
-		user: []
-
 
 	#Install configuration
 	config:
