@@ -1,0 +1,15 @@
+{
+  "name": "angular-ui-bootstrap3",
+  "homepage": "https://github.com/kkruit/angular-ui-bootstrap3-bower",
+  "version": "0.6.0",
+  "_release": "0.6.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.6.0",
+    "commit": "1e0e816220d4ac44bd87a65aa5c630284a1047a0"
+  },
+  "_source": "git://github.com/kkruit/angular-ui-bootstrap3-bower.git",
+  "_target": "~0.6.0",
+  "_originalSource": "angular-ui-bootstrap3",
+  "_direct": true
+}

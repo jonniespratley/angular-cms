@@ -1,0 +1,19 @@
+<div class="well well-sm sidebar-nav" bs-navbar>
+  <ul class="nav nav-list">
+    <li class="nav-header">Menu</li>
+    <li data-match-route="/dashboard">
+      <a href="#/dashboard" >Dashboard</a>
+    </li>
+    <li data-match-route="/profile">
+      <a href="#/profile">Profile</a>
+    </li>
+    <li class="nav-header">Admin</li>
+    <li ng-repeat="item in angularCmsApp.menu.admin" data-match-route="{{item.href}}">
+      <a ng-href="#{{item.href}}">
+      	{{item.title}}
+      </a>
+    </li>
+
+  </ul>
+</div>
+<!--/.well -->

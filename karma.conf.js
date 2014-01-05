@@ -18,6 +18,9 @@ module.exports = function(config) {
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-route/angular-route.js',
 
+
+      //Libs
+      'app/bower_components/angular-strap/dist/angular-strap.js',
       'app/bower_components/markdown.js',
       
       '.tmp/scripts/*.js',
