@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-static-top" ng-if="App.session.user">
+<div class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -13,8 +13,11 @@
 				<li ng-repeat="item in App.menu.pub" ng-include src="'menu-item.html'"></li>
 			</ul>
 		
-			<ul class="nav navbar-nav pull-right">
-				<li class="dropdown">
+			<ul class="nav navbar-nav pull-right" ng-controller="LoginCtrl">
+				<li ng-hide="App.session.user">
+					<a href="#/login">Login</a>
+				</li>
+				<li class="dropdown" ng-if="App.session.user">
 					<a href="" class="dropdown-toggle" data-toggle="dropdown">
 						<img src="https://www.gravatar.com/avatar/b4c0fecb38a48d57acf43350ee318107?s=20" class="img-circle">
 						<span>
@@ -34,7 +37,7 @@
 						</li>
 						<li class="divider"></li>
 						<li>
-							<a ng-click="App.logout()">Logout</a>
+							<a ng-click="logout()">Logout</a>
 						</li>
 					</ul>
 				</li>

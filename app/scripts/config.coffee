@@ -128,10 +128,10 @@ window.Config =
 
 		#Public menu
 		pub: [
-			id: 1
-			title: "Docs"
-			icon: "book"
-			href: "/docs"
+			#id: 1
+			#title: "Docs"
+			#icon: "book"
+			#href: "/docs"
 		]
 
 		#User menu
