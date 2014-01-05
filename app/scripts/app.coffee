@@ -33,7 +33,8 @@ angular.module('angularCmsApp', [
 				delay = $q.defer()
 				$timeout delay.resolve, 1000
 				delay.promise
-
+			
+		#Router Config
 		$routeProvider
 			.when '/',
 				templateUrl: 'views/main.html'
