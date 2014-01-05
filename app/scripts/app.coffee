@@ -91,7 +91,13 @@ angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '
 	
 	window.angularCmsApp = $rootScope.angularCmsApp;
 	
-	$log.info($rootScope);
 	
-
+	angular.element(document).ready(()->
+		$log.info('Document ready', this);
+		angular.element('.sidebar-nav').on('click', 'a', (e)->
+			$log.info(e);
+		)	
+	)
+	
+	$log.info($rootScope);
 ]

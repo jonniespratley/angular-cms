@@ -1,19 +1,17 @@
-<div class="well well-sm sidebar-nav" bs-navbar>
-  <ul class="nav nav-list">
-    <li class="nav-header">Menu</li>
-    <li data-match-route="/dashboard">
-      <a href="#/dashboard" >Dashboard</a>
-    </li>
-    <li data-match-route="/profile">
-      <a href="#/profile">Profile</a>
-    </li>
-    <li class="nav-header">Admin</li>
-    <li ng-repeat="item in angularCmsApp.menu.admin" data-match-route="{{item.href}}">
-      <a ng-href="#{{item.href}}">
-      	{{item.title}}
-      </a>
-    </li>
-
-  </ul>
+<div class="well well-sm sidebar-nav">
+  <nav class="nav nav-list">
+	<li class="nav-header">Menu</li>
+	<li ng-repeat="item in angularCmsApp.menu.user" ng-include src="'menu-item.html'"></li>
+	<li class="nav-header">Admin</li>
+	<li ng-repeat="item in angularCmsApp.menu.admin" ng-include src="'menu-item.html'"></li>
+	<li class="nav-divider"></li>
+	<li ng-repeat="item in angularCmsApp.menu.pub" ng-include src="'menu-item.html'"></li>
+  </nav>
 </div>
-<!--/.well -->
+
+<script id="menu-item.html" type="text/ng-template">
+	<a ng-href="#{{item.href}}">
+		<i class="fa fa-1x fa-{{item.icon}}"></i>
+		{{item.title}}
+	</a>
+</script>
