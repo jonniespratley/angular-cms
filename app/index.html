@@ -11,21 +11,9 @@
     <meta name="description" content="{{angularCmsApp.sitedesc}}">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-        <!-- build:css({.tmp,app}) styles/main.css -->
-
-<!-- @TODO: [Theme] 
-
-<link data-require="bootstrap-css@3.0.2" data-semver="3.0.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" />
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap-theme.min.css"/>
-
-<link data-require="font-awesome@4.0.3" data-semver="4.0.3" rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
-
-
--->
-   	
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+     <!-- build:css({.tmp,app}) styles/main.css -->   	
+     <link rel="stylesheet" href="styles/main.css">
+     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 		
         <!-- endbuild -->
 </head>
@@ -39,27 +27,22 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+	
 
-
-			
-
-	<div id="header" ng-include src="angularCmsApp.navbar.url"></div>
-	<div class="" ng-class="angularCmsApp.layout.value">
+	<header id="header" data-ng-include src="angularCmsApp.navbar.url"></header>
+	<div data-ng-class="angularCmsApp.layout.value">
 		<div id="app" class="row">
-	   		<div class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" ng-include src="angularCmsApp.sidebar.url"></div>
-			<div class="col-xs-12 col-sm-9 col-md-10">
-				<div data-ng-view=""></div>				    	
-			</div>
+	   		<aside class="col-xs-3 col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation" ng-include src="angularCmsApp.sidebar.url"></aside>
+			<section class="col-xs-12 col-sm-9 col-md-10">
+				<article data-ng-view=""></article>
+			</section>
 	   	</div>
-	   	
 	</div>
 
-	<div id="footer" class="container">
+	<footer id="footer" class="container">
 		<hr/>
-		 <div class="footer tc">
-	        <p>&copy; Company 2013</p>
-	      </div>
-	</div>
+		<p class="footer tc">&copy; Company 2013</p>
+	</footer>
 
 <!--
 
@@ -103,10 +86,16 @@
         <script src="bower_components/angular-route/angular-route.js"></script>
         <!-- endbuild -->
 
+		<!-- @TODO: [Templates] 
+		        <script src="scripts/template.js"></script>
+		-->
+
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
-        <script src="scripts/template.js"></script>
+
+
+
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/docs.js"></script>
         <script src="scripts/controllers/admin.js"></script>

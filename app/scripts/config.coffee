@@ -90,9 +90,9 @@ window.Config =
 		 icon: "puzzle-piece"
 		,
 		 id: 1
-		 title: "Media"
+		 title: "Media Library"
 		 href: "/media"
-		 icon: "file-upload"
+		 icon: "cloud-download"
 		,
 			id: 1
 			title: "Users"
@@ -102,7 +102,7 @@ window.Config =
 			id: 1
 			title: "Themes"
 			href: "/themes"
-			icon: "picture"
+			icon: "camera"
 		,
 			id: 1
 			title: "Settings"
@@ -114,8 +114,26 @@ window.Config =
 			title: "What's New"
 			icon: "star"
 			href: "/index"
+		,
+			id: 2
+			title: "Docs"
+			icon: "book"
+			href: "/docs"
 		]
+		user: [
+			id: 1
+			title: "Dashboard"
+			icon: "dashboard"
+			href: "/dashboard"
+		,
+			id: 2
+			title: "Profile"
+			icon: "user"
+			href: "/profile"
+		]
+
 		user: []
+
 
 	#Install configuration
 	config:
