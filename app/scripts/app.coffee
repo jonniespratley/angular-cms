@@ -86,10 +86,12 @@ angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '
 
 	#Login Method to set the session
 	App.login = (user)->
+		$location.path('/dashboard')
 		this.session.user = user
 
 	#Logout method to clear the session
 	App.logout = ()->
+		$location.path('/')
 		this.session.user = null
 
 	$rootScope.App = App;
