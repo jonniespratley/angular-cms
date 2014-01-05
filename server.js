@@ -166,7 +166,14 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 		/1/installations	GET	Querying Installations
 		/1/installations/<objectId>	DELETE	Deleting Installations
 		 ]====================== */
+	} else if(req.url.match(/^\/1\//)) {
 
+		/* Default express server */
+		proxy.proxyRequest(req, res, {
+			host : 'api.parse.com'
+		});
+
+		console.log('Routing request: Parse Server'.warn);
 	} else {
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
