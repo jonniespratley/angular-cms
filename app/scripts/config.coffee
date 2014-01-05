@@ -4,6 +4,8 @@ window.Config =
 	sitedesc: "This is the description"
 	email: "jonniespratley@me.com"
 	debug: false
+
+	#I hold the home page feature content
 	features: [
 		id: 1
 		title: "HTML5"
@@ -35,27 +37,32 @@ window.Config =
 		body: "The database of choice is Mongo, its fast and scalable."
 		image: "/images/feature-mongodb.png"
 	]
-
+	
+	#I hold the current session data
 	session: 
-		#FOr Demo
 		user:
 			email: 'jonniespratley@gmail.com'
 			username: 'admin'
 			password: 'fred'
 			role: 3
+	
+	#I hold the sidebar that should be used
 	sidebar:
 		value: "sidebar"
 		url: "/views/partials/sidebar.html"
 
+	#I hold the navbar that should be used
 	navbar:
 		value: "navbar"
 		url: "/views/partials/navbar.html"
 
+	#I hold the current layout that should be used
 	layout:
 		id: 0
 		name: "Fixed"
 		value: "container"
 
+	#I hold the current theme that should be used
 	theme:
 		id: 0
 		title: "Default"
@@ -64,12 +71,12 @@ window.Config =
 		image: "/css/themes/theme0/splash.png"
 		body: ""
 
-	
 	#I hold values for the compiled templates location, uncompiled location
 	templates:
 		compiled: "/dist/templates.html"
 		uncompiled: "/views"
 
+	#I hold the contents of the applications menus
 	menu:
 		admin: [
 			id: 1
@@ -110,7 +117,6 @@ window.Config =
 		]
 		user: []
 
-	
 	#Install configuration
 	config:
 		currentdate: new Date()
