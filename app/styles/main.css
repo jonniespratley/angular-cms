@@ -36,8 +36,12 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 /* @end */
 
 /* @group Form Inputs */
-.img-logo { margin: 10px auto; max-width: 300px; }
-.form-signin, .form-forgot { max-width: 280px; padding: 15px; margin: 55px auto; }
+
+.login .login-view{
+	 max-width: 280px; 
+	 margin: 55px auto;
+
+}
 
 /* @end */
 

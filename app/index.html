@@ -2,14 +2,14 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <!--<![endif]-->
+<!--[if gt IE 8]><![endif]-->
 <html data-ng-app="angularCmsApp" class="no-js"> 
 	<head>
 		<meta charset="utf-8">
 		
 		<!--[if IE]>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!--<![endif]-->
+		<![endif]-->
 
 		<title>{{App.sitetitle}}</title>
 		
@@ -20,9 +20,8 @@
 		<link rel="stylesheet" href="styles/main.css">
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 		<!-- endbuild -->
-
 </head>
-	<body data-ng-controller="AppCtrl" data-ng-cloak="" data-ng-class="App.route.current.scope.name">
+<body data-ng-class="App.route.current.scope.name">
 	<!--[if lt IE 7]>
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -32,9 +31,19 @@
 		<script src="bower_components/json3/lib/json3.min.js"></script>
 	<![endif]-->
 
-	<header id="header" data-ng-include src="App.navbar.url"></header>
-	<section id="content" data-ng-include src="App.content.url"></header>
-	<footer id="footer" data-ng-include src="App.footer.url"></footer>
+	<div id="app" class="app" data-ng-controller="AppCtrl" data-ng-cloak="">
+		<header id="header" data-ng-include="App.navbar.url">
+			Header content gets injected here.
+		</header>
+
+		<section id="content" data-ng-include="App.content.url">
+			Section content gets injected here.
+		</section>
+
+		<footer id="footer" data-ng-include="App.footer.url">
+			Footer content gets injected here.
+		</footer>
+	</div>
 
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID
 	 <script>
