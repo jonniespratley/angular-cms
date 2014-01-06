@@ -15,8 +15,9 @@
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 		<hr>
 		<p>
-			<span class=""><input type="checkbox" value="remember-me" ng-model="user.rember"> Stay signed in</span>
+			<span class=""><input type="checkbox" value="true" ng-model="user.remember"> Stay signed in</span>
 			<span class="pull-right"><a href="#/register">Create an account</a></span>
 		</p>
+		<pre ng-if="App.debug">{{user | json}}</pre>
 	</form>
 </div>

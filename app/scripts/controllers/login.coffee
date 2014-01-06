@@ -1,5 +1,7 @@
 'use strict'
 angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore) ->
+		#Controller name
+		$scope.name = 'login'
 		
 		#Setup initial model
 		$scope.user = null
@@ -9,24 +11,25 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 		@param {Object} user - A user model containing username and password
 		###
 		$scope.login = (user) ->
-			#Change location
-			$rootScope.App.location.path('/dashboard')
-
+			
 			#Set user cookie
-			$cookieStore.put('App.session.user', user)
+			$cookieStore.put('App.session.user', user) if user.remember
 
 			#Set user session
 			$rootScope.App.session.user = user
+			
+			#Change location
+			$rootScope.App.location.path('/dashboard')
 		
 		###
 		Logout method to clear the session
 		###
-		$scope.logout = () ->
+		$scope.logout = (user) ->
 			#Change location
 			$rootScope.App.location.path('/')
 
 			#Clear cookie
-			$cookieStore.put('App.session.user', null)
+			$cookieStore.put('App.session.user', null) unless user.remember
 
 			#Clear session
 			$rootScope.App.session.user = null

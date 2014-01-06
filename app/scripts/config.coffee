@@ -5,7 +5,7 @@ window.Config =
 	sitecopy: "2014 "
 	version: '0.1'
 	email: "jonniespratley@me.com"
-	debug: false
+	debug: true
 
 	#I hold the home page feature content
 	features: [
