@@ -67,11 +67,49 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 
 /* @end */
 
-/* @group Animation */
 
+/* @group Animation */
+.view-animate-container {
+  position:relative;
+  position:relative;
+  min-height:700px;
+  overflow:hidden;
+  
+}
+ 
+.view-animate {
+  padding:0px;
+  width:100%;
+}
+ 
+.view-animate.ng-enter, .view-animate.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
+ 
+  display:block;
+  width:100%;
+  
+ 
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:0px;
+}
+ 
+.view-animate.ng-enter {
+  left:100%;
+}
+.view-animate.ng-enter.ng-enter-active {
+  left:0;
+}
+.view-animate.ng-leave.ng-leave-active {
+  left:-100%;
+}
 /* Animate CSS */
 .animate-if { display: block; }
-.animate-if.ng-enter, .animate-if.ng-leave { -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s; transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s; }
+.animate-if.ng-enter, .animate-if.ng-leave { -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.1s; transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.1s; }
 .animate-if.ng-enter,
 .animate-if.ng-leave.ng-leave-active { opacity: 0; }
 .animate-if.ng-leave,

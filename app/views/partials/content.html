@@ -1,19 +1,12 @@
 <div data-ng-class="App.layout.value">
-	<div id="app" class="row">
-		<div ng-if="App.session.user" class="animate-if">
+	<div class="row">
 			<aside 
 				id="sidebar" 
-				role="navigation" 
-				ng-include src="App.sidebar.url"
+				ng-include="App.sidebar.url"
+				ng-if="App.session.user"
 				class="col-xs-3 col-sm-3 col-md-2"></aside>
-			<section class="col-xs-12 col-sm-9 col-md-10">
-				<article data-ng-view=""></article>
-			</section>
-		</div>
-		<div ng-if="!App.session.user" class="animate-if">
-			<section class="col-xs-12 col-sm-12 col-md-12">
-				<article data-ng-view=""></article>
-			</section>
-		</div>
+  <div class="view-animate-container">
+    <div class="view-animate" data-ng-view=""></div>
+  </div>
 	</div>
 </div>
