@@ -14,7 +14,38 @@
 		        <h4 class="modal-title">Modal title</h4>
 		      </div>
 		      <div class="modal-body">
-		        <p>One fine body&hellip;</p>
+		        <div class="row ng-scope">
+				            <div class="col-sm-7">
+				              <form class="form-horizontal ng-pristine ng-valid">
+				                <div class="form-group">
+				                  <label class="control-label col-sm-2">Email:</label>
+				                  <div class="controls col-sm-10">
+				                    <input type="email" class="form-control ng-pristine ng-valid ng-valid-email" placeholder="Email" ng-model="App.session.user.email">
+				                  </div>
+				                </div>
+				                <div class="form-group">
+				                  <label class="control-label col-sm-2">Name:</label>
+				                  <div class="controls col-sm-10">
+				                    <input type="text" class="form-control ng-pristine ng-valid" placeholder="Name" ng-model="App.session.user.name">
+				                  </div>
+				                </div>
+				                <div class="form-group">
+				                  <label class="control-label col-sm-2">Summary:</label>
+				                  <div class="controls col-sm-10">
+				                    <textarea class="form-control ng-pristine ng-valid" placeholder="Enter 200 words or less..." ng-model="App.session.user.meta.summary"></textarea>
+				                  </div>
+				                </div>
+				                <div class="form-group tr">
+				                  <button class="btn">Save</button>
+				                  <button class="btn">Cancel</button>
+				                </div>
+				              </form>
+				            </div>
+				            <div class="col-sm-5">
+				              <aside class="profile-pic center">
+				                <img src="http://jonniespratley.me/assets/jonnie/avatar.png" class="img-polaroid" height="200">
+				              </aside><br></div>
+				          </div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
