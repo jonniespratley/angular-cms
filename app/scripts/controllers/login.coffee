@@ -1,5 +1,5 @@
 'use strict'
-angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore) ->
+angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore, $http) ->
 		
 		#Setup initial model
 		$scope.user = null
@@ -9,6 +9,12 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 		@param {Object} user - A user model containing username and password
 		###
 		$scope.login = (user) ->
+			$http.post('/api/v2/angular-cms/users/login').success((results)->
+				console.log(results)
+			).error((error) ->
+				console.log(error)
+			)
+			
 			#Change location
 			$rootScope.App.location.path('/dashboard')
 
