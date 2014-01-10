@@ -1,0 +1,30 @@
+<header>
+  <nav class="navbar navbar-default navbar--top" role="navigation">
+     <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">{{App.sitetitle}}</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class=""><a href="#">Home</a></li>
+          <li><a href="#/login">Login</a></li>
+        </ul>
+      </div>
+    
+  </nav>
+</header>
+
+
+<script id="menu-item.html" type="text/ng-template">
+	<a ng-href="#{{item.href}}">
+		<i class="fa fa-1x fa-{{item.icon}}"></i>
+		{{item.title}}
+	</a>
+</script>

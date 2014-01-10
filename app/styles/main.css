@@ -16,13 +16,15 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 
 .feature { margin: 5px 10px; }
 
-.jumbotron { border-bottom: 1px solid #444; background: #111 url(/images/angular-cms-bg.png); color: #fff; }
-
 .hero-unit { margin: 50px auto 0 auto; width: 300px; font-size: 18px; font-weight: 200; line-height: 30px; background-color: #eee; border-radius: 6px; padding: 60px; overflow: hidden; }
 
 .hero-unit h1 { font-size: 60px; line-height: 1; letter-spacing: -1px; }
 
 
+.login-view{
+   max-width: 280px; 
+   margin: 55px auto;
+}
 
 /* @end */
 
@@ -72,11 +74,9 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 .view-animate-container {
   position:relative;
   position:relative;
-  min-height:700px;
-  overflow:hidden;
+  min-height:400px;
   
 }
- 
 .view-animate {
   padding:0px;
   width:100%;
@@ -85,11 +85,8 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 .view-animate.ng-enter, .view-animate.ng-leave {
   -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
   transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
- 
   display:block;
   width:100%;
-  
- 
   position:absolute;
   top:0;
   left:0;
@@ -97,16 +94,9 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
   bottom:0;
   padding:0px;
 }
- 
-.view-animate.ng-enter {
-  left:100%;
-}
-.view-animate.ng-enter.ng-enter-active {
-  left:0;
-}
-.view-animate.ng-leave.ng-leave-active {
-  left:-100%;
-}
+ .view-animate.ng-enter {left:100%;}
+.view-animate.ng-enter.ng-enter-active {left:0;}
+.view-animate.ng-leave.ng-leave-active { left:-100%;}
 /* Animate CSS */
 .animate-if { display: block; }
 .animate-if.ng-enter, .animate-if.ng-leave { -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.1s; transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.1s; }
@@ -117,36 +107,7 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 
 /* @end */
 
-/* @group Form Inputs */
 
-.input-group { position: relative; display: table; border-collapse: separate }
-.input-group.col { float: none; padding-left: 0; padding-right: 0 }
-.input-group .form-control { width: 100%; margin-bottom: 0 }
-.input-group-lg>.form-control,.input-group-lg>.input-group-addon,.input-group-lg>.input-group-btn>.btn { height: 45px; padding: 10px 16px; font-size: 18px; line-height: 1.33; border-radius: 6px }
-select.input-group-lg>.form-control,select.input-group-lg>.input-group-addon,select.input-group-lg>.input-group-btn>.btn { height: 45px; line-height: 45px }
-textarea.input-group-lg>.form-control,textarea.input-group-lg>.input-group-addon,textarea.input-group-lg>.input-group-btn>.btn { height: auto }
-.input-group-sm>.form-control,.input-group-sm>.input-group-addon,.input-group-sm>.input-group-btn>.btn { height: 30px; padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px }
-select.input-group-sm>.form-control,select.input-group-sm>.input-group-addon,select.input-group-sm>.input-group-btn>.btn { height: 30px; line-height: 30px }
-textarea.input-group-sm>.form-control,textarea.input-group-sm>.input-group-addon,textarea.input-group-sm>.input-group-btn>.btn { height: auto }
-.input-group-addon,.input-group-btn,.input-group .form-control { display: table-cell }
-.input-group-addon:not(:first-child):not(:last-child),.input-group-btn:not(:first-child):not(:last-child),.input-group .form-control:not(:first-child):not(:last-child) { border-radius: 0 }
-.input-group-addon,.input-group-btn { width: 1%; white-space: nowrap; vertical-align: middle }
-.input-group-addon { padding: 6px 12px; font-size: 14px; font-weight: normal; line-height: 1; text-align: center; background-color: #eee; border: 1px solid #ccc; border-radius: 4px }
-.input-group-addon.input-sm { padding: 5px 10px; font-size: 12px; border-radius: 3px }
-.input-group-addon.input-lg { padding: 10px 16px; font-size: 18px; border-radius: 6px }
-.input-group-addon input[type="radio"],.input-group-addon input[type="checkbox"] { margin-top: 0 }
-.input-group .form-control:first-child,.input-group-addon:first-child,.input-group-btn:first-child>.btn,.input-group-btn:first-child>.dropdown-toggle,.input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle) { border-bottom-right-radius: 0; border-top-right-radius: 0 }
-.input-group-addon:first-child { border-right: 0 }
-.input-group .form-control:last-child,.input-group-addon:last-child,.input-group-btn:last-child>.btn,.input-group-btn:last-child>.dropdown-toggle,.input-group-btn:first-child>.btn:not(:first-child) { border-bottom-left-radius: 0; border-top-left-radius: 0 }
-.input-group-addon:last-child { border-left: 0 }
-.input-group-btn { position: relative; white-space: nowrap }
-.input-group-btn>.btn { position: relative }
-.input-group-btn>.btn+.btn { margin-left: -4px }
-.input-group-btn>.btn:hover,.input-group-btn>.btn:active { z-index: 2 }
-.img-logo { margin: 10px auto; max-width: 575px; }
-.form-signin, .form-forgot { max-width: 320px; padding: 15px; margin: 5px auto; }
-
-/* @end */
 
 /* @group Utility Styles */
 

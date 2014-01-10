@@ -1,12 +1,8 @@
 'use strict'
-<<<<<<< HEAD
-angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore) ->
-
-		$scope.name = 'login';
-=======
 angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore, $http) ->
->>>>>>> b20c2e827bd229918365cdcc2b385a937ec40a4f
-		
+	
+		$scope.name = 'login';		
+
 		#Setup initial model
 		$scope.user = null
 		

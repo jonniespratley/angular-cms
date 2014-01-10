@@ -8,6 +8,10 @@ window.Config =
 	debug: false
 
 	#I hold the home page feature content
+	feature: 
+	  title: 'angular-cms'
+	  body: 'Use this as a starting point when creating a content management system of some sort.'
+	
 	features: [
 		id: 1
 		title: "HTML5"
@@ -42,6 +46,7 @@ window.Config =
 	
 	#I hold the current session data
 	session: 
+	  authorized: false
 		user: null
 		#user:
 		#	name: 'Jonnie'
@@ -50,25 +55,25 @@ window.Config =
 		#	password: 'fred'
 		#	role: 3
 
-	#I hold the navbar that should be used
-	navbar:
-		value: "navbar"
-		url: "/views/partials/navbar.html"
+	#I hold the header that should be used
+	header:
+		value: "header"
+		url: "views/header.html"
 
 	#I hold the sidebar that should be used
 	sidebar:
 		value: "sidebar"
-		url: "/views/partials/sidebar.html"
+		url: "views/sidebar.html"
 
 	#I hold the content that should be used
 	content:
 		value: "content"
-		url: "/views/partials/content.html"
+		url: "views/content.html"
 	
 	#I hold the footer that should be used
 	footer:
 		value: "footer"
-		url: "/views/partials/footer.html"
+		url: "views/footer.html"
 	
 	#I hold the current layout that should be used
 	layout:
