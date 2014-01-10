@@ -14,9 +14,6 @@
 			</ul>
 		
 			<ul class="nav navbar-nav pull-right" ng-controller="LoginCtrl">
-				<li ng-hide="App.session.user">
-					<a href="#/login">Login</a>
-				</li>
 				<li class="dropdown" ng-if="App.session.user">
 					<a href="" class="dropdown-toggle" data-toggle="dropdown">
 						<img src="https://www.gravatar.com/avatar/b4c0fecb38a48d57acf43350ee318107?s=20" class="img-circle">
@@ -41,20 +38,24 @@
 						</li>
 					</ul>
 				</li>
+				<li ng-hide="App.session.user" class="hidden-lg">
+					<a class="login-btn" href="#/login">Login</a>
+				</li>
 			</ul>
 
-		<!-- if !App.session.user -->
-		<form ng-if="!App.session.user" class="navbar-form navbar-right hidden-sm hidden-xs hidden" ng-submit="App.login(user)">
+		<!-- if !App.session.user-->
+		<form ng-if="!App.session.user" class="navbar-form navbar-right hidden-sm hidden-xs" ng-controller="LoginCtrl" ng-submit="login(user)">
 			<div class="form-group">
 				<input type="text" placeholder="Email" class="form-control" ng-model="user.email" required>
 			</div>
 			<div class="form-group">
 				<input type="password" placeholder="Password" class="form-control" ng-model="user.password" required>
 			</div>
-			<button type="submit" class="btn btn-success">
+			<button type="submit" class="btn btn-success submit-btn">
 			Sign in
 			</button>
 		</form> 
+
 
 		</div><!--/.navbar-collapse -->
 	</div>
