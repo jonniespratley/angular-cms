@@ -238,8 +238,8 @@ var RestResource = {
 		var query = {
 			email : req.body.email,
 			//Hashing on client side
-			//password : req.body.password
-			password : RestResource.hashPassword(req.body.password, req.body.email)
+			password : req.body.password
+			//password : RestResource.hashPassword(req.body.password, req.body.email)
 		};
 
 
