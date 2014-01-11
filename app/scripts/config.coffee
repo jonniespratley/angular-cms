@@ -97,23 +97,21 @@ window.Config =
 
 	#I hold the contents of the applications menus
 	menu:
-		
-		#Admin menu
 		admin: [
 			id: 1
 			title: "Plugins"
 			href: "/plugins"
 			icon: "folder-open"
 		,
-		 id: 1
-		 title: "Widgets"
-		 href: "/widgets"
-		 icon: "puzzle-piece"
+			id: 1
+			title: "Widgets"
+			href: "/widgets"
+			icon: "puzzle-piece"
 		,
-		 id: 1
-		 title: "Media Library"
-		 href: "/media"
-		 icon: "cloud-download"
+			id: 1
+			title: "Media"
+			href: "/media"
+			icon: "cloud-download"
 		,
 			id: 1
 			title: "Users"
@@ -130,16 +128,12 @@ window.Config =
 			href: "/settings"
 			icon: "cog"
 		]
-
-		#Public menu
 		pub: [
-			#id: 1
-			#title: "Docs"
-			#icon: "book"
-			#href: "/docs"
+			id: 1
+			title: "Docs"
+			icon: "book"
+			href: "/docs"
 		]
-
-		#User menu
 		user: [
 			id: 1
 			title: "Dashboard"

@@ -1,10 +1,4 @@
-
-	
-
-  <div id="main" class="row view">
-
-
-    
+<div id="main">
     <div class="jumbotron">
     	<div class="feature-section">
     		<div class="row">
@@ -21,17 +15,13 @@
     		</div>
     	</div>
     </div>
-    
     <div class="container-fluid">
-		<div class="row clearfix">
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ng-repeat="item in App.features">
+		<div class="clearfix">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" ng-repeat="item in App.features">
 	          <img ng-src="{{item.image}}" class="feature pull-left img-circle">
 	          <h4>{{item.title}}</h4>
 	          <p>{{item.body}}</p>
 	        </div>
 	 	</div>
     </div> <!-- /container -->
-
 </div> <!-- /view -->
-
-

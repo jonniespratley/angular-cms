@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <!--<![endif]-->
-<html data-ng-app="angularCmsApp" class="no-js"> 
+<html class="no-js"> 
 	<head>
 		<meta charset="utf-8">
 		
@@ -11,7 +11,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!--<![endif]-->
 
-		<title>{{App.sitetitle}}</title>
+		<title>angular-cms</title>
 		
 		<meta name="description" content="{{App.sitedesc}}">
 		<meta name="viewport" content="width=device-width">
@@ -35,7 +35,7 @@
 		<script src="bower_components/json3/lib/json3.min.js"></script>
 	<![endif]-->
 
-		<div id="app" class="app container" data-ng-controller="AppCtrl" data-ng-cloak="">
+		<div id="app" class="app" data-ng-controller="AppCtrl" data-ng-cloak="">
 	      <header id="header" data-ng-include="App.header.url">
 	  			Header content gets injected here.
 	  		</header>
@@ -98,6 +98,7 @@
 		<script src="scripts/controllers/users.js"></script>
 		<script src="scripts/controllers/register.js"></script>
 		<script src="scripts/controllers/pages.js"></script>
+<script src="scripts/directives/cmsFormGroup.js"></script>
 		<!-- endbuild -->
 </body>
 </html>

@@ -75,6 +75,7 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
   position:relative;
   position:relative;
   min-height:400px;
+  overflow: hidden;
   
 }
 .view-animate {
