@@ -25,6 +25,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 
 			#Set user session
 			$rootScope.App.session.user = user
+			$rootScope.App.session.authorized = true
 		
 		###
 		Logout method to clear the session
@@ -38,6 +39,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 
 			#Clear session
 			$rootScope.App.session.user = null
+			$rootScope.App.session.authorized = false
 		
 		
 		$scope.awesomeThings = [

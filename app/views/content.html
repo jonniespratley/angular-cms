@@ -1,9 +1,9 @@
-<div data-ng-class="App.layout.value">
+<div class="container">
 	<div class="row">
 			<aside 
 				id="sidebar" 
-				ng-include="App.sidebar.url"
-				ng-if="App.session.user"
+				ng-include="App.layout.sidebar"
+				ng-if="App.session.authorized"
 				class="col-xs-3 col-sm-3 col-md-2"></aside>
   <div class="view-animate-container">
     <div class="view-animate" data-ng-view=""></div>

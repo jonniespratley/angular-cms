@@ -1,5 +1,5 @@
-<header class="container">
-  <nav class="navbar navbar-default navbar--top" role="navigation">
+
+  <nav class="navbar navbar-inverse navbar-static-top container" role="navigation">
      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -13,13 +13,16 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class=""><a href="#">Home</a></li>
-          <li><a href="#/login">Login</a></li>
+          <li ng-repeat="item in App.menu.pub" ng-include src="'menu-item.html'"></li>
         </ul>
-      </div>
-    
+        <ul class="nav navbar-nav pull-right">
+            <li ng-hide="App.session.authorized">
+              <a class="login-btn" href="#/login">Login</a>
+            </li>
+        </ul>
+      </div>    
   </nav>
-</header>
+
 
 
 <script id="menu-item.html" type="text/ng-template">
