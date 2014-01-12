@@ -1,5 +1,5 @@
 
-  <nav class="navbar navbar-inverse navbar-static-top container" role="navigation">
+  <nav class="navbar navbar-default navbar-static-top container" role="navigation">
      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -15,10 +15,34 @@
         <ul class="nav navbar-nav">
           <li ng-repeat="item in App.menu.pub" ng-include src="'menu-item.html'"></li>
         </ul>
-        <ul class="nav navbar-nav pull-right">
-            <li ng-hide="App.session.authorized">
-              <a class="login-btn" href="#/login">Login</a>
-            </li>
+        <ul class="nav navbar-nav pull-right" ng-controller="LoginCtrl">
+          <li class="dropdown" ng-if="App.session.authorized">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="https://www.gravatar.com/avatar/b4c0fecb38a48d57acf43350ee318107?s=20" class="img-circle">
+              <span>
+                {{ App.session.user.username }}
+              </span>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#/profile">My Profile</a>
+              </li>
+              <li>
+                <a href="#/settings">Settings</a>
+              </li>
+              <li>
+                <a href="#/help">Help</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a ng-click="logout()">Logout</a>
+              </li>
+            </ul>
+          </li>
+          <li ng-hide="App.session.user" class="hidden-lg">
+            <a class="login-btn" href="#/login"><i class="fa fa-1x fa-lock"></i> Login</a>
+          </li>
         </ul>
       </div>    
   </nav>

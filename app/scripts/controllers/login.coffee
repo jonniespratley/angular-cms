@@ -1,50 +1,64 @@
 'use strict'
-angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore, $http) ->
+#Login Controller - Handles the login.html view for authenticating a user.
+angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore) ->
+  	
+	#Setup initial model
+	$scope.user = 
+	  username: null
+	  password: null
+	  remember: false
 	
-		$scope.name = 'login';		
-
-		#Setup initial model
-		$scope.user = null
+  $scope.user = Parse.User.current() if Parse.User.current()
+	
+	###
+	Login Method to set the session.
+	@param {Object} user - A user model containing username and password
+	###
+	$scope.login = (u) ->
+	  
+	  Parse.User.logIn u.username, u.password,
+    
+      success: (user) ->
+        console.log user
+        
+        $scope.$apply(()->
+          
+          $rootScope.alert = 
+            type: 'success'
+            code: 'Authorized'
+            message: 'Welcome back....'
+            
+        	#Set user cookie
+      		$cookieStore.put('App.session.user', user) if user.remember
+      
+      		#Set user session
+      		$rootScope.App.session.user = user
+      		
+      		#Set session authorized
+      		$rootScope.App.session.authorized = true
+      		
+      		#Change location
+      		$rootScope.App.location.path('/dashboard')  
+        )
+      error: (user, error) ->
+        $scope.$apply(()->
+          $scope.error = error; 
+        )
 		
 		###
-		Login Method to set the session
-		@param {Object} user - A user model containing username and password
+		Logout method to clear the session.
+		@param {Object} user - A user model containing remember
 		###
-		$scope.login = (user) ->
-			$http.post('/api/v2/angular-cms/users/login').success((results)->
-				console.log(results)
-			).error((error) ->
-				console.log(error)
-			)
-			
-			#Change location
-			$rootScope.App.location.path('/dashboard')
-
-			#Set user cookie
-			$cookieStore.put('App.session.user', user)
-
-			#Set user session
-			$rootScope.App.session.user = user
-			$rootScope.App.session.authorized = true
-		
-		###
-		Logout method to clear the session
-		###
-		$scope.logout = () ->
-			#Change location
-			$rootScope.App.location.path('/')
-
+		$scope.logout = (user) ->
 			#Clear cookie
-			$cookieStore.put('App.session.user', null)
+			$cookieStore.put('App.session.user', null) unless user.remember
 
 			#Clear session
 			$rootScope.App.session.user = null
 			$rootScope.App.session.authorized = false
-		
-		
-		$scope.awesomeThings = [
-			'HTML5 Boilerplate'
-			'AngularJS'
-			'Karma'
-		]
-	
+
+			#Change location
+			$rootScope.App.location.path($rootScope.App.logout.redirect)
+
+	#Controller name
+	$scope.name = 'login'	
