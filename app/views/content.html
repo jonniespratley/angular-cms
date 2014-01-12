@@ -1,11 +1,15 @@
-<div data-ng-class="App.layout.value">
+<div class="container">
 	<div class="row">
 			<aside 
 				id="sidebar" 
-				ng-include="App.sidebar.url"
-				ng-if="App.session.user"
+				ng-include="App.layout.sidebar"
+				ng-if="App.session.authorized"
 				class="col-xs-3 col-sm-3 col-md-2"></aside>
   <div class="view-animate-container">
+  	 <div class="alert alert-{{alert.type}} animate-if" ng-if="alert">
+		<strong>{{alert.code}}!</strong> {{alert.message}}
+		<a class="close" data-dismiss="alert" href="" aria-hidden="true">&times;</a>
+	</div>
     <div class="view-animate" data-ng-view=""></div>
   </div>
 	</div>

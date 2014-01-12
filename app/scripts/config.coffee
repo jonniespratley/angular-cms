@@ -5,7 +5,7 @@ window.Config =
 	sitecopy: "2014 "
 	version: '0.1'
 	email: "jonniespratley@me.com"
-	debug: false
+	debug: true
 
 	#I hold the home page feature content
 	feature: 
@@ -44,42 +44,15 @@ window.Config =
 		image: "/images/feature-mongodb.png"
 	]
 	
-	#I hold the current session data
 	session: 
-	  authorized: false
+		authorized: false
 		user: null
-		#user:
-		#	name: 'Jonnie'
-		#	email: 'jonniespratley@gmail.com'
-		#	username: 'admin'
-		#	password: 'fred'
-		#	role: 3
-
-	#I hold the header that should be used
-	header:
-		value: "header"
-		url: "views/header.html"
-
-	#I hold the sidebar that should be used
-	sidebar:
-		value: "sidebar"
-		url: "views/sidebar.html"
-
-	#I hold the content that should be used
-	content:
-		value: "content"
-		url: "views/content.html"
 	
-	#I hold the footer that should be used
-	footer:
-		value: "footer"
-		url: "views/footer.html"
-	
-	#I hold the current layout that should be used
-	layout:
-		id: 0
-		name: "Fixed"
-		value: "container"
+	layout: 
+    	header: "views/header.html"
+    	sidebar: "views/sidebar.html"
+    	content:"views/content.html"
+    	footer: "views/footer.html"
 
 	#I hold the current theme that should be used
 	theme:

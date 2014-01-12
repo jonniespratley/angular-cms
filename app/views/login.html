@@ -1,9 +1,14 @@
 <div class="login-view">
 	<form class="form-login clearfix well well-sm" ng-submit="login(user)">
-     <header>
+     	<header>
 			<img src="http://placehold.it/280x100&text=Login" alt="Logo" class="img-thumbnail">
 		</header>
 		<br/>
+		<div class="alert alert-danger" ng-show="error">
+		  	<strong>Error {{error.code}}!</strong> {{error.message}}
+		  	<a class="close" data-dismiss="alert" href="" aria-hidden="true">&times;</a>
+		</div>
+		
 		<div class="form-group">
 			<input class="form-control" type="text" placeholder="Username" ng-model="user.username" required>
 		</div>

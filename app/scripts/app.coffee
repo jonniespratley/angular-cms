@@ -16,6 +16,9 @@
 		 </file>
 	 </example>
 ###
+Parse.initialize "fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB", "QPFGBNHs0QQHFS54atV71oKppd3gTgaFfQIHP2VW"
+
+
 angular.module('angularCmsApp', [
 	'ngCookies',
 	'ngResource',
