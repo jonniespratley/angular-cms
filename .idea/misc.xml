@@ -343,6 +343,9 @@
       </general>
     </ddl-file-settings>
   </component>
+  <component name="ProjectResources">
+    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
+  </component>
   <component name="ProjectRootManager" version="2" />
 </project>
 
