@@ -12,11 +12,11 @@ describe "Angular-CMS App", ->
 		expect(element('.navbar-brand', 'Sitetitle').text()).toEqual 'angular-cms'
 
 	it 'should have a .login-btn element', ->
-		expect(element('.login-btn', 'Login link').count()).toEqual 1
+		expect(element('a[href="#/login"]', 'Login link').count()).toEqual 1
 
 	describe 'Login Story: clicking the login element', ->
 		it 'should navigate to /login and display a form', ->	
-			element('.login-btn', 'Login button').click()
+			element('a[href="#/login"]', 'Login button').click()
 			sleep 2
 			expect(browser().location().path()).toEqual '/login'		
 			expect( element('.login form', 'Login form').count() ).toEqual 1	
