@@ -1,14 +1,14 @@
 'use strict'
 
-describe 'Service: Cmssessionservice', () ->
+describe 'Service: cmsSessionService', () ->
 
   # load the service's module
   beforeEach module 'angularCmsApp'
+		# instantiate service
+		cmsSessionService = {}
 
-  # instantiate service
-  Cmssessionservice = {}
-  beforeEach inject (_Cmssessionservice_) ->
-    Cmssessionservice = _Cmssessionservice_
+	beforeEach inject (_cmsSessionService_) ->
+		cmsSessionService = _cmsSessionService_
 
   it 'should do something', () ->
-    expect(!!Cmssessionservice).toBe true
+    expect(!!cmsSessionService).toBe true

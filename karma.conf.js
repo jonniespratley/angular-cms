@@ -18,11 +18,16 @@ module.exports = function(config) {
       'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-route/angular-route.js',
-
+        'http://www.parsecdn.com/js/parse-1.2.8.min.js',
 
       //Libs
       'app/scripts/libs/markdown.js',
-      
+
+         //'app/scripts/*.coffee',
+         //'app/scripts/**/*.coffee',
+        //'test/mock/**/*.coffee',
+        //'test/spec/**/*.coffee',
+
       '.tmp/scripts/*.js',
       '.tmp/scripts/**/*.js',
       '.tmp/mock/**/*.js',

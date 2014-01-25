@@ -29,8 +29,8 @@ angular.module('angularCmsApp', [
 	#'cms.Templates'
 ])
 	.config ($routeProvider) ->
-		
-		routeResolver = 
+
+		routeResolver =
 			# I will cause a 1 second delay
 			delay: ($q, $timeout) ->
 				delay = $q.defer()
@@ -87,18 +87,18 @@ angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '
 	App = Config
 	App.route = $routeParams;
 	App.session.user = $cookieStore.get('App.session.user')
-	
+
 	App.route = $route
 	App.location = $location
 	App.routeParams = $routeParams
-	
+
 	window.App = $rootScope.App = App
 	angular.element(document).ready(()->
 		$log.info('Document ready', this);
 		angular.element('.sidebar-nav').bind('click', 'a', (e)->
 			$log.info(e);
-		)	
+		)
 	)
-	
+
 	$log.info($rootScope);
 ]
