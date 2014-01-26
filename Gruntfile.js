@@ -213,7 +213,7 @@ module.exports = function (grunt) {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
@@ -271,14 +271,16 @@ module.exports = function (grunt) {
           // useShortDoctype: true,
           // removeEmptyAttributes: true,
           // removeOptionalTags: true
+/*
             collapseBooleanAttributes:      true,
-            collapseWhitespace:             true,
+            collapseWhitespace:             false,
             removeAttributeQuotes:          true,
             removeComments:                 true, // Only if you don't use comment directives!
             removeEmptyAttributes:          true,
             removeRedundantAttributes:      true,
             removeScriptTypeAttributes:     true,
             removeStyleLinkTypeAttributes:  true
+*/
         },
         files: [{
           expand: true,
