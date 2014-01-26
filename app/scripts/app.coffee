@@ -86,7 +86,7 @@ angular.module('angularCmsApp', [
 angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', '$route', '$location', '$routeParams', '$cookieStore', ($scope, $rootScope, $http, $log, $route, $location, $routeParams, $cookieStore) ->
 	App = Config
 	App.route = $routeParams;
-	App.session.user = $cookieStore.get('App.session.user')
+	App.session = $cookieStore.get('App.session')
 
 	App.route = $route
 	App.location = $location

@@ -7,22 +7,20 @@
 </div>
 
  <div class="row">
-    <div class="col-sm-9 col-xs-7">
-      <form class="form-horizontal">
-       <cms-form-group label="App[key]" ng-repeat="(key, value) in App">
-       		<input type="text" ng-model="App[key]"/>
-	     </cms-form-group>
-
-
-        <div class="form-group tr">
-          <button class="btn btn-default">Cancel</button>
-          <button class="btn btn-primary" type="submit">Save</button>
-        </div>
-      </form>
-    </div>
-    <div class="col-sm-3 col-xs-5">
-      <aside class="well">Some help here</aside>
-    </div>
+	<div class="col-sm-9 col-xs-7">
+		<form class="form-horizontal" ng-submit="update(App)">
+			<cms-form-group label="{{key}}" ng-repeat="(key, value) in App">
+				<input type="text" ng-model="App[key]" value="{{ angular.isObject(App[key]) }}"/>
+			</cms-form-group>
+			<div class="form-group tr">
+				<button class="btn btn-default">Cancel</button>
+				<button class="btn btn-primary" type="submit">Save</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-sm-3 col-xs-5">
+	  <aside class="well">Some help here</aside>
+	</div>
   </div>
 
 <pre>App: {{App | json}}</pre>

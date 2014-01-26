@@ -106,6 +106,11 @@ window.Config =
 			title: "Docs"
 			icon: "book"
 			href: "/docs"
+		,
+			id: 1
+			title: "Login"
+			icon: "lock"
+			href: "/login"
 		]
 		user: [
 			id: 1
