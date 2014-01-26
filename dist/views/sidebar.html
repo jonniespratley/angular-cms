@@ -1,0 +1,6 @@
+<div class="well well-sm sidebar-nav" ng-controller=SidebarCtrl><nav class="nav nav-list"><li class=nav-header>Menu</li><li ng-class={active:item.selected} ng-repeat="item in App.menu.user" ng-include="" src="'sidebar-item.html'"></li><li class=nav-header>Admin</li><li ng-class={active:item.selected} ng-repeat="item in App.menu.admin" ng-include="" src="'sidebar-item.html'"></li></nav></div><script id=sidebar-item.html type=text/ng-template><a 
+		ng-click="select(item)"
+		ng-href="#{{item.href}}">
+		<i class="fa fa-1x fa-{{item.icon}}"></i>
+		{{item.title}}
+	</a></script>
