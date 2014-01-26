@@ -1,61 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="669ca988-1ab2-486d-ab1c-9f96d1642854" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/0220d123.glyphicons-halflings-white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/04a2e833.feature-customize.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/0c848475.feature-grunt.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/1299368f.feature-nodejs.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/12f79ef3.feature-layout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/1aa4be8a.angular-cms.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/1ff96738.feature-coffeescript.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/47b431ed.yeoman.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/5042b92d.feature-angular.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/597f287c.angular-cms-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/5aa9bc32.glyphicons-halflings.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/5d474b1b.feature-design.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/7c77f20f.feature-css3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/967dc3ea.feature-jasmine.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/9b37da74.feature-yeoman.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/9cc1f176.angular-cms-bg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/ab726904.feature-webfonts.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/b3f57414.feature-html5.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/b43f383e.angular-cms-banner.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/cf40c6ae.angular-cms-logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/d49df28f.brand.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/e5405622.feature-bootstrap.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/e9b93bbf.feature-phantomjs.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/images/eba876f5.feature-mongodb.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/styles/8395501c.main.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/404.html" afterPath="$PROJECT_DIR$/dist/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/admin.html" afterPath="$PROJECT_DIR$/dist/views/admin.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/content.html" afterPath="$PROJECT_DIR$/dist/views/content.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/dashboard.html" afterPath="$PROJECT_DIR$/dist/views/dashboard.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/docs.html" afterPath="$PROJECT_DIR$/dist/views/docs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/footer.html" afterPath="$PROJECT_DIR$/dist/views/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/forgotpassword.html" afterPath="$PROJECT_DIR$/dist/views/forgotpassword.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/header.html" afterPath="$PROJECT_DIR$/dist/views/header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/index.html" afterPath="$PROJECT_DIR$/dist/views/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/login.html" afterPath="$PROJECT_DIR$/dist/views/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/main.html" afterPath="$PROJECT_DIR$/dist/views/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/main.sass" afterPath="$PROJECT_DIR$/app/styles/main.sass" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/media.html" afterPath="$PROJECT_DIR$/dist/views/media.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/navbar.html" afterPath="$PROJECT_DIR$/dist/views/navbar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/pages.html" afterPath="$PROJECT_DIR$/dist/views/pages.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/plugins.html" afterPath="$PROJECT_DIR$/dist/views/plugins.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/products.html" afterPath="$PROJECT_DIR$/dist/views/products.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/profile.html" afterPath="$PROJECT_DIR$/dist/views/profile.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/resetpassword.html" afterPath="$PROJECT_DIR$/dist/views/resetpassword.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/settings.html" afterPath="$PROJECT_DIR$/dist/views/settings.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/sidebar.html" afterPath="$PROJECT_DIR$/dist/views/sidebar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/styles.html" afterPath="$PROJECT_DIR$/dist/views/styles.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/themes.html" afterPath="$PROJECT_DIR$/dist/views/themes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/users.html" afterPath="$PROJECT_DIR$/dist/views/users.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/widgets.html" afterPath="$PROJECT_DIR$/dist/views/widgets.html" />
-    </list>
+    <list default="true" id="669ca988-1ab2-486d-ab1c-9f96d1642854" name="Default" comment="" />
     <ignored path="angular-cms-base.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -77,91 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="login.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/spec/controllers/login.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="3" selection-start="355" selection-end="355" vertical-scroll-proportion="0.32" vertical-offset="246" max-vertical-offset="350">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cmsPanel.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/spec/directives/cmsPanel.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.32" vertical-offset="8" max-vertical-offset="322">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cmsFormGroup.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/spec/directives/cmsFormGroup.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="3" selection-start="223" selection-end="223" vertical-scroll-proportion="0.32" vertical-offset="176" max-vertical-offset="308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cmswidgets.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/spec/directives/cmswidgets.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="3" selection-start="221" selection-end="221" vertical-scroll-proportion="0.32" vertical-offset="176" max-vertical-offset="308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cmswidget.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/spec/directives/cmswidget.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="3" selection-start="220" selection-end="220" vertical-scroll-proportion="0.32" vertical-offset="176" max-vertical-offset="308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cmsSessionService.coffee" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="cmsSessionService.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/spec/services/cmsSessionService.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="4" selection-start="152" selection-end="152" vertical-scroll-proportion="-3.92" vertical-offset="0" max-vertical-offset="280">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="markdown.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/spec/filters/markdown.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="3" selection-start="264" selection-end="264" vertical-scroll-proportion="-6.72" vertical-offset="0" max-vertical-offset="294">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/spec/controllers/admin.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="64" selection-start="357" selection-end="357" vertical-scroll-proportion="-7.28" vertical-offset="0" max-vertical-offset="308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="16" selection-start="1432" selection-end="1432" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2226">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="28" selection-start="66" selection-end="72" vertical-scroll-proportion="0.04597701" vertical-offset="0" max-vertical-offset="609">
+            <state line="9" column="21" selection-start="196" selection-end="196" vertical-scroll-proportion="0.32061067" vertical-offset="0" max-vertical-offset="393">
               <folding />
             </state>
           </provider>
@@ -217,9 +82,9 @@
     <data>$PROJECT_DIR$/node_modules/karma</data>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="32" />
+    <option name="x" value="4" />
     <option name="y" value="22" />
-    <option name="width" value="1248" />
+    <option name="width" value="1276" />
     <option name="height" value="778" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -571,12 +436,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="32" y="22" width="1248" height="778" extended-state="6" />
-    <editor active="true" />
+    <frame x="4" y="22" width="1276" height="778" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1389728" sideWeight="0.49674797" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3530303" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32575756" sideWeight="0.4997015" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Heroku" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3242424" sideWeight="0.4997015" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="RemoteSynchronizer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -585,9 +450,9 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32779455" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Regex Tester" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287879" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13930348" sideWeight="0.86018234" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13614263" sideWeight="0.86018234" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15588723" sideWeight="0.86018234" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15235008" sideWeight="0.86018234" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33030304" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -721,13 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/spec/services/cmsSessionService.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="4" selection-start="152" selection-end="152" vertical-scroll-proportion="-3.92" vertical-offset="0" max-vertical-offset="280">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/spec/filters/markdown.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="3" selection-start="264" selection-end="264" vertical-scroll-proportion="-6.72" vertical-offset="0" max-vertical-offset="294">
@@ -751,7 +609,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="28" selection-start="66" selection-end="72" vertical-scroll-proportion="0.04597701" vertical-offset="0" max-vertical-offset="609">
+        <state line="15" column="2" selection-start="369" selection-end="369" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="294">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/spec/services/cmsSessionService.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="21" selection-start="196" selection-end="196" vertical-scroll-proportion="0.32061067" vertical-offset="0" max-vertical-offset="393">
           <folding />
         </state>
       </provider>
