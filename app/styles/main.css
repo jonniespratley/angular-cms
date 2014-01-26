@@ -1,8 +1,13 @@
 /* @override 
 	http://127.0.0.1:9000/styles/main.css
 	http://localhost:9090/styles/main.css
-*/
 @import url('bootstrap.css');
+*/
+
+
+.ng-hide{
+	display:none !important;
+}
 
 /* @group Global */
 

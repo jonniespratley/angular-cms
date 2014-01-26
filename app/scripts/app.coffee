@@ -80,25 +80,8 @@ angular.module('angularCmsApp', [
 			.when '/pages',
 				templateUrl: 'views/pages.html'
 				controller: 'PagesCtrl'
+			.when '/help',
+			  templateUrl: 'views/help.html'
+			  controller: 'HelpCtrl'
 			.otherwise
 				redirectTo: '/'
-
-angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '$http', '$log', '$route', '$location', '$routeParams', '$cookieStore', ($scope, $rootScope, $http, $log, $route, $location, $routeParams, $cookieStore) ->
-	App = Config
-	App.route = $routeParams;
-	App.session = $cookieStore.get('App.session')
-
-	App.route = $route
-	App.location = $location
-	App.routeParams = $routeParams
-
-	window.App = $rootScope.App = App
-	angular.element(document).ready(()->
-		$log.info('Document ready', this);
-		angular.element('.sidebar-nav').bind('click', 'a', (e)->
-			$log.info(e);
-		)
-	)
-
-	$log.info($rootScope);
-]

@@ -45,7 +45,6 @@ module.exports = function(config) {
       'test/e2e/**/*.coffee': ['coffee'],
       'test/mock/**/*.coffee': ['coffee'],
       'test/spec/**/*.coffee': ['coffee']
-      //'app/scripts/**/*.js': ['coverage']
     },
 
     // list of files / patterns to exclude

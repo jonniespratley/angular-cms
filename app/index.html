@@ -17,10 +17,10 @@
 		<meta name="viewport" content="width=device-width">
 		
 		<!-- build:css({.tmp,app}) styles/main.css -->   	
-		<link rel="stylesheet" href="styles/main.css">
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">		
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="styles/main.css">
 		<!-- endbuild -->
 
 </head>
@@ -37,15 +37,15 @@
 		<script src="bower_components/json3/lib/json3.min.js"></script>
 	<![endif]-->
 
-		<div id="app" class="app" data-ng-controller="AppCtrl" data-ng-cloak="">
+		<div id="app" class="app" data-ng-controller="AppCtrl" data-ng-cloak>
 			<header id="header" data-ng-include="App.layout.header">
-  				Header content gets injected here.
+  				<!--Header content gets injected here.-->
 			</header>
 			<section id="content" data-ng-include="App.layout.content">
-  				Section content gets injected here.
+  				<!--Section content gets injected here.-->
   			</section>
       		<footer id="footer" data-ng-include="App.layout.footer">
-  				Footer content gets injected here.
+  				<!--Footer content gets injected here.-->
   			</footer>
 	  	
 	    </div>
@@ -108,6 +108,8 @@
 		<script src="scripts/directives/cmsWidgets.js"></script>
 		<script src="scripts/directives/cmsWidget.js"></script>
 		<script src="scripts/controllers/sidebar.js"></script>
+<script src="scripts/controllers/help.js"></script>
+<script src="scripts/controllers/app.js"></script>
 		<!-- endbuild -->
 </body>
 </html>

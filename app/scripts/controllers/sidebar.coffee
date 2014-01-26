@@ -14,10 +14,8 @@ angular.module('angularCmsApp')
 		$scope.select = (item) ->
 			angular.forEach $rootScope.App.menu.admin, (item) ->
 				item.selected = false
-				console.log item
 			angular.forEach $rootScope.App.menu.user, (item) ->
 				item.selected = false
-				console.log item
 			
 			item.selected = true
 	

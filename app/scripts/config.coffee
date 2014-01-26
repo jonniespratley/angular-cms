@@ -2,6 +2,7 @@ window.Config =
 	baseurl: document.location.origin
 	sitetitle: "angular-cms"
 	sitedesc: "This is the description"
+	sitebrand: '/images/angular-cms-brand.png'
 	sitecopy: "2014 "
 	version: '0.1'
 	email: "jonniespratley@me.com"
@@ -101,17 +102,7 @@ window.Config =
 			href: "/settings"
 			icon: "cog"
 		]
-		pub: [
-			id: 1
-			title: "Docs"
-			icon: "book"
-			href: "/docs"
-		,
-			id: 1
-			title: "Login"
-			icon: "lock"
-			href: "/login"
-		]
+		pub: []
 		user: [
 			id: 1
 			title: "Dashboard"
