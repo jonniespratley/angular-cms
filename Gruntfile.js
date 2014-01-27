@@ -291,6 +291,27 @@ module.exports = function (grunt) {
       }
     },
 
+		//Less
+		less: {
+		  development: {
+		    options: {
+		      paths: ["cms-content/themes"]
+		    },
+		    files: {
+		      ".tmp/cms-content/themes/**/*": "<%= yeoman.app %>/cms-content/themes/**/*"
+		    }
+		  },
+		  production: {
+		    options: {
+		      paths: ["assets/css"],
+		      cleancss: true
+		    },
+		    files: {
+		      ".tmp/cms-content/themes/**/*.css": "<%= yeoman.app %>/cms-content/themes/**/*.less"
+		    }
+		  }
+		},
+
     // Allow the use of non-minsafe AngularJS files. Automatically makes it
     // minsafe compatible so Uglify does not destroy the ng references
     ngmin: {
