@@ -176,3 +176,55 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 .no-link { color: #333 }
 
 /* @end */
+
+
+
+/* Uploader */
+.uploader-dropzone h4 {
+  font-size: 180%;
+}
+
+.uploader-dropzone {
+  border: 2px dashed #ccc;
+  text-align: center;
+  padding: 55px;
+  color: #999;
+  margin-bottom: 25px;
+  padding: 25px;
+  text-align: center;
+  color: #bbb;
+}
+
+ 
+.uploader-thumb{
+  max-height:450px;
+}
+
+
+.uploader-thumbs li{
+  margin:5px;  
+  
+}
+.uploader-thumbs li a{
+  text-decoration:none;
+  
+}
+.uploader-thumbs li span{
+  text-align:center;
+}
+
+.highlight,
+.unhighlight {
+  max-height:100px;
+  max-width:100px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin:10px;
+}
+.highlight {
+  border: 5px solid #6f0;
+}
+.unhighlight {
+  border: 5px solid #ccc;
+}
