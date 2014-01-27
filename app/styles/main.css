@@ -13,7 +13,9 @@
 
 html { overflow-x: hidden; }
 
-body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #333; }
+body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #333;
+	padding-top: 50px;
+}
 
 .navbar-inverse { border-bottom: 1px solid #444; }
 
@@ -34,20 +36,77 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 /* @end */
 
 /* @group Sidebar */
+.app{
+	moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+    -webkit-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+    -moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+    -o-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+    transition: width 1s ease-in-out, left 1.5s ease-in-out;
+}
+.view-animate-container {
+  position:relative;
+  position:relative;
+  min-height:400px;
+  overflow: hidden;
 
-.sidebar-nav.fixed { position: fixed; left: 0; top: 52px; border-radius: 0px; }
+  
+}
+.cms-sidebar-nav.fixed { position: fixed; left: 0; top: 52px; border-radius: 0px; }
+.cms-sidebar{
+	border-radius:0px;
+	position:relative;
+	left: -15px;
+	moz-transition: width .5s ease-in-out, left 1.5s ease-in-out;
+    -webkit-transition: width .5s ease-in-out, left 1.5s ease-in-out;
+    -moz-transition: width .5s ease-in-out, left 1.5s ease-in-out;
+    -o-transition: width .5s ease-in-out, left 1.5s ease-in-out;
+    transition: width .5s ease-in-out, left 1.5s ease-in-out;
 
-.sidebar-nav li a{
-	color: #555;
+}
+
+.cms-sidebar i{
+	margin-right: 4px;
+}
+
+.cms-sidebar-nav-toggle {
+	position: absolute;
+	top: 0;
+	right: 0;
 	
 }
-.sidebar-nav.well { padding: 0; }
+.cms-sidebar.closed{
+	width: 72px;
+	overflow: hidden !important;
+	display: block;
+
+}
+
+.cms-sidebar.closed .nav-header span.title {
+overflow: hidden;
+	display: block;
+}
+.cms-sidebar.closed li{
+
+}
+.cms-sidebar.closed .title,
+.cms-sidebar.closed .nav-header .title	{
+
+}
+
+.cms-sidebar-nav li a{
+	color: #555;
+	display: block;
+	overflow: hidden;
+	white-space:nowrap;
+	
+}
+.cms-sidebar-nav.well { padding: 0; }
 
 /* @end */
 
 /* @group Sidebar Nav */
 
-.nav .nav-header { font-weight: bold; padding: 8px 10px; color: #999; font-size: 11px; text-transform: uppercase; }
+.cms-sidebar-nav .nav .nav-header { font-weight: bold; padding: 8px 10px; color: #999; font-size: 11px; text-transform: uppercase; }
 
 
 
@@ -76,13 +135,7 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 
 
 /* @group Animation */
-.view-animate-container {
-  position:relative;
-  position:relative;
-  min-height:400px;
-  overflow: hidden;
-  
-}
+
 .view-animate {
   padding:0px;
   width:100%;

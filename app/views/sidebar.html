@@ -1,11 +1,22 @@
-<div class="well well-sm sidebar-nav" ng-controller="SidebarCtrl">
-  <nav class="nav nav-list">
-	<li class="nav-header">Menu</li>
+<div id="cms-sidebar-nav" class="well well-sm cms-sidebar-nav">
+  <nav id="cms-sidebar-nav-list" class="nav nav-list">
+	<li class="nav-header">
+		<a id="cms-sidebar-nav-toggle"
+			href="" 
+			ng-click="toggleSidebar()"
+			class="pull-right cms-sidebar-nav-toggle" style="
+		    position: absolute;
+		    top: 0px;
+		    right: 0;">in</a>
+		<span class="title">Menu</span>
+	</li>
 	<li 
 		ng-class="{active:item.selected}"
 		ng-repeat="item in App.menu.user" 
 		ng-include src="'sidebar-item.html'"></li>
-	<li class="nav-header">Admin</li>
+	<li class="nav-header">
+		<span class="title">Admin</span>
+	</li>
 	<li 
 		ng-class="{active:item.selected}"
 		ng-repeat="item in App.menu.admin" 
@@ -18,6 +29,8 @@
 		ng-click="select(item)"
 		ng-href="#{{item.href}}">
 		<i class="fa fa-1x fa-{{item.icon}}"></i>
+		<span class="title">
 		{{item.title}}
+		</span>
 	</a>
 </script>

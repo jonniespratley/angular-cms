@@ -18,4 +18,12 @@ angular.module('angularCmsApp')
 				item.selected = false
 			
 			item.selected = true
-	
+		
+		#Toggle sidebar when clicked
+		$scope.sidebar = 
+			closed: false
+		
+		$scope.toggleSidebar = () ->
+			console.log @
+			$scope.sidebar.closed = !$scope.sidebar.closed
+
