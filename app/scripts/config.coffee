@@ -204,14 +204,7 @@ window.Config =
 			id: 0
 			title: "Default"
 		]
-		themes: [
-			id: 0
-			title: "Default"
-			slug: "theme0"
-			type: "theme"
-			image: "/css/themes/theme0/splash.png"
-			body: ""
-		]
+		themes: [ 'Default', 'Amelia', 'Cerulean', 'Cosmo', 'Cyborg', 'Flatly', 'Journal', 'Readable', 'Simplex', 'Slate', 'Spacelab', 'United', 'Yeti' ]
 
 	logout:
 		redirect: "#/login"

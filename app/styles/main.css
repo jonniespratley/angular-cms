@@ -4,6 +4,14 @@
 @import url('bootstrap.css');
 */
 
+.cms-themes .theme img{
+
+	opacity: .8;
+}
+.cms-themes .theme img:hover,
+.cms-themes .theme.selected img{
+	opacity: 1;
+}
 
 .ng-hide{
 	display:none !important;
