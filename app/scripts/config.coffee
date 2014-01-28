@@ -11,7 +11,7 @@ window.Config =
 	#I hold the home page feature content
 	feature: 
 	  title: 'angular-cms'
-	  body: 'Use this as a starting point when creating a content management system of some sort.'
+	  body: 'A content management system of some sort.'
 	
 	features: [
 		id: 1
