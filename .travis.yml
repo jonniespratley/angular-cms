@@ -16,4 +16,4 @@ deploy:
     all_branches: true
 run:
   - "grunt build"
-  - "node server"
+  - "npm start"

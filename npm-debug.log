@@ -1,0 +1,26 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
+2 info using npm@1.3.21
+3 info using node@v0.10.24
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info prestart angular-cms@0.0.1
+6 info start angular-cms@0.0.1
+7 verbose unsafe-perm in lifecycle true
+8 info angular-cms@0.0.1 Failed to exec start script
+9 error angular-cms@0.0.1 start: `node web.js`
+9 error Exit status 8
+10 error Failed at the angular-cms@0.0.1 start script.
+10 error This is most likely a problem with the angular-cms package,
+10 error not with npm itself.
+10 error Tell the author that this fails on your system:
+10 error     node web.js
+10 error You can get their info via:
+10 error     npm owner ls angular-cms
+10 error There is likely additional logging output above.
+11 error System Darwin 13.0.0
+12 error command "node" "/usr/local/bin/npm" "start"
+13 error cwd /WWW/Learning_Yeoman/angular-cms
+14 error node -v v0.10.24
+15 error npm -v 1.3.21
+16 error code ELIFECYCLE
+17 verbose exit [ 1, true ]
