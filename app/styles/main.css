@@ -180,6 +180,20 @@ clear: both;
 height: 100%;
 }
 
+#content div.container.ng-scope div.row div.view-animate-container div.view-animate.ng-scope section.ng-scope div.row div.col-sm-9 section div.row div.col-sm-8.tc div.placeholder {
+	height: 150px;
+	vertical-align: middle;
+}
+
+a.navbar-brand {
+	color: #333;
+}
+
+a.navbar-brand {
+	margin: 0;
+	padding-left: 1px;
+}
+
 .cms-sidebar.closed  span.title {
 	overflow: hidden;
 	display: none;

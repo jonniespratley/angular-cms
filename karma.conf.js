@@ -20,6 +20,8 @@ module.exports = function(config) {
 			'app/bower_components/angular-sanitize/angular-sanitize.js',
 			'app/bower_components/angular-route/angular-route.js',
 			'app/bower_components/angular-ui-utils/ui-utils.js',
+            'app/bower_components/angular-strap/dist/angular-strap.min.js',
+
 			'http://www.parsecdn.com/js/parse-1.2.8.min.js',
 			
 			//Libs
