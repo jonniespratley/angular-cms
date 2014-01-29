@@ -15,6 +15,24 @@ Follow these steps when adding features to this project.
 7. **Testing** - Unit and e2e testing will then verify the implementation of the story. 
 
 
+
+## Node Server
+
+```
+"promised-io": "~0.3.4",
+ "cloudfiles": "~0.3.4",
+ "jquery-file-upload-middleware": "~0.1.0",
+ "easyimage": "~0.1.6",
+ "url": "~0.7.9",
+ "racker": "0.0.1-alpha3",
+ "mongodb": "~1.3.19",
+ "connect": "~2.11.2",
+ "request": "https://registry.npmjs.org/request/-/request-2.0.5.tgz",
+```
+
+
+
+
 ## Parse.com
 We are going to use parse for our data store.
 
