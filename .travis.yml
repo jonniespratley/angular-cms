@@ -1,13 +1,13 @@
 language: node_js
 node_js:
   - '0.8'
- # - '0.10'
+  - '0.10'
 before_script:
   - 'npm install -g bower grunt-cli'
   - 'bower install'
 #  - 'sudo sh ./bin/db.sh'
 #  - sleep 3
-  - 'grunt serve'
+  - 'grunt test'
 #  - sleep 3
 deploy:
   provider: heroku
