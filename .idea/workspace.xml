@@ -2,11 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="669ca988-1ab2-486d-ab1c-9f96d1642854" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/header.html" afterPath="$PROJECT_DIR$/app/views/header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/karma.conf.js" afterPath="$PROJECT_DIR$/karma.conf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/styles/main.css" afterPath="$PROJECT_DIR$/app/styles/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/navbar.html" afterPath="$PROJECT_DIR$/app/views/navbar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/sidebar.html" afterPath="$PROJECT_DIR$/app/views/sidebar.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/scripts/41da34e4.plugins.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/scripts/8112d1c1.scripts.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/scripts/f77dd1af.modules.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/styles/96470c02.main.css" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/bower_components/angular/.bower.json" afterPath="$PROJECT_DIR$/dist/bower_components/angular/.bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/bower_components/angular/angular-csp.css" afterPath="$PROJECT_DIR$/dist/bower_components/angular/angular-csp.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/bower_components/angular/angular.js" afterPath="$PROJECT_DIR$/dist/bower_components/angular/angular.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/bower_components/angular/angular.min.js.map" afterPath="$PROJECT_DIR$/dist/bower_components/angular/angular.min.js.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/bower_components/angular/angular.min.js" afterPath="$PROJECT_DIR$/dist/bower_components/angular/angular.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/bower_components/angular/bower.json" afterPath="$PROJECT_DIR$/dist/bower_components/angular/bower.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/content.html" afterPath="$PROJECT_DIR$/dist/views/content.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/header.html" afterPath="$PROJECT_DIR$/dist/views/header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/login.html" afterPath="$PROJECT_DIR$/dist/views/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/media.html" afterPath="$PROJECT_DIR$/dist/views/media.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/navbar.html" afterPath="$PROJECT_DIR$/dist/views/navbar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/plugins.html" afterPath="$PROJECT_DIR$/dist/views/plugins.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/profile.html" afterPath="$PROJECT_DIR$/dist/views/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/settings.html" afterPath="$PROJECT_DIR$/dist/views/settings.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/sidebar.html" afterPath="$PROJECT_DIR$/dist/views/sidebar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/themes.html" afterPath="$PROJECT_DIR$/dist/views/themes.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/views/users.html" afterPath="$PROJECT_DIR$/dist/views/users.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="angular-cms-base.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +50,7 @@
       <file leaf-file-name="karma.conf.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/karma.conf.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="75" selection-start="960" selection-end="960" vertical-scroll-proportion="0.7368421" vertical-offset="0" max-vertical-offset="1218">
+            <state line="22" column="75" selection-start="960" selection-end="960" vertical-scroll-proportion="0.7241379" vertical-offset="0" max-vertical-offset="1218">
               <folding />
             </state>
           </provider>
@@ -360,10 +378,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="22" width="1276" height="778" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1389728" sideWeight="0.49674797" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3530303" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34242424" sideWeight="0.49674797" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3530303" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Heroku" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3242424" sideWeight="0.4997015" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="RemoteSynchronizer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -546,7 +564,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/karma.conf.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="75" selection-start="960" selection-end="960" vertical-scroll-proportion="0.7368421" vertical-offset="0" max-vertical-offset="1218">
+        <state line="22" column="75" selection-start="960" selection-end="960" vertical-scroll-proportion="0.7241379" vertical-offset="0" max-vertical-offset="1218">
           <folding />
         </state>
       </provider>

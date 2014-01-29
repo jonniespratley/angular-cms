@@ -1,17 +1,31 @@
-<div class="well well-sm sidebar-nav" ng-controller="SidebarCtrl">
-  <nav class="nav nav-list">
-	<li class="nav-header">Menu</li>
+<div id="cms-sidebar-nav" class="well well-sm cms-sidebar-nav bs-sidebar hidden-print" role="complementary" data-offset-top="-70" bs-affix="">
+  <nav id="cms-sidebar-nav-list" class="nav nav-list">
+	<li class="nav-header">
+		<a id="cms-sidebar-nav-toggle" href="" ng-click="toggleSidebar()" class="pull-right cms-sidebar-nav-toggle" style="position: absolute;
+		    top: 0px;
+		    right: 0"></a>
+		<span class="title">Menu</span>
+	</li>
 	<li ng-class="{active:item.selected}" ng-repeat="item in App.menu.user" ng-include="" src="'sidebar-item.html'"></li>
-	<li class="nav-header">Admin</li>
+	<li class="nav-header">
+		<span class="title">Admin</span>
+	</li>
 	<li ng-class="{active:item.selected}" ng-repeat="item in App.menu.admin" ng-include="" src="'sidebar-item.html'"></li>
   </nav>
 </div>
 
 <script id="sidebar-item.html" type="text/ng-template">
 	<a 
+		rel="tooltip"
+		title="{{item.title}}"
+		data-toggle="tooltip"
 		ng-click="select(item)"
 		ng-href="#{{item.href}}">
-		<i class="fa fa-1x fa-{{item.icon}}"></i>
+		<i class="fa fa-1x fa-{{item.icon}}" 
+		title="{{item.title}}"
+		bs-tooltip="tooltip"></i>
+		<span class="title">
 		{{item.title}}
+		</span>
 	</a>
 </script>

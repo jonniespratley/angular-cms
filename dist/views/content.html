@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-			<aside id="sidebar" ng-include="App.layout.sidebar" ng-if="App.session.authorized" class="col-xs-3 col-sm-3 col-md-2"></aside>
+			<aside id="cms-sidebar" ng-controller="SidebarCtrl" ng-include="App.layout.sidebar" ng-if="App.session.authorized" ng-class="{closed:sidebar.closed}" class="col-xs-3 col-sm-3 col-md-2 cms-sidebar"></aside>
   <div class="view-animate-container">
   	 <div class="alert alert-{{alert.type}} animate-if" ng-if="alert">
 		<strong>{{alert.code}}!</strong> {{alert.message}}
