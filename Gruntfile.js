@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         tasks: ['newer:coffee:dist']
       },
       coffeeTest: {
-        files: ['test/spec/{,*/}*.{coffee,litcoffee,coffee.md}'],
+        files: ['test/{,*/}*.{coffee,litcoffee,coffee.md}'],
         tasks: ['newer:coffee:test', 'karma']
       },
       compass: {
@@ -213,7 +213,7 @@ module.exports = function (grunt) {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            //'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
@@ -271,14 +271,16 @@ module.exports = function (grunt) {
           // useShortDoctype: true,
           // removeEmptyAttributes: true,
           // removeOptionalTags: true
+/*
             collapseBooleanAttributes:      true,
-            collapseWhitespace:             true,
+            collapseWhitespace:             false,
             removeAttributeQuotes:          true,
             removeComments:                 true, // Only if you don't use comment directives!
             removeEmptyAttributes:          true,
             removeRedundantAttributes:      true,
             removeScriptTypeAttributes:     true,
             removeStyleLinkTypeAttributes:  true
+*/
         },
         files: [{
           expand: true,
@@ -288,6 +290,27 @@ module.exports = function (grunt) {
         }]
       }
     },
+
+		//Less
+		less: {
+		  development: {
+		    options: {
+		      paths: ["cms-content/themes"]
+		    },
+		    files: {
+		      ".tmp/cms-content/themes/**/*": "<%= yeoman.app %>/cms-content/themes/**/*"
+		    }
+		  },
+		  production: {
+		    options: {
+		      paths: ["assets/css"],
+		      cleancss: true
+		    },
+		    files: {
+		      ".tmp/cms-content/themes/**/*.css": "<%= yeoman.app %>/cms-content/themes/**/*.less"
+		    }
+		  }
+		},
 
     // Allow the use of non-minsafe AngularJS files. Automatically makes it
     // minsafe compatible so Uglify does not destroy the ng references
@@ -345,7 +368,7 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'coffee:dist',
-        //'compass:server',
+     //   'compass:server',
         'copy:styles'
       ],
       test: [
@@ -355,11 +378,11 @@ module.exports = function (grunt) {
       ],
       dist: [
         'coffee',
-       // 'compass:dist',
+        //'compass:dist',
         'copy:styles',
-        'imagemin',
+     //   'imagemin',
         'svgmin',
-        //'htmlmin'
+        'htmlmin'
       ]
     },
 

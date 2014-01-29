@@ -1,12 +1,10 @@
 <h1><code ng:non-bindable=""></code>
-<span class="hint"></span>
+<div><span class="hint"></span>
+</div>
 </h1>
-<div><h1 id="myangularproject">My Angular Project</h2>
-
+<div><div class="2-my-angular-project-page"><h2 id="my-angular-project">My Angular Project</h2>
 <p>This chapter will cover creating applications with Yeoman using the AngularJS framework. By the end of the chapter you will have learned how to use Yeoman and the AngularJS generator to streamline AngularJS applications, and the basic concepts behind the framework.</p>
-
 <p>Topics covered in this chapter:</p>
-
 <ul>
 <li>AngularJS Concepts</li>
 <li>Application Directory Structure</li>
@@ -14,89 +12,57 @@
 <li>Application Scope</li>
 <li>Development Process</li>
 </ul>
-
 <p>By the end of this chapter you should have a firm understanding of AngularJS’s core concepts, how it fits into a web app and the three-tier software architecture pattern of a modern single-page web app.</p>
-
-<h2 id="overview">Overview</h3>
-
+<h3 id="my-angular-project_overview">Overview</h3>
 <p>This project is slated to be a tutorial walkthrough of a web developer’s workflow using Yeoman, Grunt, and Bower with the AngularJS framework to create a modern web application. The idea is to mimic the workflow of a real project as closely as possible. Before we get into developing with AngularJS, we need to explore the AngularJS concepts and how these fit into our application. </p>
-
-<h2 id="angularjsconcepts">AngularJS Concepts</h3>
-
+<h3 id="my-angular-project_angularjs-concepts">AngularJS Concepts</h3>
 <p>There are a few important concepts that we are going to use in the following chapters and it is very important that when developing with Angular, a developer understands the terminology.</p>
-
-<h4 id="scope">Scope</h5>
-
+<h5 id="my-angular-project_angularjs-concepts_scope">Scope</h5>
 <p>In Angular the scope is an object, which refers to the application model that ties a view (DOM) to the controller. In the Model-View-Controller (MVC) pattern the scope provides an execution context that is bound to the view (DOM) and its children. </p>
-
 <p>Here are some characteristics of scope:</p>
-
 <ol>
 <li>Scopes can observe the model.</li>
 <li>Scopes can propagate model changes through the application into the view.</li>
 <li>Scopes can be nested to isolate the application components and provide access to shared model properties.</li>
 <li>Scopes provide context against which expressions are evaluated.</li>
 </ol>
-
 <blockquote>
-  <p>The word scope refers to $scope in AngularJS</p>
+<p>The word scope refers to $scope in AngularJS</p>
 </blockquote>
-
-<h4 id="models">Models</h5>
-
+<h5 id="my-angular-project_angularjs-concepts_models">Models</h5>
 <p>A model is the data in the application. In Angular a model is a JavaScript object with properties and/or methods, models are defined on the scope of the controller. </p>
-
 <p>Creating a model is very straight-forward:</p>
-
 <pre><code>  $scope.inbox = {
     updated: null,
     messages:[]
-  };
-</code></pre>
-
+  };</code></pre>
 <p>In the example above:</p>
-
 <ol>
 <li>A inbox object is declared with some general properties on the $scope.</li>
 </ol>
-
 <p>Angular does the rest by making sure that whenever the models properties change it is reflected throughout the scope of the view.</p>
-
-<h4 id="views">Views</h5>
-
+<h5 id="my-angular-project_angularjs-concepts_views">Views</h5>
 <p>A view is the visual representation of a model in an application. In Angular, the view is made up of plain HTML with angular-specific elements, attributes and directives. </p>
-
 <p>Take a look at the following:</p>
-
 <pre><code>&lt;body ng-app&gt;
-    &lt;section ng-controller="MainCtrl"&gt;
-        &lt;div ng-include src="'inbox.html'"&gt;
-</code></pre>
-
-<p></div> <br />
-        </section>
+    &lt;section ng-controller=&quot;MainCtrl&quot;&gt;
+        &lt;div ng-include src=&quot;&#39;inbox.html&#39;&quot;&gt;</code></pre>
+<p></div><br>        </section>
     </body>    </p>
-
 <ol>
 <li>The <code>ng-app</code> directive on the body tag bootstraps a new angular application.</li>
 <li>The <code>ng-controller</code> directive has set the <code>MainCtrl</code> as the controller.</li>
 <li>The <code>ng-include</code> directive specifies the template that should be rendered.</li>
 <li>The <code>inbox.html</code> container can access the <code>$scope</code> by using double curly braces <code>{{  }}</code>.</li>
 </ol>
-
-<h4 id="controller">Controller</h5>
-
+<h5 id="my-angular-project_angularjs-concepts_controller">Controller</h5>
 <p>A controller is the business logic that manages the relationship between the model and the view, In Angular controllers are attached to the DOM by the <code>ng-controller</code> directive or the applications router, Angular will create a new $scope instance in the controller using the constructor function.</p>
-
 <p>Use Controllers for:</p>
-
 <ul>
 <li>Setting the initial state to the $scope.</li>
 <li>Adding behavior to the $scope.</li>
 </ul>
-
 <p>A controller is just a function with dependencies as arguments that get injected with the proper dependencies when angular creates a new instance, for example:</p>
-
 <pre><code>function MainCtrl($scope){
   $scope.inbox = {
     updated: null,
@@ -104,636 +70,399 @@
   };
   $scope.getMessages = function(){
   };
-}
-</code></pre>
-
+}</code></pre>
 <p>In the example above:</p>
-
 <ol>
 <li>A inbox object is set on the <code>$scope</code> with the updated property set to null and messages property set to an empty array.</li>
 <li>A function named <code>getMessages</code> which can be used to fetch data from the server, inject mock data or whatever logic is required.</li>
 </ol>
-
-<h4 id="templates">Templates</h5>
-
+<h5 id="my-angular-project_angularjs-concepts_templates">Templates</h5>
 <p>A template is just plain HTML that constructs the user interface for display in a view, In Angular a template is the declarative specification that uses expressions to display model data and invoke controller methods, templates can be either an external HTML <code>.html</code> file or as an inline script tag with type <code>text/ng-template</code>. </p>
-
-<pre><code> &lt;script id="inbox.html" type="text/ng-template"&gt;
+<pre><code> &lt;script id=&quot;inbox.html&quot; type=&quot;text/ng-template&quot;&gt;
     &lt;legend&gt;Inbox&lt;/legend&gt;
     &lt;!-- Content --&gt;
- &lt;/script&gt;
- ```
-
-Above we use angular-specific attribute directives that add behavior which instructs Angular to transform the template into a dynamic view that gets injected into the DOM.
-
-
-
-####  Directives
-A directive in Angular is a reusable declarative HTML component with custom attributes and/or elements with self-contained logic that instructs Angular's HTML compiler to attach the specified behavior to that DOM element or transform the DOM element and it's children. Angular comes with many directives that help define the view, here are some frequently used directives:
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th id="directive" style="text-align:left;"&gt; Directive &lt;/th&gt;
-&lt;th id="description" style="text-align:left;"&gt; Description &lt;/th&gt;
-&lt;th id="usage" style="text-align:left;"&gt; Usage &lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-app&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Auto-bootstraps an AngularJS application. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;html ng-app="myApp"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-click&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Specifies custom behavior when an element is clicked. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-click="func()"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-controller&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Attaches a controller class to the view. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-controller="MainCtrl"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-form&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Nestable alias of the form element. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-form="LoginForm"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-include&lt;/strong&gt;  &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Fetches, compiles and includes external or inline HTML fragment. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ng-include src="path.html"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-init&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Evaluates an expression in the current scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-init="fetch()"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-model&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Binds a input value to a property on the scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;input ng-model="msg.title"/&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-repeat&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Instantiates a element once per item in collection. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-repeat="key in col"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-src&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Fetches from URL expression is evaluated. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;img ng-src="gravatar.com/avatar/{{username}}"/&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-submit&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Prevents default action and binds expression to &lt;code&gt;onsubmit&lt;/code&gt; event &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;form ng-submit="{expression}"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
-
-
-
-
-####  Expressions
-An expression provides the view access to variables and methods on the scope, In Angular expressions are JavaScript-like code snippets that are placed in Angular bindings as `{{ expression }}`. The following is an example of how to use expressions in a view:
-
-
-    &lt;p&gt;You have {{ inbox.messages.length }} messages.&lt;/p&gt;
-
-In the example above:
-
-1. Using dot notation to reference the number of messages in the inbox from the controller’s scope.
-
-Angular can support various expressions including:
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th id="directive" style="text-align:left;"&gt; Directive &lt;/th&gt;
-&lt;th id="description" style="text-align:left;"&gt; Description &lt;/th&gt;
-&lt;th id="usage" style="text-align:left;"&gt; Usage &lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-app&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Auto-bootstraps an AngularJS application. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;html ng-app="myApp"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-click&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Specifies custom behavior when an element is clicked. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-click="func()"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-controller&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Attaches a controller class to the view. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-controller="MainCtrl"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-form&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Nestable alias of the form element. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-form="LoginForm"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-include&lt;/strong&gt;  &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Fetches, compiles and includes external or inline HTML fragment. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ng-include src="path.html"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-init&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Evaluates an expression in the current scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-init="fetch()"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-model&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Binds a input value to a property on the scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;input ng-model="msg.title"/&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-repeat&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Instantiates a element once per item in collection. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-repeat="key in col"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-src&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Fetches from URL expression is evaluated. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;img ng-src="gravatar.com/avatar/{{username}}"/&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-submit&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Prevents default action and binds expression to &lt;code&gt;onsubmit&lt;/code&gt; event &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;form ng-submit="{expression}"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th id="operator" style="text-align:left;"&gt; Operator &lt;/th&gt;
-&lt;th id="description" style="text-align:left;"&gt; Description &lt;/th&gt;
-&lt;th id="usage" style="text-align:left;"&gt; Usage &lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Arithmetic&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Takes numerical values as their operands and return a single numerical value. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;(+, -, /, *, %)&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Comparison&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Compares its operands and returns a logical value based on whether the comparison is true. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;(==, !-, &amp;gt;, &amp;lt;, &amp;gt;=, &amp;lt;=)&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Logical&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Used with boolean (logical) values, and when they are, they return a boolean value. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;`(&amp;amp;&amp;amp;, &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;, !)` &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Bitwise&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Bitwise operators treat their operands as a set of 32 bits (zeros and ones) and return standard JavaScript numerical value &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;`(\^, &amp;amp;, &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;)` &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Function&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Used to invoke functions set on the controllers scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;{{ func() }}&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Array&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Provides access for referencing values from index of array &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;{{ user.messages[1] }}&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
-
-####  Filters
-A filter formats the data for display to the user. In Angular, filters are used in expressions, which can be used in templates, controllers or services. The following is an example of how to use filters in a view:
-
-    &lt;p&gt;Last updated @ {{inbox.updated | date:'mediumTime'}}&lt;/p&gt;
-
-The example above:
-
-1.    Is using the date filter to display formatted time from a Unix timestamp. 
-
-Angular includes many filters for formatting various types of data, which include:
-
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th id="directive" style="text-align:left;"&gt; Directive &lt;/th&gt;
-&lt;th id="description" style="text-align:left;"&gt; Description &lt;/th&gt;
-&lt;th id="usage" style="text-align:left;"&gt; Usage &lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-app&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Auto-bootstraps an AngularJS application. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;html ng-app="myApp"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-click&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Specifies custom behavior when an element is clicked. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-click="func()"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-controller&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Attaches a controller class to the view. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-controller="MainCtrl"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-form&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Nestable alias of the form element. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-form="LoginForm"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-include&lt;/strong&gt;  &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Fetches, compiles and includes external or inline HTML fragment. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ng-include src="path.html"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-init&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Evaluates an expression in the current scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-init="fetch()"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-model&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Binds a input value to a property on the scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;input ng-model="msg.title"/&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-repeat&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Instantiates a element once per item in collection. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;ELEMENT ng-repeat="key in col"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-src&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Fetches from URL expression is evaluated. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;img ng-src="gravatar.com/avatar/{{username}}"/&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;ng-submit&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Prevents default action and binds expression to &lt;code&gt;onsubmit&lt;/code&gt; event &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;&amp;lt;form ng-submit="{expression}"&amp;gt;&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th id="operator" style="text-align:left;"&gt; Operator &lt;/th&gt;
-&lt;th id="description" style="text-align:left;"&gt; Description &lt;/th&gt;
-&lt;th id="usage" style="text-align:left;"&gt; Usage &lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Arithmetic&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Takes numerical values as their operands and return a single numerical value. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;(+, -, /, *, %)&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Comparison&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Compares its operands and returns a logical value based on whether the comparison is true. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;(==, !-, &amp;gt;, &amp;lt;, &amp;gt;=, &amp;lt;=)&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Logical&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Used with boolean (logical) values, and when they are, they return a boolean value. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;`(&amp;amp;&amp;amp;, &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;, !)` &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Bitwise&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Bitwise operators treat their operands as a set of 32 bits (zeros and ones) and return standard JavaScript numerical value &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;`(\^, &amp;amp;, &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;)` &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Function&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Used to invoke functions set on the controllers scope. &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;{{ func() }}&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;Array&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Provides access for referencing values from index of array &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;code&gt;{{ user.messages[1] }}&lt;/code&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th id="name" style="text-align:left;"&gt; Name &lt;/th&gt;
-&lt;th id="description" style="text-align:left;"&gt; Description &lt;/th&gt;
-&lt;th id="usage" style="text-align:left;"&gt; Usage &lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;&lt;strong&gt;currency&lt;/strong&gt; &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;Formats a number as a currency.  &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;`{{amount &lt;/p&gt;&lt;/td&gt;
-&lt;td style="text-align:left;"&gt;&lt;p&gt;currency:"USD$"}}` &lt;/p&gt;&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;/tbody&gt;
-&lt;/table&gt;
-| **filter** | Filters items from array and returns new array. | `msg in User.messages | filter:searchText`
-| **json** | Converts a JavaScript object into a JSON string. | `{{ {'name':'value'} | json }}`
-| **limitTo** | Creates new array/string containing specified number of elements. | `{{ User.messages | limitTo:5 }}`
-| **lowercase** | Converts a string to lowercase. | `{{ expression | lowercase }}`
-| **number** | Formats a number as text. | `{{ expression | number[:fractionSize] }}`
-| **orderBy** | Orders the specified array by the expression predicate. | `item in user.messages | orderBy:'date'`
-| **uppercase** | Converts a string to uppercase. | `{{ expression | uppercase }}`
-| **linky** | Finds links from text and converts into html links. | `&lt;span ng-bind-html="expression | linky"&gt;&lt;/span&gt;`
-
-
-####  Data Binding
-Data binding is the automatic syncing of data between a model and the view components. Angular implements two-way data-binding with double curly braces `{{ }}`. The view is a visual representation of the model at all times, when the model changes the view reflects the change and vice versa. Take a look at the following example of data binding:
-
-**In the controller:**
-
-    $scope.getMessages = function(){
-        $scope.inbox.messages.push({ 
-         date:Date.now(), 
-         body:'This is a message' 
-       });
-       $scope.inbox.updated = Date.now();
-    };
-
-1. The `getMessages` function simply pushes a mocked message object into the `inbox.messages` array that is defined on the scope.
-2. Then the `inbox.updated` property on the controllers scope is updated to the current timestamp.
-
-
-**In the view:**
-
-
-    &lt;ul&gt;
-       &lt;li ng-repeat="item in inbox.messages | orderBy:'date'"&gt;
-         {{ item.body }}
-       &lt;/li&gt;
-     &lt;/ul&gt;
-    &lt;p&gt;Last checked @ {{ inbox.updated | date:'mediumTime' }}&lt;/p&gt;
-    &lt;button ng-click="getMessages()"&gt;Refresh&lt;/button&gt;
-
-
-The code above: 
-
-1.    The `li` element has the `ng-repeat` directive which tell angular to repeat the element for each item in the collection.
-2.    Inside the element, using double curly braces `{{ }}` the value of the `body` property is retrieved from the current item being repeated.
-3.    After the list, inside the paragraph element, using data-binding syntax and an Angular filter, the timestamp is formatted for display.
-4. Finally a simple button is used with the `ng-click` directive to trigger the `getMessages` function defined in the controller
-
-&gt; Usually you make a request for real data, this is just an example of data binding.
-
-
-
-
-####  Services
-A service is a reusable piece of business logic independent of views. In Angular, services are singletons objects or functions that contain methods common with web applications, Angular has a number of built in services that simplify various tasks within a web application, Angular also supports custom services which allow a developer to create reusable modules with ease. 
-
-    $scope.getMessages = function(){
-        $http.get('/messages').success(function(data){
-            $scope.inbox.messages = data;
-            $scope.inbox.updated = Date.now();
-        });
-    };
-
-
-The code above:
-
-1. Uses Angular's `$http` service that provides access to the browser's XMLHttpRequest object for making requests.
-2. The success function then set the results from the response on the scopes `inbox.messages` property. 
-3. Then the inbox.updated property is updated to the current timestamp.
-
-Angular provides many services, here are some frequently used service modules:
-
-
-Name | Descriptions | Methods
------------- | ------------- | ------------
-`$cookieStore` | Provides a key-value storage that falls back to session cookies. | `get` `put` `remove`
-`$http` | Provides communication with remote HTTP servers via the XMLHttpRequest object or via JSONP.  | `head` `get` `post` `put` `delete` `jsonp`
-`$location` | Parses the URL in the browsers address bar and makes the URL available to the application. | `absUrl` `hash` `host` `path` `port` `replace` `search` `url`
-`$log` | Provides logging in the browsers console (if supported). | `debug` `error` `info` `log` `warn`
-`$resource` | Creates a resource object to interact with RESTful server-side data sources. | `get` `save` `query` `remove` `delete`
-`$q` | Provides a promise/deferred implementation. | `all` `defer` `resolve` `reject` `notify` `then` `when` 
-
-&gt; Methods are invoked in the form of `service.method` for example `$log.info('Hello')`
-
-
-
-
-
-####  Dependency Injection
-Dependency injection (DI) is a software design pattern that handles how a application manages its dependencies. Angular automatically creates and connects objects and functions together when a dependency is needed and provides an instance of that dependency. One of the simplest ways to use Angular's dependency injection is to pass the name of the dependency as the parameter name in the constructor function. 
-
-Here are ways for using dependency injection:
-
-**1. Inferring** - Use parameter names as names of service dependencies:
-</code></pre>
-
-<p>function MainCtrl($scope, $http, Custom) {
+ &lt;/script&gt;</code></pre>
+<p>Above we use angular-specific attribute directives that add behavior which instructs Angular to transform the template into a dynamic view that gets injected into the DOM.</p>
+<h5 id="my-angular-project_angularjs-concepts_directives">Directives</h5>
+<p>A directive in Angular is a reusable declarative HTML component with custom attributes and/or elements with self-contained logic that instructs Angular&#39;s HTML compiler to attach the specified behavior to that DOM element or transform the DOM element and it&#39;s children. Angular comes with many directives that help define the view, here are some frequently used directives:</p>
+<table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ng-app</strong></td>
+<td>Auto-bootstraps an AngularJS application.</td>
+<td><code>&lt;html ng-app=&quot;myApp&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-click</strong></td>
+<td>Specifies custom behavior when an element is clicked.</td>
+<td><code>&lt;ELEMENT ng-click=&quot;func()&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-controller</strong></td>
+<td>Attaches a controller class to the view.</td>
+<td><code>&lt;ELEMENT ng-controller=&quot;MainCtrl&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-form</strong></td>
+<td>Nestable alias of the form element.</td>
+<td><code>&lt;ELEMENT ng-form=&quot;LoginForm&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-include</strong></td>
+<td>Fetches, compiles and includes external or inline HTML fragment.</td>
+<td><code>&lt;ng-include src=&quot;path.html&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-init</strong></td>
+<td>Evaluates an expression in the current scope.</td>
+<td><code>&lt;ELEMENT ng-init=&quot;fetch()&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-model</strong></td>
+<td>Binds a input value to a property on the scope.</td>
+<td><code>&lt;input ng-model=&quot;msg.title&quot;/&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-repeat</strong></td>
+<td>Instantiates a element once per item in collection.</td>
+<td><code>&lt;ELEMENT ng-repeat=&quot;key in col&quot;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-src</strong></td>
+<td>Fetches from URL expression is evaluated.</td>
+<td><code>&lt;img ng-src=&quot;gravatar.com/avatar/{{username}}&quot;/&gt;</code></td>
+</tr>
+<tr>
+<td><strong>ng-submit</strong></td>
+<td>Prevents default action and binds expression to <code>onsubmit</code> event</td>
+<td><code>&lt;form ng-submit=&quot;{expression}&quot;&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h5 id="my-angular-project_angularjs-concepts_expressions">Expressions</h5>
+<p>An expression provides the view access to variables and methods on the scope, In Angular expressions are JavaScript-like code snippets that are placed in Angular bindings as <code>{{ expression }}</code>. The following is an example of how to use expressions in a view:</p>
+<pre><code>&lt;p&gt;You have {{ inbox.messages.length }} messages.&lt;/p&gt;</code></pre>
+<p>In the example above:</p>
+<ol>
+<li>Using dot notation to reference the number of messages in the inbox from the controller’s scope.</li>
+</ol>
+<p>Angular can support various expressions including:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Arithmetic</strong></td>
+<td>Takes numerical values as their operands and return a single numerical value.</td>
+<td><code>(+, -, /, *, %)</code></td>
+</tr>
+<tr>
+<td><strong>Comparison</strong></td>
+<td>Compares its operands and returns a logical value based on whether the comparison is true.</td>
+<td><code>(==, !-, &gt;, &lt;, &gt;=, &lt;=)</code></td>
+</tr>
+<tr>
+<td><strong>Logical</strong></td>
+<td>Used with boolean (logical) values, and when they are, they return a boolean value.</td>
+<td>`(&amp;&amp;,</td>
+<td></td>
+<td>, !)`</td>
+</tr>
+<tr>
+<td><strong>Bitwise</strong></td>
+<td>Bitwise operators treat their operands as a set of 32 bits (zeros and ones) and return standard JavaScript numerical value</td>
+<td>`(\^, &amp;,</td>
+<td>)`</td>
+</tr>
+<tr>
+<td><strong>Function</strong></td>
+<td>Used to invoke functions set on the controllers scope.</td>
+<td><code>{{ func() }}</code></td>
+</tr>
+<tr>
+<td><strong>Array</strong></td>
+<td>Provides access for referencing values from index of array</td>
+<td><code>{{ user.messages[1] }}</code></td>
+</tr>
+<tr>
+<td><strong>Object</strong></td>
+<td>Provides access for referencing values from object using dot (.) notation.</td>
+<td><code>{{ user.email }}</code></td>
+</tr>
+</tbody>
+</table>
+<h5 id="my-angular-project_angularjs-concepts_filters">Filters</h5>
+<p>A filter formats the data for display to the user. In Angular, filters are used in expressions, which can be used in templates, controllers or services. The following is an example of how to use filters in a view:</p>
+<pre><code>&lt;p&gt;Last updated @ {{inbox.updated | date:&#39;mediumTime&#39;}}&lt;/p&gt;</code></pre>
+<p>The example above:</p>
+<ol>
+<li>Is using the date filter to display formatted time from a Unix timestamp. </li>
+</ol>
+<p>Angular includes many filters for formatting various types of data, which include:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>currency</strong></td>
+<td>Formats a number as a currency.</td>
+<td>`{{amount</td>
+<td>currency:&quot;USD$&quot;}}`</td>
+</tr>
+<tr>
+<td><strong>date</strong></td>
+<td>Formats a date to a string based on specified argument.</td>
+<td>` {{ expression</td>
+<td>date:&#39;MM/dd/yyyy @ h:mma&#39; }}`</td>
+</tr>
+<tr>
+<td><strong>filter</strong></td>
+<td>Filters items from array and returns new array.</td>
+<td>`msg in User.messages</td>
+<td>filter:searchText`</td>
+</tr>
+<tr>
+<td><strong>json</strong></td>
+<td>Converts a JavaScript object into a JSON string.</td>
+<td>`{{ {&#39;name&#39;:&#39;value&#39;}</td>
+<td>json }}`</td>
+</tr>
+<tr>
+<td><strong>limitTo</strong></td>
+<td>Creates new array/string containing specified number of elements.</td>
+<td>`{{ User.messages</td>
+<td>limitTo:5 }}`</td>
+</tr>
+<tr>
+<td><strong>lowercase</strong></td>
+<td>Converts a string to lowercase.</td>
+<td>`{{ expression</td>
+<td>lowercase }}`</td>
+</tr>
+<tr>
+<td><strong>number</strong></td>
+<td>Formats a number as text.</td>
+<td>`{{ expression</td>
+<td>number[:fractionSize] }}`</td>
+</tr>
+<tr>
+<td><strong>orderBy</strong></td>
+<td>Orders the specified array by the expression predicate.</td>
+<td>`item in user.messages</td>
+<td>orderBy:&#39;date&#39;`</td>
+</tr>
+<tr>
+<td><strong>uppercase</strong></td>
+<td>Converts a string to uppercase.</td>
+<td>`{{ expression</td>
+<td>uppercase }}`</td>
+</tr>
+<tr>
+<td><strong>linky</strong></td>
+<td>Finds links from text and converts into html links.</td>
+<td>`&lt;span ng-bind-html=&quot;expression</td>
+<td>linky&quot;&gt;</span>`</td>
+</tr>
+</tbody>
+</table>
+<h5 id="my-angular-project_angularjs-concepts_data-binding">Data Binding</h5>
+<p>Data binding is the automatic syncing of data between a model and the view components. Angular implements two-way data-binding with double curly braces <code>{{ }}</code>. The view is a visual representation of the model at all times, when the model changes the view reflects the change and vice versa. Take a look at the following example of data binding:</p>
+<p><strong>In the controller:</strong></p>
+<pre><code>$scope.getMessages = function(){
+    $scope.inbox.messages.push({ 
+     date:Date.now(), 
+     body:&#39;This is a message&#39; 
+   });
+   $scope.inbox.updated = Date.now();
+};</code></pre>
+<ol>
+<li>The <code>getMessages</code> function simply pushes a mocked message object into the <code>inbox.messages</code> array that is defined on the scope.</li>
+<li>Then the <code>inbox.updated</code> property on the controllers scope is updated to the current timestamp.</li>
+</ol>
+<p><strong>In the view:</strong></p>
+<pre><code>&lt;ul&gt;
+   &lt;li ng-repeat=&quot;item in inbox.messages | orderBy:&#39;date&#39;&quot;&gt;
+     {{ item.body }}
+   &lt;/li&gt;
+ &lt;/ul&gt;
+&lt;p&gt;Last checked @ {{ inbox.updated | date:&#39;mediumTime&#39; }}&lt;/p&gt;
+&lt;button ng-click=&quot;getMessages()&quot;&gt;Refresh&lt;/button&gt;</code></pre>
+<p>The code above: </p>
+<ol>
+<li>The <code>li</code> element has the <code>ng-repeat</code> directive which tell angular to repeat the element for each item in the collection.</li>
+<li>Inside the element, using double curly braces <code>{{ }}</code> the value of the <code>body</code> property is retrieved from the current item being repeated.</li>
+<li>After the list, inside the paragraph element, using data-binding syntax and an Angular filter, the timestamp is formatted for display.</li>
+<li>Finally a simple button is used with the <code>ng-click</code> directive to trigger the <code>getMessages</code> function defined in the controller</li>
+</ol>
+<blockquote>
+<p>Usually you make a request for real data, this is just an example of data binding.</p>
+</blockquote>
+<h5 id="my-angular-project_angularjs-concepts_services">Services</h5>
+<p>A service is a reusable piece of business logic independent of views. In Angular, services are singletons objects or functions that contain methods common with web applications, Angular has a number of built in services that simplify various tasks within a web application, Angular also supports custom services which allow a developer to create reusable modules with ease. </p>
+<pre><code>$scope.getMessages = function(){
+    $http.get(&#39;/messages&#39;).success(function(data){
+        $scope.inbox.messages = data;
+        $scope.inbox.updated = Date.now();
+    });
+};</code></pre>
+<p>The code above:</p>
+<ol>
+<li>Uses Angular&#39;s <code>$http</code> service that provides access to the browser&#39;s XMLHttpRequest object for making requests.</li>
+<li>The success function then set the results from the response on the scopes <code>inbox.messages</code> property. </li>
+<li>Then the inbox.updated property is updated to the current timestamp.</li>
+</ol>
+<p>Angular provides many services, here are some frequently used service modules:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Descriptions</th>
+<th>Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$cookieStore</code></td>
+<td>Provides a key-value storage that falls back to session cookies.</td>
+<td><code>get</code> <code>put</code> <code>remove</code></td>
+</tr>
+<tr>
+<td><code>$http</code></td>
+<td>Provides communication with remote HTTP servers via the XMLHttpRequest object or via JSONP.</td>
+<td><code>head</code> <code>get</code> <code>post</code> <code>put</code> <code>delete</code> <code>jsonp</code></td>
+</tr>
+<tr>
+<td><code>$location</code></td>
+<td>Parses the URL in the browsers address bar and makes the URL available to the application.</td>
+<td><code>absUrl</code> <code>hash</code> <code>host</code> <code>path</code> <code>port</code> <code>replace</code> <code>search</code> <code>url</code></td>
+</tr>
+<tr>
+<td><code>$log</code></td>
+<td>Provides logging in the browsers console (if supported).</td>
+<td><code>debug</code> <code>error</code> <code>info</code> <code>log</code> <code>warn</code></td>
+</tr>
+<tr>
+<td><code>$resource</code></td>
+<td>Creates a resource object to interact with RESTful server-side data sources.</td>
+<td><code>get</code> <code>save</code> <code>query</code> <code>remove</code> <code>delete</code></td>
+</tr>
+<tr>
+<td><code>$q</code></td>
+<td>Provides a promise/deferred implementation.</td>
+<td><code>all</code> <code>defer</code> <code>resolve</code> <code>reject</code> <code>notify</code> <code>then</code> <code>when</code> </td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Methods are invoked in the form of <code>service.method</code> for example <code>$log.info(&#39;Hello&#39;)</code></p>
+</blockquote>
+<h5 id="my-angular-project_angularjs-concepts_dependency-injection">Dependency Injection</h5>
+<p>Dependency injection (DI) is a software design pattern that handles how a application manages its dependencies. Angular automatically creates and connects objects and functions together when a dependency is needed and provides an instance of that dependency. One of the simplest ways to use Angular&#39;s dependency injection is to pass the name of the dependency as the parameter name in the constructor function. </p>
+<p>Here are ways for using dependency injection:</p>
+<p><strong>1. Inferring</strong> - Use parameter names as names of service dependencies:</p>
+<pre><code>function MainCtrl($scope, $http, Custom) {
      // Business logic...
      Custom.method()
-}</p>
-
-<pre><code>**2. Annotation** - Use the $inject property which is a array of service names:
-</code></pre>
-
-<p>var MainCtrl = function(scope, api, custom) {
+}</code></pre>
+<p><strong>2. Annotation</strong> - Use the $inject property which is a array of service names:</p>
+<pre><code>var MainCtrl = function(scope, api, custom) {
   // Business logic...
 }
-MainCtrl['$inject'] = ['$scope', '$http', 'Custom'];</p>
-
-<pre><code>**3. Inline** - Use an array of service names before the function:
-</code></pre>
-
-<p>someModule.controller('MainCtrl', ['$scope',  '$http', 'Custom', function($scope, $http, Custom) {
+MainCtrl[&#39;$inject&#39;] = [&#39;$scope&#39;, &#39;$http&#39;, &#39;Custom&#39;];</code></pre>
+<p><strong>3. Inline</strong> - Use an array of service names before the function:</p>
+<pre><code>someModule.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;,  &#39;$http&#39;, &#39;Custom&#39;, function($scope, $http, Custom) {
   // Business logic...
-}]);</p>
-
-<pre><code>### Summary
-
-All of these concepts make AngularJS a truly powerful web application framework, with two-way data binding, client-side templating, dependency injection, services, filters, expressions, directives and model-view-controller principles make AngularJS a great choice for developing just about any size web app.
-
-
-
-
-
-
-
-
-
-## New Angular Project
-Now it is time to start using AngularJS to build a real-world web application that uses all of Angular's features to provide a robust scalable single-page-application.
-Since you already know how to get started creating AngularJS projects with Yo, let's scaffold a new project. 
-
-1. First, create a folder named `angular-cms` then make that the current working directory.
-2. Second, use the `yo angular:app` command to generate a new project.
-
-
-
-
-
-### Directory structure
-Take a look at the directory structure for the project that Yeoman created:
-
-
-1. **app:** Contains all of the front-end code; HTML, JS, CSS, images and dependencies.
-    a. **/bower_components:** Contains all libraries the application depends on.
-    b. **/images:** Contains images for the application.
-    c. **/scripts:** The main AngularJS codebase, this folder includes all the business logic.
-        0. **/app.coffee** Main entry point of application module definition and routing logic.
-        1. **/controllers:** Custom controllers go here.
-        2. **/directives:** Custom directives go here.
-        3. **/filters:** Custom filters go here.
-        4. **/services:** Reusable application services go here.
-    d. **/styles:** Contains all CSS/LESS/SASS files.
-    e. **/views:** The HTML partials for the views and the directives used in the application.
-* **node_modules:** Contains all project dependencies as node modules.
-* **routes:** Contains routes for the NodeJS server.
-* **test:** Contains all of the tests for the application
-    a. **/e2e:** Contains the e2e Angular Scenario tests.
-    b. **/routes:** Contains the unit tests for the server routes.
-    c. **/spec:** Contains the unit tests mirroring the structure of the app/scripts folder.
-* **www:** Contains all public assets.
-
-
-
-
-&gt; The folder additions for this project are the **routes** and **www** folder, this is where the middle tier of the application is going to live.
-
-
-
-
-### Application Anatomy
-Web applications are usually broken into logic chunks called 'tiers' where each tier handles a specific part of the processing, this application will use the Three-tier software architecture pattern which is broken down into the following:
-
-
-#### 1. Presentation tier
-The presentation layer will handle displaying data to the user and allow the user to manipulate data, the application will use AngularJS as the client-side framework of choice to manage keeping the data in sync with the view. Angular incorporates the basic principles of the MVC pattern into how it builds client-side web applications. 
-
-##### Model-View-Controller 
-Generally in a single page application (SPA) you create modules that contain a set of functionality, such as a view to display data, a model to store data and a controller to manage the relationship between the two and handle the business logic. 
-
-The MVC pattern is composed of three core components:
-
-* **Model** - The model is the data in an application which is displayed to the user, they are not concerned about the user interface (UI) or the business logic, a model has properties which get set on the scope; scopes are attached to the DOM by the controller and accessed by the View through expressions.
-
-* **View** - The view is the visual representation of a model, since views need to display data to the user they are not concerned with controller logic nor model logic, views usually know little information about the model and/or controller, views consist of HTML with directives and expressions; either as an external .html file or inline script tag.
-
-* **Controller** - The controller is responsible for setting the initial state of the model and augmenting the scope with methods to control behavior, the controller does not store the state its purpose is to manage the model. [EDIT]
-
-The reusable business logic will be in the form of Angular services, pieces of the user interface will also be broken down into directives to further simplify the logic of reusable components.
-
-
-
-#### 2. Middle tier
-The software in the middle tier is often called the middleware, there are a lot of good middleware solutions: ColdFusion, PHP, J2EE, Ruby on Rails, just to name a few. One of the solutions for this project will be NodeJS, which is a software platform used to build scalable network applications.
-
-**NodeJS features:** 
-
-* JavaScript is its scripting language.
-* Event-driven and non-blocking I/O model.
-* Single-threaded with built in HTTP server.
-
-
-##### Install Node
-Node offers a built-in HTTP web server that can handle serving our application just fine, but web application choosing a framework to aid with development is a good choice.
-</code></pre>
-
-<p>$ sudo install node</p>
-
-<pre><code>[ Discuss what just happened ]
-
-##### Install Express
-We are going to use Express, which is a minimal and flexible Node.js application framework providing a robust set of features for a building single and multi-page applications. 
-</code></pre>
-
-<p>$ npm install express --save</p>
-
-<pre><code>[ Discuss what just happened ]
-
-Express is going to handle the server side routes that produce a dynamic REST API that this project will leverage. 
-
-##### Install Socket.io
-Another middleware library we will use will be Socket.IO, which is a JavaScript library for realtime web applications which include both client/server components, and is event driven like NodeJS.
-</code></pre>
-
-<p>$ npm install socket.io --save
-```</p>
-
-<p>All of these technologies together will make up the middle tier which will power the application. </p>
-
-<h4 id="3datatier">3. Data tier</h5>
-
+}]);</code></pre>
+<h4 id="my-angular-project_angularjs-concepts_summary">Summary</h4>
+<p>All of these concepts make AngularJS a truly powerful web application framework, with two-way data binding, client-side templating, dependency injection, services, filters, expressions, directives and model-view-controller principles make AngularJS a great choice for developing just about any size web app.</p>
+<h3 id="my-angular-project_new-angular-project">New Angular Project</h3>
+<p>Now it is time to start using AngularJS to build a real-world web application that uses all of Angular&#39;s features to provide a robust scalable single-page-application.
+Since you already know how to get started creating AngularJS projects with Yo, let&#39;s scaffold a new project. </p>
+<ol>
+<li>First, create a folder named <code>angular-cms</code> then make that the current working directory.</li>
+<li>Second, use the <code>yo angular:app</code> command to generate a new project.</li>
+</ol>
+<h4 id="my-angular-project_new-angular-project_directory-structure">Directory structure</h4>
+<p>Take a look at the directory structure for the project that Yeoman created:</p>
+<ol>
+<li><strong>app:</strong> Contains all of the front-end code; HTML, JS, CSS, images and dependencies.
+ a. <strong>/bower_components:</strong> Contains all libraries the application depends on.
+ b. <strong>/images:</strong> Contains images for the application.
+ c. <strong>/scripts:</strong> The main AngularJS codebase, this folder includes all the business logic.<pre><code> 0. **/app.coffee** Main entry point of application module definition and routing logic.
+ 1. **/controllers:** Custom controllers go here.
+ 2. **/directives:** Custom directives go here.
+ 3. **/filters:** Custom filters go here.
+ 4. **/services:** Reusable application services go here.</code></pre>
+ d. <strong>/styles:</strong> Contains all CSS/LESS/SASS files.
+ e. <strong>/views:</strong> The HTML partials for the views and the directives used in the application.</li>
+<li><strong>node_modules:</strong> Contains all project dependencies as node modules.</li>
+<li><strong>routes:</strong> Contains routes for the NodeJS server.</li>
+<li><strong>test:</strong> Contains all of the tests for the application
+  a. <strong>/e2e:</strong> Contains the e2e Angular Scenario tests.
+  b. <strong>/routes:</strong> Contains the unit tests for the server routes.
+  c. <strong>/spec:</strong> Contains the unit tests mirroring the structure of the app/scripts folder.</li>
+<li><strong>www:</strong> Contains all public assets.</li>
+</ol>
+<blockquote>
+<p>The folder additions for this project are the <strong>routes</strong> and <strong>www</strong> folder, this is where the middle tier of the application is going to live.</p>
+</blockquote>
+<h4 id="my-angular-project_new-angular-project_application-anatomy">Application Anatomy</h4>
+<p>Web applications are usually broken into logic chunks called &#39;tiers&#39; where each tier handles a specific part of the processing, this application will use the Three-tier software architecture pattern which is broken down into the following:</p>
+<h5 id="my-angular-project_new-angular-project_application-anatomy_1-presentation-tier">1. Presentation tier</h5>
+<p>The presentation layer will handle displaying data to the user and allow the user to manipulate data, the application will use AngularJS as the client-side framework of choice to manage keeping the data in sync with the view. Angular incorporates the basic principles of the MVC pattern into how it builds client-side web applications. </p>
+<h6 id="my-angular-project_new-angular-project_application-anatomy_1-presentation-tier_model-view-controller">Model-View-Controller</h6>
+<p>Generally in a single page application (SPA) you create modules that contain a set of functionality, such as a view to display data, a model to store data and a controller to manage the relationship between the two and handle the business logic. </p>
+<p>The MVC pattern is composed of three core components:</p>
+<ul>
+<li><p><strong>Model</strong> - The model is the data in an application which is displayed to the user, they are not concerned about the user interface (UI) or the business logic, a model has properties which get set on the scope; scopes are attached to the DOM by the controller and accessed by the View through expressions.</p>
+</li>
+<li><p><strong>View</strong> - The view is the visual representation of a model, since views need to display data to the user they are not concerned with controller logic nor model logic, views usually know little information about the model and/or controller, views consist of HTML with directives and expressions; either as an external .html file or inline script tag.</p>
+</li>
+<li><p><strong>Controller</strong> - The controller is responsible for setting the initial state of the model and augmenting the scope with methods to control behavior, the controller does not store the state its purpose is to manage the model. [EDIT]</p>
+</li>
+</ul>
+<p>The reusable business logic will be in the form of Angular services, pieces of the user interface will also be broken down into directives to further simplify the logic of reusable components.</p>
+<h5 id="my-angular-project_new-angular-project_application-anatomy_2-middle-tier">2. Middle tier</h5>
+<p>The software in the middle tier is often called the middleware, there are a lot of good middleware solutions: ColdFusion, PHP, J2EE, Ruby on Rails, just to name a few. One of the solutions for this project will be NodeJS, which is a software platform used to build scalable network applications.</p>
+<p><strong>NodeJS features:</strong> </p>
+<ul>
+<li>JavaScript is its scripting language.</li>
+<li>Event-driven and non-blocking I/O model.</li>
+<li>Single-threaded with built in HTTP server.</li>
+</ul>
+<h6 id="my-angular-project_new-angular-project_application-anatomy_2-middle-tier_install-node">Install Node</h6>
+<p>Node offers a built-in HTTP web server that can handle serving our application just fine, but web application choosing a framework to aid with development is a good choice.</p>
+<pre><code>$ sudo install node</code></pre>
+<p>[ Discuss what just happened ]</p>
+<h6 id="my-angular-project_new-angular-project_application-anatomy_2-middle-tier_install-express">Install Express</h6>
+<p>We are going to use Express, which is a minimal and flexible Node.js application framework providing a robust set of features for a building single and multi-page applications. </p>
+<pre><code>$ npm install express --save</code></pre>
+<p>[ Discuss what just happened ]</p>
+<p>Express is going to handle the server side routes that produce a dynamic REST API that this project will leverage. </p>
+<h6 id="my-angular-project_new-angular-project_application-anatomy_2-middle-tier_install-socketio">Install Socket.io</h6>
+<p>Another middleware library we will use will be Socket.IO, which is a JavaScript library for realtime web applications which include both client/server components, and is event driven like NodeJS.</p>
+<pre><code>$ npm install socket.io --save</code></pre>
+<p> All of these technologies together will make up the middle tier which will power the application. </p>
+<h5 id="my-angular-project_new-angular-project_application-anatomy_3-data-tier">3. Data tier</h5>
 <p>The software that is going to power the data store will be MongoDB, which is an open-source NoSQL database.</p>
-
 <p><strong>MongoDB features:</strong></p>
-
 <ul>
 <li><strong>Document-Oriented</strong> - JSON style documents with dynamic schemas</li>
 <li><strong>Full index</strong> - Index any attribute</li>
@@ -742,57 +471,32 @@ Another middleware library we will use will be Socket.IO, which is a JavaScript 
 <li><strong>Map/Reduce</strong> - Flexible aggregation and data processing.</li>
 <li><strong>GridFS</strong> - Store files of any size</li>
 </ul>
-
-<h5 id="installmongodb">Install MongoDB</h6>
-
+<h6 id="my-angular-project_new-angular-project_application-anatomy_3-data-tier_install-mongodb">Install MongoDB</h6>
 <p>To install MongoDB open up the terminal and enter the following:</p>
-
 <p>Download the latest release:</p>
-
-<pre><code>$ curl -O http://downloads.mongodb.org/osx/mongodb-osx-x86_64-2.4.8.tgz
-</code></pre>
-
+<pre><code>$ curl -O http://downloads.mongodb.org/osx/mongodb-osx-x86_64-2.4.8.tgz</code></pre>
 <p>Extract MongoDB from archive:</p>
-
-<pre><code>$ tar -zxvf mongodb-osx-x86_64-2.4.8.tgz
-</code></pre>
-
+<pre><code>$ tar -zxvf mongodb-osx-x86_64-2.4.8.tgz</code></pre>
 <p>Copy MongoDB to target directory:</p>
-
 <pre><code>$ mkdir -p ~/mongodb
-$ cp -R -n mongodb-osx-x86_64-2.4.8/ ~/mongodb/
-</code></pre>
-
+$ cp -R -n mongodb-osx-x86_64-2.4.8/ ~/mongodb/</code></pre>
 <p>Add MongoDB system path:</p>
-
 <pre><code>$ vi ~/.bash_profile
 $ source ~/.bash_profile 
-$ echo $PATH
-</code></pre>
-
+$ echo $PATH</code></pre>
 <p>Test your installation:</p>
-
-<pre><code>$ mongod
-</code></pre>
-
-<h3 id="applicationscope">Application Scope</h4>
-
+<pre><code>$ mongod</code></pre>
+<h4 id="my-angular-project_new-angular-project_application-scope">Application Scope</h4>
 <p>The application we are going to create will be a light-weight content management system (CMS) for managing different types of data, the CMS will be able to handle basic user authentication and a registration system for new users. The administrators of the CMS will have the ability to create new content types for management and manage the users of the application. </p>
-
 <p>There are three (3) types of users: </p>
-
 <ol>
 <li><strong>Public</strong> - Visitors of the site are classified as public until authenticated.</li>
 <li><strong>Member</strong> - Registered users are classified as members with limited access to content.</li>
 <li><strong>Admin</strong> - Admin users have control over all registered users and content.</li>
 </ol>
-
 <p>Once a user has be authenticated with the CMS they will be directed to the CMS dashboard where the user will be able to manage and view content, the content is to be displayed in widgets on the dashboard, users will be associated with roles which allow actions to be enabled per role.</p>
-
-<h3 id="developmentprocess">Development Process</h4>
-
+<h4 id="my-angular-project_new-angular-project_development-process">Development Process</h4>
 <p>The development process is going to be based on the Story-driven modeling approach which includes:</p>
-
 <ol>
 <li><strong>Textual scenario</strong> - Each story will have a textual scenario that describes what should occur.</li>
 <li><strong>GUI mock-up</strong> - Visual mock-ups of the story will show how the UI should look. </li>
@@ -802,24 +506,18 @@ $ echo $PATH
 <li><strong>Implementation</strong> - The actual development of the code will take place.</li>
 <li><strong>Testing</strong> - Unit and e2e testing will then verify the implementation of the story.</li>
 </ol>
-
-<h2 id="summary">Summary</h3>
-
+<h3 id="my-angular-project_summary">Summary</h3>
 <p>In this chapter we learned about the core concepts of AngularJS and how they work by examining some code examples, we also explored some commonly used AngularJS directives like:</p>
-
 <ul>
 <li>The <code>ng-repeat</code> directive, which repeats a block of content for each item in a collection</li>
 <li>The <code>ng-src</code> directive, which prevents the web browser from fetching URLs that have yet to be evaluated by AngularJS which fixes broken links in the application while it is being initialized.</li>
 </ul>
-
 <p>We also covered topics regarding a new angular application and the directory structure, as well as the applications anatomy that we are going to build which includes:</p>
-
 <ol>
 <li>Presentation tier</li>
 <li>Middle tier</li>
 <li>Data tier</li>
 </ol>
-
 <p>We also discussed the scope of the application we are going to create and the process that is going to be used while in development, which includes scenarios, mock-ups, storyboards, class diagrams, algorithm design, implementation and testing. </p>
-
-<p>Next chapter we will get our hands dirty by implementing some stories in the project, so get ready to start developing with a process used by modern web developers.</p></div>
+<p>Next chapter we will get our hands dirty by implementing some stories in the project, so get ready to start developing with a process used by modern web developers.</p>
+</div></div>

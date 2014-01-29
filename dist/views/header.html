@@ -1,0 +1,59 @@
+<nav id="cms-navbar" class="container navbar-fixed-top" role="navigation">
+     <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#cms-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+			<img ng-src="{{App.sitebrand}}" class="brand-img">
+			<span class="brand">{{App.sitetitle}}</span>
+		</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div id="cms-navbar-collapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ng-repeat="item in App.menu.pub" ng-include="" src="'menu-item.html'"></li>
+        </ul>
+        <ul class="nav navbar-nav pull-right" ng-controller="LoginCtrl">
+          <li class="dropdown" ng-if="App.session.authorized">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="https://www.gravatar.com/avatar/b4c0fecb38a48d57acf43350ee318107?s=20" class="img-circle">
+              <span>
+                {{ App.session.user.username }}
+              </span>
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#/profile">My Profile</a>
+              </li>
+              <li>
+                <a href="#/settings">Settings</a>
+              </li>
+              <li>
+                <a href="#/help">Help</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a ng-click="logout()">Logout</a>
+              </li>
+            </ul>
+          </li>
+          <li ng-hide="App.session.authorized">
+            <a class="login-btn" href="#/login"><i class="fa fa-1x fa-lock"></i> Login</a>
+          </li>
+        </ul>
+      </div>    
+  </nav>
+
+
+
+<script id="menu-item.html" type="text/ng-template">
+	<a ng-href="#{{item.href}}">
+		<i class="fa fa-1x fa-{{item.icon}}"></i>
+		{{item.title}}
+	</a>
+</script>

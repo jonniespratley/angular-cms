@@ -1,5 +1,5 @@
 /*!
- * bootstrap-select v1.4.2
+ * bootstrap-select v1.4.3
  * http://silviomoreto.github.io/bootstrap-select/
  *
  * Copyright 2013 bootstrap-select
@@ -23,6 +23,7 @@
         this.$newElement = null;
         this.$button = null;
         this.$menu = null;
+        this.$lis = null;
 
         //Merge defaults, options and data-attributes to make our options
         this.options = $.extend({}, $.fn.selectpicker.defaults, this.$element.data(), typeof options == 'object' && options);
@@ -47,9 +48,12 @@
         constructor: Selectpicker,
 
         init: function() {
+            var that = this,
+                id = this.$element.attr('id');
+
             this.$element.hide();
             this.multiple = this.$element.prop('multiple');
-            var id = this.$element.attr('id');
+            this.autofocus = this.$element.prop('autofocus');
             this.$newElement = this.createView();
             this.$element.after(this.$newElement);
             this.$menu = this.$newElement.find('> .dropdown-menu');
@@ -57,7 +61,6 @@
             this.$searchbox = this.$newElement.find('input');
 
             if (id !== undefined) {
-                var that = this;
                 this.$button.attr('data-id', id);
                 $('label[for="' + id + '"]').click(function(e) {
                     e.preventDefault();
@@ -67,16 +70,12 @@
 
             this.checkDisabled();
             this.clickListener();
-            if (this.options.liveSearch) {
-                this.liveSearchListener();
-            }
+            if (this.options.liveSearch) this.liveSearchListener();
             this.render();
             this.liHeight();
             this.setStyle();
             this.setWidth();
-            if (this.options.container) {
-                this.selectPosition();
-            }
+            if (this.options.container) this.selectPosition();
             this.$menu.data('this', this);
             this.$newElement.data('this', this);
         },
@@ -84,11 +83,12 @@
         createDropdown: function() {
             //If we are multiple, then add the show-tick class by default
             var multiple = this.multiple ? ' show-tick' : '';
+            var autofocus = this.autofocus ? ' autofocus' : '';
             var header = this.options.header ? '<div class="popover-title"><button type="button" class="close" aria-hidden="true">&times;</button>' + this.options.header + '</div>' : '';
             var searchbox = this.options.liveSearch ? '<div class="bootstrap-select-searchbox"><input type="text" class="input-block-level form-control" /></div>' : '';
             var drop =
                 '<div class="btn-group bootstrap-select' + multiple + '">' +
-                    '<button type="button" class="btn dropdown-toggle selectpicker" data-toggle="dropdown">' +
+                    '<button type="button" class="btn dropdown-toggle selectpicker" data-toggle="dropdown"'+ autofocus +'>' +
                         '<span class="filter-option pull-left"></span>&nbsp;' +
                         '<span class="caret"></span>' +
                     '</button>' +
@@ -197,14 +197,16 @@
                  '</a>';
         },
 
-        render: function() {
+        render: function(updateLi) {
             var that = this;
 
             //Update the LI to match the SELECT
-            this.$element.find('option').each(function(index) {
-               that.setDisabled(index, $(this).is(':disabled') || $(this).parent().is(':disabled') );
-               that.setSelected(index, $(this).is(':selected') );
-            });
+            if (updateLi !== false) {
+                this.$element.find('option').each(function(index) {
+                   that.setDisabled(index, $(this).is(':disabled') || $(this).parent().is(':disabled') );
+                   that.setSelected(index, $(this).is(':selected') );
+                });
+            }
 
             this.tabIndex();
 
@@ -266,7 +268,7 @@
         },
 
         liHeight: function() {
-            var $selectClone = this.$menu.parent().clone().appendTo('body'),
+            var $selectClone = this.$menu.parent().clone().find('> .dropdown-toggle').prop('autofocus', false).end().appendTo('body'),
                 $menuClone = $selectClone.addClass('open').find('> .dropdown-menu'),
                 liHeight = $menuClone.find('li > a').outerHeight(),
                 headerHeight = this.options.header ? $menuClone.find('.popover-title').outerHeight() : 0,
@@ -406,6 +408,7 @@
         },
 
         refresh: function() {
+            this.$lis = null;
             this.reloadLi();
             this.render();
             this.setWidth();
@@ -423,14 +426,16 @@
         },
 
         setSelected: function(index, selected) {
-            this.$menu.find('li').eq(index).toggleClass('selected', selected);
+            if (this.$lis == null) this.$lis = this.$menu.find('li');
+            $(this.$lis[index]).toggleClass('selected', selected);
         },
 
         setDisabled: function(index, disabled) {
+            if (this.$lis == null) this.$lis = this.$menu.find('li');
             if (disabled) {
-                this.$menu.find('li').eq(index).addClass('disabled').find('a').attr('href', '#').attr('tabindex', -1);
+                $(this.$lis[index]).addClass('disabled').find('a').attr('href', '#').attr('tabindex', -1);
             } else {
-                this.$menu.find('li').eq(index).removeClass('disabled').find('a').removeAttr('href').attr('tabindex', 0);
+                $(this.$lis[index]).removeClass('disabled').find('a').removeAttr('href').attr('tabindex', 0);
             }
         },
 
@@ -495,19 +500,21 @@
 
                 //Dont run if we have been disabled
                 if (!that.isDisabled() && !$(this).parent().hasClass('disabled')) {
-                    var $options = that.$element.find('option');
-                    var $option = $options.eq(clickedIndex);
+                    var $options = that.$element.find('option'),
+                        $option = $options.eq(clickedIndex),
+                        state = $option.prop('selected');
 
                     //Deselect all others if not multi select box
                     if (!that.multiple) {
                         $options.prop('selected', false);
                         $option.prop('selected', true);
+                        that.$menu.find('.selected').removeClass('selected');
+                        that.setSelected(clickedIndex, true);
                     }
                     //Else toggle the one we have chosen if we are multi select.
                     else {
-                        var state = $option.prop('selected');
-
                         $option.prop('selected', !state);
+                        that.setSelected(clickedIndex, !state);
                     }
 
                     if (!that.multiple) {
@@ -544,7 +551,7 @@
             });
 
             this.$element.change(function() {
-                that.render();
+                that.render(false);
             });
         },
 
@@ -571,7 +578,7 @@
                     
                     if (!that.$menu.find('li').filter(':visible:not(.no-results)').length) {
                         if (!!no_results.parent().length) no_results.remove();
-                        no_results.html('No results match "'+ that.$searchbox.val() + '"').show();
+                        no_results.html(that.options.noneResultsText + ' "'+ that.$searchbox.val() + '"').show();
                         that.$menu.find('li').last().after(no_results);
                     } else if (!!no_results.parent().length) {
                         no_results.remove();
@@ -837,6 +844,7 @@
         title: null,
         selectedTextFormat : 'values',
         noneSelectedText : 'Nothing selected',
+        noneResultsText : 'No results match',
         countSelectedText: '{0} of {1} selected',
         width: false,
         container: false,

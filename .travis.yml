@@ -6,9 +6,10 @@ before_script:
   - 'npm install -g bower grunt-cli'
   - 'bower install'
 #  - 'sudo sh ./bin/db.sh'
-#  - sleep 3
-#  - 'node server'
-#  - sleep 3
+  #- sleep 3
+  #- 'grunt test'
+  #- sleep 3
+  #- 'npm install'
 deploy:
   provider: heroku
   api_key: '6ac65b88-dd6d-421f-9fc7-c9ae18f71cb4'
@@ -16,4 +17,4 @@ deploy:
     all_branches: true
 run:
   - "grunt build"
-  - "node server"
+  - "npm start"

@@ -1,29 +1,61 @@
 {
-  "author": "Olivier Louvignes",
   "name": "angular-strap",
-  "description": "AngularStrap - Twitter Bootstrap directives for AngularJS",
-  "version": "0.7.8",
-  "homepage": "http://mgcrea.github.com/angular-strap",
+  "description": "AngularStrap - AngularJS directives for Twitter Bootstrap",
+  "version": "2.0.0-rc.1",
+  "keywords": [
+    "angular",
+    "bootstrap"
+  ],
+  "homepage": "http://mgcrea.github.io/angular-strap",
+  "bugs": "https://github.com/mgcrea/angular-strap/issues",
+  "author": {
+    "name": "Olivier Louvignes",
+    "email": "olivier@mg-crea.com",
+    "url": "https://github.com/mgcrea"
+  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/angular-strap/angular-strap.git"
+    "url": "https://github.com/mgcrea/angular-strap.git"
   },
-  "main": "./dist/angular-strap.min.js",
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "main": [
+    "dist/angular-strap.min.js",
+    "dist/angular-strap.tpl.min.js"
+  ],
+  "ignore": [
+    "docs",
+    "test",
+    "CONTRIBUTING.md"
+  ],
   "dependencies": {
-    "jquery": ">= 1.8.0",
-    "bootstrap": ">= 2.2.0",
-    "bootstrap-datepicker": ">= 1.0.0",
-    "bootstrap-timepicker": ">= 0.2.2",
-    "bootstrap-select": "latest"
+    "angular": "~1.2.9",
+    "bootstrap": "~3.0.3"
   },
-  "_release": "0.7.8",
+  "devDependencies": {
+    "angular-animate": "~1.2.9",
+    "angular-i18n": "~1.2.9",
+    "angular-mocks": "~1.2.9",
+    "angular-motion": "~0.3.0",
+    "angular-route": "~1.2.9",
+    "angular-sanitize": "~1.2.9",
+    "angular-scenario": "~1.2.9",
+    "fastclick": "~0.6.10",
+    "font-awesome": "~4.0.3",
+    "highlightjs": "~8.0.0",
+    "jquery": "~2.0.3"
+  },
+  "_release": "2.0.0-rc.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.7.8",
-    "commit": "1dd96b9532c15eb044541ecc87cfaa856c1b239a"
+    "tag": "v2.0.0-rc.1",
+    "commit": "d765e55779036561385166a35e33c2c3c6d78a54"
   },
   "_source": "git://github.com/mgcrea/angular-strap.git",
-  "_target": "~0.7.8",
+  "_target": "~2.0.0",
   "_originalSource": "angular-strap",
   "_direct": true
 }

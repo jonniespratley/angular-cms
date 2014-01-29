@@ -1,6 +1,5 @@
 language: node_js
 node_js:
-  - "0.8"
   - "0.10"
 
 before_script:
@@ -8,7 +7,9 @@ before_script:
   - export PHANTOMJS_BIN=/usr/local/phantomjs/bin/phantomjs
   - sh -e /etc/init.d/xvfb start
   - sleep 3 # give xvfb some time to start
-  - npm install -g grunt-cli
+  - npm install -gq grunt-cli bower coveralls
+  - bower install --dev
+  - date --rfc-2822
 
 script:
-  - grunt
+  - grunt jshint test coveralls build

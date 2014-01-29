@@ -1,109 +1,319 @@
 'use strict';
 
-module.exports = function(grunt) {
+// # Globbing
+// for performance reasons we're only matching one level down:
+// 'test/spec/{,*/}*.js'
+// use this if you want to recursively match all subfolders:
+// 'test/spec/**/*.js'
 
-  // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+module.exports = function (grunt) {
 
-  // livereload
-  var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-  var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
-  };
+  // Load grunt tasks automatically
+  require('load-grunt-tasks')(grunt);
 
-  // configurable paths
-  var yeomanConfig = {
-    src: 'src',
-    dist: 'dist'
-  };
+  // Time how long tasks take. Can help when optimizing build times
+  // require('time-grunt')(grunt);
 
-  // Project configuration.
+  // Define the configuration for all the tasks
   grunt.initConfig({
-    yeoman: yeomanConfig,
-    pkg: grunt.file.readJSON('package.json'),
+
+    // Project meta
+    pkg: require('./package.json'),
+    bower: require('./bower.json'),
     meta: {
       banner: '/**\n' +
-        ' * <%= pkg.description %>\n' +
-        ' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        ' * @link <%= pkg.homepage %>\n' +
-        ' * @author <%= pkg.author %>\n' +
-        ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
-        ' */\n\n'
+      ' * <%= pkg.name %>\n' +
+      ' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+      ' * @link <%= pkg.homepage %>\n' +
+      ' * @author <%= pkg.author %>\n' +
+      ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
+      ' */\n'
     },
+
+    // Project settings
+    yo: {
+      // Configurable paths
+      src: require('./bower.json').appPath || 'src',
+      dist: 'dist',
+      docs: 'docs',
+      pages: 'pages'
+    },
+
+    // Watches files for changes and runs tasks based on the changed files
     watch: {
-      livereload: {
-        files: [
-          '{.tmp,<%= yeoman.src %>}/{,*/}*.js'
-        ],
-        tasks: ['livereload']
-      }
-    },
-    connect: {
-      options: {
-        port: 9000,
-        hostname: 'localhost'
+      js: {
+        files: ['{.tmp,<%= yo.src %>}/scripts/{,*/}*.js'],
+        tasks: ['newer:jshint:all']
+      },
+      jsTest: {
+        files: ['test/spec/{,*/}*.js'],
+        tasks: ['newer:jshint:test', 'karma']
+      },
+      styles: {
+        options: {
+          spawn: false
+        },
+        files: ['{docs,<%= yo.src %>}/styles/{,*/}*.less'],
+        tasks: ['less:dev', 'autoprefixer']
+      },
+      gruntfile: {
+        files: ['Gruntfile.js']
       },
       livereload: {
         options: {
-          middleware: function (connect) {
-            return [
-              lrSnippet,
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.src)
-            ];
-          }
+          livereload: '<%= connect.options.livereload %>'
+        },
+        files: [
+          '{docs,.dev,<%= yo.src %>}/{,*/}{,docs/}*.html',
+          '{docs,.tmp,<%= yo.src %>}/{,*/}*.css',
+          '{docs,.dev,.tmp,<%= yo.src %>}/{,*/}*.js',
+          '{docs,<%= yo.src %>}/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
+      }
+    },
+
+    // The actual grunt server settings
+    connect: {
+      options: {
+        port: 9000,
+        // Change this to '0.0.0.0' to access the server from outside.
+        hostname: '0.0.0.0',
+        livereload: 35729
+      },
+      livereload: {
+        options: {
+          open: true,
+          base: [
+            '.tmp',
+            '.dev',
+            'docs',
+            '<%= yo.src %>'
+          ]
         }
       },
       test: {
         options: {
-          port: 9090,
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
-            ];
-          }
+          port: 9001,
+          base: [
+            '.tmp',
+            'test',
+            '<%= yo.src %>'
+          ]
+        }
+      },
+      dist: {
+        options: {
+          base: '<%= yo.dist %>'
         }
       }
     },
+
+    // Make sure code styles are up to par and there are no obvious mistakes
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
+      },
+      all: [
+        'Gruntfile.js',
+        '<%= yo.src %>/scripts/{,*/}*.js'
+      ],
+      test: {
+        options: {
+          jshintrc: 'test/.jshintrc'
+        },
+        src: ['test/spec/{,*/}*.js']
+      }
+    },
+
+    // Empties folders to start fresh
     clean: {
       dist: {
         files: [{
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '<%= yo.dist %>/*',
+            '!<%= yo.dist %>/.git*'
+          ]
+        }]
+      },
+      docs: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= yo.pages %>/*',
+            '!<%= yo.pages %>/.git*'
           ]
         }]
       },
       server: '.tmp'
     },
-    jshint: {
+
+    // Compile less stylesheets
+    less: {
       options: {
-        jshintrc: '.jshintrc'
       },
-      all: [
-        'Gruntfile.js',
-        '<%= yeoman.src %>/{,*/}*.js'
-      ]
-    },
-    karma: {
-      options: {
-        configFile: 'test/karma.conf.js',
-        browsers: ['PhantomJS']
+      dev: {
+        options: {
+          dumpLineNumbers: 'comments',
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yo.docs %>/styles/',
+          src: '*.less',
+          dest: '.tmp/styles/',
+          ext: '.css'
+        }]
       },
-      unit: {
-        singleRun: true
-      },
-      server: {
-        autoWatch: true
+      docs: {
+        options: {
+          cleancss: true,
+          report: 'gzip'
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yo.docs %>/styles/',
+          src: '*.less',
+          dest: '.tmp/styles/',
+          ext: '.css'
+        }]
       }
     },
-    concat: {
+
+    // Add vendor prefixed styles
+    autoprefixer: {
       options: {
-        banner: '<%= meta.banner %>'
+        browsers: ['last 2 versions']
       },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/styles/',
+          src: '{,*/}*.css',
+          dest: '.tmp/styles/'
+        }]
+      }
+    },
+
+    // Reads HTML for usemin blocks to enable smart builds that automatically
+    // concat, minify and revision files. Creates configurations in memory so
+    // additional tasks can operate on them
+    useminPrepare: {
+      html: '<%= yo.docs %>/index.html',
+      options: {
+        dest: '<%= yo.pages %>'
+      }
+    },
+
+    // Performs rewrites based on rev and the useminPrepare configuration
+    usemin: {
+      html: '<%= yo.pages %>/index.html',
+      css: ['<%= yo.pages %>/styles/{,*/}*.css'],
+      options: {
+        assetsDirs: ['<%= yo.pages %>', '<%= yo.pages %>/images']
+      }
+    },
+
+    // Embed static ngincludes
+    nginclude: {
+      docs: {
+        files: [{
+          src: '<%= yo.docs %>/index.html',
+          dest: '<%= yo.pages %>/index.html'
+        }],
+        options: {
+          assetsDirs: ['<%= yo.src %>', '<%= yo.docs %>']
+        }
+      }
+    },
+
+    // Minify html files
+    htmlmin: {
+      options: {
+        collapseWhitespace: true,
+        removeComments: false
+      },
+      docs: {
+        files: [{
+          expand: true,
+          cwd: '<%= yo.pages %>',
+          src: ['*.html'],//, 'views/{,*/}*.html'],
+          dest: '<%= yo.pages %>'
+        }]
+      }
+    },
+
+    // Renames files for browser caching purposes
+    rev: {
+      dist: {
+        files: {
+          src: [
+            '<%= yo.pages %>/scripts/{,*/}*.js',
+            '<%= yo.pages %>/styles/{,*/}*.css',
+            '<%= yo.pages %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= yo.pages %>/styles/fonts/*'
+          ]
+        }
+      }
+    },
+
+    // Copies remaining files to places other tasks can use
+    copy: {
+      static: {
+        files: [{
+          expand: true,
+          cwd: '<%= yo.pages %>',
+          dest: '<%= yo.pages %>/static',
+          src: [
+            'images/{,*/}*.png',
+            'scripts/{,*/}*.js',
+            'styles/{,*/}*.css'
+          ]
+        }]
+      },
+      docs: {
+        files: [{
+          expand: true,
+          cwd: '<%= yo.docs %>/',
+          dest: '<%= yo.pages %>',
+          src: [
+            'images/*',
+            '1.0/**/*'
+          ]
+        }]
+      }
+    },
+
+    // Run some tasks in parallel to speed up the build process
+    concurrent: {
+      docs: [
+        'less:docs',
+        'uglify:generated',
+        'cssmin:generated'
+      ],
+      server: [
+        'less:dev'
+      ],
+      test: [
+        'less:dev'
+      ],
+      dist: [
+        'less:dist',
+        'imagemin',
+        'svgmin',
+        'htmlmin'
+      ]
+    },
+
+    concat: {
+      // generated: {
+      //   options: {
+      //     banner: '(function(window, document, $, undefined) {\n\'use strict\';\n',
+      //     footer: '\n})(window, document, window.jQuery);\n'
+      //   }
+      // },
       dist: {
         options: {
           // Replace all 'use strict' statements in the code with a single one at the top
@@ -114,95 +324,226 @@ module.exports = function(grunt) {
               src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
           }
         },
-        files: {
-          '<%= yeoman.dist %>/<%= pkg.name %>.js': [
-            '<%= yeoman.src %>/common.js',
-            '<%= yeoman.src %>/{,*/}*.js'
-          ]
-        }
+        files: [{
+          src: ['<%= yo.src %>/module.js', '<%= yo.src %>/{,*/}*.js'],
+          dest: '<%= yo.dist %>/<%= pkg.name %>.js'
+        }, {
+          src: ['<%= yo.dist %>/modules/{,*/}*.tpl.js'],
+          dest: '<%= yo.dist %>/<%= pkg.name %>.tpl.js'
+        }]
       },
       banner: {
-        banner: '<%= meta.banner %>',
-        src: ['<%= yeoman.dist %>/<%= pkg.name %>.js'],
-        dest: '<%= yeoman.dist %>/<%= pkg.name %>.js'
-      }
-    },
-    ngmin: {
-      // options: {
-      //   stripBanners: true,
-      //   banner: '<%= meta.banner %>'
-      // },
-      dist: {
+        options: {
+          banner: '<%= meta.banner %>',
+        },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: '<%= pkg.name %>.js',
-          dest: '<%= yeoman.dist %>'
+          cwd: '<%= yo.dist %>',
+          src: '{,*/}*.js',
+          dest: '<%= yo.dist %>'
+        }]
+      },
+      docs: {
+        options: {
+          banner: '<%= meta.banner %>',
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yo.pages %>',
+          src: ['scripts/{demo,docs,angular-strap}*', 'styles/{main}*'],
+          dest: '<%= yo.pages %>'
         }]
       }
     },
+
+    // Allow the use of non-minsafe AngularJS files. Automatically makes it
+    // minsafe compatible so Uglify does not destroy the ng references
+    ngmin: {
+      dist: {
+        files: [{
+          src: '<%= yo.dist %>/<%= pkg.name %>.js',
+          dest: '<%= yo.dist %>/<%= pkg.name %>.js'
+        }]
+      },
+      modules: {
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: '<%= yo.src %>',
+          src: '{,*/}*.js',
+          dest: '<%= yo.dist %>/modules'
+        }]
+      },
+      docs: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/concat/scripts',
+          src: '*.js',
+          dest: '.tmp/concat/scripts'
+        }]
+      }
+    },
+
+    ngtemplates:  {
+      test: {
+        options:  {
+          module: function(src) { return 'mgcrea.ngStrap.' + src.match(/src\/(.+)\/.*/)[1]; },
+          url: function(url) { return url.replace('src/', ''); },
+          htmlmin: { collapseWhitespace: true },
+          usemin: 'scripts/angular-strap.tpl.min.js' // docs
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: '<%= yo.src %>',
+          src: '{,*/}/*.tpl.html',
+          dest: '.tmp/ngtemplates',
+          ext: '.tpl.js'
+        }]
+      },
+      dist: {
+        options:  {
+          module: function(src) { return 'mgcrea.ngStrap.' + src.match(/src\/(.+)\/.*/)[1]; },
+          url: function(url) { return url.replace('src/', ''); },
+          htmlmin: { collapseWhitespace: true },
+        },
+        files: [{
+          expand: true,
+          flatten: true,
+          cwd: '<%= yo.src %>',
+          src: '{,*/}/*.tpl.html',
+          dest: '<%= yo.dist %>/modules',
+          ext: '.tpl.js'
+        }]
+      },
+      docs: {
+        options:  {
+          module: 'mgcrea.ngStrapDocs',
+          usemin: 'scripts/docs.tpl.min.js'
+        },
+        files: [{
+          cwd: '<%= yo.src %>',
+          src: '{,*/}docs/*.html',
+          dest: '.tmp/ngtemplates/scripts/src-docs.js'
+        },
+        {
+          cwd: '<%= yo.docs %>',
+          // src: 'views/{,*/}*.html',
+          src: 'views/{aside,sidebar}.html',
+          dest: '.tmp/ngtemplates/scripts/docs-views.js'
+        }
+        ]
+      }
+    },
+
     uglify: {
       dist: {
-        files: {
-          '<%= yeoman.dist %>/<%= pkg.name %>.min.js': [
-            '<%= yeoman.dist %>/<%= pkg.name %>.js'
-          ]
+        options: {
+          report: 'gzip',
+          sourceMap: '<%= yo.dist %>/<%= pkg.name %>.min.map',
+          sourceMappingURL: '<%= pkg.name %>.min.map'
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yo.dist %>',
+          src: '{,*/}*.js',
+          dest: '<%= yo.dist %>',
+          ext: '.min.js'
+        }, {
+          expand: true,
+          cwd: '<%= yo.dist %>',
+          src: '{,*/}*.tpl.js',
+          dest: '<%= yo.dist %>',
+          ext: '.tpl.min.js'
+        }]
+      }
+    },
+
+    // Test settings
+    karma: {
+      options: {
+        configFile: 'test/karma.conf.js',
+        browsers: ['PhantomJS']
+      },
+      unit: {
+        singleRun: true,
+        options: {
+          reporters: ['dots', 'coverage']
         }
+      },
+      server: {
+        autoWatch: true
+      }
+    },
+
+    coveralls: {
+      options: {
+        /*jshint camelcase: false */
+        coverage_dir: 'test/coverage/PhantomJS 1.9.2 (Linux)/'
       }
     }
+
   });
 
-  grunt.registerTask('server', [
-    'clean:server',
-    'livereload-start',
-    'connect:livereload',
-    'watch'
-  ]);
+
+  grunt.registerTask('serve', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'connect:dist:keepalive']);
+    }
+
+    grunt.task.run([
+      'clean:server',
+      'concurrent:server',
+      'autoprefixer',
+      'connect:livereload',
+      'watch'
+    ]);
+  });
 
   grunt.registerTask('test', [
     'clean:server',
-    'jshint',
+    // 'concurrent:test',
+    // 'autoprefixer',
+    'ngtemplates:test',
     'connect:test',
     'karma:unit'
   ]);
 
-  grunt.registerTask('test-server', [
-    'clean:server',
-    'connect:test',
-    'karma:server'
-  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
-    'test',
-    'concat',
-    'ngmin',
-    'concat:banner',
-    'uglify'
+    'ngtemplates:dist',
+    'concat:dist',
+    'ngmin:dist',
+    'ngmin:modules',
+    'uglify:dist',
+    'concat:banner'
   ]);
 
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('docs', [
+    'clean:docs',
+    'useminPrepare',
+    // 'concurrent:docs',
+    'less:docs',
+    'autoprefixer',
+    'nginclude:docs',
+    'ngtemplates:test',
+    'ngtemplates:docs',
+    'concat:generated',
+    'ngmin:docs',
+    'copy:docs',
+    'cssmin:generated',
+    'uglify:generated',
+    'concat:docs',
+    'copy:static',
+    'rev',
+    'usemin',
+    // 'htmlmin:docs' // breaks code preview
+  ]);
 
-  // Provides the "bump" task.
-  grunt.registerTask('bump', 'Increment version number', function() {
-    var versionType = grunt.option('type');
-    function bumpVersion(version, versionType) {
-      var type = {patch: 2, minor: 1, major: 0},
-          parts = version.split('.'),
-          idx = type[versionType || 'patch'];
-      parts[idx] = parseInt(parts[idx], 10) + 1;
-      while(++idx < parts.length) { parts[idx] = 0; }
-      return parts.join('.');
-    }
-    var version;
-    function updateFile(file) {
-      var json = grunt.file.readJSON(file);
-      version = json.version = bumpVersion(json.version, versionType || 'patch');
-      grunt.file.write(file, JSON.stringify(json, null, '  '));
-    }
-    updateFile('package.json');
-    updateFile('bower.json');
-    grunt.log.ok('Version bumped to ' + version);
-  });
+  grunt.registerTask('default', [
+    'newer:jshint',
+    'test',
+    'build'
+  ]);
 
 };

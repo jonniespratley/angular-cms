@@ -1,9 +1,18 @@
 window.Config =
 	baseurl: document.location.origin
-	sitetitle: "AngularCMS"
+	sitetitle: "angular-cms"
 	sitedesc: "This is the description"
+	sitebrand: '/images/angular-cms-brand.png'
+	sitecopy: "2014 "
+	version: '0.1'
 	email: "jonniespratley@me.com"
-	debug: false
+	debug: true
+
+	#I hold the home page feature content
+	feature: 
+	  title: 'angular-cms'
+	  body: 'A content management system of some sort.'
+	
 	features: [
 		id: 1
 		title: "HTML5"
@@ -35,27 +44,18 @@ window.Config =
 		body: "The database of choice is Mongo, its fast and scalable."
 		image: "/images/feature-mongodb.png"
 	]
-
+	
 	session: 
-		#FOr Demo
-		user:
-			email: 'jonniespratley@gmail.com'
-			username: 'admin'
-			password: 'fred'
-			role: 3
-	sidebar:
-		value: "sidebar"
-		url: "/views/partials/sidebar.html"
+		authorized: false
+		user: null
+	
+	layout: 
+    	header: "views/header.html"
+    	sidebar: "views/sidebar.html"
+    	content:"views/content.html"
+    	footer: "views/footer.html"
 
-	navbar:
-		value: "navbar"
-		url: "/views/partials/navbar.html"
-
-	layout:
-		id: 0
-		name: "Fixed"
-		value: "container"
-
+	#I hold the current theme that should be used
 	theme:
 		id: 0
 		title: "Default"
@@ -64,12 +64,12 @@ window.Config =
 		image: "/css/themes/theme0/splash.png"
 		body: ""
 
-	
 	#I hold values for the compiled templates location, uncompiled location
 	templates:
 		compiled: "/dist/templates.html"
 		uncompiled: "/views"
 
+	#I hold the contents of the applications menus
 	menu:
 		admin: [
 			id: 1
@@ -77,15 +77,15 @@ window.Config =
 			href: "/plugins"
 			icon: "folder-open"
 		,
-		 id: 1
-		 title: "Widgets"
-		 href: "/widgets"
-		 icon: "puzzle-piece"
+			id: 1
+			title: "Widgets"
+			href: "/widgets"
+			icon: "puzzle-piece"
 		,
-		 id: 1
-		 title: "Media"
-		 href: "/media"
-		 icon: "file-upload"
+			id: 1
+			title: "Media"
+			href: "/media"
+			icon: "cloud-download"
 		,
 			id: 1
 			title: "Users"
@@ -95,22 +95,32 @@ window.Config =
 			id: 1
 			title: "Themes"
 			href: "/themes"
-			icon: "picture"
+			icon: "camera"
 		,
 			id: 1
 			title: "Settings"
 			href: "/settings"
 			icon: "cog"
 		]
-		pub: [
+		pub: []
+		user: [
 			id: 1
-			title: "What's New"
-			icon: "star"
-			href: "/index"
-		]
-		user: []
+			title: "Dashboard"
+			icon: "dashboard"
+			href: "/dashboard"
+		,
+			id: 2
+			title: "My Profile"
+			icon: "user"
+			href: "/profile"
+		,
+			id: 3
+			title: "Help"
+			icon: "book"
+			href: "/help"
 
-	
+		]
+
 	#Install configuration
 	config:
 		currentdate: new Date()
@@ -200,14 +210,7 @@ window.Config =
 			id: 0
 			title: "Default"
 		]
-		themes: [
-			id: 0
-			title: "Default"
-			slug: "theme0"
-			type: "theme"
-			image: "/css/themes/theme0/splash.png"
-			body: ""
-		]
+		themes: [ 'Default', 'Amelia', 'Cerulean', 'Cosmo', 'Cyborg', 'Flatly', 'Journal', 'Readable', 'Simplex', 'Slate', 'Spacelab', 'United', 'Yeti' ]
 
 	logout:
 		redirect: "#/login"

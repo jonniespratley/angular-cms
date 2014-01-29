@@ -238,8 +238,8 @@ var RestResource = {
 		var query = {
 			email : req.body.email,
 			//Hashing on client side
-			//password : req.body.password
-			password : RestResource.hashPassword(req.body.password, req.body.email)
+			password : req.body.password
+			//password : RestResource.hashPassword(req.body.password, req.body.email)
 		};
 
 
@@ -807,7 +807,7 @@ function writeFile(localPath, contents) {
 //### modules
 //Gather all of the files and folders in the app/modules directory
 app.get('/api/v2/modules', function(req, res) {
-	var result = fs.readdir('./app/modules', function(err, files) {
+	var result = fs.readdir('./app/cms-content', function(err, files) {
 		console.log(files);
 		res.header('Content-Type', 'application/json');
 		res.jsonp(200, files);
