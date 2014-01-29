@@ -17,5 +17,10 @@ angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '
 		)
 	)
 
-	$log.info($rootScope);
+	$log.info($rootScope)
+	$scope.awesomeThings = [
+    'HTML5 Boilerplate'
+    'AngularJS'
+    'Karma'
+  ]
 ]
