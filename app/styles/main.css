@@ -19,6 +19,8 @@
 
 /* @group Global */
 
+/* @group Global */
+
 html {
 	overflow-x: hidden;
 }
@@ -37,8 +39,30 @@ h2 {
 	margin-top: 5px;
 }
 
+.app {
+	width: 100%;
+	display: block;
+	clear: both;
+	moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+	-webkit-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+	-moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+	-o-transition: width 1s ease-in-out, left 1.5s ease-in-out;
+	transition: width 1s ease-in-out, left 1.5s ease-in-out;
+}
+
+.view-animate-container {
+	position: relative;
+	position: relative;
+	min-height: 425px;
+	overflow: hidden;
+}
+
 .navbar-inverse {
 	border-bottom: 1px solid #444;
+}
+
+.center {
+	text-align: center;
 }
 
 footer {
@@ -47,6 +71,10 @@ footer {
 	color: #777;
 	text-align: center;
 }
+
+/* @end */
+
+/* @group Main */
 
 .feature {
 	margin: 5px 10px;
@@ -70,6 +98,10 @@ footer {
 	letter-spacing: -1px;
 }
 
+/* @end */
+
+/* @group Login */
+
 div.login {
 	max-width: 315px;
 	margin: 5px auto;
@@ -77,10 +109,6 @@ div.login {
 
 .avatar img {
 	max-height: 100px;
-}
-
-.center {
-	text-align: center;
 }
 
 .animate-show-hide {
@@ -111,30 +139,13 @@ div.login {
 
 }
 
+/* @end */
 
 /* @e
 
 nd */
 
 /* @group Sidebar */
-
-.app {
-	width: 100%;
-	display: block;
-	clear: both;
-	moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-	-webkit-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-	-moz-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-	-o-transition: width 1s ease-in-out, left 1.5s ease-in-out;
-	transition: width 1s ease-in-out, left 1.5s ease-in-out;
-}
-
-.view-animate-container {
-	position: relative;
-	position: relative;
-	min-height: 400px;
-	overflow: hidden;
-}
 
 .cms-sidebar-nav.fixed {
 	position: fixed;
@@ -144,9 +155,7 @@ nd */
 }
 
 .cms-sidebar {
-	border-radius: 0px;
-	position: relative;
-	left: -15px;
+	 	 
 	moz-transition: width .5s ease-in-out, left 1.5s ease-in-out;
 	-webkit-transition: width .5s ease-in-out, left 1.5s ease-in-out;
 	-moz-transition: width .5s ease-in-out, left 1.5s ease-in-out;
@@ -155,7 +164,7 @@ nd */
 }
 
 .cms-sidebar i {
-	margin-right: 4px;
+	 
 }
 
 .cms-sidebar-nav-toggle {
@@ -165,9 +174,10 @@ nd */
 }
 
 .cms-sidebar.closed {
-	width: 72px;
-	overflow: hidden !important;
-	display: block;
+width: 85px;
+display: block;
+clear: both;
+height: 100%;
 }
 
 .cms-sidebar.closed  span.title {
@@ -191,8 +201,16 @@ nd */
 	white-space: nowrap;
 }
 
+.cms-sidebar-nav {
+padding: 0;
+}
+
+.cms-sidebar {
+
+}
+
 .cms-sidebar-nav.well {
-	padding: 0;
+	
 }
 
 /* @end */
@@ -255,8 +273,8 @@ nd */
 }
 
 .view-animate.ng-enter, .view-animate.ng-leave {
-	-webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
-	transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
+	-webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
+	transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s;
 	display: block;
 	width: 100%;
 	position: absolute;
@@ -268,15 +286,18 @@ nd */
 }
 
 .view-animate.ng-enter {
-	left: 100%;
+	top: 100%;
+	opacity: .5;
 }
 
 .view-animate.ng-enter.ng-enter-active {
-	left: 0;
+	top: 0;
+	opacity: 1;
 }
 
 .view-animate.ng-leave.ng-leave-active {
-	left: -100%;
+	top: -100%;
+	opacity: 0;
 }
 
 /* Animate CSS */
@@ -534,6 +555,8 @@ nd */
 
 /* @end */
 
+/* @group Media > Uploader */
+
 /* Uploader */
 
 .uploader-dropzone h4 {
@@ -584,3 +607,5 @@ nd */
 .unhighlight {
 	border: 5px solid #ccc;
 }
+
+/* @end */
