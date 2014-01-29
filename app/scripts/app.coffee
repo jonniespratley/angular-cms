@@ -24,7 +24,8 @@ angular.module('angularCmsApp', [
 	'ngResource',
 	'ngSanitize',
 	'ngRoute',
-	'ngAnimate'
+	'ngAnimate',
+	'mgcrea.ngStrap'
 	#'$strap.directives'
 	#'cms.Templates'
 ])

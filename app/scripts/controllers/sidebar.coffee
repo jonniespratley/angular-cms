@@ -1,7 +1,6 @@
 'use strict'
 
-angular.module('angularCmsApp')
-	.controller 'SidebarCtrl', ($scope, $rootScope) ->
+angular.module('angularCmsApp').controller('SidebarCtrl', ($scope, $rootScope) ->
 		$scope.awesomeThings = [
 			'HTML5 Boilerplate'
 			'AngularJS'
@@ -23,7 +22,13 @@ angular.module('angularCmsApp')
 		$scope.sidebar = 
 			closed: false
 		
+		#Toggle sidebar
 		$scope.toggleSidebar = () ->
-			console.log @
 			$scope.sidebar.closed = !$scope.sidebar.closed
+		
+		
+		#tool tips for icons
+		
 
+
+)

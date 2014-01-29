@@ -110,9 +110,15 @@ window.Config =
 			href: "/dashboard"
 		,
 			id: 2
-			title: "Profile"
+			title: "My Profile"
 			icon: "user"
 			href: "/profile"
+		,
+			id: 3
+			title: "Help"
+			icon: "book"
+			href: "/help"
+
 		]
 
 	#Install configuration

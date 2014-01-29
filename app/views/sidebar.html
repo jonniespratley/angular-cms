@@ -1,4 +1,4 @@
-<div id="cms-sidebar-nav" class="well well-sm cms-sidebar-nav">
+<div id="cms-sidebar-nav" class="well well-sm cms-sidebar-nav bs-sidebar hidden-print" role="complementary" data-offset-top="-70" bs-affix>
   <nav id="cms-sidebar-nav-list" class="nav nav-list">
 	<li class="nav-header">
 		<a id="cms-sidebar-nav-toggle"
@@ -26,9 +26,14 @@
 
 <script id="sidebar-item.html" type="text/ng-template">
 	<a 
+		rel="tooltip"
+		title="{{item.title}}"
+		data-toggle="tooltip"
 		ng-click="select(item)"
 		ng-href="#{{item.href}}">
-		<i class="fa fa-1x fa-{{item.icon}}"></i>
+		<i class="fa fa-1x fa-{{item.icon}}" 
+		title="{{item.title}}"
+		bs-tooltip="tooltip"></i>
 		<span class="title">
 		{{item.title}}
 		</span>
