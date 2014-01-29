@@ -36,7 +36,6 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 					$scope.error = error; 
 				)
 		
-	
 		
 	###
 	Logout method to clear the session.

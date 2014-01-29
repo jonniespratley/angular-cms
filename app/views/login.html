@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <br/>
 <div class="login">
@@ -25,6 +26,26 @@
 	        </span>          
 	       <span class="pull-right"><a href="#/forgot">Forgot password?</a></span>
 
+=======
+<div class="login-view">
+	<form class="form-login clearfix well well-sm" ng-submit="login(user)">
+		<header>
+			<img src="http://placehold.it/280x100&text=Login" alt="Logo" class="img-thumbnail">
+		</header>
+		<br/>
+		<div class="form-group">
+			<input class="form-control" type="text" placeholder="Username" ng-model="user.username" required>
+		</div>
+		<div class="form-group">
+			<input class="form-control" type="password" placeholder="Password" ng-model="user.password" required>
+		</div>
+		<div class="form-group">
+			<label><input type="checkbox" value="true" ng-model="user.remember"> Remember me</label>
+		</div>
+		<button class="btn btn-block btn-primary" type="submit">Sign in</button>
+		<br/>
+		<pre ng-if="App.debug">{{user | json}}</pre>
+>>>>>>> 1567c3acae8c1f9dd477cc7ce461cc2c5e70e8bf
 	</form>
  	<br/>
     <p class="center">

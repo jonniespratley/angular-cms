@@ -4,12 +4,15 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <!--<![endif]-->
 <html class="no-js"> 
+<!--[if gt IE 8]><![endif]-->
+<html data-ng-app="angularCmsApp" class="no-js"> 
+ 
 	<head>
 		<meta charset="utf-8">
 		
 		<!--[if IE]>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!--<![endif]-->
+		<![endif]-->
 
 		<title>angular-cms</title>
 		
@@ -22,12 +25,12 @@
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="styles/main.css">
 		<!-- endbuild -->
-
 </head>
-	 <body data-ng-app="angularCmsApp" data-ng-class="App.route.current.scope.name">
+<body data-ng-class="App.route.current.scope.name">
     
   
   
+ 
 	<!--[if lt IE 7]>
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
@@ -37,6 +40,7 @@
 		<script src="bower_components/json3/lib/json3.min.js"></script>
 	<![endif]-->
 
+ 
 		<div id="app" class="app" data-ng-controller="AppCtrl" data-ng-cloak>
 			<header id="header" data-ng-include="App.layout.header">
   				<!--Header content gets injected here.-->
@@ -49,6 +53,7 @@
   			</footer>
 	  	
 	    </div>
+ 
 
 	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID
 	 <script>
