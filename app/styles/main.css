@@ -17,8 +17,7 @@
 	display: none !important;
 }
 
-/* @group Global */
-<<<<<<< HEAD
+ 
 
 /* @group Global */
 
@@ -111,21 +110,10 @@ div.login {
 .avatar img {
 	max-height: 100px;
 }
-=======
+ 
 html { overflow-x: hidden; }
 body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #333; }
 
-/* Hide navbar header on login page. */
-body.login #header {
-	display: none;
-}
-.navbar-inverse { border-bottom: 1px solid #444; }
-footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
-.feature { margin: 5px 10px; }
-.jumbotron { border-bottom: 1px solid #444; background: #111 url(/images/angular-cms-bg.png); color: #fff; }
-.hero-unit { margin: 50px auto 0 auto; width: 300px; font-size: 18px; font-weight: 200; line-height: 30px; background-color: #eee; border-radius: 6px; padding: 60px; overflow: hidden; }
-.hero-unit h1 { font-size: 60px; line-height: 1; letter-spacing: -1px; }
->>>>>>> 1567c3acae8c1f9dd477cc7ce461cc2c5e70e8bf
 
 .animate-show-hide {
 	padding: 10px;
@@ -156,12 +144,7 @@ footer { padding: 30px 0; font-size: .8em; color: #777; text-align: center; }
 }
 
 /* @end */
-
-<<<<<<< HEAD
-/* @e
-
-nd */
-=======
+ 
 /* @group Animation */
 
 /* Animate CSS */

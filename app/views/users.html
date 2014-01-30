@@ -1,4 +1,4 @@
-<h1><i class="fa fa-1x fa-group"></i> Users <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">
+<h1><i class="fa fa-1x fa-group"></i> Users <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#user-modal">
 	Add New
 </button></h1>
 <hr>
@@ -6,7 +6,48 @@
 	<div class="col-md-12">
 
 
-		<div id="myModal" class="modal fade">
+
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th><input type="checkbox"></th>
+					<th>Username</th>
+					<th>E-mail</th>
+					<th>Role</th>
+					<th>Last Login</th>
+				 
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in users">
+					<td>
+						<input type="checkbox" value="{{user.id}}">
+					</td>
+					<td>
+						{{user.username}}
+					</td>
+					<td>
+						{{user.email}}
+					</td>
+					<td>
+						{{user.role}}
+					</td>
+					<td>
+						{{user.updated | date:'medium'}}
+					</td>
+				 
+				</tr>
+			</tbody>
+		</table>
+
+
+
+
+
+
+
+		<div id="user-modal" class="modal fade">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -18,23 +59,36 @@
 				 
 				  <div class="row">
 				    <div class="col-sm-9 col-xs-7">
-				      <form class="form-horizontal">
+				      <form class="form-horizontal" ng-submit="addUser(user)">
+						 <div class="form-group">
+				          <label class="control-label col-sm-3 col-xs-3">Username:</label>
+				          <div class="controls col-sm-9 col-xs-9">
+				            <input type="text" class="form-control" placeholder="Username" ng-model="user.username" autofocus>
+				          </div>
+				        </div>
+				        <div class="form-group">
+				          <label class="control-label col-sm-3 col-xs-3">Password:</label>
+				          <div class="controls col-sm-9 col-xs-9">
+				            <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+				          </div>
+				        </div>
 				        <div class="form-group">
 				          <label class="control-label col-sm-3 col-xs-3">Email:</label>
 				          <div class="controls col-sm-9 col-xs-9">
-				            <input type="email" class="form-control" placeholder="Email" ng-model="App.session.user.email">
+				            <input type="email" class="form-control" placeholder="Email" ng-model="user.email">
 				          </div>
 				        </div>
 				        <div class="form-group">
 				          <label class="control-label col-sm-3 col-xs-3">Name:</label>
 				          <div class="controls col-sm-9 col-xs-9">
-				            <input type="text" class="form-control" placeholder="Name" ng-model="App.session.user.name">
+				            <input type="text" class="form-control" placeholder="Name" ng-model="user.metadata.name">
 				          </div>
 				        </div>
 				        <div class="form-group">
 				          <label class="control-label col-sm-3 col-xs-3">Summary:</label>
 				          <div class="controls col-sm-9 col-xs-9">
-				            <textarea class="form-control" placeholder="Enter 200 words or less..." ng-model="App.session.user.meta.summary"></textarea>
+				            <textarea class="form-control" placeholder="Enter 50 words or less..." 
+							ng-model="user.meta.summary"></textarea>
 				          </div>
 				        </div>
 				       
@@ -52,7 +106,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
+		        <button type="button" class="btn btn-primary" ng-click="addUser(user)">Submit</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
