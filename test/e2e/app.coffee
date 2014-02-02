@@ -57,10 +57,13 @@ describe "Angular-CMS App", ->
 			element('a[href="#/login"]', 'Login button').click()
 			LoginPage.login()
 			sleep 2
+		
 		it 'should have at least 2 widget panels', ->
 			expect(element('.panel', 'Widget Panel').count()).toEqual 2
-		it 'should have a link to the profile page',  ->
+		
+		xit 'should have a link to the profile page',  ->
 			expect(element('a[href="#/profile"]', 'the Profile link').count()).toEqual 1
+		
 		it 'should have a sidebar with a .nav-list', ->
 			expect(element('.cms-sidebar-nav .nav', 'Sidebar nav').count()).toEqual 1
 		
