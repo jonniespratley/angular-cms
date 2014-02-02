@@ -15,8 +15,8 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-      //'test/e2e/*.coffee': ['coffee'],
-      //'test/e2e/**/*.coffee': ['coffee']
+     'test/e2e/*.coffee': ['coffee'],
+     'test/e2e/**/*.coffee': ['coffee']
     },
 
     // list of files / patterns to exclude
@@ -47,7 +47,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome', 'PhantomJS'],
 
 
     // Continuous Integration mode
