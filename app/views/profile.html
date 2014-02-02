@@ -4,39 +4,32 @@
           <hr>
           <div class="row">
             <div class="col-sm-7">
-              <form class="form-horizontal">
-                <div class="form-group">
-                  <label class="control-label col-sm-2">Email:</label>
-                  <div class="controls col-sm-10">
-                    <input type="email" class="form-control" placeholder="Email" ng-model="App.session.user.email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-2">Name:</label>
-                  <div class="controls col-sm-10">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="App.session.user.name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-sm-2">Summary:</label>
-                  <div class="controls col-sm-10">
-                    <textarea class="form-control" placeholder="Enter 200 words or less..." ng-model="App.session.user.meta.summary"></textarea>
-                  </div>
-                </div>
-				<div class="form-group">
-				 
-					<div class="controls col-sm-10">
-	                 <span class=""><input type="checkbox" value="true" ng-model="user.remember"> Stay signed in</span>
-	                  </div>
-				</div>
+              <form class="form-horizontal" ng-submit="updateProfile(user)">
+				<cms-form-group label="Email">
+					<input type="email" class="form-control" placeholder="Email" ng-model="user.email" required>
+				</cms-form-group>
+				
+				<cms-form-group label="Name">
+					<input type="text" class="form-control" placeholder="Name" ng-model="user.name" required>
+				</cms-form-group>
+				<cms-form-group label="Summary">
+					<textarea class="form-control" placeholder="Enter 200 words or less..." ng-model="user.meta.summary"></textarea>
+				</cms-form-group>
+				<cms-form-group label="Cookies">
+					<input type="checkbox" value="true" ng-model="user.remember" class="checkbox">
+				</cms-form-group>
                 <div class="form-group tr">
                   <button class="btn btn-default">Cancel</button>
-                  <button class="btn btn-primary">Save</button>
+                  <button class="btn btn-primary" type="submit">Save</button>
                 </div>
               </form>
             </div>
-            <div class="col-sm-5">
+			<div class="col-sm-5">
               <aside class="profile-pic center">
-                <img src="http://jonniespratley.me/assets/jonnie/avatar.png" class="img-thumbnail" height="80">
-              </aside><br></div>
+                <img 
+					src="http://jonniespratley.me/assets/jonnie/avatar.png" 
+					ng-src="{{user.image}}"
+					class="img-thumbnail" height="80">
+              </aside>
+			</div>
  

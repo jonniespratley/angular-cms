@@ -1,53 +1,32 @@
-<<<<<<< HEAD
-
 <br/>
 <div class="login">
-	<form class="form-login clearfix well well-sm" ng-submit="login(user)">
-     	<header class="img-logo center avatar">
-	        <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle"/>       
-	    </header>
-	 
-		<div class="alert alert-danger" ng-show="error">
-		  	<strong>Error {{error.code}}!</strong> {{error.message}}
-		  	<a class="close" data-dismiss="alert" href="" aria-hidden="true">&times;</a>
-		</div>
-		
-		<div class="form-group">
-			<input class="form-control" type="text" placeholder="Username" ng-model="user.username" required autofocus>
-		</div>
-		<div class="form-group">
-			<input class="form-control" type="password" placeholder="Password" ng-model="user.password" required>
-		</div>
-		<button class="btn btn- btn-primary btn-block" type="submit">Sign in</button>
-		<hr/>
+    <form class="form-login clearfix well well-sm" ng-submit="login(user)">
+        <header class="img-logo center avatar">
+            <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle"/>
+        </header>
+
+        <div class="alert alert-danger" ng-show="error">
+            <strong>Error {{error.code}}!</strong> {{error.message}}
+            <a class="close" data-dismiss="alert" href="" aria-hidden="true">&times;</a>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Username" ng-model="user.username" required autofocus>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" placeholder="Password" ng-model="user.password" required>
+        </div>
+        <button class="btn btn- btn-primary btn-block" type="submit">Sign in</button>
+        <hr/>
 
 	        <span class="">
 				<label><input type="checkbox" value="true" ng-model="user.remember"> Remember info?</label>
-	        </span>          
-	       <span class="pull-right"><a href="#/forgot">Forgot password?</a></span>
+	        </span>
+        <span class="pull-right"><a href="#/forgot">Forgot password?</a></span>
 
-=======
-<div class="login-view">
-	<form class="form-login clearfix well well-sm" ng-submit="login(user)">
-		<header>
-			<img src="http://placehold.it/280x100&text=Login" alt="Logo" class="img-thumbnail">
-		</header>
-		<br/>
-		<div class="form-group">
-			<input class="form-control" type="text" placeholder="Username" ng-model="user.username" required>
-		</div>
-		<div class="form-group">
-			<input class="form-control" type="password" placeholder="Password" ng-model="user.password" required>
-		</div>
-		<div class="form-group">
-			<label><input type="checkbox" value="true" ng-model="user.remember"> Remember me</label>
-		</div>
-		<button class="btn btn-block btn-primary" type="submit">Sign in</button>
-		<br/>
-		<pre ng-if="App.debug">{{user | json}}</pre>
->>>>>>> 1567c3acae8c1f9dd477cc7ce461cc2c5e70e8bf
-	</form>
- 	<br/>
+    </form>
+    <br/>
+
     <p class="center">
         <a href="#/register">Create an account</a>
     </p>

@@ -38,9 +38,7 @@ module.exports = function(config) {
 		],
 
 		preprocessors: {
-			// source files, that you wanna generate coverage for
-			// do not include tests or libraries
-			// (these files will be instrumented by Istanbul)
+
 			'app/scripts/*.coffee': ['coffee'],
 			'app/scripts/**/*.coffee': ['coffee'],
 			'test/e2e/*.coffee': ['coffee'],

@@ -179,11 +179,9 @@ window.Config =
 		formFactor: "desktop"
 		currentOrientation: null
 		cdns:
-			http: "http://1ff1217913c5a6afc4c8-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.cf1.rackcdn.com"
-			https: "https://7fd8f70e662929940bdd-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.ssl.cf1.rackcdn.com"
-			streaming: "http://4949e03d0fabf78f8c71-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.r26.stream.cf1.rackcdn.com"
-			iosstreaming: "http://f0397ead16e1580b2c7f-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.iosr.cf1.rackcdn.com"
-
+			http: "http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com/angular-cms"
+			https: "https://4ac535c4a3d1d3359bbc-b2b68ced242ecf1cb9bc1021688e3775.ssl.cf1.rackcdn.com/angular-cms"
+			streaming: "http://df86ce1cf0cf1f552fe2-b2b68ced242ecf1cb9bc1021688e3775.r49.stream.cf1.rackcdn.com/angular-cms"
 	options:
 		layouts: [
 			id: 0

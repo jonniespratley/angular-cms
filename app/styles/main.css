@@ -4,6 +4,12 @@
 @import url('bootstrap.css');
 */
 
+
+.login footer{
+	display: none;
+}
+
+
 .cms-themes .theme img {
 	opacity: .8;
 }
@@ -16,8 +22,6 @@
 .ng-hide {
 	display: none !important;
 }
-
- 
 
 /* @group Global */
 
@@ -33,6 +37,7 @@ body {
 }
 
 h1 {
+	
 }
 
 h2 {
@@ -110,10 +115,16 @@ div.login {
 .avatar img {
 	max-height: 100px;
 }
- 
-html { overflow-x: hidden; }
-body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; color: #333; }
 
+html {
+	overflow-x: hidden;
+}
+
+body {
+	background: #fefefe;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #333;
+}
 
 .animate-show-hide {
 	padding: 10px;
@@ -140,33 +151,47 @@ body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-s
 }
 
 .login,.form-login, .form-forgot {
-
+	
 }
 
 /* @end */
- 
+
 /* @group Animation */
 
 /* Animate CSS */
-.animate-if { display: block; }
-.animate-if.ng-enter, .animate-if.ng-leave { -webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s; transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s; }
+
+.animate-if {
+	display: block;
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+	-webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s;
+	transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s;
+}
+
 .animate-if.ng-enter,
-.animate-if.ng-leave.ng-leave-active { opacity: 0; }
+.animate-if.ng-leave.ng-leave-active {
+	opacity: 0;
+}
+
 .animate-if.ng-leave,
-.animate-if.ng-enter.ng-enter-active { opacity: 1; }
+.animate-if.ng-enter.ng-enter-active {
+	opacity: 1;
+}
 
 /* @end */
 
 /* @group Form Inputs */
 
-.login .login-view{
-	 max-width: 280px; 
-	 margin: 55px auto;
-
+.login .login-view {
+	max-width: 280px;
+	margin: 55px auto;
 }
 
 /* @end */
 >>>>>>> 1567c3acae8c1f9dd477cc7ce461cc2c5e70e8bf
+
+
 
 /* @group Sidebar */
 
@@ -178,7 +203,6 @@ body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-s
 }
 
 .cms-sidebar {
-	 	 
 	moz-transition: width .5s ease-in-out, left 1.5s ease-in-out;
 	-webkit-transition: width .5s ease-in-out, left 1.5s ease-in-out;
 	-moz-transition: width .5s ease-in-out, left 1.5s ease-in-out;
@@ -187,7 +211,7 @@ body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-s
 }
 
 .cms-sidebar i {
-	 
+	
 }
 
 .cms-sidebar-nav-toggle {
@@ -197,10 +221,10 @@ body { background: #fefefe; font-family: "Helvetica Neue",Helvetica,Arial,sans-s
 }
 
 .cms-sidebar.closed {
-width: 85px;
-display: block;
-clear: both;
-height: 100%;
+	width: 85px;
+	display: block;
+	clear: both;
+	height: 100%;
 }
 
 #content div.container.ng-scope div.row div.view-animate-container div.view-animate.ng-scope section.ng-scope div.row div.col-sm-9 section div.row div.col-sm-8.tc div.placeholder {
@@ -239,11 +263,11 @@ a.navbar-brand {
 }
 
 .cms-sidebar-nav {
-padding: 0;
+	padding: 0;
 }
 
 .cms-sidebar {
-
+	
 }
 
 .cms-sidebar-nav.well {
@@ -302,8 +326,6 @@ padding: 0;
 
 /* @end */
 
-
-<<<<<<< HEAD
 .view-animate {
 	padding: 0px;
 	width: 100%;
@@ -591,8 +613,6 @@ padding: 0;
 }
 
 /* @end */
-=======
->>>>>>> 1567c3acae8c1f9dd477cc7ce461cc2c5e70e8bf
 
 /* @group Media > Uploader */
 

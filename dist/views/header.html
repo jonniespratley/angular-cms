@@ -17,7 +17,7 @@
         <ul class="nav navbar-nav">
           <li ng-repeat="item in App.menu.pub" ng-include="" src="'menu-item.html'"></li>
         </ul>
-        <ul class="nav navbar-nav pull-right" ng-controller="LoginCtrl">
+        <ul class="nav navbar-nav navbar-right pull-right" ng-controller="LoginCtrl">
           <li class="dropdown" ng-if="App.session.authorized">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <img src="https://www.gravatar.com/avatar/b4c0fecb38a48d57acf43350ee318107?s=20" class="img-circle">

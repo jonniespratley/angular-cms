@@ -2,7 +2,7 @@
 angular.module('angularCmsApp').directive('cmsFormGroup', () ->
   template: """
     <div class="form-group">
-      <label class="control-label col-sm-3 col-xs-3">{{label}}:</label>
+      <label class="control-label col-sm-3 col-xs-3">{{label}}</label>
       <div class="controls col-sm-9 col-xs-9" ng-transclude>
       </div>
     </div>
