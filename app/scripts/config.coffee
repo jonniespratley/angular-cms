@@ -56,13 +56,7 @@ window.Config =
     	footer: "views/footer.html"
 
 	#I hold the current theme that should be used
-	theme:
-		id: 0
-		title: "Default"
-		slug: "theme0"
-		type: "theme"
-		image: "/css/themes/theme0/splash.png"
-		body: ""
+	theme: 'default'
 
 	#I hold values for the compiled templates location, uncompiled location
 	templates:
@@ -178,6 +172,7 @@ window.Config =
 		version: "0.0.1"
 		formFactor: "desktop"
 		currentOrientation: null
+		cdn: 'http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com'
 		cdns:
 			http: "http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com/angular-cms"
 			https: "https://4ac535c4a3d1d3359bbc-b2b68ced242ecf1cb9bc1021688e3775.ssl.cf1.rackcdn.com/angular-cms"

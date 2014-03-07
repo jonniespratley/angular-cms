@@ -4,11 +4,11 @@ angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '
 	App = Config
 	App.route = $routeParams;
 	App.session = $cookieStore.get('App.session')
+	App.theme = $cookieStore.get('App.theme')
 
 	App.route = $route
 	App.location = $location
 	App.routeParams = $routeParams
-
 	window.App = $rootScope.App = App
 	angular.element(document).ready(()->
 		$log.info('Document ready', this);

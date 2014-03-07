@@ -33,10 +33,11 @@
 		
 		<!-- build:css({.tmp,app}) styles/main.css -->   	
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">		
-		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="styles/main.css">
 		<!-- endbuild -->
+		<link rel="stylesheet" ng-href="{{App.config.cdn}}/bootswatch.com/{{App.theme | lowercase}}/bootstrap.min.css"/>
+		
 </head>
 <body data-ng-class="App.route.current.scope.name">
     
