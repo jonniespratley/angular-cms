@@ -1,9 +1,10 @@
 /* @override 
 	http://127.0.0.1:9000/styles/main.css
 	http://localhost:9090/styles/main.css
-@import url('bootstrap.css');
+	@import
+	url('bootstrap.css');
+	http://localhost:9000/styles/main.css
 */
-
 
 .login footer{
 	display: none;
@@ -13,10 +14,7 @@ button.navbar-toggle {
 }
 
 .navbar-header {
-	background-color: #fefefe;
-	padding-left: 10px;
-	padding-right: 10px;
-	border-bottom: 1px solid #eee;
+	 
 }
 
 /* Large desktop */
@@ -61,9 +59,7 @@ html {
 }
 
 body {
-	background: #fefefe;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-	color: #333;
 	padding-top: 65px;
 }
 .jumbotron{
@@ -222,9 +218,7 @@ body {
 }
 
 /* @end */
->>>>>>> 1567c3acae8c1f9dd477cc7ce461cc2c5e70e8bf
-
-
+ 
 
 /* @group Sidebar */
 
@@ -265,14 +259,6 @@ body {
 	vertical-align: middle;
 }
 
-a.navbar-brand {
-	color: #333;
-}
-
-a.navbar-brand {
-	margin: 0;
-	padding-left: 1px;
-}
 
 .cms-sidebar.closed  span.title {
 	overflow: hidden;
