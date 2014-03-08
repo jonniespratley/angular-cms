@@ -550,13 +550,14 @@ var RestResource = {
 					//query
 					collection.find(query, options, function(err, cursor) {
 						cursor.toArray(function(err, docs) {
+							console.log(docs);
 							if(err) {
 								console.log(err);
 							} else {
 								var result = [];
 								if(req.params.id) {
 									if(docs.length > 0) {
-										result = self.flavorize(null, docs[0], "out");
+										result = docs[0];
 										res.header('Content-Type', 'application/json');
 										res.jsonp(200, result);
 									} else {

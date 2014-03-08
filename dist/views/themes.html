@@ -6,13 +6,12 @@
 <div class="well well-sm">
 <div class="row">
 <div class="col-sm-4 col-md-4 col-xs-4">
-<img src="http://placehold.it/400x300" class="img-thumbnail">
+<img src="http://placehold.it/400x300" ng-src="{{App.config.cdn}}/bootswatch.com/{{App.theme | lowercase}}/thumbnail.png" class="img-thumbnail">
 </div>
 <div class="col-md-8 col-sm-8 col-xs-8">
 <small class="text-muted">Current Theme</small>
-<h2>Twenty Twelve <small>1.0</small></h2>
-<p>The 2012 theme for Angular-CMS takes us back to the Bootstrap 2.3, featuring a full range of post formats, each displayed beautifully in their own unique way.
-</p>
+<h2>{{App.theme}} <small>1.0</small></h2>
+<p>This is going to be meta data for the theme.</p>
 <p class="text-muted"><span>OPTIONS:</span> <a href="#">Widgets</a> | <a href="#">Menus</a> | <a href="#">Header</a></p>
 </div>
 </div><!--/row-->
@@ -24,8 +23,8 @@
 <!-- @TODO: [Themes List] -->
 <div class="row cms-themes">
 	<div class="col-sm-6 col-md-4 col-xs-6 theme-item" ng-repeat="theme in App.options.themes">
-		<a class="thumbnail theme" href="#" ng-click="selectTheme(theme)" title="Change to {{theme}} theme">
-			  <img alt="{{theme}}" ng-src="http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com/bootswatch.com/{{theme | lowercase}}/thumbnail.png" src="http://placehold.it/300x150">
+		<a class="thumbnail theme" href="" ng-click="selectTheme(theme);" title="Change to {{theme}} theme" ng-cloak="">
+			  <img alt="{{theme}}" ng-src="{{App.config.cdn}}/bootswatch.com/{{theme | lowercase}}/thumbnail.png" src="http://placehold.it/300x150">
 		      <div class="caption hidden">
 		        <h3>{{theme}}</h3>
 		      </div>

@@ -1,6 +1,6 @@
 'use strict'
 angular.module('angularCmsApp')
-.directive 'widgets', ->
+.directive 'cmsWidgets', ->
 	restrict: 'EMA'
 	replace: true
 	transclude: true
@@ -32,12 +32,12 @@ angular.module('angularCmsApp')
 			
 	link: postLink = (scope, element, attrs) ->
 		console.log scope, element, attrs
-.directive "widget", ->
+.directive "cmsWidget", ->
 	scope:
 		id: "@"
 		title: "@"
 		icon: "@"
-	require: '^widgets'
+	require: '^cmsWidgets'
 	template: '''
 		<section id="widget-{{$id}}" class="widget {{selected ? 'selected' : ''}}">
 			<header class="widget-header clearfix">
@@ -52,7 +52,7 @@ angular.module('angularCmsApp')
 	restrict: "E"
 	replace: true
 	transclude: true
-	link: postLink = (scope, element, attrs, ctrl) ->
+	link: (scope, element, attrs, ctrl) ->
 		ctrl.add(scope)
 		# Toggle the closed/opened state
 		toggle = ->
