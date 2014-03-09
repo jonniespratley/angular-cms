@@ -7,3 +7,11 @@ angular.module('angularCmsApp')
       'AngularJS'
       'Karma'
     ]
+    $scope.config = Config
+    $scope.tabs = [
+    		title: 'General'
+    		content: ''
+    	,
+    		title: 'Client'
+    		content: ''
+    ]

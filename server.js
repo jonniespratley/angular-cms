@@ -98,65 +98,7 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 			port : options.api.port
 		});
 		console.log('Routing request: API server'.warn);
-
-		/* ======================[ @TODO:
-		 Need to put if v1 send to parse.com
-		 Host: api.parse.com/1/
-		 Content-Type: application/json
-		 X-Parse-Application-Id: fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB
-		 X-Parse-REST-API-Key: G9ALilrUgXH0F2XwFErB7MCWf3rt0xMgb8u2icpK
-
-		 URL	HTTP Verb	Functionality
-		 /1/classes/<className>	POST	Creating Objects
-		 /1/classes/<className>/<objectId>	GET	Retrieving Objects
-		 /1/classes/<className>/<objectId>	PUT	Updating Objects
-		 /1/classes/<className>	GET	Queries
-		 /1/classes/<className>/<objectId>	DELETE	Deleting Objects
-		 Users
-
-		 URL	HTTP Verb	Functionality
-		 /1/users	POST	Signing Up
-		 Linking Users
-		 /1/login	GET	Logging In
-		 /1/users/<objectId>	GET	Retrieving Users
-		 /1/users/me	GET	Validating Session Tokens
-		 Retrieving Current User
-		 /1/users/<objectId>	PUT	Updating Users
-		 Linking Users
-		 Verifying Emails
-		 /1/users	GET	Querying Users
-		 /1/users/<objectId>	DELETE	Deleting Users
-		 /1/requestPasswordReset	POST	Requesting A Password Reset
-		 Roles
-
-		 URL	HTTP Verb	Functionality
-		 /1/roles	POST	Creating Roles
-		 /1/roles/<objectId>	GET	Retrieving Roles
-		 /1/roles/<objectId>	PUT	Updating Roles
-		 /1/roles	GET	Querying Roles
-		 /1/roles/<objectId>	DELETE	Deleting Roles
-		 Files
-
-		 URL	HTTP Verb	Functionality
-		 /1/files/<fileName>	POST	Uploading Files
-		 Analytics
-
-		 URL	HTTP Verb	Functionality
-		 /1/events/AppOpened	POST	Analytics
-		 /1/events/<eventName>	POST	Custom Analytics
-		 Push Notifications
-
-		 URL	HTTP Verb	Functionality
-		 /1/push	POST	Push Notifications
-		 Installations
-
-		 URL	HTTP Verb	Functionality
-		 /1/installations	POST	Uploading Installation Data
-		 /1/installations/<objectId>	GET	Retrieving Installations
-		 /1/installations/<objectId>	PUT	Updating Installations
-		 /1/installations	GET	Querying Installations
-		 /1/installations/<objectId>	DELETE	Deleting Installations
-		 ]====================== */
+ 
 	} else if(req.url.match(/^\/1\//)) {
 
 		/* Default express server */
@@ -192,15 +134,4 @@ console.log(options);
 //Start the proxy server
 proxyServer.listen(options.port);
 
-/*
- HTTPS Server - will get prompted in browser if keys are not real.
- var httpServer = null;
- var httpsServer = null;
- httpsServer = https.createServer(options, function(req, res) {
- res.writeHead(200, {
- 'Content-type' : 'text/plain'
- });
- res.write('Request proxied ' + JSON.stringify(req.headers));
- res.end();
- }).listen(8282);
- */
+ 

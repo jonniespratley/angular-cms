@@ -5,7 +5,8 @@
 <hr>
 <div class="row">
 	<div class="col-md-12">
-		<table class="table table-bordered">
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
 					<th>
@@ -14,21 +15,29 @@
 					<th>Username</th>
 					<th>E-mail</th>
 					<th>Role</th>
-					<th>Last Login</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="user in users">
 					<td>
-					<input type="checkbox" value="{{user.id}}">
+					<input type="checkbox" value="{{user._id}}">
 					</td>
 					<td> {{user.username}} </td>
 					<td> {{user.email}} </td>
 					<td> {{user.role}} </td>
-					<td> {{user.updated | date:'medium'}} </td>
+					<td>
+						<div class="btn-group">
+  <button type="button" class="btn btn-default"><i class="fa fa-edit"></i></button>
+  <button type="button" class="btn btn-default">Middle</button>
+</div>
+						
+					</td>
 				</tr>
 			</tbody>
 		</table>
+		</div>
+		
 		<div id="user-modal" class="modal fade">
 			<div class="modal-dialog">
 				<div class="modal-content">

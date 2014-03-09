@@ -9,7 +9,10 @@
     "request": "~2.34.0",
     "jquery-file-upload-middleware": "~0.1.1",
     "easyimage": "~0.1.6",
-    "promised-io": "~0.3.4"
+    "promised-io": "~0.3.4",
+    "http-proxy": "~1.0.2",
+    "colors": "~0.6.2",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

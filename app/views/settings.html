@@ -1,25 +1,25 @@
-<div class="col-12">
-	<h1><i class="fa fa-1x fa-cogs"></i> Settings</h1>
-	<hr/>
-</div>
-<div data-fade="1" ngModel="activeTab" bs-tabs>
-  <div ng-repeat="tab in tabs" data-title="{{tab.title}}"><p>{{tab.content}}</p></div>
-</div>
+<cms-header icon="gears" title="Settings"></cms-header>
 
- <div class="row">
+<div class="row">
 	<div class="col-sm-8 col-xs-7">
 		<form class="form-horizontal" ng-submit="update(App)">
-			<cms-form-group label="{{key}}" ng-repeat="(key, value) in App">
+			<cms-form-group label="{{key}}" ng-repeat="(key, value) in config">
 				<input type="text" ng-model="App[key]" value="{{ angular.isObject(App[key]) }}"/>
 			</cms-form-group>
 			<div class="form-group tr">
-				<button class="btn btn-default">Cancel</button>
-				<button class="btn btn-primary" type="submit">Save</button>
+				<button class="btn btn-default">
+					Cancel
+				</button>
+				<button class="btn btn-primary" type="submit">
+					Save
+				</button>
 			</div>
 		</form>
 	</div>
 	<div class="col-sm-4 col-xs-5">
-	  <aside class="well well-sm tc">Some help here</aside>
+		<aside class="well well-sm tc">
+			Some help here
+		</aside>
 	</div>
-  </div>
- 
+</div>
+
