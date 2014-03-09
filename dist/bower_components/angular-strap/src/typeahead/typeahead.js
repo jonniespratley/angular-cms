@@ -5,7 +5,7 @@ angular.module('mgcrea.ngStrap.typeahead', ['mgcrea.ngStrap.tooltip', 'mgcrea.ng
   .provider('$typeahead', function() {
 
     var defaults = this.defaults = {
-      animation: 'am-fade',
+      animation: 'animation-fade',
       prefixClass: 'typeahead',
       placement: 'bottom-left',
       template: 'typeahead/typeahead.tpl.html',

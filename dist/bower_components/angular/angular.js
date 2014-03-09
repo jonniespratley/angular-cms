@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.2.11-build.2202+sha.6609e3d
+ * @license AngularJS v1.2.11-build.2190+sha.7aef2d5
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -68,7 +68,7 @@ function minErr(module) {
       return match;
     });
 
-    message = message + '\nhttp://errors.angularjs.org/1.2.11-build.2202+sha.6609e3d/' +
+    message = message + '\nhttp://errors.angularjs.org/1.2.11-build.2190+sha.7aef2d5/' +
       (module ? module + '/' : '') + code;
     for (i = 2; i < arguments.length; i++) {
       message = message + (i == 2 ? '?' : '&') + 'p' + (i-2) + '=' +
@@ -1834,7 +1834,7 @@ function setupModuleLoader(window) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
-  full: '1.2.11-build.2202+sha.6609e3d',    // all of these placeholder strings will be replaced by grunt's
+  full: '1.2.11-build.2190+sha.7aef2d5',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 2,
   dot: 11,
@@ -3408,16 +3408,17 @@ function annotate(fn) {
  * Here is an example of registering a service using
  * {@link AUTO.$provide#methods_service $provide.service(class)}.
  * <pre>
- *   var Ping = function($http) {
- *     this.$http = $http;
- *   };
- * 
- *   Ping.$inject = ['$http'];
+ *   $provide.service('ping', ['$http', function($http) {
+ *     var Ping = function() {
+ *       this.$http = $http;
+ *     };
  *   
- *   Ping.prototype.send = function() {
- *     return this.$http.get('/ping');
- *   };
- *   $provide.service('ping', Ping);
+ *     Ping.prototype.send = function() {
+ *       return this.$http.get('/ping');
+ *     }; 
+ *   
+ *     return Ping;
+ *   }]);
  * </pre>
  * You would then inject and use this service like this:
  * <pre>
@@ -6405,13 +6406,9 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
                 linkNode = $compileNode[0];
 
             if (beforeTemplateLinkNode !== beforeTemplateCompileNode) {
-              var oldClasses = beforeTemplateLinkNode.className;
               // it was cloned therefore we have to clone as well.
               linkNode = jqLiteClone(compileNode);
               replaceWith(linkRootElement, jqLite(beforeTemplateLinkNode), linkNode);
-
-              // Copy in CSS classes from original node
-              safeAddClass(jqLite(linkNode), oldClasses);
             }
             if (afterTemplateNodeLinkFn.transclude) {
               childBoundTranscludeFn = createBoundTranscludeFn(scope, afterTemplateNodeLinkFn.transclude);
@@ -7885,18 +7882,13 @@ function $HttpProvider() {
 }
 
 function createXhr(method) {
-    //if IE and the method is not RFC2616 compliant, or if XMLHttpRequest
-    //is not available, try getting an ActiveXObject. Otherwise, use XMLHttpRequest
-    //if it is available
-    if (msie <= 8 && (!method.match(/^(get|post|head|put|delete|options)$/i) ||
-      !window.XMLHttpRequest)) {
-      return new window.ActiveXObject("Microsoft.XMLHTTP");
-    } else if (window.XMLHttpRequest) {
-      return new window.XMLHttpRequest();
-    }
-
-    throw minErr('$httpBackend')('noxhr', "This browser does not support XMLHttpRequest.");
+  // IE8 doesn't support PATCH method, but the ActiveX object does
+  /* global ActiveXObject */
+  return (msie <= 8 && lowercase(method) === 'patch')
+      ? new ActiveXObject('Microsoft.XMLHTTP')
+      : new window.XMLHttpRequest();
 }
+
 
 /**
  * @ngdoc object
@@ -10919,7 +10911,7 @@ function qFactory(nextTick, exceptionHandler) {
 
 
       reject: function(reason) {
-        deferred.resolve(createInternalRejectedPromise(reason));
+        deferred.resolve(reject(reason));
       },
 
 
@@ -11076,12 +11068,6 @@ function qFactory(nextTick, exceptionHandler) {
    * @returns {Promise} Returns a promise that was already resolved as rejected with the `reason`.
    */
   var reject = function(reason) {
-    var result = defer();
-    result.reject(reason);
-    return result.promise;
-  };
-
-  var createInternalRejectedPromise = function(reason) {
     return {
       then: function(callback, errback) {
         var result = defer();
@@ -12142,7 +12128,7 @@ function $RootScopeProvider(){
        * onto the {@link ng.$exceptionHandler $exceptionHandler} service.
        *
        * @param {string} name Event name to emit.
-       * @param {...*} args Optional one or more arguments which will be passed onto the event listeners.
+       * @param {...*} args Optional set of arguments which will be passed onto the event listeners.
        * @return {Object} Event object (see {@link ng.$rootScope.Scope#methods_$on}).
        */
       $emit: function(name, args) {
@@ -12210,7 +12196,7 @@ function $RootScopeProvider(){
        * onto the {@link ng.$exceptionHandler $exceptionHandler} service.
        *
        * @param {string} name Event name to broadcast.
-       * @param {...*} args Optional one or more arguments which will be passed onto the event listeners.
+       * @param {...*} args Optional set of arguments which will be passed onto the event listeners.
        * @return {Object} Event object, see {@link ng.$rootScope.Scope#methods_$on}
        */
       $broadcast: function(name, args) {
@@ -14102,7 +14088,7 @@ function filterFilter() {
           (function(path) {
             if (typeof expression[path] == 'undefined') return;
             predicates.push(function(value) {
-              return search(path == '$' ? value : (value && value[path]), expression[path]);
+              return search(path == '$' ? value : getter(value, path), expression[path]);
             });
           })(key);
         }

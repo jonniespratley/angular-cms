@@ -5,7 +5,7 @@ angular.module('mgcrea.ngStrap.datepicker', ['mgcrea.ngStrap.helpers.dateParser'
   .provider('$datepicker', function() {
 
     var defaults = this.defaults = {
-      animation: 'am-fade',
+      animation: 'animation-fade',
       prefixClass: 'datepicker',
       placement: 'bottom-left',
       template: 'datepicker/datepicker.tpl.html',
@@ -72,14 +72,14 @@ angular.module('mgcrea.ngStrap.datepicker', ['mgcrea.ngStrap.helpers.dateParser'
           }
         };
 
-        $datepicker.select = function(date, keep) {
+        $datepicker.select = function(date, keepMode) {
           // console.warn('$datepicker.select', date, scope.$mode);
           if(!angular.isDate(date)) date = new Date(date);
           controller.$dateValue.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-          if(!scope.$mode || keep) {
+          if(!scope.$mode || keepMode) {
             controller.$setViewValue(controller.$dateValue);
             controller.$render();
-            if(options.autoclose && !keep) {
+            if(options.autoclose && !keepMode) {
               $datepicker.hide(true);
             }
           } else {

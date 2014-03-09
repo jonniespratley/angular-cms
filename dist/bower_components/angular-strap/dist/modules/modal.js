@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.0-rc.2 - 2014-01-29
+ * @version v2.0.0-rc.1 - 2014-01-29
  * @link http://mgcrea.github.io/angular-strap
  * @author [object Object]
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -8,7 +8,7 @@
 'use strict';
 angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).provider('$modal', function () {
   var defaults = this.defaults = {
-      animation: 'am-fade',
+      animation: 'animation-fade',
       prefixClass: 'modal',
       placement: 'top',
       template: 'modal/modal.tpl.html',
@@ -32,12 +32,12 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).pr
     'dimensions',
     function ($window, $rootScope, $compile, $q, $templateCache, $http, $animate, $timeout, dimensions) {
       var forEach = angular.forEach;
+      var jqLite = angular.element;
       var trim = String.prototype.trim;
-      var requestAnimationFrame = $window.requestAnimationFrame || $window.setTimeout;
-      var bodyElement = angular.element($window.document.body);
+      var bodyElement = jqLite($window.document.body);
       var htmlReplaceRegExp = /ng-bind="/gi;
       var findElement = function (query, element) {
-        return angular.element((element || document).querySelectorAll(query));
+        return jqLite((element || document).querySelectorAll(query));
       };
       function ModalFactory(config) {
         var $modal = {};
@@ -87,7 +87,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).pr
           });
         }
         var modalLinker, modalElement;
-        var backdropElement = angular.element('<div class="' + options.prefixClass + '-backdrop"/>');
+        var backdropElement = jqLite('<div class="' + options.prefixClass + '-backdrop"/>');
         $modal.$promise.then(function (template) {
           if (angular.isObject(template))
             template = template.data;
@@ -123,7 +123,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).pr
           modalElement.css({ display: 'block' }).addClass(options.placement);
           if (options.animation) {
             if (options.backdrop) {
-              backdropElement.addClass('am-fade');
+              backdropElement.addClass('animation-fade');
             }
             modalElement.addClass(options.animation);
           }
@@ -135,10 +135,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).pr
           });
           scope.$isShown = true;
           scope.$$phase || scope.$digest();
-          var el = modalElement[0];
-          requestAnimationFrame(function () {
-            el.focus();
-          });
+          $modal.focus();
           bodyElement.addClass(options.prefixClass + '-open');
           if (options.backdrop) {
             modalElement.on('click', hideOnBackdropClick);

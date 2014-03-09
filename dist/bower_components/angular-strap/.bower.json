@@ -1,7 +1,7 @@
 {
   "name": "angular-strap",
   "description": "AngularStrap - AngularJS directives for Twitter Bootstrap",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.1",
   "keywords": [
     "angular",
     "bootstrap"
@@ -39,7 +39,7 @@
     "angular-animate": "~1.2.9",
     "angular-i18n": "~1.2.9",
     "angular-mocks": "~1.2.9",
-    "angular-motion": "~0.3.1",
+    "angular-motion": "~0.3.0",
     "angular-route": "~1.2.9",
     "angular-sanitize": "~1.2.9",
     "angular-scenario": "~1.2.9",
@@ -48,13 +48,14 @@
     "highlightjs": "~8.0.0",
     "jquery": "~2.0.3"
   },
-  "_release": "2.0.0-rc.2",
+  "_release": "2.0.0-rc.1",
   "_resolution": {
     "type": "version",
-    "tag": "v2.0.0-rc.2",
-    "commit": "3e737a2f15afe5addd7c95e507d7aed9da7e0450"
+    "tag": "v2.0.0-rc.1",
+    "commit": "d765e55779036561385166a35e33c2c3c6d78a54"
   },
   "_source": "git://github.com/mgcrea/angular-strap.git",
   "_target": "~2.0.0",
-  "_originalSource": "angular-strap"
+  "_originalSource": "angular-strap",
+  "_direct": true
 }

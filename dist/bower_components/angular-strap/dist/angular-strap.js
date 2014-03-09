@@ -1,6 +1,6 @@
 /**
  * angular-strap
- * @version v2.0.0-rc.2 - 2014-01-29
+ * @version v2.0.0-rc.1 - 2014-01-29
  * @link http://mgcrea.github.io/angular-strap
  * @author [object Object]
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -159,19 +159,24 @@
       };
     }
   ]);
-  angular.module('mgcrea.ngStrap.alert', []).provider('$alert', function () {
+  angular.module('mgcrea.ngStrap.alert', []).run([
+    '$templateCache',
+    function ($templateCache) {
+      var template = '' + '<div class="alert" tabindex="-1" ng-class="[type ? \'alert-\' + type : null]">' + '<button type="button" class="close" ng-click="$hide()">&times;</button>' + '<strong ng-bind="title"></strong>&nbsp;<span ng-bind-html="content"></span>' + '</div>';
+      $templateCache.put('$alert', template);
+    }
+  ]).provider('$alert', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'alert',
         placement: null,
-        template: 'alert/alert.tpl.html',
+        template: '$alert',
         container: false,
         element: null,
         backdrop: false,
         keyboard: true,
         show: true,
-        duration: false,
-        type: false
+        duration: false
       };
     this.$get = [
       '$modal',
@@ -255,7 +260,7 @@
   ]);
   angular.module('mgcrea.ngStrap.aside', ['mgcrea.ngStrap.modal']).provider('$aside', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade-and-slide-right',
+        animation: 'animation-fadeAndSlideRight',
         prefixClass: 'aside',
         placement: 'right',
         template: 'aside/aside.tpl.html',
@@ -455,7 +460,7 @@
     'mgcrea.ngStrap.tooltip'
   ]).provider('$datepicker', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'datepicker',
         placement: 'bottom-left',
         template: 'datepicker/datepicker.tpl.html',
@@ -516,14 +521,14 @@
               $datepicker.$build();
             }
           };
-          $datepicker.select = function (date, keep) {
+          $datepicker.select = function (date, keepMode) {
             if (!angular.isDate(date))
               date = new Date(date);
             controller.$dateValue.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-            if (!scope.$mode || keep) {
+            if (!scope.$mode || keepMode) {
               controller.$setViewValue(controller.$dateValue);
               controller.$render();
-              if (options.autoclose && !keep) {
+              if (options.autoclose && !keepMode) {
                 $datepicker.hide(true);
               }
             } else {
@@ -953,7 +958,7 @@
   });
   angular.module('mgcrea.ngStrap.dropdown', ['mgcrea.ngStrap.tooltip']).provider('$dropdown', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'dropdown',
         placement: 'bottom-left',
         template: 'dropdown/dropdown.tpl.html',
@@ -1370,7 +1375,7 @@
   });
   angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions']).provider('$modal', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'modal',
         placement: 'top',
         template: 'modal/modal.tpl.html',
@@ -1394,12 +1399,12 @@
       'dimensions',
       function ($window, $rootScope, $compile, $q, $templateCache, $http, $animate, $timeout, dimensions) {
         var forEach = angular.forEach;
+        var jqLite = angular.element;
         var trim = String.prototype.trim;
-        var requestAnimationFrame = $window.requestAnimationFrame || $window.setTimeout;
-        var bodyElement = angular.element($window.document.body);
+        var bodyElement = jqLite($window.document.body);
         var htmlReplaceRegExp = /ng-bind="/gi;
         var findElement = function (query, element) {
-          return angular.element((element || document).querySelectorAll(query));
+          return jqLite((element || document).querySelectorAll(query));
         };
         function ModalFactory(config) {
           var $modal = {};
@@ -1449,7 +1454,7 @@
             });
           }
           var modalLinker, modalElement;
-          var backdropElement = angular.element('<div class="' + options.prefixClass + '-backdrop"/>');
+          var backdropElement = jqLite('<div class="' + options.prefixClass + '-backdrop"/>');
           $modal.$promise.then(function (template) {
             if (angular.isObject(template))
               template = template.data;
@@ -1485,7 +1490,7 @@
             modalElement.css({ display: 'block' }).addClass(options.placement);
             if (options.animation) {
               if (options.backdrop) {
-                backdropElement.addClass('am-fade');
+                backdropElement.addClass('animation-fade');
               }
               modalElement.addClass(options.animation);
             }
@@ -1497,10 +1502,7 @@
             });
             scope.$isShown = true;
             scope.$$phase || scope.$digest();
-            var el = modalElement[0];
-            requestAnimationFrame(function () {
-              el.focus();
-            });
+            $modal.focus();
             bodyElement.addClass(options.prefixClass + '-open');
             if (options.backdrop) {
               modalElement.on('click', hideOnBackdropClick);
@@ -1644,7 +1646,7 @@
   ]);
   angular.module('mgcrea.ngStrap.popover', ['mgcrea.ngStrap.tooltip']).provider('$popover', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         placement: 'right',
         template: 'popover/popover.tpl.html',
         contentTemplate: false,
@@ -1931,7 +1933,7 @@
     'mgcrea.ngStrap.helpers.parseOptions'
   ]).provider('$select', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'select',
         placement: 'bottom-left',
         template: 'select/select.tpl.html',
@@ -2185,7 +2187,7 @@
     }
   ]).provider('$tab', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         template: 'tab/tab.tpl.html'
       };
     this.$get = function () {
@@ -2238,7 +2240,7 @@
     'mgcrea.ngStrap.tooltip'
   ]).provider('$timepicker', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'timepicker',
         placement: 'bottom-left',
         template: 'timepicker/timepicker.tpl.html',
@@ -2602,7 +2604,7 @@
   ]);
   angular.module('mgcrea.ngStrap.tooltip', ['mgcrea.ngStrap.helpers.dimensions']).provider('$tooltip', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'tooltip',
         container: false,
         placement: 'top',
@@ -2629,7 +2631,6 @@
       function ($window, $rootScope, $compile, $q, $templateCache, $http, $animate, $timeout, dimensions) {
         var trim = String.prototype.trim;
         var requestAnimationFrame = $window.requestAnimationFrame || $window.setTimeout;
-        var isTouch = 'createTouch' in $window.document;
         var htmlReplaceRegExp = /ng-bind="/gi;
         var findElement = function (query, element) {
           return angular.element((element || document).querySelectorAll(query));
@@ -2936,7 +2937,7 @@
     'mgcrea.ngStrap.helpers.parseOptions'
   ]).provider('$typeahead', function () {
     var defaults = this.defaults = {
-        animation: 'am-fade',
+        animation: 'animation-fade',
         prefixClass: 'typeahead',
         placement: 'bottom-left',
         template: 'typeahead/typeahead.tpl.html',

@@ -11,7 +11,7 @@ angular.module('mgcrea.ngStrap.tab', [])
   .provider('$tab', function() {
 
     var defaults = this.defaults = {
-      animation: 'am-fade',
+      animation: 'animation-fade',
       template: 'tab/tab.tpl.html'
     };
 
