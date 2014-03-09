@@ -19,6 +19,7 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 		$scope.users = []
 
 		#Fetch data from api
+		DataService.endpoint = '/api/v2/angular-cms/'
 		DataService.fetch('users').then((data) ->
 			$scope.users = data
 		)

@@ -7,7 +7,12 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
-
+var LIVERELOAD_PORT = 35729;
+var SERVER_PORT = 9000;
+//var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var mountFolder = function (connect, dir) {
+    return connect.static(require('path').resolve(dir));
+};
 module.exports = function(grunt) {
 
 	// Load grunt tasks automatically
@@ -67,7 +72,23 @@ module.exports = function(grunt) {
 				port : 9000,
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname : 'localhost',
-				livereload : 35729
+				livereload : 35729,
+				/*
+				 middleware: function (connect) {
+            return [
+							require('json-proxy').initialize({
+								proxy: {
+                      forward: {
+                        '/api': '127.0.0.1:8181'
+                      },
+                      headers: {
+                          'X-Forwarded-User': 'John Doe'
+                        }
+                    }
+                  })
+            ];
+        }
+        */
 			},
 			livereload : {
 				options : {
@@ -500,7 +521,7 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin', 'ngdocs']);
+	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
 
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
 };
