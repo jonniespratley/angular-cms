@@ -13,6 +13,8 @@ deploy:
   api_key: '6ac65b88-dd6d-421f-9fc7-c9ae18f71cb4'
   on:
     all_branches: true
-run:
-  - 'grunt build'
-  - 'npm start'
+  app:
+  	master: 'develop'
+	run:
+	  - 'grunt build'
+	  - 'npm start'
