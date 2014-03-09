@@ -1,0 +1,43 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage',
+1 verbose cli   '--save-dev' ]
+2 info using npm@1.3.25
+3 info using node@v0.10.22
+4 warn package.json http-proxy@1.0.2 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ '/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage',
+6 verbose cache add   null ]
+7 verbose cache add name=undefined spec="/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage" args=["/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage',
+8 verbose parsed url   path: '/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage',
+8 verbose parsed url   href: '/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage' }
+9 silly lockFile c32bb0f3--cms-node-modules-karma-coverage /WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage
+10 verbose lock /WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage /Users/jonathanspratley/.npm/c32bb0f3--cms-node-modules-karma-coverage.lock
+11 silly lockFile c32bb0f3--cms-node-modules-karma-coverage /WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage
+12 silly lockFile c32bb0f3--cms-node-modules-karma-coverage /WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage
+13 error addLocal Could not install /WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage
+14 error Error: ENOENT, open '/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage/package.json'
+15 error If you need help, you may report this *entire* log,
+15 error including the npm and node versions, at:
+15 error     <http://github.com/isaacs/npm/issues>
+16 error System Darwin 13.0.0
+17 error command "node" "/usr/local/bin/npm" "install" "/WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage" "--save-dev"
+18 error cwd /WWW/Learning_Yeoman/angular-cms
+19 error node -v v0.10.22
+20 error npm -v 1.3.25
+21 error path /WWW/Learning_Yeoman/angular-cms/node_modules/karma-coverage/package.json
+22 error code ENOENT
+23 error errno 34
+24 verbose exit [ 34, true ]

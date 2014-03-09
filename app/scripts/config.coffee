@@ -50,10 +50,10 @@ window.Config =
 		user: null
 	
 	layout: 
-    	header: "views/header.html"
-    	sidebar: "views/sidebar.html"
-    	content:"views/content.html"
-    	footer: "views/footer.html"
+    	header: "views/_header.html"
+    	sidebar: "views/_sidebar.html"
+    	content:"views/_content.html"
+    	footer: "views/_footer.html"
 
 	#I hold the current theme that should be used
 	theme: 'default'
@@ -172,7 +172,7 @@ window.Config =
 		version: "0.0.1"
 		formFactor: "desktop"
 		currentOrientation: null
-		cdn: 'http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com'
+		cdn: 'http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com/angular-cms'
 		cdns:
 			http: "http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com/angular-cms"
 			https: "https://4ac535c4a3d1d3359bbc-b2b68ced242ecf1cb9bc1021688e3775.ssl.cf1.rackcdn.com/angular-cms"
