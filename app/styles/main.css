@@ -1,4 +1,7 @@
-/* @override http://127.0.0.1:9000/styles/main.css */
+/* @override 
+	http://127.0.0.1:9000/styles/main.css
+	http://localhost:9000/styles/main.css
+*/
 
 /* @group Global */
 
@@ -9,7 +12,7 @@ body {
  
 button.navbar-toggle {
 }
-.login {
+.login .login-wrap {
 	margin: 5px auto;
 	max-width: 315px;
 }
@@ -44,8 +47,7 @@ html {
 /* @group Animate */
 
 .view-animate {
-	padding: 0px;
-	width: 100%;
+	padding-left: 20px;
 }
 .view-animate.ng-enter {
 	opacity: .5;
@@ -54,15 +56,13 @@ html {
 .view-animate.ng-enter, 
 .view-animate.ng-leave {
 	bottom: 0;
-	display: block;
 	left: 0;
-	padding: 0px;
 	position: absolute;
 	right: 0;
 	top: 0;
 	transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
 	webkit-transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
-	width: 100%;
+
 }
 .view-animate.ng-enter.ng-enter-active {
 	opacity: 1;
@@ -76,6 +76,7 @@ html {
 	min-height:550px;
 	overflow: hidden;
 	position: relative;
+
 }
 
 .animate-if {
@@ -108,21 +109,29 @@ html {
 	webkit-transition: width .5s ease-in-out, left 1.5s ease-in-out;
 	display: block;
 	position: relative;
+	z-index: 150;
 }
  
 .cms-sidebar.closed {
-	clear: both;
 	display: block;
-	height: 100%;
 	width: 85px;
+	
+
 }
 .cms-sidebar.closed span.title {
 	display: none;
 	overflow: hidden;
 }
+.cms-sidebar.closed .nav-header {
+	display: none;
+}
 
 .cms-sidebar-nav {
 	padding: 0;
+	moz-transition: width .5s ease-in-out;
+	o-transition: width .5s ease-in-out;
+	transition: width .5s ease-in-out;
+	webkit-transition: width .5s ease-in-out;
 }
 .cms-sidebar-nav .nav .nav-header {
 	color: #999;
@@ -133,7 +142,6 @@ html {
 }
 .cms-sidebar-nav li a {
 	display: block;
-	overflow: hidden;
 	white-space: nowrap;
 }
 .cms-sidebar-nav.fixed {
@@ -142,11 +150,13 @@ html {
 	position: fixed;
 	top: 52px;
 }
- 
-.cms-sidebar-nav-toggle {
-	position: absolute;
-	right: 0;
-	top: 0;
+.cms-sidebar-nav-toggle:hover{
+	 
+} 
+.cms-sidebar-nav-toggle {	  
+	z-index: 200;
+
+	white-space: nowrap;
 }
 
 /* @end */

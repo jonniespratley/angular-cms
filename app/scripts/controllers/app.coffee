@@ -12,7 +12,7 @@ angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '
 	window.App = $rootScope.App = App
 	angular.element(document).ready(()->
 		$log.info('Document ready', this);
-		angular.element('.sidebar-nav').bind('click', 'a', (e)->
+		angular.element('.nav').bind('click', 'a', (e)->
 			$log.info(e);
 		)
 	)

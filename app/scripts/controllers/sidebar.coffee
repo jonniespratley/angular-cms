@@ -25,6 +25,7 @@ angular.module('angularCmsApp').controller('SidebarCtrl', ($scope, $rootScope) -
 		#Toggle sidebar
 		$scope.toggleSidebar = () ->
 			$scope.sidebar.closed = !$scope.sidebar.closed
+			#$('[rel="tooltip"]').tooltip()
 		
 		
 		#tool tips for icons
