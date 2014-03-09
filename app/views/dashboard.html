@@ -1,77 +1,82 @@
-<h1><i class="fa fa-1x fa-dashboard"></i> Dashboard</h1>
-<hr>
+<div id="dashboard">
+			<button class="btn btn-default pull-right" ng-click="fullscreen()">Full Screen</button>
+	<cms-header title="Dashboard" icon="dashboard">
+	</cms-header>
 
-<cms-widgets>
-	<cms-widget title="Overview" size="6">
-	<div class="row">
-		<div class="col-6 col-sm-6">
-			<legend>
-				Content
-			</legend>
-			<ul class="list-unstyled">
-				<li>
-					<span class="badge">42</span> Pages
-				</li>
-				<li>
-					<span class="badge">2</span> Categories
-				</li>
-				<li>
-					<span class="badge">5</span> Tags
-				</li>
-				<li>
-					<span class="badge">23</span> Files
-				</li>
-				<li>
-					<span class="badge">5</span> Plugins
-				</li>
-			</ul>
+
+	<cms-widgets>
+		<cms-widget title="Overview" size="6">
+		<div class="row">
+			<div class="col-6 col-sm-6">
+				<legend>
+					Content
+				</legend>
+				<ul class="list-unstyled">
+					<li>
+						<span class="badge">42</span> Pages
+					</li>
+					<li>
+						<span class="badge">2</span> Categories
+					</li>
+					<li>
+						<span class="badge">5</span> Tags
+					</li>
+					<li>
+						<span class="badge">23</span> Files
+					</li>
+					<li>
+						<span class="badge">5</span> Plugins
+					</li>
+				</ul>
+			</div>
+			<div class="col-6 col-sm-6">
+				<legend>
+					System
+				</legend>
+			</div>
 		</div>
-		<div class="col-6 col-sm-6">
-			<legend>
-				System
-			</legend>
-		</div>
+		<p>
+			You are using <strong>Angular-CMS 0.1.0</strong>
+		</p>
+	</section>
+	<div class="panel-footer clearfix">
+		<button class="btn pull-left hidden-sm btn-default" type="reset">
+			Check for Update
+		</button>
+		<button class="btn btn-primary pull-right">
+			Install Plugin
+		</button>
 	</div>
-	<p>
-		You are using <strong>Angular-CMS 0.1.0</strong>
-	</p>
-</section>
-<div class="panel-footer clearfix">
-	<button class="btn pull-left hidden-sm btn-default" type="reset">
-		Check for Update
-	</button>
-	<button class="btn btn-primary pull-right">
-		Install Plugin
-	</button>
-</div>
-		
-	</cms-widget>
-	<cms-widget title="Quick Post" size="6">
-		<form>
-			<div class="form-group">
-				<div class="controls">
-					<input type="text" class="form-control" placeholder="Enter title here...">
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="controls">
-					<textarea class="form-control" rows="3"></textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="controls">
-					<input type="text" class="form-control" placeholder="Tags (separate with commas)">
-				</div>
-			</div>
-		</form>
-		<div class="panel-footer clearfix">
-			<button class="btn pull-left btn-default" type="button">
-				Save Draft
-			</button>
-			<button class="btn btn-primary pull-right">
-				Publish
-			</button>
-		</div>
-	</cms-widget>
-</cms-widgets>
 
+		</cms-widget>
+		<cms-widget title="Quick Post" size="6">
+			<form>
+				<div class="form-group">
+					<div class="controls">
+						<input type="text" class="form-control" placeholder="Enter title here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="controls">
+						<textarea class="form-control" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="controls">
+						<input type="text" class="form-control" placeholder="Tags (separate with commas)">
+					</div>
+				</div>
+			</form>
+			<div class="panel-footer clearfix">
+				<button class="btn pull-left btn-default" type="button">
+					Save Draft
+				</button>
+				<button class="btn btn-primary pull-right">
+					Publish
+				</button>
+			</div>
+		</cms-widget>
+	</cms-widgets>
+
+	
+</div>

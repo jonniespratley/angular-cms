@@ -4,7 +4,15 @@
 */
 
 /* @group Global */
-
+#dashboard:-webkit-full-screen {
+position: absolute;	
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 10px 15px;
+	background: none;
+}
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	padding-top: 65px;
