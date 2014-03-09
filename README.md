@@ -1,7 +1,5 @@
-
 # Angular CMS 
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
-
 
 ## Documentation
 Follow these steps when adding features to this project.
@@ -13,59 +11,6 @@ Follow these steps when adding features to this project.
 5. **Algorithm design** - Textual algorithm design will explain how the implementation should work.
 6. **Implementation** - The actual development of the code will take place.
 7. **Testing** - Unit and e2e testing will then verify the implementation of the story. 
-
-
-
-## Node Server
-
-```
-"promised-io": "~0.3.4",
- "cloudfiles": "~0.3.4",
- "jquery-file-upload-middleware": "~0.1.0",
- "easyimage": "~0.1.6",
- "url": "~0.7.9",
- "racker": "0.0.1-alpha3",
- "mongodb": "~1.3.19",
- "connect": "~2.11.2",
- "request": "https://registry.npmjs.org/request/-/request-2.0.5.tgz",
-```
-
-
-
-
-## Parse.com
-We are going to use parse for our data store.
-
-#### Sign Up
-
-	POST /1/users HTTP/1.1
-	Host: api.parse.com
-	Content-Type: application/json
-	X-Parse-Application-Id: fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB
-	X-Parse-REST-API-Key: G9ALilrUgXH0F2XwFErB7MCWf3rt0xMgb8u2icpK
-	
-	{ "username": "jonniespratley", "email": "jonniespratley@gmail.com", "password": "fred", "name": "Jonnie" }
-
-#### Login
-
-	GET /1/login?username=jonniespratley&password=fred HTTP/1.1
-	Host: api.parse.com
-	Content-Type: application/json
-	X-Parse-Application-Id: fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB
-	X-Parse-REST-API-Key: G9ALilrUgXH0F2XwFErB7MCWf3rt0xMgb8u2icpK
-	Cache-Control: no-cache
-	Postman-Token: 67d3ce51-dcf4-84c2-6e0e-b607767e831f
-
-
-#### Post
-
-	POST /1/classes/Post HTTP/1.1
-	Host: api.parse.com
-	Content-Type: application/json
-	X-Parse-Application-Id: fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB
-	X-Parse-REST-API-Key: G9ALilrUgXH0F2XwFErB7MCWf3rt0xMgb8u2icpK
-	
-	{ "ID": 1, "post_author": 1, "post_date": "2014-01-05 00:49:01", "post_date_gmt": "2014-01-05 00:49:01", "post_content": "", "post_title": "startupweekend", "post_excerpt": "", "post_status": "inherit", "comment_status": "open", "ping_status": "open", "post_password": "", "post_name": "startupweekend", "to_ping": "", "pinged": "", "post_modified": "2014-01-05 00:49:01", "post_modified_gmt": "2014-01-05 00:49:01", "post_content_filtered": "", "post_parent": 0, "guid": "http://wordpress.local/wp-content/uploads/2014/01/startupweekend.png", "menu_order": 0, "post_type": "attachment", "post_mime_type": "image/png", "comment_count": 0 } 
 
 ##Authentication System
 

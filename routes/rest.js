@@ -757,8 +757,25 @@ app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
 app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 //Readme
+
+var markdown = require( "markdown" ).markdown;
 app.get('/api/v2/README', function(res, req) {
-	getFile(__dirname + '/../README.md', null, req);
+	var localPath = __dirname + '/../README.md';
+
+	fs.readFile(localPath, 'utf8', function(err, data) {
+		if(err) {
+			req.end('There was an error.');
+			return console.log(err);
+		} else {
+			req.writeHead(200, {
+				"Content-Type" : 'utf8',
+				"Content-Length" : data.length
+			});
+			req.end(markdown.toHTML(data));
+		}
+		console.log(data);
+
+	});
 });
 /* ======================[ @TODO: Other Rest Utility Methods ]====================== */
 
