@@ -12,7 +12,7 @@ angular.module('angularCmsApp')
 					<a href="" ng-click="select(widget)">{{widget.title}}</a>
 				</li>
 		</ul>
-		<div ng-transclude>
+		<div class="row" ng-transclude>
 		
 		</div>
 	</div>

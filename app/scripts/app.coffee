@@ -19,7 +19,7 @@
 Parse.initialize "fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB", "QPFGBNHs0QQHFS54atV71oKppd3gTgaFfQIHP2VW"
 
 
-angular.module('angularCmsApp', [
+app = angular.module('angularCmsApp', [
 	'ngCookies',
 	'ngResource',
 	'ngSanitize',
@@ -29,8 +29,8 @@ angular.module('angularCmsApp', [
 	#'$strap.directives'
 	#'cms.Templates'
 ])
-	.config ($routeProvider) ->
-
+	.config ($routeProvider) ->		
+		#Resolve routes
 		routeResolver =
 			# I will cause a 1 second delay
 			delay: ($q, $timeout) ->

@@ -5,18 +5,20 @@ angular.module('angularCmsApp').directive "cmsWidget", ->
 	scope:
 		id: "@"
 		title: "@"
+		size: "@"
 		icon: "@"
 	require: '?^cmsWidgets'
 	template: '''
-		<section id="widget-{{$id}}" class="widget {{selected ? 'selected' : ''}}">
-			<header class="widget-header clearfix">
-				<!--i class="icon-chevron-right toggle" ng-show="icon"></i-->
-				<i class="icon-{{icon}}" ng-show="icon"></i>
-				<h3>{{title}}</h3>
-				
+		<div class="col-md-{{size}}">
+		<div id="widget-{{$id}}" class="panel panel-default {{selected ? 'selected' : ''}}">
+			<header class="panel-heading clearfix">
+				<!--i class="fa fa-chevron-right toggle" ng-show="icon"></i-->
+				<i class="fa fa--{{icon}}" ng-show="icon"></i>
+				{{title}}
 			</header>
-			<section class="widget-content" ng-transclude></section>
-		</section>
+			<section class="panel-body" ng-transclude></section>
+		</div>
+	</div>
 	'''
 	link: (scope, element, attrs, ctrl) ->
 		#console.log(ctrl)
@@ -24,11 +26,11 @@ angular.module('angularCmsApp').directive "cmsWidget", ->
 		toggle = ->
 			#console.log scope
 			opened = not opened
-			element.find(".widget-content").slideToggle(()->
+			element.find("section").slideToggle(()->
 					element.toggleClass (if opened then "closed" else "opened")
 			)
 			
-		widgetTitle = element.find(".widget-header")
+		widgetTitle = element.find("header")
 		widgetTitle.css(cursor: 'move')
 		opened = true
 		widgetTitle.bind "click", toggle
