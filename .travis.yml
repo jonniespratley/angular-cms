@@ -17,4 +17,4 @@ deploy:
     master: 'develop'
   run:
     - 'grunt build'
-    - 'npm start'
+#    - 'npm start'
