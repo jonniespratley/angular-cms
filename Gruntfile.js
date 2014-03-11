@@ -7,14 +7,30 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+
+var serverEndpoint = 'http://localhost:8181';
+var proxyConfig = {
+	proxy : {
+	    forward : {
+	        '/api' : serverEndpoint
+	    }
+	}
+};
+
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 9000;
 //var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
+
+
+
 module.exports = function(grunt) {
 
+	//Connect proxy to route requests to localhost:8181/api
+	grunt.loadNpmTasks('grunt-connect-proxy');
+require('json-proxy').initialize({});
 	// Load grunt tasks automatically
 	require('load-grunt-tasks')(grunt);
 
@@ -71,24 +87,16 @@ module.exports = function(grunt) {
 			options : {
 				port : 9000,
 				// Change this to '0.0.0.0' to access the server from outside.
-				hostname : 'localhost',
+				hostname : '127.0.0.1',
 				livereload : 35729,
-				/*
-				 middleware: function (connect) {
-            return [
-							require('json-proxy').initialize({
-								proxy: {
-                      forward: {
-                        '/api': '127.0.0.1:8181'
-                      },
-                      headers: {
-                          'X-Forwarded-User': 'John Doe'
-                        }
-                    }
-                  })
-            ];
-        }
-        */
+				middleware : function(connect, options) {
+						return [ 
+							require('json-proxy').initialize(proxyConfig), 
+							mountFolder(connect, '.grunt'), 
+							mountFolder(connect, '.tmp'),
+							mountFolder(connect, 'app')
+						];
+					}
 			},
 			livereload : {
 				options : {
@@ -496,7 +504,6 @@ module.exports = function(grunt) {
 				fileTypes : {}
 			}
 		}
-
 	});
 
 	grunt.registerTask('serve', function(target) {
