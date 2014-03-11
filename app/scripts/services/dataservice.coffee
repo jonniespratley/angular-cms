@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('angularCmsApp').service('DataService', ['$http', '$q', ($http, $q) ->
+angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resource', ($http, $q, $resource) ->
 	defer = $q.defer()
 	
 	DataService = 
@@ -22,5 +22,6 @@ angular.module('angularCmsApp').service('DataService', ['$http', '$q', ($http, $
 				console.log err
 			)
 			return defer.promise
-		
+	
+	#Add some rest methods
 ])
