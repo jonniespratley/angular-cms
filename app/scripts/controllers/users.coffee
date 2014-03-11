@@ -29,16 +29,28 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 
 		UserService = $resource('/api/v2/angular-cms/users/:id', {id:'@_id'});
 
+		#Select user
+		$scope.selectUser = (user) ->
+			$scope.user = user
+
 		#Get users
 		$scope.getUsers = () ->
-			UserService.get().then((data)->
+			UserService.query((data)->
 				console.log(data)
 				$scope.users = data
 			)
-		
+
+		#Delete user
+		$scope.deleteUser = (user) ->
+			UserService.remove(user, (data) -> alert('success'), (error) -> alert(error))
+
 		#Add user to database
 		$scope.addUser = (user) ->
-			$scope.users.push(user)
-			$scope.user = {}
-			$('#user-modal').modal('hide')
+			UserService.$save(user, (data)->
+				console.log(data)
+				$scope.users.push(user)
+				$scope.user = {}
+				$('#user-modal').modal('hide')
+			)
+			
 )

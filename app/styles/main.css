@@ -3,6 +3,11 @@
 	http://localhost:9000/styles/main.css
 */
 
+.actions{
+    width: 100px;
+    text-align: center;
+}
+
 /* @group Global */
 #dashboard:-webkit-full-screen {
 position: absolute;	
