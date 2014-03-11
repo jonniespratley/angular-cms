@@ -1,5 +1,5 @@
 'use strict'
-angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
+angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, DataService) ->
 		$scope.awesomeThings = [
 			'HTML5 Boilerplate'
 			'AngularJS'
@@ -19,11 +19,24 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 		$scope.users = []
 
 		#Fetch data from api
+		###
 		DataService.endpoint = '/api/v2/angular-cms/'
 		DataService.fetch('users').then((data) ->
 			$scope.users = data
 		)
+		###
 		
+
+		UserService = $resource('/api/v2/angular-cms/users/:id', {id:'@_id'});
+
+		#Get users
+		$scope.getUsers = () ->
+			UserService.get().then((data)->
+				console.log(data)
+				$scope.users = data
+			)
+		
+		#Add user to database
 		$scope.addUser = (user) ->
 			$scope.users.push(user)
 			$scope.user = {}
