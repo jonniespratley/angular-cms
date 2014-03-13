@@ -7,10 +7,12 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 		]
 		
 		$scope.user = 
-			id: null
 			username: null
 			email: null
 			password: null
+			role: 'user'
+			created: new Date()
+			modified: new Date()
 			metadata: 
 				avatar: ''
 				name: null
@@ -29,14 +31,13 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 
 		#Get users
 		$scope.getUsers = () ->
-			DataService.fetch('users', cache: false).then((data) ->
+			DataService.fetch('users').then((data) ->
 				$scope.users = data
 			)
 
 		#Delete user
 		$scope.deleteUser = (user) ->
 			DataService.destroy('users', user).then((data) ->
-				console.log(data)
 				$scope.getUsers()
 			)
 

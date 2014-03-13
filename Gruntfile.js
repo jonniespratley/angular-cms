@@ -409,12 +409,10 @@ require('json-proxy').initialize({});
 		// Test settings
 		karma : {
 			unit : {
-				configFile : 'karma.conf.js',
-				singleRun : true
+				configFile : 'karma.conf.js'
 			},
 			e2e : {
-				configFile : 'karma-e2e.conf.js',
-				singleRun : true
+				configFile : 'karma-e2e.conf.js'
 			}
 		},
 		jasmine_node : {
