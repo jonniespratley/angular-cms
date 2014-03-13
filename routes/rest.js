@@ -1,6 +1,6 @@
 //# REST
 // This is the resource object that contains all of the REST api methods for a full CRUD on a mongo account document.
-
+//TODO Clean up this file
 /**
  * @author Jonnie Spratley,
  * @created 10/23/12
@@ -756,6 +756,13 @@ app.post('/api/v2/:db/:collection', express.bodyParser(), RestResource.add);
 app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
 app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
+
+app.post('/api/v2/upload', function(res, req){
+	console.log(req.files);
+});
+
+
+
 //Readme
 
 var markdown = require( "markdown" ).markdown;
@@ -868,15 +875,15 @@ exports.rest = {
 				//### Express Config
 				//Configure the express app server.
 				app.configure(function() {
+					
+				 
 					app.use(express.static(config.staticDir));
 					app.use(express.directory(config.publicDir));
 					
+					app.use(express.json());
 					app.use("jsonp callback", true);
-					//app.use(express.json());
-					//app.use(express.urlencoded());
-					app.use(express.bodyParser());
-					
-					// simple logger
+					app.use(express.urlencoded());
+				
 					app.use(function(req, res, next){
 					  console.log('%s %s', req.method, req.body, req.url);
 					  next();
@@ -888,9 +895,10 @@ exports.rest = {
 					});
 
 
-
+					 app.use('/api/upload', upload.fileHandler());
+					 app.use(express.bodyParser());
 					//Upload config
-					app.use('/api/v2/upload', upload.fileHandler());
+					app.use('/api/v1/upload', upload.fileHandler());
 					app.use('/api/v2/uploads', function(req, res, next){
 						upload.fileManager().getFiles(function (files) {
 							res.json(files);

@@ -14,7 +14,9 @@
     "bootstrap": "~3.0.3",
     "font-awesome": "~4.0.3",
     "angular-ui-utils": "bower",
-    "angular-strap": "~2.0.0"
+    "angular-strap": "~2.0.0",
+    "jquery-file-upload": "~9.5.7",
+    "jquery-ui": "~1.10.4"
   },
   "devDependencies": {
     "angular-mocks": "1.2.4",
