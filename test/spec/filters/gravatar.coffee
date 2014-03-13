@@ -10,6 +10,6 @@ describe 'Filter: gravatar', () ->
   beforeEach inject ($filter) ->
     gravatar = $filter 'gravatar'
 
-  it 'should return the input prefixed with "gravatar filter:"', () ->
-    text = 'angularjs'
-    expect(gravatar text).toBe ('gravatar filter: ' + text)
+  it 'should return the hashed url', () ->
+    text = 'jonniespratley@gmail.com'
+    expect(gravatar.text).toBe('http://www.gravatar.com/avatar/f6112e781842d6a2b4636b35451401ff')
