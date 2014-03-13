@@ -19,14 +19,8 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 		$scope.users = []
 
 		#Fetch data from api
-		###
-		DataService.endpoint = '/api/v2/angular-cms/'
-		DataService.fetch('users').then((data) ->
-			$scope.users = data
-		)
-		###
 		
-
+		DataService.endpoint = '/api/v2/angular-cms/'
 		UserService = $resource('/api/v2/angular-cms/users/:id', {id:'@_id'});
 
 		#Select user
@@ -35,18 +29,20 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 
 		#Get users
 		$scope.getUsers = () ->
-			UserService.query((data)->
-				console.log(data)
+			DataService.fetch('users', cache: false).then((data) ->
 				$scope.users = data
 			)
 
 		#Delete user
 		$scope.deleteUser = (user) ->
-			UserService.remove(user, (data) -> alert('success'), (error) -> alert(error))
+			DataService.destroy('users', user).then((data) ->
+				console.log(data)
+				$scope.getUsers()
+			)
 
 		#Add user to database
 		$scope.addUser = (user) ->
-			UserService.$save(user, (data)->
+			UserService.save(user, (data)->
 				console.log(data)
 				$scope.users.push(user)
 				$scope.user = {}

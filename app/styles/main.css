@@ -526,3 +526,18 @@ html {
 }
 
 /* @end */
+
+/* @group Panels */
+
+.panel-body {
+	position: relative;
+	padding-bottom: 65px;
+}
+.panel-footer{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+/* @end */
