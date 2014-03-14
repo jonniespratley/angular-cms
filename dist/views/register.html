@@ -1,0 +1,34 @@
+<div class="slim-view register">
+	<form id="register-form" class="form-register well well-sm" ng-submit="register(user)" name="RegisterForm">
+		<header class="img-logo center avatar">
+			<img src="images/avatar_2x.png" class="img-circle">
+		</header>
+		<div class="form-group">
+			<input type="email" class="form-control" placeholder="Email" ng-model="user.email" required="">
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Username" ng-model="user.username" required="">
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control" placeholder="Password" ng-model="user.password" required="">
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control" placeholder="Confirm Password" ng-model="user.password2" required="">
+		</div>
+		<div class="form-group">
+			<label>
+				<input class="inline-checkbox" type="checkbox" ng-model="user.agree" required="">
+				Agree to Terms of Use 
+			</label>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary btn-block" type="submit" ng-disabled="!RegisterForm.$valid">
+				Sign up
+			</button>
+		</div>
+	</form>
+	<div class="clearfix">
+		<span class="pull-left"> Back to <a href="#/login">Login</a> </span>
+		
+	</div>
+</div>
