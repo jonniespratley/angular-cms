@@ -1,0 +1,40 @@
+<div id="cms-sidebar-nav" class="well well-sm cms-sidebar-nav bs-sidebar hidden-print" role="complementary" data-offset-top="-70" bs-affix="">
+
+	<nav id="cms-sidebar-nav-list" class="nav nav-list">
+		<li class="nav-header">
+			<span class="title">Menu</span>
+		</li>
+		<li ng-class="{active:item.selected}" ng-repeat="item in App.menu.user" ng-include="" src="'sidebar-item.html'"></li>
+		<li class="nav-header">
+			<span class="title">Admin</span>
+		</li>
+		<li ng-class="{active:item.selected}" ng-repeat="item in App.menu.admin" ng-include="" src="'sidebar-item.html'"></li>
+		<li>
+			<a id="cms-sidebar-nav-toggle" href="" ng-click="toggleSidebar()" class="cms-sidebar-nav-toggle"> 
+				<i class="fa fa-toggle-left" ng-hide="sidebar.closed"></i> 
+				<i class="fa fa-toggle-right" ng-show="sidebar.closed"></i> 
+				<span class="title">Collapse menu</span> </a>
+		</li>
+	</nav>
+
+</div>
+
+<script id="sidebar-item.html" type="text/ng-template">
+	<a
+	rel="tooltip"
+	data-delay="3"
+	data-toggle="tooltip" 
+	data-placement="right" 
+	title="{{item.title}}"
+	data-id="{{item.id}}"
+	data-page="{{item.slug}}"
+	ng-click="select(item)"
+	ng-href="#{{item.href}}">
+	<i
+	class="fa fa-1x fa-{{item.icon}}"
+	title="{{item.title}}"></i>
+	<span class="title">
+	{{item.title}}
+	</span>
+	</a>
+</script>

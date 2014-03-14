@@ -17,6 +17,7 @@
 					</th>
 					<th>E-mail</th>
 					<th>Role</th>
+					<th>Groups</th>
 					<th>Active</th>
 					<th>Last Login</th>
 					<th class="actions">Actions</th>
@@ -28,6 +29,7 @@
 					<input type="checkbox" value="{{user._id}}">
 					</td>
 					<td> {{user.email}} </td>
+					<td> {{user.role}} </td>
 					<td> {{user.groups}} </td>
 					<td> {{user.active}} </td>
 					<td> {{user.modified | date:'medium'}} </td>

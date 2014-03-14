@@ -10,7 +10,7 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 			username: null
 			email: null
 			password: null
-			role: 'user'
+			role: null
 			created: new Date()
 			modified: new Date()
 			metadata: 
@@ -43,7 +43,8 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 
 		#Add user to database
 		$scope.addUser = (user) ->
-			UserService.save(user, (data)->
+			DataService.save('users', user).then((data) ->
+				#$scope.getUsers()
 				$scope.users.push(user) unless user._id
 				$scope.user = {}
 				$('#user-modal').modal('hide')

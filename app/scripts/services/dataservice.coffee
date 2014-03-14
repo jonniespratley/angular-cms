@@ -24,11 +24,9 @@ angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resourc
 		#save - PUT or POST if object has id
 		save: (collection, data) ->
 			if data._id
-				@update(collection data)
-				console.log 'update'
+				@update(collection, data)
 			else
 				@create(collection, data)
-				console.log 'create'
 		
 		
 		#Save - POST a object to the backend
