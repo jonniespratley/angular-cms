@@ -47,7 +47,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome', 'PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
@@ -56,7 +56,7 @@ module.exports = function(config) {
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     proxies: {
-       '/': 'http://localhost:5000/'
+       '/': 'http://localhost:8181/'
     },
     // URL root prevent conflicts with the site root
     urlRoot: '_karma_'

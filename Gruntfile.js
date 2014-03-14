@@ -349,7 +349,10 @@ require('json-proxy').initialize({});
 					dot : true,
 					cwd : '<%= yeoman.app %>',
 					dest : '<%= yeoman.dist %>',
-					src : ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*', 'images/{,*/}*.{webp}', 'fonts/*']
+					src : ['*.{ico,png,txt}', '.htaccess', 
+					'bower_components/**/*', 
+					'scripts/libs/*', 
+					'images/{,*/}*.{webp}', 'fonts/*']
 				}, {
 					expand : true,
 					cwd : '.tmp/images',
