@@ -16,7 +16,7 @@
     "markdown": "~0.5.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
+    "grunt": "~0.4.4",
     "load-grunt-tasks": "~0.2.0",
     "js-yaml": "~2.1.3",
     "grunt-autoprefixer": "~0.4.0",
@@ -42,7 +42,7 @@
     "time-grunt": "~0.2.1",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-ng-scenario": "~0.1.0",
-    "grunt-karma": "~0.6.2",
+    "grunt-karma": "*",
     "grunt-ngdocs": "~0.1.7",
     "grunt-contrib-jasmine": "~0.5.2",
     "jasmine-node": "~1.11.0",
@@ -51,7 +51,9 @@
     "grunt-bower-install": "~0.8.0",
     "grunt-angular-templates": "~0.5.1",
     "grunt-contrib-less": "~0.9.0",
-    "json-proxy": "~0.1.2"
+    "json-proxy": "~0.1.2",
+    "karma": "~0.10.0",
+    "connect-proxy": "~1.0.2"
   },
   "engines": {
     "node": ">=0.8.0"

@@ -85,5 +85,11 @@ app = angular.module('angularCmsApp', [
 			.when '/help',
 			  templateUrl: 'views/help.html'
 			  controller: 'HelpCtrl'
+			.when '/forgot-password',
+			  templateUrl: 'views/forgot-password.html'
+			  controller: 'ForgotPasswordCtrl'
+			.when '/register',
+			  templateUrl: 'views/register.html'
+			  controller: 'RegisterCtrl'
 			.otherwise
 				redirectTo: '/'
