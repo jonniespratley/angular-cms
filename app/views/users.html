@@ -15,9 +15,10 @@
 					<th>
 					<input type="checkbox">
 					</th>
-					<th>Username</th>
 					<th>E-mail</th>
 					<th>Role</th>
+					<th>Active</th>
+					<th>Last Login</th>
 					<th class="actions">Actions</th>
 				</tr>
 			</thead>
@@ -26,9 +27,10 @@
 					<td>
 					<input type="checkbox" value="{{user._id}}">
 					</td>
-					<td> {{user.username}} </td>
 					<td> {{user.email}} </td>
-					<td> {{user.role}} </td>
+					<td> {{user.groups}} </td>
+					<td> {{user.active}} </td>
+					<td> {{user.modified | date:'medium'}} </td>
 					<td class="actions">
 						<div class="btn-group">
 						  <button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal" data-target="#user-modal"><i class="fa fa-edit"></i></button>

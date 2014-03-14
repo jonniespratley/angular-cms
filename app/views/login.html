@@ -1,7 +1,7 @@
-<div class="login-wrap">
+<div class=" slim-view">
 	<form id="login-form" class="form-login clearfix well well-sm" ng-submit="login(user)">
 		<header class="img-logo center avatar">
-			<img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="img-circle"/>
+			<img src="images/avatar_2x.png" class="img-circle"/>
 		</header>
 
 		<div class="alert alert-danger" ng-show="error">
@@ -19,11 +19,10 @@
 		</button>
 		<hr/>
 
-		<span class=""> <label>
-				<input type="checkbox" value="true" ng-model="user.remember">
-				Remember info?</label> </span>
-		<span class="pull-right"><a href="#/forgot">Forgot password?</a></span>
-
+		<p>
+			<label><input type="checkbox" ng-model="user.remember"> Stay signed in </label>
+			<span class="pull-right"> <a href="#/forgot-password"> Forgot password? </a> </span>
+		</p>
 	</form>
 	<br/>
 

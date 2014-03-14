@@ -171,7 +171,13 @@ html {
 
 	white-space: nowrap;
 }
-
+.avatar{
+	margin: 25px auto;
+}
+.slim-view{
+	max-width: 310px;
+	margin: 15px auto;
+}
 /* @end */
 
 /* @group Themes */
@@ -220,6 +226,7 @@ html {
 	webkit-border-radius: 5px;
 }
 .jumbotron {
+	text-align: center;
 }
 .jumbotron h1 {
 	margin-top: 5px;
