@@ -40,9 +40,10 @@
     "grunt-usemin": "~2.0.2",
     "jshint-stylish": "~0.1.3",
     "time-grunt": "~0.2.1",
-    "karma-ng-html2js-preprocessor": "~0.1.0",
-    "karma-ng-scenario": "~0.1.0",
+    "karma": "~0.10.0",
     "grunt-karma": "*",
+    "karma-ng-html2js-preprocessor": "*",
+    "karma-ng-scenario": "*",
     "grunt-ngdocs": "~0.1.7",
     "grunt-contrib-jasmine": "~0.5.2",
     "jasmine-node": "~1.11.0",
@@ -52,7 +53,6 @@
     "grunt-angular-templates": "~0.5.1",
     "grunt-contrib-less": "~0.9.0",
     "json-proxy": "~0.1.2",
-    "karma": "~0.10.0",
     "connect-proxy": "~1.0.2"
   },
   "engines": {
