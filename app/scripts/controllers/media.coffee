@@ -19,4 +19,8 @@ angular.module('angularCmsApp').controller 'MediaCtrl', ($scope) ->
 				$.each data.result.files, (index, file) ->
 					$("<p/>").text(file.name).appendTo document.body
 		)
+		
+		$scope.uploader = {
+			files: []
+		};
 
