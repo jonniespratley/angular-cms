@@ -28,7 +28,6 @@ var fs = require('fs');
 var app = express();
 var request = require('request');
 var upload = require('jquery-file-upload-middleware');
-var colors = require('colors');
 var easyimg = require('easyimage');
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
@@ -59,6 +58,7 @@ var cloudfilesConfig = {
 };
 
 //### Colors Config
+var colors = require('colors');
 colors.setTheme({
 	silly : 'rainbow',
 	input : 'grey',
@@ -71,7 +71,6 @@ colors.setTheme({
 	debug : 'blue',
 	error : 'red'
 });
-
 
 //# Class Objects
 
@@ -857,7 +856,7 @@ exports.rest = {
 	express : express,
 	init : function(options) {
 		
-		console.log('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + ''.warn);
+		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + '').warn);
 		config = options;
 				
 
@@ -924,6 +923,6 @@ exports.rest = {
 
 						app.listen(options.port || process.env.PORT);
 
-						console.log('Server Listening on port: ' + options.port);
+						console.log(String('Server Listening on port: ' + options.port).warn);
 	}
 };
