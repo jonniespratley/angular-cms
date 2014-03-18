@@ -56,7 +56,8 @@
     "karma-ng-scenario": "*",
     "karma-jasmine": "~0.1.5",
     "karma-chrome-launcher": "~0.1.2",
-    "karma-phantomjs-launcher": "~0.1.2"
+    "karma-phantomjs-launcher": "~0.1.2",
+    "json-proxy": "~0.1.2"
   },
   "engines": {
     "node": ">=0.8.0"
