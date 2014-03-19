@@ -33,8 +33,8 @@
 		<link rel="apple-touch-startup-image" sizes="640x920" media="(device-height: 480px)" href="/ico/splash.png" />
 
 		<!-- build:css({.tmp,app}) styles/main.css -->
-		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="styles/main.css">
 		<!-- endbuild -->
 		<link rel="stylesheet" ng-href="{{App.config.cdn}}/bootswatch.com/{{App.theme | lowercase}}/bootstrap.min.css"/>
@@ -78,15 +78,19 @@
 		<!-- bower:js -->
 		<!-- endbower -->
 
-		<script src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
-
 		<!-- build:js scripts/plugins.js -->
-		<script src="/bower_components/jquery/jquery.js"></script>
-		<script src="/bower_components/es5-shim/es5-shim.js"></script>
-		<script src="/bower_components/angular/angular.js"></script>
-		<script src="/bower_components/json3/lib/json3.min.js"></script>
-		<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="bower_components/jquery/jquery.js"></script>
+		<script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+		<script src="bower_components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+		<script src="bower_components/jquery-file-upload/js/jquery.fileupload.js"></script>
+		<script src="bower_components/es5-shim/es5-shim.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/json3/lib/json3.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 		<!-- endbuild -->
+		<script src="scripts/libs/md5.js"></script>
+		<script src="scripts/libs/markdown.js"></script>
+		<script src="scripts/libs/parse-1.2.17.min.js"></script>
 
 		<!-- build:js scripts/modules.js -->
 		<script src="bower_components/angular-route/angular-route.js"></script>
@@ -96,6 +100,7 @@
 		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 		<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
 		<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+		<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 
 		<!-- endbuild -->
 
@@ -129,9 +134,16 @@
 		<script src="scripts/directives/cmsUploader.js"></script>
 		<script src="scripts/services/DataService.js"></script>
 		<script src="scripts/directives/cmsHeader.js"></script>
-<script src="scripts/services/cmsDataServiceProvider.js"></script>
-<script src="scripts/services/cmsDataServiceFactory.js"></script>
+		<script src="scripts/services/cmsDataServiceProvider.js"></script>
+		<script src="scripts/services/cmsDataServiceFactory.js"></script>
 
+		<script src="scripts/services/cmsUsersFactory.js"></script>
+<script src="scripts/directives/cmsGravatar.js"></script>
+<script src="scripts/filters/gravatar.js"></script>
+<script src="scripts/services/cmsAuthService.js"></script>
+<script src="scripts/services/cmsSessionService.js"></script>
+<script src="scripts/services/cmsNotify.js"></script>
+<script src="scripts/controllers/forgot-password.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>

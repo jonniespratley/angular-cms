@@ -1,6 +1,6 @@
 'use strict'
 angular.module('angularCmsApp').directive('cmsHeader', () ->
-	template: '<div class="clearfix"><h1><i class="fa fa-1x fa-{{icon}}"></i> {{title}}</h1><hr/></div>'
+	template: '<div class="page-header"><h1><i class="fa fa-1x fa-{{icon}}"></i> {{title}}</h1></div>'
 	restrict: 'E'
 	transclude: true
 	replace: true

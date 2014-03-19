@@ -1,8 +1,11 @@
+<div id="users" ng-init="getUsers()">
+
 <h1><i class="fa fa-1x fa-group"></i> Users
 <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#user-modal">
 	Add New
 </button></h1>
 <hr>
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="table-responsive">
@@ -12,10 +15,12 @@
 					<th>
 					<input type="checkbox">
 					</th>
-					<th>Username</th>
 					<th>E-mail</th>
 					<th>Role</th>
-					<th>Actions</th>
+					<th>Groups</th>
+					<th>Active</th>
+					<th>Last Login</th>
+					<th class="actions">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,14 +28,16 @@
 					<td>
 					<input type="checkbox" value="{{user._id}}">
 					</td>
-					<td> {{user.username}} </td>
 					<td> {{user.email}} </td>
 					<td> {{user.role}} </td>
-					<td>
+					<td> {{user.groups}} </td>
+					<td> {{user.active}} </td>
+					<td> {{user.modified | date:'medium'}} </td>
+					<td class="actions">
 						<div class="btn-group">
-  <button type="button" class="btn btn-default"><i class="fa fa-edit"></i></button>
-  <button type="button" class="btn btn-default">Middle</button>
-</div>
+						  <button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal" data-target="#user-modal"><i class="fa fa-edit"></i></button>
+						  <button type="button" class="btn btn-default btn-sm" ng-click="deleteUser(user);"><i class="fa fa-trash-o"></i></button>
+						</div>
 						
 					</td>
 				</tr>
@@ -67,7 +74,7 @@
 										<div class="form-group">
 											<label class="control-label col-sm-3 col-xs-3">Role:</label>
 											<div class="controls col-sm-9 col-xs-9">
-												<input type="text" class="form-control" ng-model="user.role">
+												<input type="text" class="form-control" ng-model="user.role" placeholder="Role">
 											</div>
 										</div>
 										<div class="form-group">
@@ -92,7 +99,7 @@
 								</div>
 								<div class="col-sm-3 col-xs-5">
 									<aside class="profile-pic center">
-										<img src="http://jonniespratley.me/assets/jonnie/avatar.png" class="img-thumbnail" alt="{{App.session.user.username}}">
+										<img ng-src="{{ user.email | gravatar }}" class="img-thumbnail" alt="{{App.session.user.username}}">
 									</aside>
 								</div>
 							</div>
@@ -110,4 +117,5 @@
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 	</div>
+</div>
 </div>

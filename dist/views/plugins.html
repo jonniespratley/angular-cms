@@ -1,12 +1,12 @@
 <div id="plugins" class="">
 
 	<div class="col-12">
-		          <h1><i class="fa fa-1x fa-folder-open"></i> Plugins</h1>
-		          <hr>
+		<cms-header title="Plugins" icon="folder-open"></cms-header>
+
 
 
 		   <div class="row">
-		   <div class="col-sm-8 span8">
+		   <div class="col-sm-9">
 		     <!-- Single button -->
 		<div class="btn-group">
 		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -22,13 +22,10 @@
 		</div>
 		<button class="btn btn-default">Apply</button>
 		   </div>
-		     <div class="col-sm-4 span4">
-		        <div class="input-group">
-		      <input type="text" class="form-control">
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button">Search</button>
-		      </span>
-		    </div><!-- /input-group -->
+		     <div class="col-sm-3">
+
+		      <input type="text" class="form-control" ng-model="query">
+
 		     </div>
 		   </div>
 		   <br>
@@ -43,33 +40,12 @@
 		              </tr>
 		            </thead>
 		            <tbody>
-		              <tr>
+		              <tr ng-repeat="plugin in plugins | filter: query">
 		                <td>
-		                  <input type="checkbox">
+		                  <input type="checkbox" ng-model="plugin.id">
 		                </td>
-		                <td>Google Chart Widgets</td>
-		                <td>This plugin brings Google Charts to the dashboard, configurable settings to visualize any content type.</td>
-		              </tr>
-		              <tr>
-		                <td>
-		                  <input type="checkbox">
-		                </td>
-		                <td>Twitter Widget</td>
-		                <td>This plugin enables your Twitter feed on your dashboard and public stream widgets for your pages.</td>
-		              </tr>
-		              <tr>
-		                <td>
-		                  <input type="checkbox">
-		                </td>
-		                <td>Rich Content Editor</td>
-		                <td>This plugin enables all text area inputs in the content editor view will be a Rich Text Editor.</td>
-		              </tr>
-		              <tr>
-		                <td>
-		                  <input type="checkbox">
-		                </td>
-		                <td>ACL User Management</td>
-		                <td>This plugin enables ACL manage for the users of the CMS, easily configure actions to user roles to more control.</td>
+		                <td>{{plugin.title}}</td>
+		                <td>{{plugin.description}}</td>
 		              </tr>
 		            </tbody>
 		          </table>

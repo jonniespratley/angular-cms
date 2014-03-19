@@ -9,7 +9,12 @@ angular.module('angularCmsApp').controller 'AppCtrl', ['$scope', '$rootScope', '
 	App.route = $route
 	App.location = $location
 	App.routeParams = $routeParams
+	
+	App.roles = [ 'guest', 'user', 'admin' ]
+	
 	window.App = $rootScope.App = App
+	
+	
 	angular.element(document).ready(()->
 		$log.info('Document ready', this);
 		angular.element('.nav').bind('click', 'a', (e)->

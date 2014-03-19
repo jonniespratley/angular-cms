@@ -21,7 +21,8 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 	    showtable: "@"
 	    showlist: "@"
 	    handles: "@"
-	    uploader: "@"
+	    uploader: "="
+	    ngModel: '='
 	  template: '''
 	      <div id="uploader">
 	        <div id="uploader-dropzone" class="uploader-dropzone">
@@ -30,21 +31,25 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 	            <span>or</span>
 	          </p>
 	          <button id="uploader-btn" class="btn btn-default">Select files</button>
-	          <input id="uploader-file-input" type="file" name="{{name}}" multiple="{{multiple}}" />
+	          <input id="uploader-file-input" type="file" name="files[]" multiple />
 	        </div>
-	        <legend>Que</legend>
-	        <span id="uploader-count"></span>
-	         <legend>List</legend>
-	        <div id="imgPanel"></div>
+	        
+	        
+	        <div id="cms-uploader-list" ng-show="showlist">
+		         <legend>List</legend>
+		        <div id="imgPanel"></div>
+		        <div id="fileAttributes"></div>
+	        </div>
 
-	        <div id="fileAttributes"></div>
 
 	        <div id="uploader-wrap"></div>
-	         <legend>Table</legend>
-	        <table id="uploader-table" class="table table-bordered"></table>
-
+	        <div id="cms-uploader-table-wrap" ng-show="showtable">
+	        	<legend>Table</legend>
+	        	<table id="uploader-table" class="table table-bordered"></table>
+					</div>
 	        <ul class="list-unstyled uploader-files-list">
-	          <li class="media">
+	          
+	          <li class="media" ng-repeat="item in uploader.files">
 	            <a class="pull-left" href="#">
 	              <img class="media-object img-thumbnail" src="http://placehold.it/75" />
 	            </a>
@@ -69,14 +74,15 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 	  restrict: "E"
 	  replace: true
 	  transclude: false
-	  link: postLink = (scope, element, attrs) ->
+	  require: '^?ngModel'
+	  link: postLink = (scope, element, attrs, ngModel) ->
 
 	    targetId = 'uploader-dropzone'
 	    inputId = 'uploader-file-input'
 	    buttonId = 'uploader-btn'
 
 	    #Internal variables
-	    _uploader = 
+	    scope.uploader = 
 	      files: []
 	      button: angular.element("##{buttonId}")
 	      input: angular.element("##{inputId}")
@@ -86,8 +92,8 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 
 
 
-	    _uploader.button.bind( 'click', () ->
-	     _uploader.input.trigger('click') 
+	    angular.element("##{buttonId}").bind( 'click', () ->
+	     angular.element("##{inputId}").trigger('click') 
 	    )
 
 	    console.log( scope )
@@ -98,7 +104,7 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 
 
 	      #Hide element
-	      _uploader.input.hide()
+	      scope.uploader.input.hide()
 
 	      #Listen for button and trigger change
 
@@ -108,6 +114,7 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 	      dropZone.addEventListener "drop", handleFileDrop, false
 
 	      uploader = document.getElementById(inputId)
+	      
 	      uploader.addEventListener "change", ((e) ->
 	        files = e.currentTarget.files
 	        handleFiles files
@@ -182,7 +189,8 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 	            if file.size < sizeLimitBytes
 
 	              #Add to files
-	              #scope.uploader.files.push(file)
+	              scope.uploader.files.push(file)
+	              
 
 	              img = document.createElement("img")
 	              img.file = file

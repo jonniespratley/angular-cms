@@ -1,6 +1,6 @@
 //# REST
 // This is the resource object that contains all of the REST api methods for a full CRUD on a mongo account document.
-
+//TODO Clean up this file
 /**
  * @author Jonnie Spratley,
  * @created 10/23/12
@@ -28,7 +28,6 @@ var fs = require('fs');
 var app = express();
 var request = require('request');
 var upload = require('jquery-file-upload-middleware');
-var colors = require('colors');
 var easyimg = require('easyimage');
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
@@ -59,6 +58,7 @@ var cloudfilesConfig = {
 };
 
 //### Colors Config
+var colors = require('colors');
 colors.setTheme({
 	silly : 'rainbow',
 	input : 'grey',
@@ -71,7 +71,6 @@ colors.setTheme({
 	debug : 'blue',
 	error : 'red'
 });
-
 
 //# Class Objects
 
@@ -231,17 +230,19 @@ var RestResource = {
 	//### login
 	//I handle trying to authorized a user with the v1 myappmatrix api server.
 	login : function(req, res, next) {
-
+		var query = {};
 		console.log(req.body);
 
 		//TODO: Need to make this externalized.
-		var query = {
-			email : req.body.email,
-			//Hashing on client side
-			password : req.body.password
-			//password : RestResource.hashPassword(req.body.password, req.body.email)
-		};
-
+		if(req.body.username){
+			//query.username = req.body.username;
+		}
+		if(req.body.email){
+			query.email = req.body.email;
+		}
+		
+		//TODO: Hashing on client side
+		query.password = req.body.password 
 
 
 		console.log('Login Query: ', query);
@@ -261,9 +262,7 @@ var RestResource = {
 						res.header('Content-Type', 'application/json');
 						res.jsonp(200, {
 							status : true,
-							results : {
-								user : cursor
-							}
+							user : cursor
 						});
 					} else {
 						res.jsonp(404, {
@@ -756,6 +755,13 @@ app.post('/api/v2/:db/:collection', express.bodyParser(), RestResource.add);
 app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
 app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
+
+app.post('/api/v2/upload', function(res, req){
+	console.log(req.files);
+});
+
+
+
 //Readme
 
 var markdown = require( "markdown" ).markdown;
@@ -850,7 +856,7 @@ exports.rest = {
 	express : express,
 	init : function(options) {
 		
-		console.log('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + ''.warn);
+		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + '').warn);
 		config = options;
 				
 
@@ -868,15 +874,15 @@ exports.rest = {
 				//### Express Config
 				//Configure the express app server.
 				app.configure(function() {
+					
+				 
 					app.use(express.static(config.staticDir));
 					app.use(express.directory(config.publicDir));
 					
+					app.use(express.json());
 					app.use("jsonp callback", true);
-					//app.use(express.json());
-					//app.use(express.urlencoded());
-					app.use(express.bodyParser());
-					
-					// simple logger
+					app.use(express.urlencoded());
+				
 					app.use(function(req, res, next){
 					  console.log('%s %s', req.method, req.body, req.url);
 					  next();
@@ -888,9 +894,10 @@ exports.rest = {
 					});
 
 
-
+					 app.use('/api/upload', upload.fileHandler());
+					 app.use(express.bodyParser());
 					//Upload config
-					app.use('/api/v2/upload', upload.fileHandler());
+					app.use('/api/v1/upload', upload.fileHandler());
 					app.use('/api/v2/uploads', function(req, res, next){
 						upload.fileManager().getFiles(function (files) {
 							res.json(files);
@@ -916,6 +923,6 @@ exports.rest = {
 
 						app.listen(options.port || process.env.PORT);
 
-						console.log('Server Listening on port: ' + options.port);
+						console.log(String('Server Listening on port: ' + options.port).warn);
 	}
 };
