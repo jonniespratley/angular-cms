@@ -67,6 +67,11 @@ window.Config =
 	menu:
 		admin: [
 			id: 1
+			title: "Pages"
+			href: "/pages"
+			icon: "edit"
+		,
+			id: 1
 			title: "Plugins"
 			href: "/plugins"
 			icon: "folder-open"
