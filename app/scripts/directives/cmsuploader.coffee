@@ -75,7 +75,7 @@ angular.module('angularCmsApp').directive "cmsUploader", ->
 	  replace: true
 	  transclude: false
 	  require: '^?ngModel'
-	  link: postLink = (scope, element, attrs) ->
+	  link: postLink = (scope, element, attrs, ngModel) ->
 
 	    targetId = 'uploader-dropzone'
 	    inputId = 'uploader-file-input'
