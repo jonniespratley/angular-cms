@@ -54,6 +54,9 @@ footer {
 	font-size: .8em;
 	padding: 30px 0;
 	text-align: center;
+	margin-top: 45px;
+	display: block;
+	text-transform: none;
 }
 
 h2 {
@@ -145,7 +148,7 @@ html {
 	transition: width .5s ease-in-out, left 1.5s ease-in-out;
 	webkit-transition: width .5s ease-in-out, left 1.5s ease-in-out;
 	display: block;
-	position: fixed;
+
 	z-index: 150;
 	top: 0;
 }
@@ -153,6 +156,10 @@ html {
 .cms-sidebar.closed {
 	display: block;
 	width: 85px;
+}
+.cms-sidebar.closed .well{
+	width: 45px;
+
 }
 
 .cms-sidebar.closed span.title {
@@ -164,7 +171,7 @@ html {
 	display: none;
 }
 
-.cms-sidebar-nav {
+.cms-sidebar-nav, .cms-sidebar span.title {
 	padding: 0;
 	moz-transition: width .5s ease-in-out;
 	o-transition: width .5s ease-in-out;
@@ -626,9 +633,12 @@ html body {
 
 @media (max-width: 767px) {
 
-
+.cms-sidebar{
+	margin-top: 20px;
+}
 html body {
-	padding: 35px 10px !important;
+	padding: 55px 15px !important;
+	padding-left: 0;
 }
 .cms-sidebar {
 	width: 80px !important;
@@ -638,19 +648,25 @@ html body {
 	margin-bottom: 0px;
 }
 .cms-sidebar .well {
-	width: 65px;
+	max-width: 65px;
+	position: fixed;
+	
 }
 
 .cms-sidebar .title {
 	display: none;
 }
-
+.view-animate {
+	padding-left: 5px;
+}
 }
 
 @media (min-width: 768px) {
 
 .cms-sidebar .well {
 	width: 160px;
+	position: fixed;
+	
 }
 
 .view-animate {
@@ -682,7 +698,7 @@ html body {
 
 .panel-body {
 	position: relative;
-	padding-bottom: 65px;
+	padding-bottom: 65px !important;
 }
 
 .panel-footer {
