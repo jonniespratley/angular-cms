@@ -1,8 +1,8 @@
 <div id="users" ng-init="getUsers()">
 
 <h1><i class="fa fa-1x fa-group"></i> Users
-<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#user-modal">
-	Add New
+<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#user-modal" ng-click="user = {}">
+	New User
 </button></h1>
 <hr>
 
@@ -16,7 +16,7 @@
 					<input type="checkbox">
 					</th>
 					<th>E-mail</th>
-					<th>Role</th>
+					
 					<th>Groups</th>
 					<th>Active</th>
 					<th>Last Login</th>
@@ -29,7 +29,6 @@
 					<input type="checkbox" value="{{user._id}}">
 					</td>
 					<td> {{user.email}} </td>
-					<td> {{user.role}} </td>
 					<td> {{user.groups}} </td>
 					<td> {{user.active}} </td>
 					<td> {{user.modified | date:'medium'}} </td>
@@ -52,17 +51,27 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 							&times;
 						</button>
-						<h4 class="modal-title">Add New User</h4>
+						<h4 class="modal-title" ng-hide="user.email">New User</h4>
+						<h4 class="modal-title" ng-show="user.email">Edit User</h4>
 					</div>
 					<div class="modal-body">
 						<div class="profile-view">
 							<div class="row">
-								<div class="col-sm-9 col-xs-7">
-									<form class="form-horizontal" ng-submit="addUser(user)">
+								<div class="col-sm-8 col-xs-7">
+									<form name="UserForm" class="form-horizontal" ng-submit="addUser(user)">
+									<!--
 										<div class="form-group">
 											<label class="control-label col-sm-3 col-xs-3">Username:</label>
 											<div class="controls col-sm-9 col-xs-9">
 												<input type="text" class="form-control" placeholder="Username" ng-model="user.username" autofocus>
+											</div>
+										</div>
+									-->
+									
+									<div class="form-group">
+											<label class="control-label col-sm-3 col-xs-3">Email:</label>
+											<div class="controls col-sm-9 col-xs-9">
+												<input type="email" class="form-control" placeholder="Email" ng-model="user.email" ng-disabled="user.email">
 											</div>
 										</div>
 										<div class="form-group">
@@ -72,17 +81,12 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="control-label col-sm-3 col-xs-3">Role:</label>
+											<label class="control-label col-sm-3 col-xs-3">Groups:</label>
 											<div class="controls col-sm-9 col-xs-9">
-												<input type="text" class="form-control"  ng-model="user.role" placeholder="Role">
+												<input type="text" class="form-control"  ng-model="user.groups" placeholder="Group">
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-3 col-xs-3">Email:</label>
-											<div class="controls col-sm-9 col-xs-9">
-												<input type="email" class="form-control" placeholder="Email" ng-model="user.email">
-											</div>
-										</div>
+										
 										<div class="form-group">
 											<label class="control-label col-sm-3 col-xs-3">Name:</label>
 											<div class="controls col-sm-9 col-xs-9">
@@ -97,9 +101,17 @@
 										</div>
 									</form>
 								</div>
-								<div class="col-sm-3 col-xs-5">
+								<div class="col-sm-4 col-xs-5">
 									<aside class="profile-pic center">
-										<img ng-src="{{ user.email | gravatar }}" class="img-thumbnail" alt="{{App.session.user.username}}"/>
+										
+										<div class="well well-sm">
+											<img ng-src="{{ user.email | gravatar }}" alt="{{App.session.user.username}}"/>
+											
+											<br/>
+											<small>
+												To change visit <a href="gravatar.com" target="_blank">gravatar.com</a>
+											</small>
+										</div>
 									</aside>
 								</div>
 							</div>
@@ -109,7 +121,7 @@
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							Close
 						</button>
-						<button type="button" class="btn btn-primary" ng-click="addUser(user)">
+						<button type="button" class="btn btn-primary" ng-click="addUser(user)" ng-disabled="!UserForm.$valid">
 							Submit
 						</button>
 					</div>
