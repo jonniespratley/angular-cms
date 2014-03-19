@@ -230,17 +230,19 @@ var RestResource = {
 	//### login
 	//I handle trying to authorized a user with the v1 myappmatrix api server.
 	login : function(req, res, next) {
-
+		var query = {};
 		console.log(req.body);
 
 		//TODO: Need to make this externalized.
-		var query = {
-			email : req.body.email,
-			//Hashing on client side
-			password : req.body.password
-			//password : RestResource.hashPassword(req.body.password, req.body.email)
-		};
-
+		if(req.body.username){
+			//query.username = req.body.username;
+		}
+		if(req.body.email){
+			query.email = req.body.email;
+		}
+		
+		//TODO: Hashing on client side
+		query.password = req.body.password 
 
 
 		console.log('Login Query: ', query);
@@ -260,9 +262,7 @@ var RestResource = {
 						res.header('Content-Type', 'application/json');
 						res.jsonp(200, {
 							status : true,
-							results : {
-								user : cursor
-							}
+							user : cursor
 						});
 					} else {
 						res.jsonp(404, {
