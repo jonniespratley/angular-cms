@@ -1,5 +1,5 @@
 'use strict'
-angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, DataService) ->
+angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 		$scope.awesomeThings = [
 			'HTML5 Boilerplate'
 			'AngularJS'
@@ -18,12 +18,17 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 				name: null
 				aboue: null
 		
+		#Hold the users
 		$scope.users = []
-
-		#Fetch data from api
 		
-		DataService.endpoint = '/api/v2/angular-cms/'
-		UserService = $resource('/api/v2/angular-cms/users/:id', {id:'@_id'});
+		#Holds the user groups
+		$scope.groups = null
+
+		$scope.getGroups = () ->
+			DataService.fetch('groups').then((data) ->
+				$scope.groups = data
+				console.log(data)
+			)
 
 		#Select user
 		$scope.selectUser = (user) ->
@@ -33,11 +38,13 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, $resource, Data
 		$scope.getUsers = () ->
 			DataService.fetch('users').then((data) ->
 				$scope.users = data
+				$scope.getGroups() unless $scope.groups
 			)
 
 		#Delete user
-		$scope.deleteUser = (user) ->
+		$scope.deleteUser = (index, user) ->
 			DataService.destroy('users', user).then((data) ->
+				$scope.users.pop(index)
 				$scope.getUsers()
 			)
 
