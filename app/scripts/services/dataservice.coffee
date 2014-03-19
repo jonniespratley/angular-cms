@@ -1,8 +1,6 @@
 'use strict'
 
 angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resource', ($http, $q, $resource) ->
-	defer = $q.defer()
-	
 	DataService = 
 	
 		#Endpoint location
@@ -12,7 +10,9 @@ angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resourc
 		fetch - I fetch data from the angular-cms mongo backend api.
 		###
 		fetch: (collection, params) ->
+			defer = $q.defer()
 			options = 
+				cache: false
 				params: params
 			$http.get( @endpoint + collection, options ).success((data) ->
 				defer.resolve(data)
@@ -31,6 +31,7 @@ angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resourc
 		
 		#Save - POST a object to the backend
 		create: (collection, data) ->
+			defer = $q.defer()
 			$http.post( @endpoint + collection, data ).success((data) ->
 				defer.resolve(data)
 			).error((err) -> 
@@ -40,6 +41,7 @@ angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resourc
 			
 		#remove - POST a object to the backend
 		destroy: (collection, data) ->
+			defer = $q.defer()
 			$http.delete( @endpoint + collection + '/' +  data._id ).success((data) ->
 				defer.resolve(data)
 			).error((err) -> 
@@ -49,6 +51,7 @@ angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resourc
 		
 		#update - PUT a object to the backend
 		update: (collection, data) ->
+			defer = $q.defer()
 			$http.put( @endpoint + collection + '/' + data._id, data ).success((data) ->
 				defer.resolve(data)
 			).error((err) -> 
