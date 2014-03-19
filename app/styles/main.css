@@ -6,7 +6,9 @@
 	http://127.0.0.1:9000/styles/main.css
 	http://localhost:9000/styles/main.css
 */
-
+.navbar-avatar{
+	height: 20px;
+}
 .actions {
 	width: 100px;
 	text-align: center;

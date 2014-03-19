@@ -77,7 +77,7 @@ require('json-proxy').initialize({});
 			},
 			//docs
 			ngdocs : {
-				files : ['docs/**/*'],
+				files : ['content/**/*'],
 				tasks : ['ngdocs']
 			}
 		},
@@ -442,32 +442,23 @@ require('json-proxy').initialize({});
 
 		ngdocs : {
 			options : {
-				dest : 'app/docs',
+				dest : 'docs',
 				html5Mode : false,
-				startPage : '/',
+				startPage : '/api',
 				title : "AngularCMS",
 				//  image: "path/to/my/image.png",
 				imageLink : "http://my-domain.com",
-				titleLink : "/",
+				titleLink : "/api",
 				bestMatch : true,
-				analytics : {
-					account : 'UA-08150815-0',
-					domainName : 'my-domain.com'
-				},
-				discussions : {
-					shortName : 'my',
-					url : 'http://my-domain.com',
-					dev : false
-				}
 			},
 			tutorial : {
-				src : ['content/*.ngdoc', 'content/tutorial/*.ngdoc'],
-				title : 'Learning Yeoman'
+				src : ['content/**/*.ngdoc'],
+				title : 'Angular CMS'
 			},
-			api : {
-				src : ['.tmp/scripts/**/*.js', 'app/scripts/**/*.coffee'],
-				title : 'API'
-			}
+		  api: {
+    			src: ['.temp/**/*.js', '!.temp/**/*.spec.js'],
+    			title: 'API Documentation'
+  			}
 		},
 
 		//https://npmjs.org/package/grunt-angular-templates

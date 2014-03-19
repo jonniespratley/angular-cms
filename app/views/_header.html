@@ -8,7 +8,7 @@
 			class="" 
 						data-template="views/_aside.html" 
 					data-placement="right" 
-					data-animation="am-slide-left" 
+					data-animation="am-slide-right" 
 					bs-aside="aside" 
 					data-container="body"
 			>
@@ -29,7 +29,8 @@
 
 			<ul class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
 				<li class="dropdown" ng-if="App.session.authorized">
-					<a href="" class="dropdown-toggle" data-toggle="dropdown"> <img src="https://www.gravatar.com/avatar/b4c0fecb38a48d57acf43350ee318107?s=20" class="img-circle"> <span> {{ App.session.user.username }} </span> <b class="caret"></b> </a>
+					<a href="" class="dropdown-toggle" data-toggle="dropdown"> 
+						<img ng-src="{{ user.email | gravatar }}" class="img-circle navbar-avatar"> <span> {{ App.session.user.email }} </span> <b class="caret"></b> </a>
 					<ul class="dropdown-menu">
 						<li>
 							<a href="#/profile">My Profile</a>
