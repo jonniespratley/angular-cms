@@ -10,7 +10,6 @@ currentUser
 ###
 # AngularJS will instantiate a singleton by calling "new" on this function
 angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log) ->
-	defer = $q.defer()
 
 	cmsAuthService = 
 		#Endpoint location
@@ -20,6 +19,7 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log) ->
 		authorize - I handle authorizing a user.
 		###
 		authorize: (user) ->
+			defer = $q.defer()
 			$http.post( @endpoint, user ).success((data) ->
 				$log.info(data)
 				defer.resolve(data)

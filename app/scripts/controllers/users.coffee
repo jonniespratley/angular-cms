@@ -51,8 +51,8 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 		#Add user to database
 		$scope.addUser = (user) ->
 			DataService.save('users', user).then((data) ->
-				#$scope.getUsers()
-				$scope.users.push(user) unless user._id
+				$scope.getUsers()
+				#$scope.users.push(user) unless user._id
 				$scope.user = {}
 				$('#user-modal').modal('hide')
 			)
