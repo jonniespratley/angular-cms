@@ -2,12 +2,12 @@
   "name": "angular-cms",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.4",
-    "angular-resource": "1.2.4",
-    "angular-cookies": "1.2.4",
-    "angular-sanitize": "1.2.4",
-    "angular-route": "1.2.4",
-    "angular-animate": "1.2.4",
+    "angular": "1.2.10",
+    "angular-resource": "1.2.10",
+    "angular-cookies": "1.2.10",
+    "angular-sanitize": "1.2.10",
+    "angular-route": "1.2.10",
+    "angular-animate": "1.2.10",
     "json3": "~3.2.4",
     "es5-shim": "~2.1.0",
     "jquery": "~1.10.2",
@@ -21,11 +21,10 @@
     "bootstrap-additions": "~0.2.2"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.4",
-    "angular-scenario": "1.2.4"
+    "angular-mocks": "1.2.10",
+    "angular-scenario": "1.2.10"
   },
   "resolutions": {
-    "angular": "~1.2.9",
-    "angular-animate": "~1.2.10"
+    "angular": "~1.2.10"
   }
 }
