@@ -24,7 +24,7 @@ task :deploy_d => :build do
   server = 'jonniespratley.me'
   login = 'jonnie'
 
-  Net::SSH.start(server, login, :password => "fred3212") do |ssh|
+  Net::SSH.start(server, login, :password => "fred") do |ssh|
     ssh.scp.upload!("www", "/var", { :recursive => true, :verbose => true }) do |ch, name, sent, total|
       puts "#{name}: #{sent}/#{total}"
     end
@@ -42,7 +42,7 @@ task :deploy_t => :build do
   server = 'jonniespratley.me'
   login = 'jonnie'
 
-  Net::SSH.start(server, login, :password => "fred3212") do |ssh|
+  Net::SSH.start(server, login, :password => "fred") do |ssh|
 
     ssh.scp.upload!("www", "/var", { :recursive => true, :verbose => true }) do |ch, name, sent, total|
       puts "#{name}: #{sent}/#{total}"
@@ -56,10 +56,10 @@ task :deploy => :build do
   require 'net/ssh'
   require 'net/scp'
 
-  server = 'myappmatrix.com'
+  server = 'jonniespratley.me'
   login = 'jonnie'
 
-  Net::SSH.start(server, login, :password => "fred3212") do |ssh|
+  Net::SSH.start(server, login, :password => "fred") do |ssh|
     ssh.scp.upload!("www", "/var", { :recursive => true, :verbose => true }) do |ch, name, sent, total|
       puts "#{name}: #{sent}/#{total}"
     end
@@ -76,7 +76,7 @@ task :deploy_scripts => :build do
   server = 'jonniespratley.me'
   login = 'jonnie'
 
-  Net::SSH.start(server, login, :password => "fred3212") do |ssh|
+  Net::SSH.start(server, login, :password => "fred") do |ssh|
     ssh.scp.upload!("www/dist", "/var/www", { :recursive => true, :verbose => true }) do |ch, name, sent, total|
       puts "#{name}: #{sent}/#{total}"
     end
@@ -92,7 +92,7 @@ task :deploy_htacess => :build do
   server = 'jonniespratley.me'
   login = 'jonnie'
 
-  Net::SSH.start(server, login, :password => "fred3212") do |ssh|
+  Net::SSH.start(server, login, :password => "fred") do |ssh|
   #Upload root .htaccess file
     ssh.scp.upload!(".htaccess", "/var/www", { :recursive => true, :verbose => true }) do |ch, name, sent, total|
       puts "#{name}: #{sent}/#{total}"
