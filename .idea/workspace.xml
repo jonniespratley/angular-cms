@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="669ca988-1ab2-486d-ab1c-9f96d1642854" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/styles/angular-motion.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/styles/bootstrap-additions.min.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/karma-e2e.conf.js" afterPath="$PROJECT_DIR$/karma-e2e.conf.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="angular-cms-base.iws" />
@@ -29,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="karma-e2e.conf.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="karma-e2e.conf.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/karma-e2e.conf.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="5" selection-start="484" selection-end="484" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="980">
+            <state line="58" column="34" selection-start="1434" selection-end="1434" vertical-scroll-proportion="1.1923642" vertical-offset="0" max-vertical-offset="980">
               <folding />
             </state>
           </provider>
@@ -92,10 +89,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="102" selection-start="3134" selection-end="3134" vertical-scroll-proportion="0.68085104" vertical-offset="266" max-vertical-offset="2506">
+            <state line="51" column="102" selection-start="3134" selection-end="3134" vertical-scroll-proportion="-19.47826" vertical-offset="266" max-vertical-offset="2506">
               <folding />
             </state>
           </provider>
@@ -143,7 +140,6 @@
         <option value="$PROJECT_DIR$/karma.conf.js" />
         <option value="$PROJECT_DIR$/app/views/header.html" />
         <option value="$PROJECT_DIR$/app/scripts/config.coffee" />
-        <option value="$PROJECT_DIR$/karma-e2e.conf.js" />
         <option value="$PROJECT_DIR$/app/views/login.html" />
         <option value="$PROJECT_DIR$/test/e2e/app.coffee" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -151,6 +147,7 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/app/index.html" />
+        <option value="$PROJECT_DIR$/karma-e2e.conf.js" />
       </list>
     </option>
   </component>
@@ -514,11 +511,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="3619" y="-84" width="1861" height="1176" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34242424" sideWeight="0.49674797" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33238906" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33238906" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Runner" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38812786" sideWeight="0.49756098" order="10" side_tool="true" content_ui="tabs" />
@@ -736,13 +733,6 @@
         <state line="36" column="6" selection-start="1630" selection-end="1630" vertical-scroll-proportion="0.13953489" vertical-offset="462" max-vertical-offset="784" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/karma-e2e.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="5" selection-start="484" selection-end="484" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="980">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="47" selection-start="155" selection-end="155" vertical-scroll-proportion="-1.2173913" vertical-offset="0" max-vertical-offset="532">
@@ -801,7 +791,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="102" selection-start="3134" selection-end="3134" vertical-scroll-proportion="0.68085104" vertical-offset="266" max-vertical-offset="2506">
+        <state line="51" column="102" selection-start="3134" selection-end="3134" vertical-scroll-proportion="-19.47826" vertical-offset="266" max-vertical-offset="2506">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/karma-e2e.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="34" selection-start="1434" selection-end="1434" vertical-scroll-proportion="1.1923642" vertical-offset="0" max-vertical-offset="980">
           <folding />
         </state>
       </provider>
