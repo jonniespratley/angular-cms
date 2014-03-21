@@ -75,8 +75,8 @@
 		"json-proxy": "~0.1.2",
 		"grunt-karma": "~0.8.2",
 		"karma": "~0.12.0",
-		"karma-firefox-launcher": "~0.1.3",
-		"karma-chrome-launcher": "~0.1.2",
+		"karma-phantomjs-launcher": "~0.1",
+		"karma-chrome-launcher": "~0.1",
 		"karma-ng-html2js-preprocessor": "~0.1",
 		"karma-ng-scenario": "~0.1",
 		"karma-jasmine": "~0.1.5"
