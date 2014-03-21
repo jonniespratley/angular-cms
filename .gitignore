@@ -5,6 +5,7 @@ node_modules
 .sass-cache
 .editorconfig
 .project
+dist
 app/bower_components
 db/mongod.lock
  
