@@ -7,7 +7,6 @@
 <html class="no-js">
 	<!--[if gt IE 8]><![endif]-->
 <html data-ng-app="angularCmsApp" class="no-js">
-
 	<head>
 		<meta charset="utf-8">
 
@@ -17,20 +16,36 @@
 
 		<title>angular-cms</title>
 
-		<meta name="description" content="{{App.sitedesc}}">
+		<meta name="description" content="This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.">
 		<meta name="viewport" content="width=device-width">
 		<meta name="fragment" content="#" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-title" content="angular-cms"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link rel="shortcut icon" href="/ico/favicon.ico"/>
-		<link rel="apple-touch-icon" href="/ico/apple-touch-icon-57-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png" />
-		<link rel="apple-touch-startup-image" href="/ico/splash.png"/>
-		<link rel="apple-touch-startup-image" media="(device-height: 568px)" href="/ico/splash.png"/>
-		<link rel="apple-touch-startup-image" sizes="640x920" media="(device-height: 480px)" href="/ico/splash.png" />
+
+
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="images/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="images/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="images/favicon-196x196.png" sizes="196x196">
+        <link rel="icon" type="image/png" href="images/favicon-160x160.png" sizes="160x160">
+        <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+        <meta name="msapplication-square70x70logo" content="images/mstile-70x70.png">
+        <meta name="msapplication-square144x144logo" content="images/mstile-144x144.png">
+        <meta name="msapplication-square150x150logo" content="images/mstile-150x150.png">
+        <meta name="msapplication-square310x310logo" content="images/mstile-310x310.png">
+        <meta name="msapplication-wide310x150logo" content="images/mstile-310x150.png">
 
 		<!-- build:css({.tmp,app}) styles/main.css -->
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
@@ -125,25 +140,29 @@
 		<script src="scripts/controllers/users.js"></script>
 		<script src="scripts/controllers/register.js"></script>
 		<script src="scripts/controllers/pages.js"></script>
+        <script src="scripts/controllers/forgot-password.js"></script>
+        <script src="scripts/controllers/sidebar.js"></script>
+        <script src="scripts/controllers/help.js"></script>
+        <script src="scripts/controllers/app.js"></script>
+
 		<script src="scripts/directives/cmsFormGroup.js"></script>
 		<script src="scripts/directives/cmsWidgets.js"></script>
 		<script src="scripts/directives/cmsWidget.js"></script>
-		<script src="scripts/controllers/sidebar.js"></script>
-		<script src="scripts/controllers/help.js"></script>
-		<script src="scripts/controllers/app.js"></script>
-		<script src="scripts/directives/cmsUploader.js"></script>
-		<script src="scripts/services/DataService.js"></script>
-		<script src="scripts/directives/cmsHeader.js"></script>
-		<script src="scripts/services/cmsDataServiceProvider.js"></script>
-		<script src="scripts/services/cmsDataServiceFactory.js"></script>
+        <script src="scripts/directives/cmsUploader.js"></script>
+        <script src="scripts/directives/cmsHeader.js"></script>
+        <script src="scripts/directives/cmsGravatar.js"></script>
 
-		<script src="scripts/services/cmsUsersFactory.js"></script>
-<script src="scripts/directives/cmsGravatar.js"></script>
-<script src="scripts/filters/gravatar.js"></script>
-<script src="scripts/services/cmsAuthService.js"></script>
-<script src="scripts/services/cmsSessionService.js"></script>
-<script src="scripts/services/cmsNotify.js"></script>
-<script src="scripts/controllers/forgot-password.js"></script>
+        <script src="scripts/filters/gravatar.js"></script>
+
+
+        <script src="scripts/services/DataService.js"></script>
+        <script src="scripts/services/cmsDataServiceProvider.js"></script>
+		<script src="scripts/services/cmsDataServiceFactory.js"></script>
+        <script src="scripts/services/cmsUsersFactory.js"></script>
+        <script src="scripts/services/cmsAuthService.js"></script>
+        <script src="scripts/services/cmsSessionService.js"></script>
+        <script src="scripts/services/cmsNotify.js"></script>
+
 		<!-- endbuild -->
 	</body>
 </html>
