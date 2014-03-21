@@ -11,12 +11,12 @@ LoginPage =
 		#Enter the test credentials
 		input('user.email').enter('admin@email.com')
 		input('user.password').enter('admin1234')
-		#Click the submit button
 		element('.login form button[type="submit"]', 'Click the Login submit button').click()
 		
 describe "Angular-CMS App", ->
 	beforeEach ->
 		MainPage.index()
+
 	#Welome Story: the initial page 
 	describe 'Welcome Story: the initial page', ->
 
