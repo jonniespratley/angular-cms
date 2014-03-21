@@ -8,4 +8,4 @@ node_modules
 dist
 app/bower_components
 db/mongod.lock
- 
+www/cms-content/uploads/
