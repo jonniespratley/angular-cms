@@ -1,6 +1,29 @@
 {
   "name": "angular-cms",
   "version": "0.0.1",
+	"description": "This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.",
+	"author": "Jonnie Spratley",
+	"license": "MIT",
+	"readmeFilename": "README.md",
+	"homepage": "https://github.com/jonniespratley/angular-cms",
+	"main": "Gruntfile.js",
+	"bugs": {
+		"url": "https://github.com/jonniespratley/angular-cms/issues"
+	},
+	"directories": {
+		"doc": "docs",
+		"test": "test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jonniespratley/angular-cms.git"
+	},
+	"keywords": [
+		"angular",
+		"grunt",
+		"angular-cms",
+		"yeoman"
+	],
   "dependencies": {
     "mongodb": "*",
     "mongoose": "*",
@@ -19,7 +42,7 @@
   "devDependencies": {
     "grunt": "~0.4.4",
     "load-grunt-tasks": "~0.2.0",
-    "js-yaml": "~2.1.3",
+	  "time-grunt": "~0.2.1",
     "grunt-autoprefixer": "~0.4.0",
     "grunt-concurrent": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
@@ -39,8 +62,6 @@
     "grunt-rev": "~0.1.0",
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~2.0.2",
-    "jshint-stylish": "~0.1.3",
-    "time-grunt": "~0.2.1",
     "grunt-ngdocs": "~0.1.7",
     "grunt-contrib-jasmine": "~0.5.2",
     "grunt-jasmine-node": "~0.1.0",
@@ -51,42 +72,24 @@
     "jasmine-node": "~1.11.0",
     "connect-proxy": "~1.0.2",
     "grunt-connect-proxy": "~0.1.10",
+	  "json-proxy": "~0.1.2",
     "grunt-karma": "~0.8.2",
-    "karma": "~0.12.0",
-    "karma-ng-html2js-preprocessor": "*",
-    "karma-ng-scenario": "*",
-    "karma-jasmine": "~0.1.5",
-    "karma-chrome-launcher": "~0.1.2",
-    "karma-phantomjs-launcher": "~0.1.2",
-    "json-proxy": "~0.1.2"
+	  "karma": "~0.12.0",
+	  "karma-firefox-launcher": "~0.1.3",
+	  "karma-chrome-launcher": "~0.1.2"
+	  "karma-ng-html2js-preprocessor": "~0.1"
+    "karma-ng-scenario": "~0.1",
+    "karma-jasmine": "~0.1.5"
   },
+	"peerDependencies": {
+		"grunt": "0.4.x",
+		"karma": "~0.12.0"
+	},
   "engines": {
     "node": ">=0.8.0"
   },
   "scripts": {
     "test": "grunt test",
     "start": "node web.js"
-  },
-  "description": "This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.",
-  "main": "Gruntfile.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jonniespratley/angular-cms.git"
-  },
-  "keywords": [
-    "angular",
-    "grunt",
-    "angular-cms",
-    "yeoman"
-  ],
-  "author": "Jonnie Spratley",
-  "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/jonniespratley/angular-cms/issues"
-  },
-  "homepage": "https://github.com/jonniespratley/angular-cms"
+  }
 }
