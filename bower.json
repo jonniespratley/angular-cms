@@ -16,13 +16,16 @@
     "angular-ui-utils": "bower",
     "angular-strap": "~2.0.0",
     "jquery-file-upload": "~9.5.7",
-    "jquery-ui": "~1.10.4"
+    "jquery-ui": "~1.10.4",
+    "angular-motion": "~0.3.2",
+    "bootstrap-additions": "~0.2.2"
   },
   "devDependencies": {
     "angular-mocks": "1.2.4",
     "angular-scenario": "1.2.4"
   },
   "resolutions": {
-    "angular": "~1.2.9"
+    "angular": "~1.2.9",
+    "angular-animate": "~1.2.10"
   }
 }

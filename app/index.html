@@ -48,6 +48,8 @@
         <meta name="msapplication-wide310x150logo" content="images/mstile-310x150.png">
 
 		<!-- build:css({.tmp,app}) styles/main.css -->
+        <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css">
+        <link rel="stylesheet" href="bower_components/bootstrap-additions/dist/bootstrap-additions.min.css">
 		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="styles/main.css">
@@ -90,8 +92,9 @@
 		ga('send', 'pageview');
 		</script>
 		-->
-		<!-- bower:js -->
-		<!-- endbower -->
+
+
+
 
 		<!-- build:js scripts/plugins.js -->
 		<script src="bower_components/jquery/jquery.js"></script>
@@ -103,9 +106,13 @@
 		<script src="bower_components/json3/lib/json3.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 		<!-- endbuild -->
-		<script src="scripts/libs/md5.js"></script>
-		<script src="scripts/libs/markdown.js"></script>
-		<script src="scripts/libs/parse-1.2.17.min.js"></script>
+
+        <!-- bower:js -->
+        <script src="scripts/libs/md5.js"></script>
+        <script src="scripts/libs/markdown.js"></script>
+        <script src="scripts/libs/parse-1.2.17.min.js"></script>
+        <!-- endbower -->
+
 
 		<!-- build:js scripts/modules.js -->
 		<script src="bower_components/angular-route/angular-route.js"></script>
@@ -116,7 +123,6 @@
 		<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
 		<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
 		<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-
 		<!-- endbuild -->
 
 		<!-- @TODO: [Templates]
