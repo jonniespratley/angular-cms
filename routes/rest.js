@@ -27,7 +27,7 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 var request = require('request');
-var upload = require('jquery-file-upload-middleware');
+//var upload = require('jquery-file-upload-middleware');
 var easyimg = require('easyimage');
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
@@ -895,10 +895,10 @@ exports.rest = {
 					});
 
 
-					 app.use('/api/upload', upload.fileHandler());
+					// app.use('/api/upload', upload.fileHandler());
 					 app.use(express.bodyParser());
 					//Upload config
-					app.use('/api/v1/upload', upload.fileHandler());
+					//app.use('/api/v1/upload', upload.fileHandler());
 					app.use('/api/v2/uploads', function(req, res, next){
 						// upload.fileManager().getFiles(function (files) {
 							// res.json(files);
