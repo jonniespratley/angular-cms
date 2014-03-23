@@ -579,9 +579,12 @@ var RestResource = {
 		});
 	},
 	//### add
-	//I handle
+	//I handle adding a record to the database.
 	add : function(req, res, next) {
 		var data = req.body;
+		var results = [];
+		var response = {};
+		
 		if(data) {
 			var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
 				auto_reconnect : true,
@@ -596,7 +599,7 @@ var RestResource = {
 							console.log("There are " + count + " records.");
 						});
 					});
-					var results = [];
+					
 					db.collection(req.params.collection, function(err, collection) {
 						//Check if the posted data is an array, if it is, then loop and insert each document
 						if(data.length) {
@@ -608,18 +611,21 @@ var RestResource = {
 									results.push(obj);
 								});
 							}
+							response.results = results;
 							db.close();
-							//	res.header('Location', '/'+req.params.db+'/'+req.params.collection+'/'+docs[0]._id.toHexString());
 							res.header('Content-Type', 'application/json');
-							res.jsonp(200, {
-								results : results
-							});
+							res.jsonp(200, response);
 						} else {
 							collection.insert(req.body, function(err, docs) {
-								res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + docs[0]._id.toHexString());
-								res.header('Content-Type', 'application/json');
-								res.send('{"ok":1}', 201);
 								db.close();
+								if(!err){
+									response.status = 'ok';
+									response.data = docs[0];
+									//res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + docs[0]._id.toHexString());
+									res.header('Content-Type', 'application/json');
+									res.send(response, 201);
+									
+								}
 							});
 						}
 					});
