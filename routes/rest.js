@@ -859,7 +859,7 @@ exports.rest = {
 		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + '').warn);
 		config = options;
 				
-
+/*
 				upload.fileHandler({
 					uploadDir : config.uploadsDestDir,
 					uploadUrl : 'www/cms-content/uploads',
@@ -871,6 +871,7 @@ exports.rest = {
 					}
 				});
 
+*/
 				//### Express Config
 				//Configure the express app server.
 				app.configure(function() {
@@ -899,26 +900,26 @@ exports.rest = {
 					//Upload config
 					app.use('/api/v1/upload', upload.fileHandler());
 					app.use('/api/v2/uploads', function(req, res, next){
-						upload.fileManager().getFiles(function (files) {
-							res.json(files);
-						});
+						// upload.fileManager().getFiles(function (files) {
+							// res.json(files);
+						// });
 					});
 
 					
 					
 				});
 
-
-				 		// events
-				        upload.on('begin', function (fileInfo) { 
-				        	console.log(fileInfo);
-				        });
-				        upload.on('abort', function (fileInfo) {  });
-				        upload.on('end', function (fileInfo) {  });
-				        upload.on('delete', function (fileInfo) {  });
-				        upload.on('error', function (e) {
-				            console.log(e.message);
-				        });
+// 
+				 		// // events
+				        // upload.on('begin', function (fileInfo) { 
+				        	// console.log(fileInfo);
+				        // });
+				        // upload.on('abort', function (fileInfo) {  });
+				        // upload.on('end', function (fileInfo) {  });
+				        // upload.on('delete', function (fileInfo) {  });
+				        // upload.on('error', function (e) {
+				            // console.log(e.message);
+				        // });
 
 
 						app.listen(options.port || process.env.PORT);
