@@ -859,14 +859,14 @@ exports.rest = {
 	app : app,
 	express : express,
 	init : function(options) {
-		
-		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + '').warn);
+		console.log(options);
+		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + '').debug);
 		config = options;
 				
-/*
+
 				upload.fileHandler({
 					uploadDir : config.uploadsDestDir,
-					uploadUrl : 'www/cms-content/uploads',
+					uploadUrl : config.uploadsUrl,
 					imageVersions : {
 						thumbnail : {
 							width : 125,
@@ -874,7 +874,7 @@ exports.rest = {
 						}
 					}
 				});
-
+		/*
 */
 				//### Express Config
 				//Configure the express app server.
@@ -901,33 +901,18 @@ exports.rest = {
 
 					app.use('/api/upload', upload.fileHandler());
 					 app.use(express.bodyParser());
-					//Upload config
-					app.use('/api/v1/upload', upload.fileHandler());
-					app.use('/api/v2/uploads', function(req, res, next){
-							upload.fileManager().getFiles(function (files) {
-							res.json(files);
-						});
-					});
+
+
+
 
 					
 					
 				});
 
-// 
-				 		// // events
-				        // upload.on('begin', function (fileInfo) { 
-				        	// console.log(fileInfo);
-				        // });
-				        // upload.on('abort', function (fileInfo) {  });
-				        // upload.on('end', function (fileInfo) {  });
-				        // upload.on('delete', function (fileInfo) {  });
-				        // upload.on('error', function (e) {
-				            // console.log(e.message);
-				        // });
 
 
 						app.listen(options.port || process.env.PORT);
 
-						console.log(String('Server Listening on port: ' + options.port).warn);
+						console.log(String('Listening on port: ' + options.port).debug);
 	}
 };
