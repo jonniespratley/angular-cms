@@ -526,4 +526,8 @@ require('json-proxy').initialize({});
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
 
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
+
+
+	grunt.registerTask('heroku:production', 'build');
+	grunt.registerTask('heroku:development', 'build');
 };
