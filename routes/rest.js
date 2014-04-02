@@ -879,15 +879,17 @@ exports.rest = {
 				//### Express Config
 				//Configure the express app server.
 				app.configure(function() {
-					
-				 
+					app.set("view options", { layout: false, pretty: true });
+
 					app.use(express.static(config.staticDir));
 					app.use(express.directory(config.publicDir));
-					
+
 					app.use(express.json());
 					app.use("jsonp callback", true);
 					app.use(express.urlencoded());
-				
+
+					app.use('/api/upload', upload.fileHandler());
+					app.use(express.bodyParser());
 					app.use(function(req, res, next){
 					  console.log('%s %s', req.method, req.body, req.url);
 					  next();
@@ -899,14 +901,7 @@ exports.rest = {
 					});
 
 
-					app.use('/api/upload', upload.fileHandler());
-					 app.use(express.bodyParser());
 
-
-
-
-					
-					
 				});
 
 

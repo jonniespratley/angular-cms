@@ -82,10 +82,10 @@ var config = {
 		password: 'isyourdaughter18?'
 	},
 	staticDir : __dirname + '/dist',
-	publicDir : __dirname + '/www',
+	publicDir : './www',
 	uploadsTmpDir : __dirname + '/.tmp',
 	uploadsDestDir : __dirname + '/www/cms-content/uploads',
-	uploadsUrl: '/www/cms-content/uploads',
+	uploadsUrl: ':8181/cms-content/',
 	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'
 };
 
