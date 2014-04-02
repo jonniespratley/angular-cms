@@ -522,6 +522,7 @@ require('json-proxy').initialize({});
 			return grunt.task.run(['karma:unit']);
 		}
 	});
+	grunt.registerTask('test:server', 'coffee', 'jasmine_node');
 
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
 

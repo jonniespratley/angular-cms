@@ -216,7 +216,7 @@ var RestResource = {
 	v2index : function(req, res, next) {
 		RestResource.version = 'v2';
 		res.json({
-			message : ' REST API Server ' + RestResource.useversion
+			message : 'REST API Server ' + RestResource.useversion
 		});
 	},
 	//### hashPassword
