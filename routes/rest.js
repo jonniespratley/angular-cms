@@ -27,7 +27,7 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 var request = require('request');
-//var upload = require('jquery-file-upload-middleware');
+var upload = require('jquery-file-upload-middleware');
 var easyimg = require('easyimage');
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
@@ -762,9 +762,7 @@ app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
 app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 
-app.post('/api/v2/upload', function(res, req){
-	console.log(req.files);
-});
+
 
 
 
@@ -783,7 +781,7 @@ app.get('/api/v2/README', function(res, req) {
 				"Content-Type" : 'utf8',
 				"Content-Length" : data.length
 			});
-			req.end(markdown.toHTML(data));
+			req.end(data);
 		}
 		console.log(data);
 
@@ -901,14 +899,14 @@ exports.rest = {
 					});
 
 
-					// app.use('/api/upload', upload.fileHandler());
+					app.use('/api/upload', upload.fileHandler());
 					 app.use(express.bodyParser());
 					//Upload config
-					//app.use('/api/v1/upload', upload.fileHandler());
+					app.use('/api/v1/upload', upload.fileHandler());
 					app.use('/api/v2/uploads', function(req, res, next){
-						// upload.fileManager().getFiles(function (files) {
-							// res.json(files);
-						// });
+							upload.fileManager().getFiles(function (files) {
+							res.json(files);
+						});
 					});
 
 					

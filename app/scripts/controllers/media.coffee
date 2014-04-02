@@ -1,6 +1,13 @@
 'use strict'
-angular.module('angularCmsApp').controller 'MediaCtrl', ($scope) ->
+angular.module('angularCmsApp').controller 'MediaCtrl', ($scope, $http, DataService) ->
 	$scope.awesomeThings = ['HTML5 Boilerplate', 'AngularJS','Karma']
+
+	$scope.uploads = []
+	$scope.getUploads = () ->
+		$http.get('/api/upload').success((data)->
+			$scope.uploads = data
+		)
+
 	$ ->
 		$("#fileupload").fileupload(
 			dataType: 'json'

@@ -1,5 +1,9 @@
 // Module dependencies.
-var application_root = __dirname, express = require('express'), path = require('path'), mongoose = require('mongoose'), app = express();
+var application_root = __dirname, 
+express = require('express'), 
+path = require('path'), 
+mongoose = require('mongoose'), 
+app = express();
 
 // Configure server
 app.configure(function() {
