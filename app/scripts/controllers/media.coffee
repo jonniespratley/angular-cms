@@ -11,7 +11,6 @@ angular.module('angularCmsApp').controller 'MediaCtrl', ($scope, $http, DataServ
 	$ ->
 		$("#fileupload").fileupload(
 			dataType: 'json'
-			url: '/api/upload'
 			dropZone: $('.uploader-dropzone')
 			add: (e, data) ->
 				console.log(e, data)
