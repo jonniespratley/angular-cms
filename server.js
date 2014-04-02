@@ -176,4 +176,11 @@ var message = {
 // to asynchronously send individual emails instead of a queue
 
 
- 
+ /*
+ * fs.readFile(req.files.displayImage.path, function (err, data) {
+  // ...
+  var newPath = __dirname + "/uploads/uploadedFileName";
+  fs.writeFile(newPath, data, function (err) {
+  res.redirect("back");
+  });
+  });*/
