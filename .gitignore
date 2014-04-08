@@ -7,5 +7,6 @@ node_modules
 .project
 dist
 app/bower_components
-db/mongod.lock
+db/*
 www/cms-content/uploads/
+.idea/
