@@ -8,20 +8,21 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+
 var serverEndpoint = 'http://localhost:8181';
 var proxyConfig = {
 	proxy : {
-	    forward : {
-	        '/api' : serverEndpoint
-	    }
+		forward : {
+			'/api' : serverEndpoint
+		}
 	}
 };
 
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 9000;
 //var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
-var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
+var mountFolder = function(connect, dir) {
+	return connect.static(require('path').resolve(dir));
 };
 
 
@@ -521,8 +522,13 @@ require('json-proxy').initialize({});
 			return grunt.task.run(['karma:unit']);
 		}
 	});
+	grunt.registerTask('test:server', 'coffee', 'jasmine_node');
 
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
 
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
+
+
+	grunt.registerTask('heroku:production', 'build');
+	grunt.registerTask('heroku:development', 'build');
 };
