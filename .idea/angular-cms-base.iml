@@ -47,6 +47,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Node.js Dependencies for angular-cms-base" level="project" />
     <orderEntry type="library" name="Node.js v0.8.22 Core Library" level="application" />
+    <orderEntry type="library" name="sass-stdlib" level="application" />
   </component>
 </module>
 
