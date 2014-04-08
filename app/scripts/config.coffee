@@ -217,4 +217,7 @@ window.Config =
 	login:
 		logo: "https://7fd8f70e662929940bdd-79dc9bd5ca0b6e6cb6f16ffd7b1e05e2.ssl.cf1.rackcdn.com/img/logo-login-med.png"
 		redirect: "/#/home"
+		user:
+			username: ''
+			password: ''
 		message: "Welcome {{user.username}}"
