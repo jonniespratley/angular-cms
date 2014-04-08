@@ -27,7 +27,7 @@ var express = require('express');
 var fs = require('fs');
 var app = express();
 var request = require('request');
-//var upload = require('jquery-file-upload-middleware');
+var upload = require('jquery-file-upload-middleware');
 var easyimg = require('easyimage');
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
@@ -216,7 +216,7 @@ var RestResource = {
 	v2index : function(req, res, next) {
 		RestResource.version = 'v2';
 		res.json({
-			message : ' REST API Server ' + RestResource.useversion
+			message : 'REST API Server ' + RestResource.useversion
 		});
 	},
 	//### hashPassword
@@ -762,9 +762,7 @@ app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
 app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 
-app.post('/api/v2/upload', function(res, req){
-	console.log(req.files);
-});
+
 
 
 
@@ -783,7 +781,7 @@ app.get('/api/v2/README', function(res, req) {
 				"Content-Type" : 'utf8',
 				"Content-Length" : data.length
 			});
-			req.end(markdown.toHTML(data));
+			req.end(data);
 		}
 		console.log(data);
 
@@ -861,14 +859,14 @@ exports.rest = {
 	app : app,
 	express : express,
 	init : function(options) {
-		
-		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + '').warn);
+		console.log(options);
+		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - ' + RestResource.hashPassword('admin1234', 'angular-cms') + '').debug);
 		config = options;
 				
-/*
+
 				upload.fileHandler({
 					uploadDir : config.uploadsDestDir,
-					uploadUrl : 'www/cms-content/uploads',
+					uploadUrl : config.uploadsUrl,
 					imageVersions : {
 						thumbnail : {
 							width : 125,
@@ -876,20 +874,22 @@ exports.rest = {
 						}
 					}
 				});
-
+		/*
 */
 				//### Express Config
 				//Configure the express app server.
 				app.configure(function() {
-					
-				 
+					app.set("view options", { layout: false, pretty: true });
+
 					app.use(express.static(config.staticDir));
 					app.use(express.directory(config.publicDir));
-					
+
 					app.use(express.json());
 					app.use("jsonp callback", true);
 					app.use(express.urlencoded());
-				
+
+					app.use('/api/upload', upload.fileHandler());
+					app.use(express.bodyParser());
 					app.use(function(req, res, next){
 					  console.log('%s %s', req.method, req.body, req.url);
 					  next();
@@ -901,35 +901,13 @@ exports.rest = {
 					});
 
 
-					// app.use('/api/upload', upload.fileHandler());
-					 app.use(express.bodyParser());
-					//Upload config
-					//app.use('/api/v1/upload', upload.fileHandler());
-					app.use('/api/v2/uploads', function(req, res, next){
-						// upload.fileManager().getFiles(function (files) {
-							// res.json(files);
-						// });
-					});
 
-					
-					
 				});
 
-// 
-				 		// // events
-				        // upload.on('begin', function (fileInfo) { 
-				        	// console.log(fileInfo);
-				        // });
-				        // upload.on('abort', function (fileInfo) {  });
-				        // upload.on('end', function (fileInfo) {  });
-				        // upload.on('delete', function (fileInfo) {  });
-				        // upload.on('error', function (e) {
-				            // console.log(e.message);
-				        // });
 
 
 						app.listen(options.port || process.env.PORT);
 
-						console.log(String('Server Listening on port: ' + options.port).warn);
+						console.log(String('Listening on port: ' + options.port).debug);
 	}
 };

@@ -18,6 +18,7 @@ colors.setTheme({
 	error : 'red'
 });
 
+/*
 console.log("this is an silly".silly);
 console.log("this is an input".input);
 console.log("this is an verbose".verbose);
@@ -28,6 +29,7 @@ console.log("this is an help".help);
 console.log("this is an debug".debug);
 console.log("this is an error".error);
 console.log("this is a warning".warn);
+*/
 
 /**
  * @TODO - HTTPS Key and Cert
@@ -80,9 +82,10 @@ var config = {
 		password: 'isyourdaughter18?'
 	},
 	staticDir : __dirname + '/dist',
-	publicDir : __dirname + '/dist',
-	uploadsTmpDir : '.temp',
-	uploadsDestDir : 'www/cms-content/uploads',
+	publicDir : './www',
+	uploadsTmpDir : __dirname + '/.tmp',
+	uploadsDestDir : __dirname + '/www/cms-content/uploads',
+	uploadsUrl: ':8181/cms-content/',
 	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'
 };
 
@@ -173,4 +176,11 @@ var message = {
 // to asynchronously send individual emails instead of a queue
 
 
- 
+ /*
+ * fs.readFile(req.files.displayImage.path, function (err, data) {
+  // ...
+  var newPath = __dirname + "/uploads/uploadedFileName";
+  fs.writeFile(newPath, data, function (err) {
+  res.redirect("back");
+  });
+  });*/
