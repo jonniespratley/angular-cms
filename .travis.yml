@@ -15,6 +15,3 @@ deploy:
     all_branches: true
   app:
     master: 'develop'
-  run:
-    - 'grunt build'
-    - 'npm start'

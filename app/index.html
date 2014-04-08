@@ -93,19 +93,13 @@
 		</script>
 		-->
 
-
-
-
 		<!-- build:js scripts/plugins.js -->
         <!-- bower:js -->
         <script src="bower_components/jquery/jquery.js"></script>
         <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
         <script src="bower_components/es5-shim/es5-shim.js"></script>
-
         <script src="bower_components/json3/lib/json3.min.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
-
         <script src="bower_components/blueimp-tmpl/js/tmpl.js"></script>
         <script src="bower_components/blueimp-load-image/js/load-image.js"></script>
         <script src="bower_components/blueimp-load-image/js/load-image-ios.js"></script>
@@ -130,9 +124,9 @@
 
         <!-- endbower -->
         <script src="scripts/libs/parse-1.2.17.min.js"></script>
+		<script src="scripts/libs/md5.js"></script>
+		<script src="scripts/libs/markdown.js"></script>
 		<!-- endbuild -->
-
-
 
 
 		<!-- build:js scripts/modules.js -->
@@ -146,16 +140,22 @@
         <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
         <script src="bower_components/jquery-file-upload/js/jquery.fileupload-angular.js"></script>
 		<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
-
 		<!-- endbuild -->
 
-		<!-- @TODO: [Templates]
-		<script src="scripts/template.js"></script>
-		-->
-
 		<!-- build:js({.tmp,app}) scripts/scripts.js -->
+		<!-- @TODO: [
+		Always this order
+		1. config
+		2. app
+		3. templates
+		4. controllers
+		5. etc
+
+		]-->
+
 		<script src="scripts/config.js"></script>
 		<script src="scripts/app.js"></script>
+		<script src="scripts/templates.js"></script>
 		<script src="scripts/controllers/main.js"></script>
 		<script src="scripts/controllers/docs.js"></script>
 		<script src="scripts/controllers/admin.js"></script>
