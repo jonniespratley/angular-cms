@@ -9,3 +9,4 @@ dist
 app/bower_components
 db/*
 www/cms-content/uploads/
+.idea/*
