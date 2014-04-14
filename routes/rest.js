@@ -249,7 +249,7 @@ var RestResource = {
 						callback(cursor);
 
 					} else {
-						callback(error);
+						callback(err);
 					}
 					db.close();
 				});
@@ -279,6 +279,18 @@ var RestResource = {
 		query.password = hashPassword(req.body.password, req.body.email);
 
 		console.log('Login Query: ', query);
+
+		var deferred = new Deferred();
+
+		var userFound = false;
+		RestResource.findOne(req, 'users', query, function(u){
+
+			res.jsonp(200, {
+				success: true,
+				result: u
+			});
+			userFound = true;
+		});
 
 
 	},
