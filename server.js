@@ -82,7 +82,7 @@ var config = {
 		password: 'isyourdaughter18?'
 	},
 	staticDir : __dirname + '/dist',
-	publicDir : './www',
+	publicDir : __dirname + '/app',
 	uploadsTmpDir : __dirname + '/.tmp',
 	uploadsDestDir : __dirname + '/www/cms-content/uploads',
 	uploadsUrl: ':8181/cms-content/',
@@ -91,7 +91,10 @@ var config = {
 
 //Start the reset server
 var rest = require('./routes/rest').rest;
-rest.init(config);
+
+var socket = require('./routes/socketserver').SocketServer;
+
+socket.init(rest.init(config));
 
 //Create proxy server and proxy requests
 proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
@@ -138,8 +141,12 @@ proxyServer.on('listening', function() {
 });
 
 
+
 //Start the proxy server
 proxyServer.listen(options.port);
+
+
+
 
 
 /**

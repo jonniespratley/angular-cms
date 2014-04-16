@@ -882,6 +882,7 @@ exports.rest = {
 					app.set("view options", { layout: false, pretty: true });
 
 					app.use(express.static(config.staticDir));
+					app.use(express.directory(config.staticDir));
 					app.use(express.directory(config.publicDir));
 
 					app.use(express.json());
@@ -907,7 +908,7 @@ exports.rest = {
 
 
 						app.listen(options.port || process.env.PORT);
-
-						console.log(String('Listening on port: ' + options.port).debug);
+			console.log(String('Listening on port: ' + options.port).debug);
+			return app;
 	}
 };
