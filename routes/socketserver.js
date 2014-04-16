@@ -18,13 +18,52 @@
 //Start the websocket server
 //SocketServer.init(proxyServer);
 
-var sio = require('socket.io'),
+var sio = require('socket.io');
+//Hold the ncmss of events that this socket server listens for and emits
+var CmsSocket = {
+	events : {
+		session : {
+			pageView : 'cms:session:pageView',
+			hashChange : 'cms:session:hashChange',
+			login : 'cms:session:login',
+			logout : 'cms:session:logout'
+		},
+		server : {
+			message : 'cms:server:message',
+			connected : 'cms:server:connect',
+			disconnected : 'cms:server:disconnect'
+		},
+		client : {
+			message : 'cms:client:message',
+			connected : 'cms:client:connect',
+			disconnected : 'cms:client:disconnect'
+		}
+	}
+};
 var SocketServer = {
-
+	connections : [],
+	events : {
+		session : {
+			pageView : 'cms:session:pageView',
+			hashChange : 'cms:session:hashChange',
+			login : 'cms:session:login',
+			logout : 'cms:session:logout'
+		},
+		server : {
+			message : 'cms:server:message',
+			connected : 'cms:server:connect',
+			disconnected : 'cms:server:disconnect'
+		},
+		client : {
+			message : 'cms:client:message',
+			connected : 'cms:client:connect',
+			disconnected : 'cms:client:disconnect'
+		}
+	},
 	//###init(app)
 	//I setup the socket server and listen for any routing requests from the express app.
 	init : function(app) {
-		var io = sio.listen(app);
+		var self = this, io = sio.listen(app);
 		io.configure(function() {
 			io.set('authorization', function(handshakeData, callback) {
 				if(handshakeData.xdomain) {
@@ -34,28 +73,6 @@ var SocketServer = {
 				}
 			});
 		});
-		//Hold the ncmss of events that this socket server listens for and emits
-		var CmsSocket = {
-			events : {
-				session : {
-					pageView : 'cms:session:pageView',
-					hashChange : 'cms:session:hashChange',
-					login : 'cms:session:login',
-					logout : 'cms:session:logout'
-				},
-				server : {
-					message : 'cms:server:message',
-					connected : 'cms:server:connect',
-					disconnected : 'cms:server:disconnect'
-				},
-				client : {
-					message : 'cms:client:message',
-					connected : 'cms:client:connect',
-					disconnected : 'cms:client:disconnect'
-				}
-			}
-		};
-
 		//Store a list of the connected clients
 		var connections = [];
 
@@ -63,17 +80,19 @@ var SocketServer = {
 		io.sockets.on('connection', function(socket) {
 
 			//push to connections array
-			connections.push(socket);
+			self.connections.push(socket);
 
 			//Publish the server connected event
 			io.sockets.emit(CmsSocket.events.server.connected, {
-				data : connections.length
+				data : self.connections.length
 			});
 
 			//Listen for client connected
 			socket.on(CmsSocket.events.client.connected, function(msg) {
 				console.log(CmsSocket.events.client.connected, msg);
 			});
+			
+			
 			//Listen for any messages from the client
 			socket.on(CmsSocket.events.client.message, function(content) {
 
@@ -104,6 +123,9 @@ var SocketServer = {
 					'timestamp' : new Date()
 				});
 			});
+			
+			
+			
 			//handle disconnections
 			socket.on('disconnect', function() {
 				console.log("Socket disconnected");
@@ -116,6 +138,5 @@ var SocketServer = {
 		});
 	}
 };
-
 
 exports.SocketServer = SocketServer;

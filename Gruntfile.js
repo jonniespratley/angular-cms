@@ -13,6 +13,7 @@ var serverEndpoint = 'http://localhost:8181';
 var proxyConfig = {
 	proxy : {
 		forward : {
+			'/socket.io' : serverEndpoint,
 			'/api' : serverEndpoint
 		}
 	}
