@@ -1,0 +1,24 @@
+<cms-header icon="gears" title="Settings"></cms-header>
+
+<div class="row">
+	<div class="col-sm-8 col-xs-7">
+		<form class="form-horizontal" ng-submit="update(App)">
+			<cms-form-group label="{{key}}" ng-repeat="(key, value) in config">
+				<input type="text" ng-model="App[key]" value="{{ angular.isObject(App[key]) }}">
+			</cms-form-group>
+			<div class="form-group tr">
+				<button class="btn btn-default">
+					Cancel
+				</button>
+				<button class="btn btn-primary" type="submit">
+					Save
+				</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-sm-4 col-xs-5">
+		<aside class="well well-sm tc">
+			Some help here
+		</aside>
+	</div>
+</div>
