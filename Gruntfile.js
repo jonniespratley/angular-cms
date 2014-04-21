@@ -408,14 +408,14 @@ module.exports = function (grunt) {
 		// Run some tasks in parallel to speed up the build process
 		concurrent: {
 			server: ['coffee:dist',
-				'compass:server',
+			//	'compass:server',
 				'ngtemplates',
 				'copy:styles'],
 			test: ['coffee',
-				'compass',
+			//	'compass',
 				'copy:styles'],
 			dist: ['coffee',
-				'compass:dist',
+			//	'compass:dist',
 				'ngtemplates',
 				'copy:styles',
 
