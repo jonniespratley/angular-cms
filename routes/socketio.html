@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Socket.io</title>
+
+
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var log = [];
+		var socket = io.connect('http://localhost:9090');
+		socket.on('message', function(data){
+			log.push(data);
+			$('#output').val(JSON.stringify(log));
+			console.log( data );
+		});
+
+		$('.clear').click(function(){
+			$('#output').val('');
+		});
+	</script>
+
+</head>
+
+<body>
+<div class="container">
+	<div class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+						class="icon-bar"></span><span class="icon-bar"></span>
+				</button>
+				<a href="#" class="navbar-brand">Socket.io Tester</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#">Home</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<b> Input</b>
+		</div>
+		<div class="panel-body">
+			<textarea class="form-control" rows="3" name="input" id="input"></textarea>
+
+		</div>
+		<div class="panel-footer clearfix">
+			<a class="btn pull-right btn-primary">Send</a>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<b> Output</b>
+		</div>
+		<div class="panel-body">
+			<textarea class="form-control" rows="4" name="output" id="output"></textarea>
+		</div>
+		<div class="panel-footer clearfix">
+			<a class="btn pull-right btn-default clear">Clear</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>
