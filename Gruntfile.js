@@ -202,6 +202,17 @@ module.exports = function (grunt) {
 						ext: '.js'
 					}
 				]
+			},
+			routes: {
+				files: [
+					{
+						expand: true,
+						cwd: 'routes',
+						src: '{,*/}*.coffee',
+						dest: '.tmp/routes',
+						ext: '.js'
+					}
+				]
 			}
 		},
 
