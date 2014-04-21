@@ -5,7 +5,6 @@ node_modules
 .sass-cache
 .editorconfig
 .project
-dist
 app/bower_components
 db/*
 www/cms-content/uploads/
