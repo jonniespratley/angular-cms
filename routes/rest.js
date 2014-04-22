@@ -234,7 +234,7 @@ var RestResource = {
 		});
 	},
 
-	findOne: function(req, table, query, callback){
+	findOne: function (req, table, query, callback) {
 		//Open db
 		var db = new mongo.Db('angular-cms', new mongo.Server(config.db.host, config.db.port, {
 			'auto_reconnect': true,
@@ -247,8 +247,8 @@ var RestResource = {
 				collection.findOne(query, options, function (err, cursor) {
 					if (cursor != null) {
 						callback(cursor);
-
 					} else {
+						throw new Error("No user found!");
 						callback(err);
 					}
 					db.close();
@@ -283,7 +283,7 @@ var RestResource = {
 		var deferred = new Deferred();
 
 		var userFound = false;
-		RestResource.findOne(req, 'users', query, function(u){
+		RestResource.findOne(req, 'users', query, function (u) {
 
 			res.jsonp(200, {
 				success: true,
@@ -310,7 +310,7 @@ var RestResource = {
 		var deferred = new Deferred();
 
 		var userFound = false;
-		RestResource.findOne(req, 'users', {email: req.body.email}, function(u){
+		RestResource.findOne(req, 'users', {email: req.body.email}, function (u) {
 			res.jsonp(404, {
 				status: false,
 				message: 'The user is already registered with ' + req.body.email
@@ -319,7 +319,7 @@ var RestResource = {
 		});
 
 
-		if(!userFound){
+		if (!userFound) {
 			//Open db
 			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
 			db.open(function (err, db) {
@@ -345,7 +345,6 @@ var RestResource = {
 				});
 			});
 		}
-
 
 
 	},
