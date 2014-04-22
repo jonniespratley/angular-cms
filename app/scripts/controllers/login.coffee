@@ -14,11 +14,11 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 			(results)->
 				
 				#Welcome the user
-				cmsNotify( '.login-message', 'success', 'Success!', "Welcome #{results.user.email}")
+				cmsNotify( '.login-message', 'success', 'Success!', "Welcome back.")
 				
 				#Set user session
 				session = 
-					user: results.user
+					user: u
 					authorized: true
 					
 				#Set user cookie
