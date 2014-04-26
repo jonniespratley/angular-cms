@@ -13,19 +13,28 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log) ->
 
 	cmsAuthService = 
 		#Endpoint location
-		endpoint: '/api/v2/angular-cms/users/login'
+		endpoint: '/api/v2'
 
 		###
 		authorize - I handle authorizing a user.
 		###
 		authorize: (user) ->
 			defer = $q.defer()
-			$http.post( @endpoint, user ).success((data) ->
-				$log.info(data)
+			$http.post( @endpoint+"/users/login", user ).success((data) ->
 				defer.resolve(data)
-			).error((err) -> 
-				$log.info(err)
+			).error((err) ->
 				defer.reject(err)
 			)
 			return defer.promise
-		
+
+		###
+			register - I handle register a user.
+			###
+		register: (user) ->
+			defer = $q.defer()
+			$http.post( @endpoint+"/users/register", user ).success((data) ->
+				defer.resolve(data)
+			).error((err) ->
+				defer.reject(err)
+			)
+			return defer.promise
