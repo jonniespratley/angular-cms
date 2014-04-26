@@ -234,7 +234,7 @@ var RestResource = {
 		});
 	},
 
-	findOne: function (req, table, query, callback) {
+	findOne: function (req, table, query, success, fail) {
 		//Open db
 		var db = new mongo.Db('angular-cms', new mongo.Server(config.db.host, config.db.port, {
 			'auto_reconnect': true,
@@ -246,10 +246,10 @@ var RestResource = {
 				var options = req.params.options || {};
 				collection.findOne(query, options, function (err, cursor) {
 					if (cursor != null) {
-						callback(cursor);
+						success(cursor);
 					} else {
-						throw new Error("No user found!");
-						callback(err);
+						err = "No user found!";
+						fail(err);
 					}
 					db.close();
 				});
@@ -284,12 +284,21 @@ var RestResource = {
 
 		var userFound = false;
 		RestResource.findOne(req, 'users', query, function (u) {
-
+			userFound = true;
 			res.jsonp(200, {
 				success: true,
 				result: u
 			});
-			userFound = true;
+			
+		}, function(error){
+			userFound = false;
+			res.jsonp(404, {
+				status: false,
+				error: true,
+				message: error
+			});
+			
+			
 		});
 
 

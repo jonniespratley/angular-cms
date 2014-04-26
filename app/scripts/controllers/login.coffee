@@ -30,7 +30,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 				
 			,
 			(error)->
-				cmsNotify( '.login-message', 'danger', 'Error!', error.message)
+				cmsNotify( '.login-message', 'danger', 'Error!', error.message, 2500)
 		)
 	
 	###
