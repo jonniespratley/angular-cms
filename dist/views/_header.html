@@ -1,0 +1,58 @@
+<nav class="cms-navbar navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" class="" data-template="views/_aside.html" data-placement="right" data-animation="am-slide-right" bs-aside="aside" data-container="body">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"> <img ng-src="{{App.config.cdns.https}}{{App.sitebrand}}" class="brand-img"> <span class="brand">{{App.sitetitle}}</span> </a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="cms-navbar-collapse">
+
+			<ul class="nav navbar-nav">
+				<li ng-repeat="item in App.menu.pub" ng-include="" src="'menu-item.html'"></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
+				<li class="dropdown" ng-if="App.session.authorized">
+					<a href="" class="dropdown-toggle" data-toggle="dropdown"> 
+						<img ng-src="{{ user.email | gravatar }}" class="img-circle navbar-avatar"> <span> {{ App.session.user.email }} </span> <b class="caret"></b> </a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#/profile">My Profile</a>
+						</li>
+						<li>
+							<a href="#/settings">Settings</a>
+						</li>
+						<li>
+							<a href="#/help">Help</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a ng-click="logout()">Logout</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+	
+				</li><li ng-hide="App.session.authorized">
+					<a class="login-btn" href="#/login"><i class="fa fa-1x fa-lock"></i> Login</a>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+<!-- You can use a custom html template with the `data-template` attr -->
+
+
+<script id="menu-item.html" type="text/ng-template">
+	<a ng-href="#{{item.href}}">
+	<i class="fa fa-1x fa-{{item.icon}}"></i>
+	{{item.title}}
+	</a>
+</script>
