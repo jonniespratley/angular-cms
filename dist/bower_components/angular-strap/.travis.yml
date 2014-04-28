@@ -8,7 +8,9 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - sleep 3 # give xvfb some time to start
   - npm install -gq grunt-cli bower coveralls
-  - bower install --dev
+  - bower install --dev --config.interactive=0
+  - grunt --version
+  - bower --version
   - date --rfc-2822
 
 script:

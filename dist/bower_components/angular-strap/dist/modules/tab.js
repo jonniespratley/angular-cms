@@ -1,8 +1,8 @@
 /**
  * angular-strap
- * @version v2.0.0-rc.2 - 2014-01-29
+ * @version v2.0.0-rc.4 - 2014-03-07
  * @link http://mgcrea.github.io/angular-strap
- * @author [object Object]
+ * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
 'use strict';
@@ -33,25 +33,31 @@ angular.module('mgcrea.ngStrap.tab', []).run([
         return attr.template || defaults.template;
       },
       link: function postLink(scope, element, attr, controller) {
+        // Directive options
         var options = defaults;
         angular.forEach(['animation'], function (key) {
           if (angular.isDefined(attr[key]))
             options[key] = attr[key];
         });
+        // Require scope as an object
         attr.bsTabs && scope.$watch(attr.bsTabs, function (newValue, oldValue) {
           scope.panes = newValue;
         }, true);
+        // Add base class
         element.addClass('tabs');
+        // Support animations
         if (options.animation) {
           element.addClass(options.animation);
         }
         scope.active = scope.activePane = 0;
+        // view -> model
         scope.setActive = function (index, ev) {
           scope.active = index;
           if (controller) {
             controller.$setViewValue(index);
           }
         };
+        // model -> view
         if (controller) {
           controller.$render = function () {
             scope.active = controller.$modelValue * 1;
