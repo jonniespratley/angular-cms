@@ -6,6 +6,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
 
     var defaults = this.defaults = {
       animation: 'am-fade',
+      backdropAnimation: 'am-fade',
       prefixClass: 'modal',
       placement: 'top',
       template: 'modal/modal.tpl.html',
@@ -26,30 +27,22 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
       var bodyElement = angular.element($window.document.body);
       var htmlReplaceRegExp = /ng-bind="/ig;
 
-      // Helper functions
-
-      var findElement = function(query, element) {
-        return angular.element((element || document).querySelectorAll(query));
-      };
-
       function ModalFactory(config) {
 
         var $modal = {};
 
         // Common vars
         var options = angular.extend({}, defaults, config);
-        $modal.$promise = $q.when($templateCache.get(options.template) || $http.get(options.template));
+        $modal.$promise = fetchTemplate(options.template);
         var scope = $modal.$scope = options.scope && options.scope.$new() || $rootScope.$new();
         if(!options.element && !options.container) {
           options.container = 'body';
         }
 
         // Support scope as string options
-        if(!options.scope) {
-          forEach(['title', 'content'], function(key) {
-            if(options[key]) scope[key] = options[key];
-          });
-        }
+        forEach(['title', 'content'], function(key) {
+          if(options[key]) scope[key] = options[key];
+        });
 
         // Provide scope helpers
         scope.$hide = function() {
@@ -71,13 +64,11 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
         // Support contentTemplate option
         if(options.contentTemplate) {
           $modal.$promise = $modal.$promise.then(function(template) {
-            if(angular.isObject(template)) template = template.data;
             var templateEl = angular.element(template);
-            return $q.when($templateCache.get(options.contentTemplate) || $http.get(options.contentTemplate))
+            return fetchTemplate(options.contentTemplate)
             .then(function(contentTemplate) {
-              if(angular.isObject(contentTemplate)) contentTemplate = contentTemplate.data;
               var contentEl = findElement('[ng-bind="content"]', templateEl[0]).removeAttr('ng-bind').html(contentTemplate);
-              // Drop the default footer
+              // Drop the default footer as you probably don't want it if you use a custom contentTemplate
               if(!config.template) contentEl.next().remove();
               return templateEl[0].outerHTML;
             });
@@ -137,7 +128,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           // Options: animation
           if(options.animation) {
             if(options.backdrop) {
-              backdropElement.addClass('am-fade');
+              backdropElement.addClass(options.backdropAnimation);
             }
             modalElement.addClass(options.animation);
           }
@@ -156,9 +147,9 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           });
 
           bodyElement.addClass(options.prefixClass + '-open');
-          // if(options.animation) {
-          //   bodyElement.addClass(options.prefixClass + '-with-' + options.animation);
-          // }
+          if(options.animation) {
+            bodyElement.addClass(options.prefixClass + '-with-' + options.animation);
+          }
 
           // Bind events
           if(options.backdrop) {
@@ -175,15 +166,15 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
 
           $animate.leave(modalElement, function() {
             bodyElement.removeClass(options.prefixClass + '-open');
-            // if(options.animation) {
-            //   bodyElement.addClass(options.prefixClass + '-with-' + options.animation);
-            // }
+            if(options.animation) {
+              bodyElement.addClass(options.prefixClass + '-with-' + options.animation);
+            }
           });
           if(options.backdrop) {
             $animate.leave(backdropElement, function() {});
           }
-          scope.$$phase || scope.$digest();
           scope.$isShown = false;
+          scope.$$phase || scope.$digest();
 
           // Unbind events
           if(options.backdrop) {
@@ -225,6 +216,23 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
 
       }
 
+      // Helper functions
+
+      function findElement(query, element) {
+        return angular.element((element || document).querySelectorAll(query));
+      }
+
+      function fetchTemplate(template) {
+        return $q.when($templateCache.get(template) || $http.get(template))
+        .then(function(res) {
+          if(angular.isObject(res)) {
+            $templateCache.put(template, res.data);
+            return res.data;
+          }
+          return res;
+        });
+      }
+
       return ModalFactory;
 
     };
@@ -247,7 +255,7 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
         // Support scope as data-attrs
         angular.forEach(['title', 'content'], function(key) {
           attr[key] && attr.$observe(key, function(newValue, oldValue) {
-            scope[key] = newValue;
+            scope[key] = $sce.trustAsHtml(newValue);
           });
         });
 

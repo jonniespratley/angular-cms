@@ -25,7 +25,7 @@ module.exports = function (grunt) {
       ' * <%= pkg.name %>\n' +
       ' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
       ' * @link <%= pkg.homepage %>\n' +
-      ' * @author <%= pkg.author %>\n' +
+      ' * @author <%= pkg.author.name %> (<%= pkg.author.email %>)\n' +
       ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
       ' */\n'
     },
@@ -169,8 +169,7 @@ module.exports = function (grunt) {
       },
       docs: {
         options: {
-          cleancss: true,
-          report: 'gzip'
+          cleancss: false
         },
         files: [{
           expand: true,
@@ -282,6 +281,17 @@ module.exports = function (grunt) {
             'images/*',
             '1.0/**/*'
           ]
+        }, {
+          src: 'bower_components/angular-motion/dist/angular-motion.css',
+          dest: '<%= yo.pages %>/styles/angular-motion.css'
+        }, {
+          src: '.tmp/styles/bootstrap-additions.css',
+          dest: '<%= yo.pages %>/styles/bootstrap-additions.css'
+        }, {
+          expand: true,
+          cwd: '<%= yo.dist %>',
+          dest: '<%= yo.pages %>/dist',
+          src: '{,*/}*.{js,map}'
         }]
       }
     },
@@ -466,12 +476,15 @@ module.exports = function (grunt) {
         browsers: ['PhantomJS']
       },
       unit: {
-        singleRun: true,
         options: {
           reporters: ['dots', 'coverage']
-        }
+        },
+        singleRun: true,
       },
       server: {
+        options: {
+          reporters: ['progress']
+        },
         autoWatch: true
       }
     },
@@ -479,7 +492,7 @@ module.exports = function (grunt) {
     coveralls: {
       options: {
         /*jshint camelcase: false */
-        coverage_dir: 'test/coverage/PhantomJS 1.9.2 (Linux)/'
+        coverage_dir: 'test/coverage/PhantomJS 1.9.7 (Linux)/'
       }
     }
 
@@ -493,6 +506,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngtemplates:test',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',

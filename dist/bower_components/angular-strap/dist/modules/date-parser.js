@@ -1,8 +1,8 @@
 /**
  * angular-strap
- * @version v2.0.0-rc.2 - 2014-01-29
+ * @version v2.0.0-rc.4 - 2014-03-07
  * @link http://mgcrea.github.io/angular-strap
- * @author [object Object]
+ * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
 'use strict';
@@ -102,9 +102,11 @@ angular.module('mgcrea.ngStrap.helpers.dateParser', []).provider('$dateParser', 
             }
             return date;
           };
+          // Private functions
           function setMapForFormat(format) {
             var keys = Object.keys(setFnMap), i;
             var map = [], sortedMap = [];
+            // Map to setFn
             var clonedFormat = format;
             for (i = 0; i < keys.length; i++) {
               if (format.split(keys[i]).length > 1) {
@@ -114,6 +116,7 @@ angular.module('mgcrea.ngStrap.helpers.dateParser', []).provider('$dateParser', 
                   map[index] = setFnMap[keys[i]];
               }
             }
+            // Sort result map
             angular.forEach(map, function (v) {
               sortedMap.push(v);
             });
@@ -125,9 +128,11 @@ angular.module('mgcrea.ngStrap.helpers.dateParser', []).provider('$dateParser', 
           function regExpForFormat(format) {
             var keys = Object.keys(regExpMap), i;
             var re = format;
+            // Abstract replaces to avoid collisions
             for (i = 0; i < keys.length; i++) {
               re = re.split(keys[i]).join('${' + i + '}');
             }
+            // Replace abstracted values
             for (i = 0; i < keys.length; i++) {
               re = re.split('${' + i + '}').join('(' + regExpMap[keys[i]] + ')');
             }

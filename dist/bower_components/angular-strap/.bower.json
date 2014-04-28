@@ -1,7 +1,7 @@
 {
   "name": "angular-strap",
   "description": "AngularStrap - AngularJS directives for Twitter Bootstrap",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.4",
   "keywords": [
     "angular",
     "bootstrap"
@@ -32,27 +32,27 @@
     "CONTRIBUTING.md"
   ],
   "dependencies": {
-    "angular": "~1.2.9",
-    "bootstrap": "~3.0.3"
+    "angular": "~1.2.10",
+    "bootstrap": "~3.1.0"
   },
   "devDependencies": {
-    "angular-animate": "~1.2.9",
-    "angular-i18n": "~1.2.9",
-    "angular-mocks": "~1.2.9",
+    "angular-animate": "~1.2.10",
+    "angular-i18n": "~1.2.10",
+    "angular-mocks": "~1.2.10",
     "angular-motion": "~0.3.1",
-    "angular-route": "~1.2.9",
-    "angular-sanitize": "~1.2.9",
-    "angular-scenario": "~1.2.9",
-    "fastclick": "~0.6.10",
+    "angular-route": "~1.2.10",
+    "angular-sanitize": "~1.2.10",
+    "angular-scenario": "~1.2.10",
+    "fastclick": "~0.6.11",
     "font-awesome": "~4.0.3",
     "highlightjs": "~8.0.0",
-    "jquery": "~2.0.3"
+    "jquery": "~2.1.0"
   },
-  "_release": "2.0.0-rc.2",
+  "_release": "2.0.0-rc.4",
   "_resolution": {
     "type": "version",
-    "tag": "v2.0.0-rc.2",
-    "commit": "3e737a2f15afe5addd7c95e507d7aed9da7e0450"
+    "tag": "v2.0.0-rc.4",
+    "commit": "05cd5f34fb86adb11a561f906dc4fdcdd363b016"
   },
   "_source": "git://github.com/mgcrea/angular-strap.git",
   "_target": "~2.0.0",
