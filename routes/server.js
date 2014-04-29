@@ -1,9 +1,34 @@
 // Module dependencies.
-var application_root = __dirname, 
-express = require('express'), 
-path = require('path'), 
-mongoose = require('mongoose'), 
-app = express();
+var application_root = __dirname, express = require('express'), path = require('path'), mongoose = require('mongoose'), app = express();
+
+var appDirectory = path.join(application_root, '');
+
+console.log(appDirectory);
+
+
+var $ = require('jquery');
+
+
+
+/**
+ * Client side REST jquery Plugin
+ */
+var restServer = {
+	endpoint: 'http://localhost:9191/api',
+	get: function(){
+		
+	}
+};
+
+
+
+
+
+
+
+
+
+
 
 // Configure server
 app.configure(function() {
@@ -14,14 +39,13 @@ app.configure(function() {
 	//perform route lookup based on URL and HTTP method
 	app.use(app.router);
 	//Where to serve static content
-	app.use(express.static(path.join(application_root, '../dist')));
+	app.use(express.static(appDirectory));
 	//Show all errors in development
 	app.use(express.errorHandler({
 		dumpExceptions : true,
 		showStack : true
 	}));
 });
-
 //Connect to database
 mongoose.connect('mongodb://localhost/learning-yeoman');
 
@@ -41,15 +65,19 @@ var Post = new mongoose.Schema({
 var PostModel = mongoose.model('Post', Post);
 
 //Routes
-// Routes
-app.get('/api', function(request, response) {
-	response.send('API is running');
+app.get('/', function(request, response){
+	response.json({message: 'Node API Server'});
 });
 
-//Get a list 
+
+// Routes
+app.get('/api', function(request, response) {
+	response.json({message: 'API is running'});
+});
+//Get a list
 app.get('/api/posts', function(request, response) {
 	return PostModel.find(function(err, data) {
-		if (!err) {
+		if(!err) {
 			return response.send(data);
 		} else {
 			return console.log(err);
@@ -69,7 +97,7 @@ app.post('/api/posts', function(request, response) {
 		modified : new Date()
 	});
 	model.save(function(err) {
-		if (!err) {
+		if(!err) {
 			return console.log('Created');
 		} else {
 			return console.log(err);
@@ -77,26 +105,24 @@ app.post('/api/posts', function(request, response) {
 	});
 	return response.send(model);
 });
-
 //Get a single by id
 app.get('/api/posts/:id', function(request, response) {
 	return PostModel.findById(request.params.id, function(err, model) {
-		if (!err) {
+		if(!err) {
 			return response.send(model);
 		} else {
 			return console.log(err);
 		}
 	});
 });
-
-//Update 
+//Update
 app.put('/api/posts/:id', function(request, response) {
 	console.log('Updating post ' + request.body.title);
 	return PostModel.findById(request.params.id, function(err, model) {
 		model.title = request.body.title;
 
 		model.save(function(err) {
-			if (!err) {
+			if(!err) {
 				console.log('model updated');
 			} else {
 				console.log(err);
@@ -105,14 +131,12 @@ app.put('/api/posts/:id', function(request, response) {
 		});
 	});
 });
-
-//Delete 
-app.delete ('/api/posts/:id',
-function(request, response) {
+//Delete
+app.delete ('/api/posts/:id', function(request, response) {
 	console.log('Deleting post with id: ' + request.params.id);
 	return PostModel.findById(request.params.id, function(err, model) {
 		return model.remove(function(err) {
-			if (!err) {
+			if(!err) {
 				console.log('model removed');
 				return response.send('');
 			} else {
@@ -121,6 +145,7 @@ function(request, response) {
 		});
 	});
 });
+
 //Start server
 var port = 9191;
 app.listen(port, function() {
