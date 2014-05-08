@@ -318,17 +318,9 @@ var RestResource = {
 
 		var deferred = new Deferred();
 
-		var userFound = false;
-		RestResource.findOne(req, 'users', {email: req.body.email}, function (u) {
-			res.jsonp(404, {
-				status: false,
-				message: 'The user is already registered with ' + req.body.email
-			});
-			userFound = true;
-		});
+	
 
-
-		if (!userFound) {
+		if (true) {
 			//Open db
 			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
 			db.open(function (err, db) {
