@@ -1,0 +1,98 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<!--<![endif]-->
+<html class="no-js">
+	<!--[if gt IE 8]><![endif]-->
+<html data-ng-app="angularCmsApp" class="no-js">
+	<head>
+		<meta charset="utf-8">
+
+		<!--[if IE]>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<![endif]-->
+
+		<title>angular-cms</title>
+
+		<meta name="description" content="This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.">
+		<meta name="viewport" content="width=device-width">
+		<meta name="fragment" content="#">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-title" content="angular-cms">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="images/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="images/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="images/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="images/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="images/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="images/favicon-196x196.png" sizes="196x196">
+        <link rel="icon" type="image/png" href="images/favicon-160x160.png" sizes="160x160">
+        <link rel="icon" type="image/png" href="images/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileImage" content="images/mstile-144x144.png">
+        <meta name="msapplication-square70x70logo" content="images/mstile-70x70.png">
+        <meta name="msapplication-square144x144logo" content="images/mstile-144x144.png">
+        <meta name="msapplication-square150x150logo" content="images/mstile-150x150.png">
+        <meta name="msapplication-square310x310logo" content="images/mstile-310x310.png">
+        <meta name="msapplication-wide310x150logo" content="images/mstile-310x150.png">
+
+		<link rel="stylesheet" href="styles/3355f697.main.css"/>
+		<link rel="stylesheet" ng-href="{{App.config.cdn}}/bootswatch.com/{{App.theme | lowercase}}/bootstrap.min.css">
+
+	</head>
+	<body data-ng-class="App.route.current.scope.name">
+
+		<!--[if lt IE 7]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+
+		<!--[if lt IE 9]>
+		<script src="bower_components/es5-shim/es5-shim.js"></script>
+		<script src="bower_components/json3/lib/json3.min.js"></script>
+		<![endif]-->
+
+		<div id="app" class="app" data-ng-controller="AppCtrl" data-ng-cloak="">
+			<header id="header" data-ng-include="App.layout.header">
+				<!--Header content gets injected here.-->
+			</header>
+			<section id="content" data-ng-include="App.layout.content">
+				<!--Section content gets injected here.-->
+			</section>
+			<footer id="footer" data-ng-include="App.layout.footer">
+				<!--Footer content gets injected here.-->
+			</footer>
+
+		</div>
+
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID
+		<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-XXXXX-X');
+		ga('send', 'pageview');
+		</script>
+		-->
+
+
+		<script src="scripts/cb9efb57.plugins.js"></script>
+
+
+		<script src="scripts/68fcaa29.modules.js"></script>
+
+		<script src="scripts/1cd82f8f.scripts.js"></script>
+	</body>
+</html></html>
