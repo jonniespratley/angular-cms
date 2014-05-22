@@ -33,6 +33,13 @@ var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 
+
+var DS = require('jps-ds').DS;
+
+var _ds = new DS({
+	host: 'localhost/angular-cms'
+});
+
 function delay(ms, value) {
 	// create a new Deferred
 	var deferred = new Deferred();
@@ -311,16 +318,24 @@ var RestResource = {
 	 */
 	register: function (req, res, next) {
 		var data = req.body;
-		data.password = hashPassword(req.body.password, req.body.email)
+			data.password = hashPassword(req.body.password, req.body.email)
 
 		console.log(String("Register user").debug, req.body);
 
-
-		var deferred = new Deferred();
-
-	
-
-		if (true) {
+		var user = null;
+		var query = {
+			email: req.body.email
+		};
+		
+		RestResource.findOne(req, 'users', query, function (u) {
+			user = u;
+			res.jsonp(404, {
+				status: false,
+				message: 'User already exists!'
+			});
+			
+		}, function(error){
+			user = null;
 			//Open db
 			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
 			db.open(function (err, db) {
@@ -345,6 +360,14 @@ var RestResource = {
 					});
 				});
 			});
+			
+		});
+
+
+		if (!user) {
+			
+		} else {
+			
 		}
 
 
