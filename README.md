@@ -3,10 +3,6 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 
 
 ## Getting Started
-Download the [production version][min] or the [development version][max].
-
-**TODO: Include module builds**
-
 
 ###Step 1 - Start mongodb
 To start mongodb execute the following command:

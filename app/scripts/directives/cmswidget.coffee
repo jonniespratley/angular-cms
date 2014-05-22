@@ -1,3 +1,21 @@
+###*
+ @ngdoc directive
+ @name angularCmsApp.directive:cmsWidget
+ @element div
+ @function
+ 
+ @description
+ 	Provides a widget component that acts as a container for other content.
+ 
+ @example
+   <example module="angularCmsApp">
+     <file name="index.html">
+         <cms-widget title="My Widget" icon="file">
+         	This is my content.
+         </cms-widget>
+     </file>
+   </example>
+###
 angular.module('angularCmsApp').directive "cmsWidget", ->
 	restrict: "E"
 	replace: true

@@ -1,3 +1,12 @@
+###*
+@ngdoc directive
+@name angularCmsApp.directive:cmsUploader
+@element div
+@function
+
+@description 
+	This is an example uploader.
+###
 'use strict'
 angular.module('angularCmsApp').directive "cmsUploader", ->
 	  scope:

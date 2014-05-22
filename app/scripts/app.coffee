@@ -1,5 +1,5 @@
 'use strict'
-###
+###*
  * @ngdoc directive
  * @name rfx.directive:rAutogrow
  * @element textarea

@@ -1,0 +1,48 @@
+<h1><code ng:non-bindable="">Scope</code>
+<div><span class="hint">type in module <code ng:non-bindable="">ng</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="ng-rootscope-scope-page"><p>A root scope can be retrieved using the <a href="#/api/ng.$rootScope"><code>$rootScope</code></a> key from the
+<a href="#/api/AUTO.$injector"><code>$injector</code></a>. Child scopes are created using the
+<a href="#/api/ng.$rootScope.Scope#methods_$new"><code>$new()</code></a> method. (Most scopes are created automatically when
+compiled HTML template is executed.)</p>
+<p>Here is a simple scope snippet to show how you can interact with the scope.
+<pre class="prettyprint linenums">
+undefined
+</pre>
+<h3 id="description_inheritance">Inheritance</h3>
+<p>A scope can inherit from a parent scope, as in this example:
+<pre class="prettyprint linenums">
+         var parent = $rootScope;
+         var child = parent.$new();
+
+         parent.salutation = "Hello";
+         child.name = "World";
+         expect(child.salutation).toEqual('Hello');
+
+         child.salutation = "Welcome";
+         expect(child.salutation).toEqual('Welcome');
+         expect(parent.salutation).toEqual('Hello');
+</pre>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">Scope([providers][, instanceCache]);</pre>
+<h4 id="usage_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>providers <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object.&lt;string, function()&gt;</a></td><td><div class="ng-rootscope-scope-page"><p>Map of service factory which need to be
+provided for the current scope. Defaults to <a href="#/api/ng">ng</a>.</p>
+</div></td></tr><tr><td>instanceCache <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object.&lt;string, *&gt;</a></td><td><div class="ng-rootscope-scope-page"><p>Provides pre-instantiated services which should
+append/override services provided by <code>providers</code>. This is handy
+when unit-testing and having the need to override a default
+service.</p>
+</div></td></tr></tbody></table><h4 id="usage_returns">Returns</h4><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="ng-rootscope-scope-page"><p>Newly created scope.</p>
+</div></td></tr></table></div>
+<div class="member property"><h2 id="properties">Properties</h2>
+<ul class="properties"><li><h3 id="properties_$id">$id</h3>
+<div class="$id"><h5 id="properties_$id_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-number">number</a></td><td><div class="ng-rootscope-scope-id-page"><p>Unique scope ID (monotonically increasing alphanumeric sequence) useful for
+debugging.</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
