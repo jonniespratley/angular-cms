@@ -249,13 +249,12 @@ var RestResource = {
 		}));
 		db.open(function (err, db) {
 			db.collection(table, function (err, collection) {
-
 				var options = req.params.options || {};
 				collection.findOne(query, options, function (err, cursor) {
 					if (cursor != null) {
 						success(cursor);
 					} else {
-						err = "No user found!";
+						err = "No data found!";
 						fail(err);
 					}
 					db.close();
@@ -317,15 +316,16 @@ var RestResource = {
 	 * @param next
 	 */
 	register: function (req, res, next) {
-		var data = req.body;
-			data.password = hashPassword(req.body.password, req.body.email)
-
+		var data = req.body,
+			user = null,
+			query = {
+				email: req.body.email
+			};
+			
+			
+		data.password = hashPassword(req.body.password, req.body.email),
 		console.log(String("Register user").debug, req.body);
 
-		var user = null;
-		var query = {
-			email: req.body.email
-		};
 		
 		RestResource.findOne(req, 'users', query, function (u) {
 			user = u;
@@ -336,7 +336,6 @@ var RestResource = {
 			
 		}, function(error){
 			user = null;
-			//Open db
 			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
 			db.open(function (err, db) {
 				db.collection('users', function (err, collection) {
@@ -362,15 +361,6 @@ var RestResource = {
 			});
 			
 		});
-
-
-		if (!user) {
-			
-		} else {
-			
-		}
-
-
 	},
 	session: function (req, res, next) {
 	},

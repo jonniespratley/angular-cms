@@ -9,8 +9,17 @@ describe 'Service: cmsAuthService', () ->
 	httpBackend = null
 	
 	successfulResponse = 
-		status: true
-		user: null
+		"success": true,
+		"result": {
+			"_id": "537e75385b11c600e0968da7",
+			"email": "test1@email.com",
+			"password": "9bfc2a094175a37a07c41986aa9ab4350c2c31ab",
+			"metadata": {
+				"avatar": "",
+				"name": "Jonnie Dollas"
+			}
+		}
+	
 	unsuccessfulResponse = 
 		status: false
 		error: true
@@ -29,7 +38,15 @@ describe 'Service: cmsAuthService', () ->
 			httpBackend.whenPOST('/api/v2/users/login').respond(successfulResponse)
 		
 		it 'should resolve a promise on successful auth', () ->
-			cmsAuthService.authorize(username: 'admin', password: 'admin')
+			user = null
+			expect(user).toBeNull()
+			
+			cmsAuthService.authorize(email: 'test@email.com', password: 'fred').then( (data)->
+				user = data.results
+				expect(user).not.toBeNull()
+				expect(user.email).toBe('test@email.com')
+			)
+			
 		
 	
 	describe 'Unsuccessful login', () ->
@@ -47,7 +64,7 @@ describe 'Service: cmsAuthService', () ->
 			httpBackend.whenPOST('/api/v2/users/register').respond(successfulResponse)
 		
 		it 'should resolve a promise on successful registration', () ->
-			cmsAuthService.authorize(username: 'admin', password: 'admin')
+			cmsAuthService.register(username: 'admin', password: 'admin')
 		
 	
 
