@@ -1,3 +1,21 @@
+###*
+@ngdoc directive
+@name angularCmsApp.directive:cmsWidgets
+@element div
+@function
+
+@description
+	This is the container for widgets.
+
+@example
+<example module="angularCmsApp" > 
+
+    <file name="jdx.html" >
+        HTML example come here ==> `<div class="lior" ></div >`
+    </file >
+
+</example >
+###
 'use strict'
 angular.module('angularCmsApp')
 .directive 'cmsWidgets', ->
