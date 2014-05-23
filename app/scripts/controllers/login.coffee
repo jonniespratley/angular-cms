@@ -1,6 +1,6 @@
 'use strict'
 #Login Controller - Handles the login.html view for authenticating a user.
-angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore, cmsAuthService, cmsNotify) ->
+angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $cookieStore, cmsAuthService, cmsNotify, cmsSessionService) ->
 	#Setup initial model
 	$scope.user = 
 		email: null
@@ -11,23 +11,22 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 	
 	$scope.login = (u) ->
 		cmsAuthService.authorize(u).then(
-			(results)->
+			(data)->
 				
 				#Welcome the user
 				cmsNotify( '.login-message', 'success', 'Success!', "Welcome back.")
 				
 				#Set user session
 				session = 
-					user: u
+					user: data.result
 					authorized: true
 					
 				#Set user cookie
-				$cookieStore.put('App.session', session) if u.remember
+				cmsSessionService.setSession(session)
 				$rootScope.App.session = session
 				
 				#Change location
-				$rootScope.App.location.path('/dashboard')	
-				
+				$rootScope.App.location.path('/dashboard')		
 			,
 			(error)->
 				cmsNotify( '.login-message', 'danger', 'Error!', error.message, 2500)
@@ -67,7 +66,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 	###
 	$scope.logout = (user) ->
 		#Clear cookie
-		$cookieStore.put('App.session', null) unless App.session.user.remember
+		$cookieStore.put('App.session', null)
 		#Clear session
 		$rootScope.App.session = null
 		#Change location
