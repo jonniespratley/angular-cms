@@ -5,27 +5,50 @@ describe 'Service: DataService', () ->
 	beforeEach module 'angularCmsApp'
 
 	# instantiate service
+	ds = null
 	DataService = null
-	httpBackend = null
+	$httpBackend = null
+	resolvedValue = null
+	rejectedValue = null
+	dsServiceSpy = null
+	$q = null
+	$rootScope = null
 
-	beforeEach inject (_DataService_, _$httpBackend_) ->
+	beforeEach inject (_$rootScope_, _DataService_, _$httpBackend_, _$q_) ->
 		DataService = _DataService_
-		httpBackend = _$httpBackend_
+		
+		ds = DataService
+		$httpBackend = _$httpBackend_
+		$q = _$q_
+		$rootScope = _$rootScope_
+		
+		dsServiceSpy = spyOn(ds, "fetch").andCallFake(->
+			mockData = 
+				results: [
+					id: "1"
+					anotherProp: 123
+				]
+			d = $q.defer()
+			d.resolve(mockData)
+			d.promise
+		)
+	afterEach ->
+		$rootScope.$apply()
 
 	it 'should have DataService defined', () ->
-		expect(!!DataService).toBe true
+		expect(!!ds).toBe true
 
 	it 'should have a fetch method', () ->
-		expect(DataService.fetch).toBeDefined()
+		expect(ds.fetch).toBeDefined()
 
 	it 'should have a save method', () ->
-		expect(DataService.save).toBeDefined()
+		expect(ds.save).toBeDefined()
 
 	it 'should have a create method', () ->
-		expect(DataService.create).toBeDefined()
+		expect(ds.create).toBeDefined()
 
 	it 'should have a update method', () ->
-		expect(DataService.update).toBeDefined()		
+		expect(ds.update).toBeDefined()		
 
 	it 'should have a destroy method', () ->
-		expect(DataService.destroy).toBeDefined()
+		expect(ds.destroy).toBeDefined()
