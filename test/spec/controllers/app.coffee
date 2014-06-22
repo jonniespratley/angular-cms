@@ -15,5 +15,5 @@ describe 'Controller: AppCtrl', () ->
       $scope: scope
     }
 
-  it 'should attach a list of awesomeThings to the scope', () ->
-    expect(scope.awesomeThings.length).toBe 3
+  it 'it should have name on scope', () ->
+    expect(scope.name).toBe('AppCtrl')

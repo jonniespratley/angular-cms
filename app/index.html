@@ -14,7 +14,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<![endif]-->
 
-		<title>angular-cms</title>
+		<title>Angular-CMS</title>
 
 		<meta name="description" content="This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.">
 		<meta name="viewport" content="width=device-width">
@@ -23,7 +23,6 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-title" content="angular-cms"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 
         <link rel="shortcut icon" href="images/favicon.ico">
         <link rel="apple-touch-icon" sizes="57x57" href="images/apple-touch-icon-57x57.png">
@@ -81,18 +80,16 @@
 
 		</div>
 
-		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID
+
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID	-->
 		<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-		ga('create', 'UA-XXXXX-X');
-		ga('send', 'pageview');
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-52162355-1', 'angular-cms.herokuapp.com');
+			ga('send', 'pageview');
 		</script>
-		-->
-
 
 		<!-- build:js scripts/plugins.js -->
         <!-- bower:js -->
@@ -120,9 +117,7 @@
         <script src="bower_components/jquery-file-upload/js/jquery.fileupload-video.js"></script>
         <script src="bower_components/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
         <script src="bower_components/jquery-file-upload/js/jquery.fileupload-jquery-ui.js"></script>
-
         <script src="bower_components/jquery-file-upload/js/jquery.iframe-transport.js"></script>
-
         <!-- endbower -->
         <script src="scripts/libs/parse-1.2.17.min.js"></script>
 		<script src="scripts/libs/md5.js"></script>
@@ -144,16 +139,6 @@
 		<!-- endbuild -->
 
 		<!-- build:js({.tmp,app}) scripts/scripts.js -->
-		<!-- @TODO: [
-		Always this order
-		1. config
-		2. app
-		3. templates
-		4. controllers
-		5. etc
-
-		]-->
-
 		<script src="scripts/config.js"></script>
 		<script src="scripts/app.js"></script>
 		<script src="scripts/templates.js"></script>
@@ -175,25 +160,20 @@
         <script src="scripts/controllers/sidebar.js"></script>
         <script src="scripts/controllers/help.js"></script>
         <script src="scripts/controllers/app.js"></script>
-
 		<script src="scripts/directives/cmsformgroup.js"></script>
 		<script src="scripts/directives/cmswidgets.js"></script>
 		<script src="scripts/directives/cmswidget.js"></script>
         <script src="scripts/directives/cmsuploader.js"></script>
         <script src="scripts/directives/cmsheader.js"></script>
         <script src="scripts/directives/cmsgravatar.js"></script>
-
         <script src="scripts/filters/gravatar.js"></script>
-
-
         <script src="scripts/services/dataservice.js"></script>
-        <script src="scripts/services/cmsdataserviceprovider.js"></script>
+        <!--script src="scripts/services/cmsdataserviceprovider.js"></script-->
 		<script src="scripts/services/cmsdataservicefactory.js"></script>
         <script src="scripts/services/cmsusersfactory.js"></script>
         <script src="scripts/services/cmsauthservice.js"></script>
         <script src="scripts/services/cmssessionservice.js"></script>
         <script src="scripts/services/cmsnotify.js"></script>
-
 		<!-- endbuild -->
 	</body>
 </html>
