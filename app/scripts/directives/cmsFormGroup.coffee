@@ -1,3 +1,21 @@
+###*
+ @ngdoc directive
+ @name angularCmsApp.directive:cmsFormGroup
+ @element div
+ @function
+ 
+ @description
+ 	Resize textarea automatically to the size of its text content.
+ 	**Note:** ie<9 needs pollyfill for window.getComputedStyle
+ 
+ @example
+   <example module="angularCmsApp">
+     <file name="index.html">
+         <textarea ng-model="text"rx-autogrow class="input-block-level"></textarea>
+         <pre>{{text}}</pre>
+     </file>
+   </example>
+###
 'use strict'
 angular.module('angularCmsApp').directive('cmsFormGroup', () ->
   template: """

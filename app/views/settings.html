@@ -3,9 +3,24 @@
 <div class="row">
 	<div class="col-sm-8 col-xs-7">
 		<form class="form-horizontal" ng-submit="update(App)">
+			
+			<legend>General</legend>
+			<cms-form-group label="Site Title:">
+				<input type="text" ng-model="App.sitetitle"/>
+			</cms-form-group>
+			<cms-form-group label="Domain:">
+				<input type="text" ng-model="App.baseurl"/>
+			</cms-form-group>
+			
+			<legend>Network</legend>
+			
+			
 			<cms-form-group label="{{key}}" ng-repeat="(key, value) in config">
 				<input type="text" ng-model="App[key]" value="{{ angular.isObject(App[key]) }}"/>
 			</cms-form-group>
+			
+			
+			
 			<div class="form-group tr">
 				<button class="btn btn-default">
 					Cancel

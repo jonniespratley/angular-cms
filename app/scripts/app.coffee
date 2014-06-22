@@ -1,5 +1,5 @@
 'use strict'
-###
+###*
  * @ngdoc directive
  * @name rfx.directive:rAutogrow
  * @element textarea
@@ -29,7 +29,7 @@ app = angular.module('angularCmsApp', [
 	#'$strap.directives'
 	#'cms.Templates'
 ])
-	.config ($routeProvider) ->		
+	.config ($routeProvider) ->	
 		#Resolve routes
 		routeResolver =
 			# I will cause a 1 second delay
