@@ -8,5 +8,4 @@ node_modules
 app/bower_components
 db/*
 www/cms-content/uploads/
-.idea/
 dist/.htaccess
