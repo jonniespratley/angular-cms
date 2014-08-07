@@ -11,7 +11,7 @@ This service will take care of authentication of a user, common methods include:
 * currentUser
 ###
 # AngularJS will instantiate a singleton by calling "new" on this function
-angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log) ->
+angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $rootScope, $cookieStore, $location) ->
 
 	cmsAuthService = 
 		#Endpoint location
@@ -40,3 +40,19 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log) ->
 				defer.reject(err)
 			)
 			return defer.promise
+
+		###
+			Logout method to clear the session.
+			@param {Object} user - A user model containing remember
+		###
+		logout: (user) ->
+			#Clear cookie
+			$cookieStore.put('session', null) unless session.user.remember
+
+			#Clear session
+			$rootScope.session = null
+
+			#Change location
+			$location.path($rootScope.App.logout.redirect)
+
+

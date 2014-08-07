@@ -35,7 +35,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 	###
 	Login Method to set the session.
 	@param {Object} user - A user model containing username and password
-	###
+
 	$scope._login = (u) ->
 		console.log(u)
 		Parse.User.logIn u.username, u.password,
@@ -58,12 +58,8 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 				$scope.$apply(()->
 					$scope.error = error; 
 				)
-		
-		
 	###
-	Logout method to clear the session.
-	@param {Object} user - A user model containing remember
-	###
+
 	$scope.logout = (user) ->
 		#Clear cookie
 		$cookieStore.put('App.session', null)
@@ -71,6 +67,5 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 		$rootScope.App.session = null
 		#Change location
 		$rootScope.App.location.path($rootScope.App.logout.redirect)
-	
 	#Controller name
 	$scope.name = 'login' 
