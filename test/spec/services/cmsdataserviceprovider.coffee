@@ -10,5 +10,5 @@ describe 'Service: cmsDataServiceProvider', () ->
   beforeEach inject (_cmsDataServiceProvider_) ->
     cmsDataServiceProvider = _cmsDataServiceProvider_
 
-  it 'should do something', () ->
+  xit 'should do something', () ->
     expect(!!cmsDataServiceProvider).toBe true

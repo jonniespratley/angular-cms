@@ -10,9 +10,9 @@ angular.module('angularCmsApp').controller 'AppCtrl', ($scope, $rootScope, $http
 	App.location = $location
 	App.routeParams = $routeParams
 	App.roles = [ 'guest', 'user', 'admin' ]
+	$scope.name = 'AppCtrl'
 	
-	
-	window.App = $rootScope.App = App
+	window.App = $scope.App = $rootScope.App = App
 	
 	angular.element(document).ready(()->
 		$log.info('Document ready', this);
