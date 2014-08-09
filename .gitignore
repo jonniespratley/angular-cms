@@ -1,4 +1,5 @@
 node_modules
+
 .tmp
 .idea
 .grunt
@@ -9,6 +10,12 @@ app/bower_components
 db
 www/cms-content/uploads/
 dist/.htaccess
-coverage
+coverage/
 .DS_Store
 atlassian-ide-plugin.xml
+
+dist
+.tmp
+.sass-cache
+app/components
+
