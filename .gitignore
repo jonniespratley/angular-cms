@@ -9,3 +9,6 @@ app/bower_components
 db
 www/cms-content/uploads/
 dist/.htaccess
+coverage
+.DS_Store
+atlassian-ide-plugin.xml
