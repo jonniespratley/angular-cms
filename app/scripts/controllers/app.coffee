@@ -15,7 +15,6 @@ angular.module('angularCmsApp').controller 'AppCtrl', ($scope, $rootScope, $http
 	window.App = $scope.App = $rootScope.App = App
 	
 	angular.element(document).ready(()->
-		$log.info('Document ready', this);
 		angular.element('.nav').bind('click', 'a', (e)->
 			$log.info(e);
 		)
