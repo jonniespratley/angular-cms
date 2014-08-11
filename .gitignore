@@ -6,6 +6,7 @@ node_modules
 .editorconfig
 .project
 app/bower_components
-db
+db/
+coverage/
 www/cms-content/uploads/
 dist/.htaccess
