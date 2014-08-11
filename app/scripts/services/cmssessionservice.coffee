@@ -22,7 +22,8 @@ angular.module('angularCmsApp').service 'cmsSessionService',[ '$q', '$rootScope'
 	#Listen for route to change and check the routes.
 	$rootScope.$on "$locationChangeStart", (event, next, current) ->
 		$rootScope.$emit('session:route:start', {event:event, next:next, current:current})
-		$log.log(event, 'Next route', next, 'Current route', current)
+		
+		#console.warn(event, 'Next route', next, 'Current route', current)
 		
 		#Find active link and remove active
 		angular.element('.active').removeClass('active')
@@ -45,6 +46,7 @@ angular.module('angularCmsApp').service 'cmsSessionService',[ '$q', '$rootScope'
 					#Find target link and make active
 					angular.element('a[href="#'+$location.path()+'"]').addClass('active')
 					$rootScope.$emit('session:authorized', event)
+					
 					#Redirect to index
 					#document.location = '/'
 		
