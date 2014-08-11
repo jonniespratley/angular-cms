@@ -10,7 +10,18 @@ module.exports = function(config) {
 		frameworks : ['jasmine'],
 
 		// list of files / patterns to load in the browser
-		files : ['app/bower_components/jquery/jquery.js', 'app/bower_components/angular/angular.js', 'app/bower_components/angular-animate/angular-animate.js', 'app/bower_components/angular-mocks/angular-mocks.js', 'app/bower_components/angular-resource/angular-resource.js', 'app/bower_components/angular-cookies/angular-cookies.js', 'app/bower_components/angular-sanitize/angular-sanitize.js', 'app/bower_components/angular-route/angular-route.js', 'app/bower_components/angular-ui-utils/ui-utils.js', 'app/bower_components/angular-strap/dist/angular-strap.min.js', 'app/scripts/libs/parse-1.2.17.min.js', 'app/scripts/libs/md5.js', 'app/scripts/libs/markdown.js', '.tmp/scripts/*.js', '.tmp/scripts/**/*.js',
+		files : ['app/bower_components/jquery/jquery.js',
+      'app/bower_components/angular/angular.js',
+      'app/bower_components/angular-animate/angular-animate.js',
+      'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/angular-resource/angular-resource.js',
+      'app/bower_components/angular-cookies/angular-cookies.js',
+      'app/bower_components/angular-sanitize/angular-sanitize.js',
+      'app/bower_components/angular-route/angular-route.js',
+      'app/bower_components/angular-ui-utils/ui-utils.js',
+      'app/bower_components/angular-strap/dist/angular-strap.min.js',
+      'app/scripts/libs/parse-1.2.17.min.js', 'app/scripts/libs/md5.js',
+      'app/scripts/libs/markdown.js', '.tmp/scripts/*.js', '.tmp/scripts/**/*.js',
 		//'.tmp/mock/**/*.js',
 		'.tmp/spec/**/*.js'],
 
