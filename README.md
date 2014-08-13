@@ -1,9 +1,18 @@
 # Angular CMS
-<<<<<<< HEAD
 This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is in development stage and aims to offer a quick start for creating full-stack angular application.
 
 
 ## Getting Started
+
+This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+[![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
+
+This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
+
+
 
 ###Step 1 - Start mongodb
 To start mongodb execute the following command:
@@ -23,45 +32,31 @@ The server supports dynamic REST API calls to a resource endpoint.
 
 Endpoint: `http://localhost:8181/api/v2`
 
-METHOD  | ACTION | ROUTE
-=======
-This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
-[![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
-
-This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
-
-The purpose of this CMS is for many reasons, the most important reason is this is the CMS that the Learning Yeoman book is going to revolve around.
-The book is going to be published during the 1st quarter of the new year by Packt Publishing. Each piece has to do with a corresponding chapter in the book that I am writing.
 
 
 
 ## Features
 
-
-### Database
+**Database**
 The database of choice is Mongo, its fast, easy and scalable.
 
-### Server
+**Server**
 The server of choice is Node, its JavaScript, its fast and scalable.
 
-### AngularJS 
+**AngularJS** 
 The client-side framework of choice is Angular, its a full-stack, just what we need.
 
-### Responsive
+**Responsive**
 The client-side ui of choice is Twitter Bootstrap, its updated and clean.
 
-### HTML5
+**HTML5**
 Using HTML5 in every way to make a better user experience.
 
-### Customizable
+**Customizable**
 Using a modular approach you can easily extend the core to your application.
 
-
-
-_(Coming soon)_
+ 
 
 
 
@@ -80,7 +75,6 @@ Base URL: `http://localhost:8181/api/v2`
 
 
 HTTP  | METHOD | ENDPOINT
->>>>>>> b6e9992bc764ecfd6179bf6aecc046e0decf7b71
 ------------ | ------------- | ------------
  GET   |   findAll     |   /database/table
  GET   |   findById    |   /database/table/:id
@@ -88,7 +82,7 @@ HTTP  | METHOD | ENDPOINT
  PUT   |   update      |   /database/table/:id
  DELETE |  destroy     |   /database/table/:id
 
-<<<<<<< HEAD
+
 
 
 ### Step 3 - Start developing
@@ -98,10 +92,9 @@ Then for development use grunt to serve up a dev server that uses a proxy to rou
 
 > Your browser should open up displaying the main page.
        
- 
-![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/images/127_0_0_1__full.png)
-=======
-### Socket Server
+---
+
+## Socket Server
 This is a socket server implementation for "real" time analytics and other data.
 This is for use with geo analytics and other backend data from the app. listen for connected clients
 
