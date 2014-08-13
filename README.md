@@ -2,6 +2,41 @@
 This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is in development stage and aims to offer a quick start for creating full-stack angular application.
 
 
+
+
+
+## Development
+The following sections are different development tasks that I generally run while developing features.
+
+### Karma e2e Scenario Tests
+To run the Karma scenario tests take the following steps:
+
+
+1. Start Node server - $ grunt serve
+2. Start REST server - $ node server
+3. Start DB server - $ sh bin/db.sh
+4. Run Tests - $ grunt test:e2e
+
+> Each step is a ‘new’ terminal window
+
+
+### Protractor e2e Tests
+To run the Protractor e2e tests take the following steps:
+
+1. Start Node server - $ grunt serve
+2. Start REST server - $ node server
+3. Start DB server - $ sh bin/db.sh
+4. Start webdriver - $ webdriver-manager start
+5. Run Tests - $ grunt protractor
+
+> Each step is a ‘new’ terminal window
+
+
+
+
+
+
+
 ## Getting Started
 
 This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
