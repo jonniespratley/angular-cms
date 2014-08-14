@@ -218,6 +218,8 @@ The API documentation will be in the form of ngDocs style. The files located in 
 $ grunt docs
 ```
 
+> Your default browser should open [http://127.0.0.1:9191/#/api](http://127.0.0.1:9191/#/api)
+
 _(Coming soon)_
 
 
