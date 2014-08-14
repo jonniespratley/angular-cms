@@ -21,13 +21,18 @@ angular.module('angularCmsApp').controller 'RegisterCtrl', ($scope, $location, c
 	#Handle registering a user
 	$scope.register = (user)->
 		console.log('register')
+		
+		#Register user
 		cmsAuthService.register(user).then(
 			(data)->
-				console.log(data)
-				#Welcome the user
-				cmsNotify( '.message', 'info', 'Registered!', "You have registered as #{data.user.email}")
-				cmsSessionService.setSession(user: data)
-				$location.path('/dashboard')
+				cmsAuthService.login(user).then(
+					#Now login the user
+					console.log(data)
+					#Welcome the user
+					cmsNotify( '.message', 'info', 'Registered!', "You have registered as #{data.user.email}")
+					cmsSessionService.setSession(user: data)
+					$location.path('/dashboard')		
+				)
 			,
 			(error) ->
 				console.log(error)
