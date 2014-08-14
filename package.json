@@ -69,6 +69,8 @@
     "grunt-newer": "~0.5.4",
     "grunt-ngdocs": "~0.1.7",
     "grunt-ngmin": "~0.0.2",
+    "grunt-protractor-runner": "^1.1.0",
+    "grunt-protractor-webdriver": "^0.1.8",
     "grunt-rev": "~0.1.0",
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~2.0.2",
@@ -82,6 +84,7 @@
     "karma-ng-scenario": "~0.1",
     "karma-phantomjs-launcher": "~0.1",
     "load-grunt-tasks": "~0.2.0",
+    "protractor": "^1.0.0",
     "time-grunt": "~0.2.1"
   },
   "peerDependencies": {

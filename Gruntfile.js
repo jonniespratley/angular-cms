@@ -511,7 +511,30 @@ module.exports = function(grunt) {
 				exclude : [],
 				fileTypes : {}
 			}
-		}
+		},
+									 
+		 protractor_webdriver: {
+				options: {
+					// Task-specific options go here.
+				},
+				test: {
+					// Target-specific file lists and/or options go here.
+				}
+			},
+   protractor: {
+    options: {
+      keepAlive: true, // If false, the grunt process stops when the test fails.
+      noColor: false, // If true, protractor will not use colors in its output.
+      args: {
+      }
+    },
+    test: {
+      options: {
+        configFile: "protractor.conf.js", 
+        args: {} 
+      }
+    }
+  }
 	});
 
 	grunt.registerTask('serve', function(target) {

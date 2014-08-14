@@ -49,7 +49,7 @@ describe "Angular-CMS App", ->
 		#Make sure there is a username and password input with button
 		it 'should have email and password inputs with a button to submit the form', ->
 			expect(browser().location().path()).toEqual '/login'		
-			expect( element('#login-form', 'Login form').count() ).toEqual 1
+			expect(element('#login-form', 'Login form').count()).toEqual 1
 			expect(element('input[type="email"]', 'Email input').count()).toEqual 1
 			expect(element('input[type="password"]', 'Password input').count()).toEqual 1
 			expect(element('button[type="submit"]', 'Submit button').count()).toEqual 1
@@ -73,6 +73,17 @@ describe "Angular-CMS App", ->
 			expect(element('a[ng-href="#/profile"]', 'the Profile link').count()).toEqual 1
 			expect(element('.cms-sidebar-nav', 'Sidebar nav').count()).toEqual 1
 
+	
+	
+	#The user registration implementation
+	
+	
+	#The user forgot password implementation
+	
+	
+	# The CRUD operations on DB implementation
+	
+	
 	
 
 
