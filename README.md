@@ -1,6 +1,78 @@
 # Angular CMS
 This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is in development stage and aims to offer a quick start for creating full-stack angular application.
 
+[![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
+
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+
+### Technologies
+Some featured technologies used in this project include the following:
+
+* **MongoDB** - The database of choice is Mongo, its fast, easy and scalable.
+* **NodeJS** - The server of choice is Node, its JavaScript, its fast and scalable.
+* **AngularJS** - The client-side framework of choice is Angular, its a full-stack, just what we need.
+* **Bootstrap** - The client-side ui of choice is Twitter Bootstrap, its updated and clean.
+* **HTML5** - Using HTML5 in every way to make a better user experience.
+* **Protractor** - Using Protractor for all e2e testing.
+* **Karma** - The test runner is Karma.
+
+
+
+## Getting Started
+To get started on developing with this code base you can either fork the repository or clone it using the following command:
+
+```
+$ git clone https://github.com/jonniespratley/angular-cms.git
+```
+
+### Step 1 - Install NPM dependencies
+Before you can run or build the application you need to install the dependencies, execute the following command:
+
+```
+$ npm install
+```
+
+> Note: You may need to run this as a `sudo` user.
+
+
+### Step 2 - Install bower dependencies
+Now you need to install the client-side dependencies that is managed by bower, execute the following command:
+
+```
+$ bower install
+```
+
+### Step 3 - Start preview server
+Now you are ready to run the preview server that is used for development, execute the following command:
+
+```
+$ grunt serve
+```
+
+> **Note:** Your default browser should open up to [http://localhost:9000](http://localhost:9000)
+
+
+
+## Running the application
+To run the application on your local machine please take the following steps.
+
+
+#### Step 1 - Start mongodb
+To start mongodb execute the following command:
+
+	$ sh ./bin/db.sh
+	
+> **Note:** If errors when executing command remove the `db/mongod.lock` file. 
+
+#### Step 2 - Start REST server
+To start the server execute the following command:
+
+	$ node server
+
+Open your default browser to [http://localhost:8181/api/v2](http://localhost:8181/api/v2)
 
 
 
@@ -8,14 +80,21 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 ## Development
 The following sections are different development tasks that I generally run while developing features.
 
+
+### Karma Unit Tests
+To run the Karma unit tests execute the following command:
+
+```
+$ grunt test
+```
+
 ### Karma e2e Scenario Tests
 To run the Karma scenario tests take the following steps:
 
-
-1. Start Node server - $ grunt serve
-2. Start REST server - $ node server
-3. Start DB server - $ sh bin/db.sh
-4. Run Tests - $ grunt test:e2e
+1. Start Node server - `$ grunt serve`
+2. Start REST server - `$ node server`
+3. Start DB server - `$ sh bin/db.sh`
+4. Run tests - `$ grunt test:e2e`
 
 > Each step is a ‘new’ terminal window
 
@@ -23,11 +102,10 @@ To run the Karma scenario tests take the following steps:
 ### Protractor e2e Tests
 To run the Protractor e2e tests take the following steps:
 
-1. Start Node server - $ grunt serve
-2. Start REST server - $ node server
-3. Start DB server - $ sh bin/db.sh
-4. Start webdriver - $ webdriver-manager start
-5. Run Tests - $ grunt protractor
+1. Start Node server - `$ grunt serve`
+2. Start REST server - `$ node server`
+3. Start DB server - `$ sh bin/db.sh`
+4. Run tests - `$ grunt protractor`
 
 > Each step is a ‘new’ terminal window
 
@@ -37,76 +115,10 @@ To run the Protractor e2e tests take the following steps:
 
 
 
-## Getting Started
+## RESTful Server
+The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s). 
 
-This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
-[![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
-
-This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.
-
-
-
-###Step 1 - Start mongodb
-To start mongodb execute the following command:
-
-	$ sudo sh ./bin/db.sh
-
-###Step 2 - Start node server
-To start node execute the following command:
-
-	$ node server
-
-Open up the default host localhost:8181
-
-
-#### REST API
-The server supports dynamic REST API calls to a resource endpoint.
-
-Endpoint: `http://localhost:8181/api/v2`
-
-
-
-
-
-## Features
-
-**Database**
-The database of choice is Mongo, its fast, easy and scalable.
-
-**Server**
-The server of choice is Node, its JavaScript, its fast and scalable.
-
-**AngularJS** 
-The client-side framework of choice is Angular, its a full-stack, just what we need.
-
-**Responsive**
-The client-side ui of choice is Twitter Bootstrap, its updated and clean.
-
-**HTML5**
-Using HTML5 in every way to make a better user experience.
-
-**Customizable**
-Using a modular approach you can easily extend the core to your application.
-
- 
-
-
-
-
-
-
-
-
-
-
-
-## Server
-The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints.
-
-Base URL: `http://localhost:8181/api/v2`
+The base URL is `http://localhost:8181/api/v2`
 
 
 HTTP  | METHOD | ENDPOINT
@@ -119,15 +131,8 @@ HTTP  | METHOD | ENDPOINT
 
 
 
-
-### Step 3 - Start developing
-Then for development use grunt to serve up a dev server that uses a proxy to route all requests to the API server.
-
-    $ grunt serve
-
-> Your browser should open up displaying the main page.
-       
 ---
+
 
 ## Socket Server
 This is a socket server implementation for "real" time analytics and other data.
@@ -173,36 +178,11 @@ These are the events that this socket server dispatches.
 
 
 
-## Getting Started
 
-Download the [production version][min] or the [development version][max].
-
-
-### Start the server
-To start the node server you should start the mongo instance first. 
-
-To start mongodb execute the following command:
-
-	$ sudo sh ./bin/db.sh
-	
-To start node execute the following command:
-
-	$ node server
-	
-Open up the default host localhost:8181
-
-
-
-_(Coming soon)_
-
-## Documentation
-_(Coming soon)_
-
-
-### Themes
+## Themes
 Themes will be installed via bower, we will have a ui for searching and installing angular-cms themes searching by tag angular-cms.
 
-##### Theme Structure
+### Structure
 This is the structure of the themes.
 
 	my-theme/
@@ -219,39 +199,38 @@ This is the structure of the themes.
 			footer.html
 			content.html
 		
-
-
-
-### Plugins
-Plugins will be installed via bower as well, keywords angular-cms.
-
-
-
-
-
-
-
-## Examples
 _(Coming soon)_
 
->>>>>>> b6e9992bc764ecfd6179bf6aecc046e0decf7b71
+
+## Plugins
+Plugins will be installed via bower as well, keywords angular-cms.
+
+ _(Coming soon)_
 
 
-# Contributing
+
+
+
+## API Documentation
+The API documentation will be in the form of ngDocs style. The files located in the `content` directory are tutorial specs for the different features in this project. Documentation can be generated and viewed by running the following command:
+
+```
+$ grunt docs
+```
+
+_(Coming soon)_
+
+
+
 
 ## Important notes
-Please don't edit files in the `dist` subdirectory as they are generated via Grunt. You'll find source code in the `src` subdirectory!
+Please don't edit files in the `dist` subdirectory as they are generated via Grunt. You'll find source code in the `app` subdirectory! Regarding code style like indentation and whitespace, **follow the conventions you see used in the source already.**
 
-### Code style
-Regarding code style like indentation and whitespace, **follow the conventions you see used in the source already.**
-
-### PhantomJS
-While Grunt can run the included unit tests via [PhantomJS](http://phantomjs.org/), this shouldn't be considered a substitute for the real thing. Please be sure to test the `test/*.html` unit test file(s) in _actual_ browsers.
 
 ## Modifying the code
 First, ensure that you have the latest [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
 
-Test that Grunt's CLI and Bower are installed by running `grunt --version` and `bower --version`.  If the commands aren't found, run `npm install -g grunt-cli bower`.  For more information about installing the tools, see the [getting started with Grunt guide](http://gruntjs.com/getting-started) or [bower.io](http://bower.io/) respectively.
+Test that Grunt's CLI and Bower are installed by running `grunt --version` and `bower --version`. 
 
 1. Fork and clone the repo.
 1. Run `npm install` to install all build dependencies (including Grunt).
@@ -259,6 +238,7 @@ Test that Grunt's CLI and Bower are installed by running `grunt --version` and `
 1. Run `grunt` to grunt this project.
 
 Assuming that you don't see any red, you're ready to go. Just be sure to run `grunt` after making any changes, to ensure that nothing is broken.
+
 
 ## Submitting pull requests
 
@@ -269,7 +249,4 @@ Assuming that you don't see any red, you're ready to go. Just be sure to run `gr
 1. Open `test/*.html` unit test file(s) in actual browser to ensure tests pass everywhere.
 1. Update the documentation to reflect any changes.
 1. Push to your fork and submit a pull request.
-<<<<<<< HEAD
-=======
- 
->>>>>>> b6e9992bc764ecfd6179bf6aecc046e0decf7b71
+
