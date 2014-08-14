@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 			},
 			test : {
 				options : {
-					port : 9001,
+					port : 9292,
 					base : ['.tmp', 'test', '<%= yeoman.app %>']
 				}
 			},
@@ -115,9 +115,9 @@ module.exports = function(grunt) {
 					port : 9191,
 					open: true,
 					middleware : function(connect, options) {
-					return [ 
-					mountFolder(connect, '.grunt'), 
-					mountFolder(connect, '.tmp'), 
+					return [
+					mountFolder(connect, '.grunt'),
+					mountFolder(connect, '.tmp'),
 					mountFolder(connect, 'docs')
 					];
 				}
@@ -464,13 +464,13 @@ module.exports = function(grunt) {
 				startPage : '/api',
 				title : "AngularCMS Docs",
 				//imageLink: "http://my-domain.com",
-				
+
 				titleLink : "/api",
 				bestMatch : true,
 			},
 			api : {
 				src : [
-				'.tmp/scripts/**/*.js', 
+				'.tmp/scripts/**/*.js',
 				'!.tmp/spec/**/*.js'
 				],
 				title : 'API'
@@ -537,6 +537,7 @@ module.exports = function(grunt) {
 	});
 	grunt.registerTask('test:server', 'coffee', 'jasmine_node');
 
+	grunt.registerTask('build-docs', [ 'useminPrepare','autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
 
 	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:ngdocs']);
