@@ -11,26 +11,25 @@
 var serverEndpoint = 'http://localhost:8181';
 var proxyConfig = {
 	proxy : {
-	    forward : {
-	        '/api' : serverEndpoint
-	    }
+		forward : {
+			'/socket.io' : serverEndpoint,
+			'/api' : serverEndpoint
+		}
 	}
 };
 
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 9000;
 //var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
-var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
+var mountFolder = function(connect, dir) {
+	return connect.static(require('path').resolve(dir));
 };
-
-
 
 module.exports = function(grunt) {
 
 	//Connect proxy to route requests to localhost:8181/api
 	grunt.loadNpmTasks('grunt-connect-proxy');
-require('json-proxy').initialize({});
+	require('json-proxy').initialize({});
 	// Load grunt tasks automatically
 	require('load-grunt-tasks')(grunt);
 
@@ -55,8 +54,8 @@ require('json-proxy').initialize({});
 				tasks : ['newer:coffee:dist']
 			},
 			coffeeTest : {
-				files : ['test/{,*/}*.{coffee,litcoffee,coffee.md}'],
-				tasks : [ 'coffee:test', 'newer:coffee:test', 'karma']
+				files : ['test/{,**/}*.{coffee,litcoffee,coffee.md}'],
+				tasks : ['coffee:test', 'newer:coffee:test', 'karma']
 			},
 			compass : {
 				files : ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -73,12 +72,13 @@ require('json-proxy').initialize({});
 				options : {
 					livereload : '<%= connect.options.livereload %>'
 				},
-				files : ['<%= yeoman.app %>/{,*/}*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}']
+				files : ['<%= yeoman.app %>/{,**/}*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'],
+				tasks : ['ngtemplates']
 			},
 			//docs
 			ngdocs : {
-				files : ['content/**/*'],
-				tasks : ['ngdocs']
+				files : ['content/**/*', '<%= yeoman.app %>/scripts/{,**/}*.{coffee,litcoffee,coffee.md}'],
+				tasks : ['coffee', 'ngdocs']
 			}
 		},
 
@@ -90,13 +90,8 @@ require('json-proxy').initialize({});
 				hostname : '127.0.0.1',
 				livereload : 35729,
 				middleware : function(connect, options) {
-						return [ 
-							require('json-proxy').initialize(proxyConfig), 
-							mountFolder(connect, '.grunt'), 
-							mountFolder(connect, '.tmp'),
-							mountFolder(connect, 'app')
-						];
-					}
+					return [require('json-proxy').initialize(proxyConfig), mountFolder(connect, '.grunt'), mountFolder(connect, '.tmp'), mountFolder(connect, 'app')];
+				}
 			},
 			livereload : {
 				options : {
@@ -106,13 +101,26 @@ require('json-proxy').initialize({});
 			},
 			test : {
 				options : {
-					port : 9001,
+					port : 9292,
 					base : ['.tmp', 'test', '<%= yeoman.app %>']
 				}
 			},
 			dist : {
 				options : {
 					base : '<%= yeoman.dist %>'
+				}
+			},
+			docs : {
+				options : {
+					port : 9191,
+					open: true,
+					middleware : function(connect, options) {
+					return [
+					mountFolder(connect, '.grunt'),
+					mountFolder(connect, '.tmp'),
+					mountFolder(connect, 'docs')
+					];
+				}
 				}
 			}
 		},
@@ -185,6 +193,15 @@ require('json-proxy').initialize({});
 					cwd : 'test/e2e',
 					src : '{,*/}*.coffee',
 					dest : '.tmp/e2e',
+					ext : '.js'
+				}]
+			},
+			routes : {
+				files : [{
+					expand : true,
+					cwd : 'routes',
+					src : '{,*/}*.coffee',
+					dest : '.tmp/routes',
 					ext : '.js'
 				}]
 			}
@@ -349,10 +366,11 @@ require('json-proxy').initialize({});
 					dot : true,
 					cwd : '<%= yeoman.app %>',
 					dest : '<%= yeoman.dist %>',
-					src : ['*.{ico,png,txt}', '.htaccess', 
-					'bower_components/**/*', 
-					'scripts/libs/*', 
-					'images/{,*/}*.{webp}', 'fonts/*']
+					src : ['*.{ico,png,txt}', '.htaccess',
+						//'bower_components/**/*',
+						'scripts/libs/*',
+						'images/{,*/}*.{webp}',
+						'fonts/*']
 				}, {
 					expand : true,
 					cwd : '.tmp/images',
@@ -371,16 +389,14 @@ require('json-proxy').initialize({});
 		// Run some tasks in parallel to speed up the build process
 		concurrent : {
 			server : ['coffee:dist',
-			//   'compass:server',
-			'copy:styles'],
+			//	'compass:server',
+			'ngtemplates', 'copy:styles'],
 			test : ['coffee',
-			// 'compass',
+			//	'compass',
 			'copy:styles'],
 			dist : ['coffee',
-			//'compass:dist',
-			'copy:styles',
-			//   'imagemin',
-			'svgmin', 'htmlmin']
+			//	'compass:dist',
+			'ngtemplates', 'copy:styles', 'svgmin', 'htmlmin']
 		},
 
 		// By default, your `index.html`'s <!-- Usemin block --> will take care of
@@ -413,11 +429,11 @@ require('json-proxy').initialize({});
 		karma : {
 			unit : {
 				configFile : 'karma.conf.js',
-				singleRun: true
+				singleRun : true
 			},
 			e2e : {
 				configFile : 'karma-e2e.conf.js',
-				singleRun: true
+				singleRun : true
 			}
 		},
 		jasmine_node : {
@@ -440,32 +456,36 @@ require('json-proxy').initialize({});
 			all : ['test/routes/']
 		},
 
+		//Generate angularjs docs
 		ngdocs : {
 			options : {
 				dest : 'docs',
 				html5Mode : false,
 				startPage : '/api',
-				title : "AngularCMS",
-				//  image: "path/to/my/image.png",
-				imageLink : "http://my-domain.com",
+				title : "AngularCMS Docs",
+				//imageLink: "http://my-domain.com",
+
 				titleLink : "/api",
 				bestMatch : true,
 			},
-			tutorial : {
-				src : ['content/**/*.ngdoc'],
-				title : 'Angular CMS'
+			api : {
+				src : [
+				'.tmp/scripts/**/*.js',
+				'!.tmp/spec/**/*.js'
+				],
+				title : 'API'
 			},
-		  api: {
-    			src: ['.temp/**/*.js', '!.temp/**/*.spec.js'],
-    			title: 'API Documentation'
-  			}
+			tutorial : {
+				src : ['content/tutorial/*.ngdoc', 'content/*.ngdoc'],
+				title : 'Tutorial'
+			},
 		},
 
 		//https://npmjs.org/package/grunt-angular-templates
 		ngtemplates : {
 			app : {
-				src : '<%=yeoman.app %>/views/**.html',
-				dest : '.tmp/scripts/template.js',
+				src : '<%=yeoman.app %>/views/**/*.html',
+				dest : '.tmp/scripts/templates.js',
 				options : {
 					module : 'angularCmsApp',
 					//url: 'views',
@@ -476,7 +496,7 @@ require('json-proxy').initialize({});
 					htmlmin : {
 						collapseWhitespace : true,
 						collapseBooleanAttributes : true
-					},
+					}
 					//  usemin: 'dist/vendors.js' // <~~ This came from the <!-- build:js --> block
 				}
 			}
@@ -485,19 +505,36 @@ require('json-proxy').initialize({});
 		/* ======================[ @TODO: Bower Install ]====================== */
 		'bower-install' : {
 			app : {
-
-				// Point to the files that should be updated when
-				// you run `grunt bower-install`
 				src : ['app/index.html'],
-
-				// Optional:
-				// ---------
 				cwd : '',
 				ignorePath : '',
 				exclude : [],
 				fileTypes : {}
 			}
-		}
+		},
+
+		 protractor_webdriver: {
+				options: {
+					// Task-specific options go here.
+				},
+				test: {
+					// Target-specific file lists and/or options go here.
+				}
+			},
+   protractor: {
+    options: {
+      keepAlive: true, // If false, the grunt process stops when the test fails.
+      noColor: false, // If true, protractor will not use colors in its output.
+      args: {
+      }
+    },
+    test: {
+      options: {
+        configFile: "protractor.conf.js",
+        args: {}
+      }
+    }
+  }
 	});
 
 	grunt.registerTask('serve', function(target) {
@@ -521,8 +558,14 @@ require('json-proxy').initialize({});
 			return grunt.task.run(['karma:unit']);
 		}
 	});
+	grunt.registerTask('test:server', 'coffee', 'jasmine_node');
 
+	grunt.registerTask('build-docs', [ 'useminPrepare','autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
 
+	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:ngdocs']);
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
+
+	grunt.registerTask('heroku:production', 'build');
+	grunt.registerTask('heroku:development', 'build');
 };

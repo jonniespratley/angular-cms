@@ -1,5 +1,5 @@
 'use strict'
-###
+###*
  * @ngdoc directive
  * @name rfx.directive:rAutogrow
  * @element textarea
@@ -20,16 +20,15 @@ Parse.initialize "fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB", "QPFGBNHs0QQHFS54at
 
 
 app = angular.module('angularCmsApp', [
-	'ngCookies',
-	'ngResource',
-	'ngSanitize',
-	'ngRoute',
-	'ngAnimate',
+	'ngCookies'
+	'ngResource'
+	'ngSanitize'
+	'ngRoute'
+	'ngAnimate'
 	'mgcrea.ngStrap'
-	#'$strap.directives'
 	#'cms.Templates'
 ])
-	.config ($routeProvider) ->		
+	.config ($routeProvider) ->	
 		#Resolve routes
 		routeResolver =
 			# I will cause a 1 second delay

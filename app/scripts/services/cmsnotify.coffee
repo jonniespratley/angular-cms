@@ -20,7 +20,7 @@ angular.module('angularCmsApp').factory('cmsNotify', ['$timeout', '$q', ($timeou
 			$timeout(()-> 
 				angular.element('.alert').fadeOut().remove()
 			, 
-			timeout * 1000
+			timeout
 			)
 	return notify
 ])

@@ -22,7 +22,7 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 		$scope.users = []
 		
 		#Holds the user groups
-		$scope.groups = null
+		$scope.groups = ['Admin', 'Member', 'Public']
 
 		$scope.getGroups = () ->
 			DataService.fetch('groups').then((data) ->
@@ -43,10 +43,13 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 
 		#Delete user
 		$scope.deleteUser = (index, user) ->
-			DataService.destroy('users', user).then((data) ->
-				$scope.users.pop(index)
-				$scope.getUsers()
-			)
+			ask = confirm "Delete #{user.email}?"
+
+			if ask
+				DataService.destroy('users', user).then((data) ->
+					$scope.users.pop(index)
+					$scope.getUsers()
+				)
 
 		#Add user to database
 		$scope.addUser = (user) ->

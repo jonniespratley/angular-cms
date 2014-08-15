@@ -1,0 +1,74 @@
+<h1><code ng:non-bindable="">ngInit</code>
+<div><span class="hint">directive in module <code ng:non-bindable="">ng</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="ng-directive-page ng-directive-nginit-page"><p>The <code>ngInit</code> directive allows you to evaluate an expression in the
+current scope.</p>
+<div class="alert alert-error">
+The only appropriate use of <code>ngInit</code> is for aliasing special properties of
+<a href="#/api/ng.directive:ngRepeat"><code><code>ngRepeat</code></code></a>, as seen in the demo below. Besides this case, you
+should use <a href="#/guide/controller">controllers</a> rather than <code>ngInit</code>
+to initialize values on a scope.
+</div>
+<div class="alert alert-warning">
+<strong>Note</strong>: If you have assignment in <code>ngInit</code> along with <a href="#/api/ng.$filter"><code><code>$filter</code></code></a>, make
+sure you have parenthesis for correct precedence:
+<pre class="prettyprint" class="prettyprint linenums">
+  &lt;div ng-init="test1 = (data | orderBy:'name')"&gt;&lt;/div&gt;
+</pre>
+</div></div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage">as attribute<pre class="prettyprint linenums">&lt;ANY ng-init="{expression}"&gt;
+   ...
+&lt;/ANY&gt;</pre>
+as class<pre class="prettyprint linenums">&lt;ANY class="ng-init: {expression};"&gt;
+   ...
+&lt;/ANY&gt;</pre>
+<h3 id="usage_directive-info">Directive info</h3>
+<div class="directive-info"><ul><li>This directive executes at priority level 450.</li>
+</ul>
+</div>
+<h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>ngInit</td><td><a href="" class="label type-hint type-hint-expression">expression</a></td><td><div class="ng-directive-page ng-directive-nginit-page"><p><a href="#/guide/expression">Expression</a> to eval.</p>
+</div></td></tr></tbody></table></div>
+<h2 id="example">Example</h2>
+<div class="example"><div class="ng-directive-page ng-directive-nginit-page"><h4 id="example_source">Source</h4>
+<div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html-122" source-edit-css="" source-edit-js="script.js-121" source-edit-json="" source-edit-unit="" source-edit-scenario="scenario.js-123"></div>
+<div class="tabbable"><div class="tab-pane" title="index.html">
+<pre class="prettyprint linenums" ng-set-text="index.html-122" ng-html-wrap-loaded=" angular.js script.js"></pre>
+<script type="text/ng-template" id="index.html-122">
+
+<div ng-controller="Ctrl">
+<div ng-repeat="innerList in list" ng-init="outerIndex = $index">
+  <div ng-repeat="value in innerList" ng-init="innerIndex = $index">
+     <span class="example-init">list[ {{outerIndex}} ][ {{innerIndex}} ] = {{value}};</span>
+  </div>
+</div>
+</div>
+</script>
+</div>
+<div class="tab-pane" title="script.js">
+<pre class="prettyprint linenums" ng-set-text="script.js-121"></pre>
+<script type="text/ng-template" id="script.js-121">
+function Ctrl($scope) {
+  $scope.list = [['a', 'b'], ['c', 'd']];
+}
+</script>
+</div>
+<div class="tab-pane" title="End to end test">
+<pre class="prettyprint linenums" ng-set-text="scenario.js-123"></pre>
+<script type="text/ng-template" id="scenario.js-123">
+  it('should alias index positions', function() {
+    expect(element('.example-init').text())
+      .toBe('list[ 0 ][ 0 ] = a;' +
+            'list[ 0 ][ 1 ] = b;' +
+            'list[ 1 ][ 0 ] = c;' +
+            'list[ 1 ][ 1 ] = d;');
+  });
+</script>
+</div>
+</div><h4 id="example_demo">Demo</h4>
+<div class="well doc-example-live animate-container" ng-embed-app="" ng-set-html="index.html-122" ng-eval-javascript="script.js-121"></div>
+</div></div>
+</div>

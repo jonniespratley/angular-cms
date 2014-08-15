@@ -5,7 +5,10 @@ node_modules
 .sass-cache
 .editorconfig
 .project
-dist
 app/bower_components
-db/mongod.lock
+db
 www/cms-content/uploads/
+coverage/
+.DS_Store
+atlassian-ide-plugin.xml
+ app/components

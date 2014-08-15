@@ -18,6 +18,7 @@ colors.setTheme({
 	error : 'red'
 });
 
+/*
 console.log("this is an silly".silly);
 console.log("this is an input".input);
 console.log("this is an verbose".verbose);
@@ -28,6 +29,7 @@ console.log("this is an help".help);
 console.log("this is an debug".debug);
 console.log("this is an error".error);
 console.log("this is a warning".warn);
+*/
 
 /**
  * @TODO - HTTPS Key and Cert
@@ -80,15 +82,19 @@ var config = {
 		password: 'isyourdaughter18?'
 	},
 	staticDir : __dirname + '/dist',
-	publicDir : __dirname + '/dist',
-	uploadsTmpDir : '.temp',
-	uploadsDestDir : 'www/cms-content/uploads',
+	publicDir : __dirname + '/app',
+	uploadsTmpDir : __dirname + '/.tmp',
+	uploadsDestDir : __dirname + '/www/cms-content/uploads',
+	uploadsUrl: ':8181/cms-content/',
 	logFormat : '[:date] - [:method] - :url - :status - :response-time ms'
 };
 
 //Start the reset server
 var rest = require('./routes/rest').rest;
-rest.init(config);
+
+var socket = require('./routes/socketserver').SocketServer;
+
+socket.init(rest.init(config));
 
 //Create proxy server and proxy requests
 proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
@@ -135,8 +141,12 @@ proxyServer.on('listening', function() {
 });
 
 
+
 //Start the proxy server
 proxyServer.listen(options.port);
+
+
+
 
 
 /**
@@ -173,4 +183,11 @@ var message = {
 // to asynchronously send individual emails instead of a queue
 
 
- 
+ /*
+ * fs.readFile(req.files.displayImage.path, function (err, data) {
+  // ...
+  var newPath = __dirname + "/uploads/uploadedFileName";
+  fs.writeFile(newPath, data, function (err) {
+  res.redirect("back");
+  });
+  });*/

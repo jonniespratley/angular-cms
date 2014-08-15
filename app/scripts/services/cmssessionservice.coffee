@@ -8,21 +8,22 @@ angular.module('angularCmsApp').service 'cmsSessionService',[ '$q', '$rootScope'
 
 	#Set the user to authorized
 	setUserAuthenticated = (value) ->
-		#window.sessionStorage.setItem('userIsAuthenticated', value)
+		window.sessionStorage.setItem('userIsAuthenticated', value)
 		$cookieStore.put('App.session', value)
 		userIsAuthenticated = value
 		$log.info "user is authorized: #{userIsAuthenticated.authorized}"
 	
 	#Check if the user is authorized
 	getUserAuthenticated = ->
-		#window.sessionStorage.getItem('userIsAuthenticated')
+		window.sessionStorage.getItem('userIsAuthenticated')
 		$log.info "user is authorized: #{userIsAuthenticated.authorized}"
 		return userIsAuthenticated.authorized
 	
 	#Listen for route to change and check the routes.
 	$rootScope.$on "$locationChangeStart", (event, next, current) ->
 		$rootScope.$emit('session:route:start', {event:event, next:next, current:current})
-		#$log.log(event, 'Next route', next, 'Current route', current)
+		
+		#console.warn(event, 'Next route', next, 'Current route', current)
 		
 		#Find active link and remove active
 		angular.element('.active').removeClass('active')
@@ -38,7 +39,6 @@ angular.module('angularCmsApp').service 'cmsSessionService',[ '$q', '$rootScope'
 					event.preventDefault()
 					
 					$rootScope.$emit('session:unauthorized', event)
-					
 					$location.path('/')
 					#document.location.reload()
 					#document.location = '/'
@@ -46,6 +46,7 @@ angular.module('angularCmsApp').service 'cmsSessionService',[ '$q', '$rootScope'
 					#Find target link and make active
 					angular.element('a[href="#'+$location.path()+'"]').addClass('active')
 					$rootScope.$emit('session:authorized', event)
+					
 					#Redirect to index
 					#document.location = '/'
 		
@@ -57,7 +58,10 @@ angular.module('angularCmsApp').service 'cmsSessionService',[ '$q', '$rootScope'
 		getUserAuthenticated: getUserAuthenticated
 		setUserAuthenticated: setUserAuthenticated
 		getSession: () ->
-			$cookieStore.get('App.session')
+			if $cookieStore.get('App.session')
+				$cookieStore.get('App.session')
+			else 
+				{}
 		setSession: (value) ->
 			$cookieStore.put('App.session', value)
 		login: (user) ->

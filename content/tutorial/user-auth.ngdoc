@@ -1,0 +1,30 @@
+@ngdoc overview
+@name 2 - User Authentication
+@description
+
+## User Authentication
+As a admin I want to have user authentication for accessing the data.
+
+**Scenario:**
+Tom goes to the local farmers market to sell his products. Tom uses angular-cms to manage his sales and employees, he wants to user authentication to administor his content.
+
+1. Tom sells a burger for $10, Tom needs to add the sale to his records.
+* Tom opens his tablets web browser and enters the url of his cms, clicks the sign in link and is presented with a login form.
+* Tom enters his email and password then clicks the login button.
+* Tom is then directed to the Dashboard to add the sale.
+
+**GUI Mock-up**:
+The following is a mock-up created from visualizing the scenario above.
+
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/docs/cms-login.png)
+
+
+**Storyboard:**
+
+1. Enter valid user email address.
+2. Enter user password.
+3. Select "Stay signed in" checkbox.
+4. Click "Sign in" button.
+5. **Success** - Dashboard should appear after successful authentication
+6. **Fail** - Alert dialog should appear stating the issue.
+

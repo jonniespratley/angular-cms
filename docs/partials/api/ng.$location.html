@@ -1,0 +1,68 @@
+<h1><code ng:non-bindable="">$location</code>
+<div><span class="hint">service in module <code ng:non-bindable="">ng</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="ng-location-page"><p>The $location service parses the URL in the browser address bar (based on the
+<a href="https://developer.mozilla.org/en/window.location">window.location</a>) and makes the URL
+available to your application. Changes to the URL in the address bar are reflected into
+$location service and changes to $location are reflected into the browser address bar.</p>
+<p><strong>The $location service:</strong></p>
+<ul>
+<li>Exposes the current URL in the browser address bar, so you can<ul>
+<li>Watch and observe the URL.</li>
+<li>Change the URL.</li>
+</ul>
+</li>
+<li>Synchronizes the URL with the browser when the user<ul>
+<li>Changes the address bar.</li>
+<li>Clicks the back or forward button (or clicks a History link).</li>
+<li>Clicks on a link.</li>
+</ul>
+</li>
+<li>Represents the URL object as a set of methods (protocol, host, port, path, search, hash).</li>
+</ul>
+<p>For more information see <a href="#/guide/dev_guide.services.$location">Developer Guide: Angular Services: Using $location</a></p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$browser">$browser</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$sniffer">$sniffer</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$rootElement">$rootElement</a></code>
+</li>
+</ul>
+<div class="member event"><h2 id="events">Events</h2>
+<ul class="events"><li><h3 id="events_$locationchangestart">$locationChangeStart</h3>
+<div class="$locationchangestart"><div class="ng-location-locationchangestart-page"><p>Broadcasted before a URL will change. This change can be prevented by calling
+<code>preventDefault</code> method of the event. See <a href="#/api/ng.$rootScope.Scope#$on"><code>ng.$rootScope.Scope#$on</code></a> for more
+details about event object. Upon successful change
+<a href="#/api/ng.$location#events_$locationchangesuccess"><code>$locationChangeSuccess</code></a> is fired.</p>
+</div><div class="inline"><h4 id="events_$locationchangestart_type">Type:</h4>
+<div class="type">broadcast</div>
+</div>
+<div class="inline"><h4 id="events_$locationchangestart_target">Target:</h4>
+<div class="target">root scope</div>
+</div>
+<h5 id="events_$locationchangestart_target_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>angularEvent</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="ng-location-locationchangestart-page"><p>Synthetic event object.</p>
+</div></td></tr><tr><td>newUrl</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="ng-location-locationchangestart-page"><p>New URL</p>
+</div></td></tr><tr><td>oldUrl <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="ng-location-locationchangestart-page"><p>URL that was before it was changed.</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="events_$locationchangesuccess">$locationChangeSuccess</h3>
+<div class="$locationchangesuccess"><div class="ng-location-locationchangesuccess-page"><p>Broadcasted after a URL was changed.</p>
+</div><div class="inline"><h4 id="events_$locationchangesuccess_type">Type:</h4>
+<div class="type">broadcast</div>
+</div>
+<div class="inline"><h4 id="events_$locationchangesuccess_target">Target:</h4>
+<div class="target">root scope</div>
+</div>
+<h5 id="events_$locationchangesuccess_target_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>angularEvent</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="ng-location-locationchangesuccess-page"><p>Synthetic event object.</p>
+</div></td></tr><tr><td>newUrl</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="ng-location-locationchangesuccess-page"><p>New URL</p>
+</div></td></tr><tr><td>oldUrl <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="ng-location-locationchangesuccess-page"><p>URL that was before it was changed.</p>
+</div></td></tr></tbody></table></div>
+</li>
+</ul>
+</div>
+</div>
