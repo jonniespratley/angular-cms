@@ -35,17 +35,17 @@ Before you can run or build the application you need to install the dependencies
 $ npm install
 ```
 
-> Note: You may need to run this as a `sudo` user.
+> **Note:** You may need to run this as a `sudo` user.
 
 
-### Step 2 - Install bower dependencies
+### Step 2 - Install Bower dependencies
 Now you need to install the client-side dependencies that is managed by bower, execute the following command:
 
 ```
 $ bower install
 ```
 
-### Step 3 - Start preview server
+### Step 3 - Start Grunt server
 Now you are ready to run the preview server that is used for development, execute the following command:
 
 ```
@@ -70,9 +70,12 @@ To start mongodb execute the following command:
 #### Step 2 - Start REST server
 To start the server execute the following command:
 
-	$ node server
+```
+$ node server
+```
 
-Open your default browser to [http://localhost:8181/api/v2](http://localhost:8181/api/v2)
+> **Note:** The REST server is running at [http://localhost:8181/api/v2](http://localhost:8181/api/v2)
+
 
 
 
@@ -94,9 +97,13 @@ To run the Karma scenario tests take the following steps:
 1. Start Node server - `$ grunt serve`
 2. Start REST server - `$ node server`
 3. Start DB server - `$ sh bin/db.sh`
-4. Run tests - `$ grunt test:e2e`
+4. Now run the e2e tests by executing:
 
-> Each step is a ‘new’ terminal window
+```
+$ grunt test:e2e
+```
+
+> **Note:** Each step is a ‘new’ terminal window
 
 
 ### Protractor e2e Tests
@@ -105,15 +112,24 @@ To run the Protractor e2e tests take the following steps:
 1. Start Node server - `$ grunt serve`
 2. Start REST server - `$ node server`
 3. Start DB server - `$ sh bin/db.sh`
-4. Run tests - `$ grunt protractor`
+4. Now run the Protractor tests by executing:
 
-> Each step is a ‘new’ terminal window
+```
+$ grunt protractor
+```
+
+> **Note:** Each step is a ‘new’ terminal window
 
 
 
 
 
 
+
+
+
+
+---
 
 ## RESTful Server
 The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s). 
@@ -129,16 +145,16 @@ HTTP  | METHOD | ENDPOINT
  PUT   |   update      |   /database/table/:id
  DELETE |  destroy     |   /database/table/:id
 
-
+> **Tip:** To create new collection open `http://localhost:8181/api/v2/[DATABASE]/[COLLECTION]` in browser.
 
 ---
 
 
-## Socket Server
-This is a socket server implementation for "real" time analytics and other data.
-This is for use with geo analytics and other backend data from the app. listen for connected clients
+## WebSocket Server
+This is a socket server implementation for "real" time.
 
-### Socket Server Channels
+
+### WebSocket Channels
 These are the events that this socket server dispatches.
 
 
@@ -149,67 +165,47 @@ These are the events that this socket server dispatches.
 5. cms:server:message
 6. cms:server:disconnect
 7. cms:server:connect
-8. cms:
 
 
-
-
-
-
-### Must Have
-* user management & user roles
-* action and view permissions
-* content versioning and audit
-* some form of workflow and notifications
-* i18n support on literals and object versions
-* normalized database schema design
-* some form of content import-export
-* assets management and thumbnail generation for uploads
-* Valid XHTML (compressed with GZIP)
-* Rich text editing (e.g FCKeditor) which generates accessible markup
-* Valid and minified CSS and javascript (e.g using YUI)
-* automatically generated sitemaps.org document
-* integration with Google Analytics
-* automatic RSS feeds
-* open search support
-* print css and/or print versions of content
-* SEO consideration for duplicate content (e.g use of canonical tag)
+---
 
 
 
 
 
 ## Themes
-Themes will be installed via bower, we will have a ui for searching and installing angular-cms themes searching by tag angular-cms.
+Themes will be installed via `bower`, search and install themes searching by tag `angular-cms`.
 
-### Structure
+### Structure of theme
 This is the structure of the themes.
 
-	my-theme/
-		package.json
-		bower.json
-		css/
-			my-theme.css
-		js/
-			my-theme.js
-		index.html
-		partials/
-			header.html
-			sidebar.html
-			footer.html
-			content.html
-		
-_(Coming soon)_
+```
+my-theme/
+	package.json
+	bower.json
+	css/
+		my-theme.css
+	js/
+		my-theme.js
+	index.html
+	partials/
+		header.html
+		sidebar.html
+		footer.html
+		content.html
+```		
 
+
+
+---
 
 ## Plugins
-Plugins will be installed via bower as well, keywords angular-cms.
+Plugins will be installed via `bower`, search and install themes searching by tag `angular-cms`.
 
- _(Coming soon)_
-
-
+### Structure of plugin
 
 
+---
 
 ## API Documentation
 The API documentation will be in the form of ngDocs style. The files located in the `content` directory are tutorial specs for the different features in this project. Documentation can be generated and viewed by running the following command:
@@ -223,6 +219,7 @@ $ grunt docs
 _(Coming soon)_
 
 
+---
 
 
 ## Important notes
@@ -242,13 +239,39 @@ Test that Grunt's CLI and Bower are installed by running `grunt --version` and `
 Assuming that you don't see any red, you're ready to go. Just be sure to run `grunt` after making any changes, to ensure that nothing is broken.
 
 
+
 ## Submitting pull requests
 
 1. Create a new branch, please don't work in your `master` branch directly.
 1. Add failing tests for the change you want to make. Run `grunt` to see the tests fail.
 1. Fix stuff.
-1. Run `grunt` to see if the tests pass. Repeat steps 2-4 until done.
-1. Open `test/*.html` unit test file(s) in actual browser to ensure tests pass everywhere.
+1. Run `grunt` to see if the tests pass. Repeat steps 2-3 until done.
 1. Update the documentation to reflect any changes.
 1. Push to your fork and submit a pull request.
+
+---
+
+## TODO
+The following list is features that are comming.
+
+
+* user management & user roles
+* action and view permissions
+* content versioning and audit
+* some form of workflow and notifications
+* i18n support on literals and object versions
+* normalized database schema design
+* some form of content import-export
+* assets management and thumbnail generation for uploads
+* Valid XHTML (compressed with GZIP)
+* Rich text editing (e.g FCKeditor) which generates accessible markup
+* Valid and minified CSS and javascript (e.g using YUI)
+* automatically generated sitemaps.org document
+* integration with Google Analytics
+* automatic RSS feeds
+* open search support
+* print css and/or print versions of content
+* SEO consideration for duplicate content (e.g use of canonical tag)
+
+---
 
