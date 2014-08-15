@@ -8,7 +8,11 @@ node_modules
 
 
 app/bower_components
-db/
+db/*
+db/angular-cms.0
+db/angular-cms.1
+db/angular-cms.ns
+
 www/cms-content/uploads/
 coverage/
 .DS_Store*
