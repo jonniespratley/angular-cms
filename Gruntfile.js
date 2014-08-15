@@ -72,7 +72,7 @@ module.exports = function(grunt) {
 				options : {
 					livereload : '<%= connect.options.livereload %>'
 				},
-				files : ['<%= yeoman.app %>/{,*/}*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'],
+				files : ['<%= yeoman.app %>/{,**/}*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'],
 				tasks : ['ngtemplates']
 			},
 			//docs
@@ -512,7 +512,7 @@ module.exports = function(grunt) {
 				fileTypes : {}
 			}
 		},
-									 
+
 		 protractor_webdriver: {
 				options: {
 					// Task-specific options go here.
@@ -530,8 +530,8 @@ module.exports = function(grunt) {
     },
     test: {
       options: {
-        configFile: "protractor.conf.js", 
-        args: {} 
+        configFile: "protractor.conf.js",
+        args: {}
       }
     }
   }
