@@ -25,7 +25,8 @@ $rest =
           dataType: "json"
           data: data
             
-            
+
+###     
 $ ->
   
   $rest.read('posts').then((data)->
@@ -45,12 +46,7 @@ $ ->
   ).fail((error)->
     console.error error
   )
-  
-  
-  $("h1").animate {
-    "margin-left": "100px"
-  }, "slow"
-
+###
 
 # Configure server
 app.configure ->
@@ -139,8 +135,6 @@ app.get "/api/posts/:id", (request, response) ->
 		else
 			console.log err
 
-
-
 #Update
 app.put "/api/posts/:id", (request, response) ->
 	console.log "Updating post " + request.body.title
@@ -156,7 +150,6 @@ app.put "/api/posts/:id", (request, response) ->
 		return
 
 
-
 #Delete
 app.delete "/api/posts/:id", (request, response) ->
 	console.log "Deleting post with id: " + request.params.id
@@ -168,8 +161,6 @@ app.delete "/api/posts/:id", (request, response) ->
 			else
 				console.log err
 			return
-
-
 
 
 #Start server
