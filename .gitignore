@@ -5,10 +5,11 @@ node_modules
 .sass-cache
 .editorconfig
 .project
+
+
 app/bower_components
-db
+db/
 www/cms-content/uploads/
 coverage/
-.DS_Store
+.DS_Store*
 atlassian-ide-plugin.xml
- app/components
