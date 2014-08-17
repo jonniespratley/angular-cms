@@ -243,10 +243,7 @@ var RestResource = {
 
 	findOne: function (req, table, query, success, fail) {
 		//Open db
-		var db = new mongo.Db('angular-cms', new mongo.Server(config.db.host, config.db.port, {
-			'auto_reconnect': true,
-			'safe': true
-		}));
+		var db = new mongo.Db('angular-cms', new mongo.Server(config.db.host, config.db.port));
 		db.open(function (err, db) {
 			db.collection(table, function (err, collection) {
 				var options = req.params.options || {};
@@ -336,7 +333,7 @@ var RestResource = {
 
 		}, function (error) {
 			user = null;
-			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
+			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: true}));
 			db.open(function (err, db) {
 				db.collection('users', function (err, collection) {
 					collection.insert(data, function (err, docs) {
@@ -393,6 +390,8 @@ var RestResource = {
 		if (req.param('appid')) {
 			appid = String(req.param('appid'));
 		}
+
+		console.log(req.files)
 
 		//Handle if dynamic filenames are enabled
 		var tmp_filename = req.files.file.name || 'tmp_name';
@@ -483,7 +482,7 @@ var RestResource = {
 						};
 
 						//Output the results
-						res.json(json);
+						res.send(json);
 					});
 				});
 			});
@@ -572,7 +571,7 @@ var RestResource = {
 							results: req.files,
 							appid: appid
 						};
-						res.json(json);
+						res.send(json);
 					}
 				});
 			});
@@ -819,6 +818,7 @@ app.get('/api/v2', RestResource.v2index);
 app.post('/api/v1/imagecrop', RestResource.imageCrop);
 app.post('/api/v2/cloudupload', RestResource.cloudupload);
 
+app.post('/api/v2/upload', RestResource.upload);
 
 //Always users table
 app.post('/api/v2/users/login', express.bodyParser(), RestResource.login);
@@ -944,7 +944,7 @@ exports.rest = {
 
 			app.use(express.static(config.staticDir));
 			app.use(express.directory(config.publicDir));
-
+			app.use(express.methodOverride());
 			app.use(express.json());
 			app.use("jsonp callback", true);
 			app.use('/api/upload', upload.fileHandler());

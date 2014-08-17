@@ -3,284 +3,69 @@
 @name angularCmsApp.directive:cmsUploader
 @element div
 @function
-
 @description 
 	This is an example uploader.
 ###
 'use strict'
-angular.module('angularCmsApp').directive "cmsUploader", ->
-	  scope:
-	    id: "@"
-	    title: "@"
-	    image: "@"
-	    collection: "@"
-	    maxwidth: "@"
-	    maxheight: "@"
-	    sizelimit: "@"
-	    filelimit: "@"
-	    aspectratio: "@"
-	    name: "@"
-	    btncrop: "@"
-	    btnupload: "@"
-	    action: "@"
-	    multiple: "@"
-	    cropper: "@"
-	    dragdrop: "@"
-	    litmpl: "@"
-	    showtable: "@"
-	    showlist: "@"
-	    handles: "@"
-	    uploader: "="
-	    ngModel: '='
-	  template: '''
-	      <div id="uploader">
-	        <div id="uploader-dropzone" class="uploader-dropzone">
+angular.module('angularCmsApp').directive 'cmsUploader', ->
+	scope:
+		ngModel: '='
+	template: '''
+	      <div class="uploader">
+	        <div class="uploader-dropzone">
 	          <h4>Drop files here</h4>
 	          <p>
 	            <span>or</span>
 	          </p>
 	          <button id="uploader-btn" class="btn btn-default">Select files</button>
-	          <input id="uploader-file-input" type="file" name="files[]" multiple />
+	          <input id="uploader-input" type="file" name="files[]" multiple />
 	        </div>
-	        
-	        
-	        <div id="cms-uploader-list" ng-show="showlist">
-		         <legend>List</legend>
-		        <div id="imgPanel"></div>
-		        <div id="fileAttributes"></div>
-	        </div>
-
-
-	        <div id="uploader-wrap"></div>
-	        <div id="cms-uploader-table-wrap" ng-show="showtable">
-	        	<legend>Table</legend>
-	        	<table id="uploader-table" class="table table-bordered"></table>
-					</div>
-	        <ul class="list-unstyled uploader-files-list">
-	          
-	          <li class="media" ng-repeat="item in uploader.files">
-	            <a class="pull-left" href="#">
-	              <img class="media-object img-thumbnail" src="http://placehold.it/75" />
-	            </a>
-	            <div class="media-body">
-	              <h5 class="media-heading">File being uploaded...</h5>
-	              <p>
-	                <small>
-	                Type: image/png 
-	                Size: 45kb 
-	                Modified: date</small>
-	              </p>
-	              <div class="progress">
-	                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-	                  <span class="sr-only">60% Complete</span>
-	                </div>
-	              </div>
-	            </div>
-	          </li>
-	        </ul>
 	      </div>
 	  '''
-	  restrict: "E"
-	  replace: true
-	  transclude: false
-	  require: '^?ngModel'
-	  link: postLink = (scope, element, attrs, ngModel) ->
+	restrict: 'E'
+	replace: true
+	transclude: false
+	require: '^?ngModel'
+	link: postLink = ($scope, $element, $attrs, ngModel) ->
 
-	    targetId = 'uploader-dropzone'
-	    inputId = 'uploader-file-input'
-	    buttonId = 'uploader-btn'
+		Uploader = () ->
+			@files = []
+			@inputEl = document.getElementById('uploader-input')
+			@input = $element.find('#uploader-input')
 
-	    #Internal variables
-	    scope.uploader = 
-	      files: []
-	      button: angular.element("##{buttonId}")
-	      input: angular.element("##{inputId}")
-	      dropzone: angular.element("##{targetId}")
+			#Hide default file input
+			@input.hide()
 
+			#Listen for click and open file dialog
+			$element.find('button').bind('click', (e) =>
+				@input.trigger('click')
+			)
 
+			#Listen for file selection change and upload each file
+			@inputEl.addEventListener('change', (e) =>
+				@files = @inputEl.files
+				@uploadFile(file) for file in @files
+			)
 
+			#Upload each file
+			@uploadFile = (file) ->
+				form = new FormData()
+				form.append('files[]', file)
 
+				xhr = new XMLHttpRequest()
+				xhr.onload = () ->
+					console.log('Upload complete')
 
-	    angular.element("##{buttonId}").bind( 'click', () ->
-	     angular.element("##{inputId}").trigger('click') 
-	    )
+				xhr.open('POST', '/api/v2/upload', true)
+				xhr.send(form)
 
-	    console.log( scope )
-
-
-	    init = (id) ->
-
-
-
-	      #Hide element
-	      scope.uploader.input.hide()
-
-	      #Listen for button and trigger change
-
-	      dropZone = document.getElementById(targetId)
-	      dropZone.addEventListener "dragout", handleDragOut, false
-	      dropZone.addEventListener "dragover", handleDragOver, false
-	      dropZone.addEventListener "drop", handleFileDrop, false
-
-	      uploader = document.getElementById(inputId)
-	      
-	      uploader.addEventListener "change", ((e) ->
-	        files = e.currentTarget.files
-	        handleFiles files
-	      ), false
-
-	    handleFileDrop = (evt) ->
-	      evt.stopPropagation()
-	      evt.preventDefault()
-	      files = evt.dataTransfer.files
-	      displayFiles files
-	      handleFiles files
-
-	    handleDragOver = (evt) ->
-	      evt.stopPropagation()
-	      evt.preventDefault()
-	      console.log 'dragover'
-
-	    handleDragOut = (evt) ->
-	      evt.stopPropagation()
-	      evt.preventDefault()
-	      console.log 'dragout'
-
-	    displayFiles = (files) ->
-	      clearTable()
-	      fileCount = document.getElementById("uploader-count")
-	      fileCount.innerHTML = files.length + " File(s) Selected"
-	      fileTable = document.getElementById("uploader-table")
-	      if files.length > 0
-	        row = undefined
-	        cell = undefined
-	        textNode = undefined
-	        i = 0
-
-	        while i < files.length
-	          addThumbnail files[i]
-	          row = fileTable.insertRow(i)
-	          cell = row.insertCell(0)
-	          textNode = document.createTextNode(files[i].name)
-	          cell.appendChild textNode
-	          cell = row.insertCell(1)
-	          textNode = document.createTextNode(files[i].type)
-	          cell.appendChild textNode
-	          cell = row.insertCell(2)
-	          textNode = document.createTextNode((files[i].size / 1024).toFixed(2) + "KB")
-	          cell.appendChild textNode
-	          if files[i].lastModifiedDate isnt undefined
-	            cell = row.insertCell(3)
-	            textNode = document.createTextNode(files[i].lastModifiedDate)
-	            cell.appendChild textNode
-	          i++
-	        fileTable.style.visibility = "visible"
-	      else
-	        fileTable.style.visibility = "hidden"
-
-	    clearTable = ->
-	      fileTable = document.getElementById("uploader-table")
-	      fileTable.deleteRow fileTable.rows.length - 1  while fileTable.rows.length > 0
-
-	    handleFiles = (files) ->
-	      fileLimit = scope.filelimit
-	      sizeLimit = scope.sizelimit
-	      imageType = /image.*/
-	      imgPanel = document.getElementById("imgPanel")
-	      imgPanel.innerHTML = ""
-	      sizeLimitBytes = sizeLimit * 1024
-	      if files.length < fileLimit
-	        i = 0
-
-	        while i < files.length
-	          file = files[i]
-	          if file.type.match(imageType)
-	            if file.size < sizeLimitBytes
-
-	              #Add to files
-	              scope.uploader.files.push(file)
-	              
-
-	              img = document.createElement("img")
-	              img.file = file
-	              img.id = file.name
-	              img.name = file.name
-	              img.alt = file.name
-	              img.className = "unhighlight"
-	              img.addEventListener "mouseover", showFile, false
-	              img.addEventListener "mouseout", clearFile, false
-	              imgPanel.appendChild img
+				console.log('Upload ', file)
 
 
-	              reader = new FileReader()
-	              reader.onload = ((aImg) ->
-	                (e) ->
-	                  aImg.src = e.target.result
-	              )(img)
-	              reader.readAsDataURL file
-	            else
-	              alert file.name + " is larger than " + sizeLimit + "KB."
-	          else
-	            alert file.name + " is not an image."
-	          i++
-	      else
-	        imgPanel.innerHTML = "Only " + fileLimit + " files can be selected at a time."
-
-	    #Handle displaying file info in a popover
-	    showFile = (el)->
-	      console.log @
-
-	      #Build the info
-	      file = @file
-	      fileinfo = ""
-	      fileinfo += file.type + "<br>"
-	      fileinfo += (file.size / 1024).toFixed(2) + "KB<br>"
-	      fileinfo += file.lastModifiedDate + "<br>"
-	      fileAttributes = document.getElementById("fileAttributes")
-	      fileAttributes.innerHTML = fileinfo
-
-
-	      options = 
-	        html: true
-	        selector: ".#{file.name}"
-	        title: 'File info'
-	        content: fileinfo
-	        placement: 'top'
-
-	      @className = "highlight " + file.name
-
-	      #create popover  
-	      #filePopover = angular.element("#fileAttributes").popover(options)
-
-	      #open popover
-	      #filePopover.popover('show')
+			#Add result to table list / progress
 
 
 
-	    clearFile = ->
-	      #create popover  
-	      #filePopover = angular.element('#fileAttributes').popover()
 
-	      #open popover
-	      #filePopover.popover('hide')
-
-	      fileAttributes = document.getElementById("fileAttributes")
-	      fileAttributes.innerHTML = ""
-
-
-	      @className = "unhighlight"
-
-	    handleRead = (theFile) ->
-	      (e) ->
-	        span = document.createElement("span")
-	        span.innerHTML = ["<img class=\"uploader-thumb\" src=\"", e.target.result, "\" title=\"", escape(theFile.name), "\"/>"].join("")
-	        $("#uploader-wrap").html span
-
-	    addThumbnail = (file) ->
-	      elm = "#uploader-thumbnails"
-	      tmpl = angular.element(scope.litmpl).html()
-	      angular.element(elm).append tmpl
-
-	    init(targetId)
-	    console.log "Linking function", element, attrs
-
+		#Initialize Uploader
+		new Uploader()
