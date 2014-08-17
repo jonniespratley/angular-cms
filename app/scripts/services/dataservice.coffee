@@ -1,6 +1,8 @@
 'use strict'
 
 angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resource', ($http, $q, $resource) ->
+
+
 	DataService =
 
 		#Endpoint location
@@ -59,3 +61,26 @@ angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resourc
 			)
 			return defer.promise
 ])
+###
+DataService = (apiEndpoint) ->
+	@create = () ->
+	@update = () ->
+	@destroy = () ->
+	@fetch = () ->
+
+angular.module('angularCmsApp').provider( 'DataService', DataServiceProvider = ->
+		useApiEndpoint = '/api/v2/'
+
+		@useApiEndpoint = (value) ->
+			useApiEndpoint = !!value
+			return
+
+		@$get = [
+			"apiEndpoint", DataServiceFactory = (apiEndpoint) ->
+				return new DataService(apiEndpoint, useApiEndpoint)
+		]
+		@method = () ->
+
+		return
+)
+###

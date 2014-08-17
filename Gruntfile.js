@@ -90,7 +90,10 @@ module.exports = function(grunt) {
 				hostname : '127.0.0.1',
 				livereload : 35729,
 				middleware : function(connect, options) {
-					return [require('json-proxy').initialize(proxyConfig), mountFolder(connect, '.grunt'), mountFolder(connect, '.tmp'), mountFolder(connect, 'app')];
+					return [require('json-proxy').initialize(proxyConfig),
+						mountFolder(connect, '.grunt'),
+						mountFolder(connect, '.tmp'),
+						mountFolder(connect, 'app')];
 				}
 			},
 			livereload : {
@@ -521,20 +524,20 @@ module.exports = function(grunt) {
 					// Target-specific file lists and/or options go here.
 				}
 			},
-   protractor: {
-    options: {
-      keepAlive: true, // If false, the grunt process stops when the test fails.
-      noColor: false, // If true, protractor will not use colors in its output.
-      args: {
-      }
-    },
-    test: {
-      options: {
-        configFile: "protractor.conf.js",
-        args: {}
-      }
-    }
-  }
+		   protractor: {
+			options: {
+			  keepAlive: true, // If false, the grunt process stops when the test fails.
+			  noColor: false, // If true, protractor will not use colors in its output.
+			  args: {
+			  }
+			},
+			test: {
+			  options: {
+				configFile: "protractor.conf.js",
+				args: {}
+			  }
+			}
+		  }
 	});
 
 	grunt.registerTask('serve', function(target) {
@@ -559,6 +562,7 @@ module.exports = function(grunt) {
 		}
 	});
 	grunt.registerTask('test:server', 'coffee', 'jasmine_node');
+	grunt.registerTask('test:protractor', 'coffee:test', 'protractor')
 
 	grunt.registerTask('build-docs', [ 'useminPrepare','autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
