@@ -6,6 +6,8 @@ MainPage =
 		browser().navigateTo('/')
 
 LoginPage =
+	get: () ->
+		browser().navigateTo('/login')
 	login: () ->
 	  #element('a[href="#/login"]', 'Login button').click()
 		#Enter the test credentials
@@ -14,6 +16,17 @@ LoginPage =
 		element('.login form button[type="submit"]', 'Click the Login submit button').click()
 
 
+
+RegisterPage =
+	get: () ->
+		browser().navigateTo('/register')
+	register: () ->
+		input('user.email').enter('test@email.com')
+		input('user.username').enter('test')
+		input('user.password').enter('test')
+		input('user.password2').enter('test')
+		element('input[type="checkbox"]').click()
+		element('form button[type="submit"]', 'Click the submit button').click()
 
 
 
@@ -25,7 +38,7 @@ describe "Angular-CMS App", ->
 		MainPage.index()
 
 	#Welome Story: the initial page
-	describe 'Welcome Story: the initial page', ->
+	describe 'Index:', ->
 
 		it "should display the main index view as default", ->
 			expect(browser().location().path()).toEqual '/'
@@ -45,8 +58,27 @@ describe "Angular-CMS App", ->
 			expect(element('.jumbotron').count()).toEqual 1
 
 
+	describe 'Register: ', ->
+		beforeEach ->
+			RegisterPage.get()
+
+		it 'should have email and password inputs with a button to submit the form', ->
+			expect(browser().location().path()).toEqual '/register'
+			expect(element('form', 'Login form').count()).toEqual 1
+			expect(element('input[type="email"]', 'Email input').count()).toEqual 1
+			expect(element('input[type="text"]', 'Username input').count()).toEqual 1
+			expect(element('input[type="password"]', 'Password input').count()).toEqual 2
+			expect(element('button[type="submit"]', 'Submit button').count()).toEqual 1
+		
+		it 'should allow the user to create a new account', ->
+			RegisterPage.register()
+			expect(browser().location().path()).toEqual '/register'
+			sleep 1
+			expect(browser().location().path()).toEqual '/dashboard'
+
+
 	#The user login implementation
-	describe 'Login Story: clicking the .login-btn element...', ->
+	describe 'Login:', ->
 
 		#Click the login button each time
 		beforeEach ->
@@ -75,6 +107,8 @@ describe "Angular-CMS App", ->
 			element('a[href="#/login"]', 'Login button').click()
 			LoginPage.login()
 			sleep 1
+
+		#Profile page
 		it 'should have a link to the profile page',  ->
 			expect(element('.panel', 'Widget Panel').count()).toEqual 2
 			expect(element('a[ng-href="#/profile"]', 'the Profile link').count()).toEqual 1

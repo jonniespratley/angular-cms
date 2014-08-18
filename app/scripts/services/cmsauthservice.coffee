@@ -1,10 +1,9 @@
 'use strict'
 ###*
 @module AuthService
-
 @description
 This service will take care of authentication of a user, common methods include:
-* login
+* authorize
 * logout
 * register
 * forgot
@@ -14,10 +13,11 @@ This service will take care of authentication of a user, common methods include:
 angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $rootScope, $cookieStore, $location) ->
 
 	cmsAuthService = 
+
 		#Endpoint location
 		endpoint: '/api/v2'
 
-		###
+		###*
 		authorize - I handle authorizing a user.
 		###
 		authorize: (user) ->
@@ -29,9 +29,9 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 			)
 			return defer.promise
 
-		###
+		###*
 			register - I handle register a user.
-			###
+		###
 		register: (user) ->
 			defer = $q.defer()
 			$http.post( @endpoint+"/users/register", user ).success((data) ->
@@ -41,7 +41,7 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 			)
 			return defer.promise
 
-		###
+		###*
 			Logout method to clear the session.
 			@param {Object} user - A user model containing remember
 		###

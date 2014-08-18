@@ -16,6 +16,7 @@ angular.module('angularCmsApp').factory('cmsNotify', ['$timeout', '$q', ($timeou
 		else 
 			angular.element('.container').prepend(alert)
 		
+		#If timeout
 		if timeout
 			$timeout(()-> 
 				angular.element('.alert').fadeOut().remove()

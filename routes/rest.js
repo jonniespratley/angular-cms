@@ -34,6 +34,21 @@ var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 
 
+
+//Strings for results
+var MESSAGES = {
+	USER_REGISTRATION_ERROR: 'There was an error, please try again.',
+	USER_REGISTRATION_SUCCESS: 'New user successfully registered.',
+	USER_REGISTRATION_EXISTS: 'User already in exists.'
+
+};
+
+
+
+
+
+
+
 var DS = require('jps-ds').DS;
 
 var _ds = new DS({
@@ -298,7 +313,7 @@ var RestResource = {
 			res.jsonp(404, {
 				status: false,
 				error: true,
-				message: error
+				message: 'Invalid email/password.'
 			});
 
 
@@ -328,7 +343,7 @@ var RestResource = {
 			user = u;
 			res.jsonp(404, {
 				status: false,
-				message: 'User already exists!'
+				message: MESSAGES.USER_REGISTRATION_EXISTS
 			});
 
 		}, function (error) {
@@ -342,13 +357,13 @@ var RestResource = {
 							res.header('Content-Type', 'application/json');
 							res.jsonp(200, {
 								status: true,
-								message: 'New user successfully registered.',
+								message: MESSAGES.USER_REGISTRATION_SUCCESS,
 								user: req.body
 							});
 						} else {
 							res.jsonp(404, {
 								status: false,
-								message: 'There was an error, please try again.'
+								message: MESSAGES.USER_REGISTRATION_ERROR
 							});
 							console.log(error.warn);
 						}
