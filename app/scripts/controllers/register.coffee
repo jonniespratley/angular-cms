@@ -33,8 +33,16 @@ angular.module('angularCmsApp').controller 'RegisterCtrl', ($scope, $location, $
 					#Welcome the user
 					cmsNotify( '.message', 'info', 'Registered!', "You have registered as #{data.user.email}")
 
-					#Set session
-					cmsSessionService.setSession(user: data)
+					#Set user session
+					session = 
+						user: data.user
+						authorized: true
+						
+					#Set user cookie
+					cmsSessionService.setSession(session)
+
+					#Set session on scope
+					$rootScope.App.session = session
 
 					#Change location
 					$location.path('/dashboard')		
@@ -42,6 +50,6 @@ angular.module('angularCmsApp').controller 'RegisterCtrl', ($scope, $location, $
 			,
 			(error) ->
 				$log.error(error)
-				cmsNotify( '.message', 'danger', 'Error!', error.message, 3)
+				cmsNotify( '.message', 'danger', 'Error!', error.message, 4000)
 		)
 
