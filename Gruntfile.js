@@ -590,7 +590,7 @@ module.exports = function (grunt) {
 		if (target === 'e2e') {
 			return grunt.task.run(['karma']);
 		} else {
-			return grunt.task.run(['karma:unit']);
+			return grunt.task.run(['karma:unit', 'coveralls']);
 		}
 	});
 	grunt.registerTask('test:server', 'coffee', 'jasmine_node');
