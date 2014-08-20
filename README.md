@@ -7,6 +7,7 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+[![Coverage Status](https://coveralls.io/repos/jonniespratley/angular-cms/badge.png)](https://coveralls.io/r/jonniespratley/angular-cms)
 
 ### Technologies
 Some featured technologies used in this project include the following:
