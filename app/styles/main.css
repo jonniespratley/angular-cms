@@ -702,14 +702,11 @@ html {
 
 .panel-body {
   position: relative;
-  padding-bottom: 65px !important;
+  padding-bottom: 45px !important;
 }
 
 .panel-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
 }
 
 /* @end */

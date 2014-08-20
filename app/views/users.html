@@ -12,26 +12,26 @@
 				<table class="table table-bordered table-hover table-condensed">
 					<thead>
 						<tr>
-							<th>
-							<input type="checkbox">
-							</th>
+							<th class="tc"><input type="checkbox"></th>
 							<th>E-mail</th>
-
-							<th>Groups</th>
+							<th>Username</th>
 							<th>Active</th>
-							<th>Last Login</th>
+							<th>Created</th>
 							<th class="actions">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="user in users">
-							<td>
-							<input type="checkbox" value="{{user._id}}">
+							<td class="tc">
+								<input type="checkbox" value="{{user._id}}">
 							</td>
 							<td> {{user.email}} </td>
-							<td><span class="label label-primary" ng-repeat="group in user.groups">{{group}}</span></td>
+							<td>
+								{{ user.username }}
+								<!--span class="label label-primary" ng-repeat="group in user.groups">{{group}}</span-->
+							</td>
 							<td> {{user.active}} </td>
-							<td> {{user.modified | date:'medium'}} </td>
+							<td> {{user.created | date:'medium'}} </td>
 							<td class="actions">
 							<div class="btn-group">
 								<button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal" data-target="#user-modal">
@@ -82,7 +82,7 @@
                                                     <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <!--div class="form-group">
                                                 <label class="control-label col-sm-3 col-xs-3">Group:</label>
                                                 <div class="controls col-sm-9 col-xs-9">
                                                     <select ng-model="user.groups" class="form-control" multiple="" ng-options="group for group in groups">
@@ -90,7 +90,7 @@
                                                     </select>
 
                                                 </div>
-                                            </div>
+                                            </div-->
 
                                             <div class="form-group">
                                                 <label class="control-label col-sm-3 col-xs-3">Name:</label>

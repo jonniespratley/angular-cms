@@ -4,31 +4,32 @@
 
  This is the protractor spec that will test the different areas of the application.
  */
-var UsersPage;
 
-UsersPage = function() {
+var UsersPage = function() {
 
 	this.newUserBtn = element(by.buttonText('New User'));
-
-
-	this.emailInput = element(protractor.By.model('user.email'));
-	this.usernameInput = element(protractor.By.model('user.username'));
-	this.passwordInput = element(protractor.By.model('user.password'));
-	this.nameInput = element(protractor.By.model('user.meta.name'));
-	this.summaryInput = element(protractor.By.model('user.meta.summary'));
 	this.submitBtn = element(by.buttonText('Submit'));
+
+	this.inputs = {
+		email: element(protractor.By.model('user.email')),
+		username: element(protractor.By.model('user.username')),
+		password: element(protractor.By.model('user.password')),
+		name: element(protractor.By.model('user.meta.name')),
+		summary: element(protractor.By.model('user.meta.summary'))
+	};
 
 	this.get = function() {
 		browser.get('http://localhost:9000/#/users');
 	};
+
 	this.setForm = function(email, username, password, name, summary) {
 		this.newUserBtn.click();
-		browser.sleep(1000);
-		this.emailInput.sendKeys(email);
-		this.usernameInput.sendKeys(username);
-		this.passwordInput.sendKeys(password);
-		this.nameInput.sendKeys(name);
-		this.summaryInput.sendKeys(summary);
+		browser.sleep(500);
+		this.inputs.username.sendKeys(username);
+		this.inputs.email.sendKeys(email);
+		this.inputs.password.sendKeys(password);
+		this.inputs.name.sendKeys(name);
+		this.inputs.summary.sendKeys(summary);
 
 		this.submitBtn.click();
 		browser.sleep(1000);
@@ -38,13 +39,16 @@ UsersPage = function() {
 
 describe('Angular-CMS', function() {
 	var usersPage = null;
-	describe('Users Page', function() {
+
+	describe('Users Page:', function() {
 		beforeEach(function() {
 			usersPage = new UsersPage();
 			usersPage.get();
 		});
+
 		it('should be able to create a new user', function() {
-			usersPage.setForm('test@test.com', 'test', 'test', 'test', 'test');
+			var username = 'protractor' + Date.now();
+			usersPage.setForm(username+'@test.com', username, 'test', 'John Doe', 'This is an example user.');
 		});
 	});
 });
