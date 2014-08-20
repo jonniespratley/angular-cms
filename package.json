@@ -67,6 +67,7 @@
     "grunt-google-cdn": "~0.2.0",
     "grunt-jasmine-node": "~0.1.0",
     "grunt-karma": "^0.8.3",
+    "grunt-karma-coveralls": "^2.5.1",
     "grunt-newer": "~0.5.4",
     "grunt-ngdocs": "~0.1.7",
     "grunt-ngmin": "0.0.3",
