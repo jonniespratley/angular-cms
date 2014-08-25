@@ -64,7 +64,7 @@ var SocketServer = {
 	//I setup the socket server and listen for any routing requests from the express app.
 	init : function(app) {
 		var self = this,
-      io = sio.listen(app);
+      io = sio(app);
 
 		//Store a list of the connected clients
 		var connections = [];
