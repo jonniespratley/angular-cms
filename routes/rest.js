@@ -825,10 +825,10 @@ var RestResource = {
 //### v2 API
 //v2 mongo rest api
 app.get('/api/v2', RestResource.v2index);
-app.post('/api/v1/imagecrop',  bodyParser.urlencoded(), RestResource.imageCrop);
-app.post('/api/v2/cloudupload',  bodyParser.urlencoded(), RestResource.cloudupload);
+app.post('/api/v1/imagecrop',  bodyParser.urlencoded({type: 'multipart'}), RestResource.imageCrop);
+app.post('/api/v2/cloudupload',  bodyParser.urlencoded({type: 'multipart'}), RestResource.cloudupload);
 
-app.post('/api/v2/upload', bodyParser.urlencoded(), RestResource.upload);
+
 
 //Always users table
 app.post('/api/v2/users/login', bodyParser.json(), RestResource.login);
@@ -928,6 +928,8 @@ var uploadsTmpDir = config.uploadsTmpDir;
 var uploadDestDir = config.uploadDestDir;
 
 
+var Uploader = require('./uploader.js').Uploader;
+
 //Export to public api
 exports.rest = {
 	RestResource: RestResource,
@@ -941,12 +943,15 @@ exports.rest = {
 
 		app.use(express.static(config.staticDir));
 
+		var u = Uploader.init(app, {path: __dirname + '/public'});
+		app.route('/api/v2/upload').post( u.upload );
+
 		// parse application/x-www-form-urlencoded
 		app.use(bodyParser.urlencoded({ extended: false }))
 
 		// parse application/json
 		app.use(bodyParser.json())
-
+		app.use(bodyParser({defer: true}));
 		app.use(function (req, res, next) {
 			console.log('%s %s', req.method, req.body, req.url);
 			next();
