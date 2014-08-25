@@ -34,6 +34,7 @@ var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 var bodyParser = require('body-parser');
 var DS = require('jps-ds').DS;
+var http = require('http');
 
 
 
@@ -957,10 +958,8 @@ exports.rest = {
 			next();
 		});
 
-		app.listen(options.port || process.env.PORT, function(){
-			console.log(String('Node.js REST server listening on port: ' + options.port).verbose);
-		});
 
-		return app;
+
+		return http.createServer(app).listen(process.env.PORT || options.port);
 	}
 };

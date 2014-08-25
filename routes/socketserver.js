@@ -65,15 +65,7 @@ var SocketServer = {
 	init : function(app) {
 		var self = this,
       io = sio.listen(app);
-		io.configure(function() {
-			io.set('authorization', function(handshakeData, callback) {
-				if(handshakeData.xdomain) {
-					callback('Cross-domain connections are not allowed');
-				} else {
-					callback(null, true);
-				}
-			});
-		});
+
 		//Store a list of the connected clients
 		var connections = [];
 

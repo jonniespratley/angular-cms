@@ -93,15 +93,8 @@ var config = {
 
 //Start the reset server
 var rest = require('./routes/rest').rest;
-
 var socket = require('./routes/socketserver').SocketServer;
     socket.init(rest.init(config));
-
-
-
-
-
-
 
 
 //Create proxy server and proxy requests
@@ -138,9 +131,6 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 
 //Start the proxy server
 proxyServer.listen(options.port);
-
-
-
 
 
 /**
