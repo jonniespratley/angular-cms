@@ -44,7 +44,6 @@
     "mongoose": "*",
     "promised-io": "~0.3.4",
     "request": "~2.34.0",
-    "socket.io": "^1.0.6",
     "websocket": "^1.0.8"
   },
   "devDependencies": {
@@ -80,20 +79,18 @@
     "grunt-svgmin": "^0.2.1",
     "grunt-usemin": "^2.0.2",
     "jasmine-node": "^1.11.0",
-    "karma": "^0.12.21",
-    "karma-chrome-launcher": "~0.1",
+    "karma": "^0.12.22",
+    "karma-chrome-launcher": "^0.1.4",
     "karma-coverage": "^0.2.6",
     "karma-jasmine": "^0.1.5",
-    "karma-ng-html2js-preprocessor": "~0.1",
-    "karma-ng-scenario": "~0.1",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-script-launcher": "^0.1.0",
     "load-grunt-tasks": "^0.2.1",
     "protractor": "^1.2.0-beta1",
     "time-grunt": "^0.2.10"
   },
   "peerDependencies": {
-    "grunt": "0.4.x",
-    "karma": "~0.12.0"
+    "grunt": "0.4.x"
   },
   "engines": {
     "node": ">=0.8.0"
