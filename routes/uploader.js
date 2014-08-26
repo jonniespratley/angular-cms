@@ -26,12 +26,13 @@ var Uploader = {
 	 * I handle creating a directory if it does not exist.
 	 * @param name
 	 */
-	createDirectory: function(name){
-		try{
-			fs.mkdir(name, 0777, function(){
+	createDirectory: function (name) {
+		try {
+			fs.mkdir(name, 0777, function () {
 				console.log('Directory created at ', name);
+				return name;
 			});
-		} catch(err){
+		} catch (err) {
 			console.log(err);
 		}
 	},
@@ -44,18 +45,23 @@ var Uploader = {
 	upload: function (req, res, next) {
 		var fstream, self = this;
 		console.log('got upload');
+
 		Uploader.createDirectory(Uploader.options.path);
 		req.pipe(req.busboy);
+
 		req.busboy.on('file', function (fieldname, file, filename) {
-			var filePath = Uploader.options.path +'/' + filename;
-			console.log("Uploading: " + filePath);
+			var filePath = Uploader.options.path + '/' + filename;
+			console.log("Uploading: " + fieldname + ' = ' + filePath);
+
 			fstream = fsExtra.createWriteStream(filePath);
 			file.pipe(fstream);
+
 			fstream.on('close', function () {
 				console.log("Upload Finished of " + filePath);
+
 				res.send({success: true, results: {
-					filename: filename,
-					path: String(filePath)
+					name: filename,
+					path: filePath
 				}});
 				next();
 			});
