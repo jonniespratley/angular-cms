@@ -109,7 +109,7 @@ var SocketServer = {
 
 				//Broadcast the event
 				io.sockets.emit(CmsSocket.events.session.pageView, {
-					'connections': Object.keys(io.connected).length,
+					'connections': io.connected.length,
 					'ip': ip,
 					'url': url,
 					'xdomain': socket.handshake.xdomain,
@@ -122,9 +122,7 @@ var SocketServer = {
 			socket.on('disconnect', function () {
 				console.log("Socket disconnected");
 
-				io.sockets.emit('cms:session:pageview', {
-					'connections': Object.keys(io.connected).length
-				});
+				io.sockets.emit('cms:session:pageview');
 
 			});
 		});
