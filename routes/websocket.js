@@ -9,6 +9,35 @@ var http = require('http'),
 	WebSocketServer = require('websocket').server,
 	WebSocketRouter = require('websocket').router;
 
+
+
+function jsWebSocketServer(options){
+
+	//Private API
+	var _wsServer = null,
+		_wsRouter = null,
+		_httpServer = null,
+		_options = options || {};
+
+
+	//Public API
+	return {
+		/**
+		 * Create new instance of socket if not already one.
+		 * @returns {*}
+		 */
+		getInstance: function(){
+			if(!_wsServer){
+				_wsServer = new WebSocketServer();
+				_wsServer.mount(_options);
+			}
+			return _wsServer;
+		}
+	}
+};
+
+
+
 /**
  * Create Server
  */
@@ -28,37 +57,41 @@ var server = http.createServer(function (req, res) {
 	console.log('WebSocket on port 5050');
 });
 
+
+
+
+
 var serverConfig = {
 	httpServer: server,
 	autoAcceptConnections: false
 };
 
-var SocketServer = {
-	instance: null,
-	getInstance: function () {
-
-	}
-};
-
-
 /**
  * Create Socket Server
  * @type {WebSocketServer}
  */
-var wsserver = new WebSocketServer();
-wsserver.mount(serverConfig);
+var wsserver = jsWebSocketServer(serverConfig).getInstance();
+
+var wsrouter = new WebSocketRouter();
+	wsrouter.attachServer(wsserver);
 
 /**
  * On Connect
  */
 wsserver.on('connect', function (connection) {
-	console.log('connected');
-	connection.send('yo');
+	connection.send('WebSocketServer: Connected!');
+	console.log('Connected to WebSocket Server!');
+});
+/**
+ * On Close
+ */
+wsserver.on('close', function (connection, reason, description) {
+	connection.send('WebSocketServer: Disconnected!');
+	console.log('Disconnected to WebSocket Server!', reason, description);
 });
 
-var router = new WebSocketRouter();
-router.attachServer(wsserver);
-router.mount('*', 'echo-protocol', function (request) {
+
+wsrouter.mount('*', 'echo-protocol', function (request) {
 	console.log('mounted to echo protocol');
 	var conn = request.accept(request.origin);
 	conn.on('message', function (message) {
@@ -66,7 +99,7 @@ router.mount('*', 'echo-protocol', function (request) {
 	});
 	conn.send('hey');
 });
-router.mount('*', 'update-protocol', function (request) {
+wsrouter.mount('*', 'update-protocol', function (request) {
 	console.log('mounted to update protocol');
 	var conn = request.accept(request.origin);
 	conn.on('message', function (message) {
@@ -75,9 +108,3 @@ router.mount('*', 'update-protocol', function (request) {
 });
 
 
-/**
- * On Close
- */
-wsserver.on('close', function (conn, reason, description) {
-	console.log('closing', reason, description);
-});
