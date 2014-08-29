@@ -87,12 +87,66 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "angularCmsApp.service:cmsAuthService",
+      "shortName": "cmsAuthService",
+      "type": "service",
+      "moduleName": "angularCmsApp",
+      "shortDescription": "AngularJS will instantiate a singleton by calling &quot;new&quot; on this function",
+      "keywords": "angularcmsapp angularjs api authentication authorize calling care common currentuser forgot function include instantiate logout methods register service singleton user"
+    },
+    {
+      "section": "api",
+      "id": "angularCmsApp.service:cmsDataServiceFactory",
+      "shortName": "cmsDataServiceFactory",
+      "type": "service",
+      "moduleName": "angularCmsApp",
+      "shortDescription": "This is the description.",
+      "keywords": "angularcmsapp api description service"
+    },
+    {
+      "section": "api",
+      "id": "angularCmsApp.service:cmsDataServiceProvider",
+      "shortName": "cmsDataServiceProvider",
+      "type": "service",
+      "moduleName": "angularCmsApp",
+      "shortDescription": "This is the description.",
+      "keywords": "angularcmsapp api description service"
+    },
+    {
+      "section": "api",
+      "id": "angularCmsApp.service:cmsNotify",
+      "shortName": "cmsNotify",
+      "type": "service",
+      "moduleName": "angularCmsApp",
+      "shortDescription": "This is the description.",
+      "keywords": "angularcmsapp api description service"
+    },
+    {
+      "section": "api",
+      "id": "angularCmsApp.service:cmsSessionService",
+      "shortName": "cmsSessionService",
+      "type": "service",
+      "moduleName": "angularCmsApp",
+      "shortDescription": "This is the description.",
+      "keywords": "angularcmsapp api description service"
+    },
+    {
+      "section": "api",
       "id": "angularCmsApp.service:cmsUsersFactory",
       "shortName": "cmsUsersFactory",
       "type": "service",
       "moduleName": "angularCmsApp",
       "shortDescription": "This is the UsersFactory.",
       "keywords": "angularcmsapp api service usersfactory"
+    },
+    {
+      "section": "api",
+      "id": "angularCmsApp.service:DataService",
+      "shortName": "DataService",
+      "type": "service",
+      "moduleName": "angularCmsApp",
+      "shortDescription": "This is the description.",
+      "keywords": "angularcmsapp api description service"
     },
     {
       "section": "api",

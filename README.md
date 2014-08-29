@@ -8,17 +8,25 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 
-### Technologies
+## Technologies
 Some featured technologies used in this project include the following:
 
-* **MongoDB** - The database of choice is Mongo, its fast, easy and scalable.
-* **NodeJS** - The server of choice is Node, its JavaScript, its fast and scalable.
-* **AngularJS** - The client-side framework of choice is Angular, its a full-stack, just what we need.
-* **Bootstrap** - The client-side ui of choice is Twitter Bootstrap, its updated and clean.
+* **MongoDB** - MongoDB is a document database that provides high performance,
+high availability, and easy scalability.
+* **NodeJS** - Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications.
+* **AngularJS** - AngularJS lets you write client-side web applications as if you had a smarter browser.
+* **Bootstrap 3.0** - Bootstrap makes front-end web development faster and easier.
 * **HTML5** - Using HTML5 in every way to make a better user experience.
-* **Protractor** - Using Protractor for all e2e testing.
-* **Karma** - The test runner is Karma.
+* **Express** - Express is a minimal and flexible node.js web application framework, providing a robust set of features.
+* **Karma Runner** - A simple tool that allows you to execute JavaScript code in multiple real browsers.
+* **Protractor** - Protractor is an end-to-end test framework for AngularJS applications. Protractor built on top of WebDriverJS.
 
+
+
+
+
+
+# Development
 
 
 ## Getting Started
@@ -207,7 +215,7 @@ Plugins will be installed via `bower`, search and install themes searching by ta
 
 ---
 
-## API Documentation
+## Documentation
 The API documentation will be in the form of ngDocs style. The files located in the `content` directory are tutorial specs for the different features in this project. Documentation can be generated and viewed by running the following command:
 
 ```
@@ -215,6 +223,16 @@ $ grunt docs
 ```
 
 > Your default browser should open [http://127.0.0.1:9191/#/api](http://127.0.0.1:9191/#/api)
+
+## API Documentation
+The following are diagrams of the concept behind this project repository.
+
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/images/docs-classdiagram.png)
+
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/images/docs-appmvc.png)
+![image](https://dl.dropboxusercontent.com/u/26906414/angular-cms/images/docs-appanatomy.png)
+
+
 
 _(Coming soon)_
 
@@ -252,26 +270,16 @@ Assuming that you don't see any red, you're ready to go. Just be sure to run `gr
 ---
 
 ## TODO
-The following list is features that are comming.
-
+The following list is features that are coming.
 
 * user management & user roles
 * action and view permissions
-* content versioning and audit
-* some form of workflow and notifications
 * i18n support on literals and object versions
 * normalized database schema design
 * some form of content import-export
 * assets management and thumbnail generation for uploads
 * Valid XHTML (compressed with GZIP)
 * Rich text editing (e.g FCKeditor) which generates accessible markup
-* Valid and minified CSS and javascript (e.g using YUI)
-* automatically generated sitemaps.org document
-* integration with Google Analytics
-* automatic RSS feeds
-* open search support
-* print css and/or print versions of content
-* SEO consideration for duplicate content (e.g use of canonical tag)
-
+* search support
 ---
 

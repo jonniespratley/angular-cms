@@ -1,7 +1,9 @@
-'use strict'
 ###*
-@module AuthService
+@ngdoc service
+@name angularCmsApp.service:cmsAuthService
+@function
 @description
+AngularJS will instantiate a singleton by calling "new" on this function
 This service will take care of authentication of a user, common methods include:
 * authorize
 * logout
@@ -9,7 +11,7 @@ This service will take care of authentication of a user, common methods include:
 * forgot
 * currentUser
 ###
-# AngularJS will instantiate a singleton by calling "new" on this function
+'use strict'
 angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $rootScope, $cookieStore, $location) ->
 
 	cmsAuthService = 

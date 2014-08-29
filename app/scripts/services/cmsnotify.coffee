@@ -1,3 +1,10 @@
+###*
+@ngdoc service
+@name angularCmsApp.service:cmsNotify
+@function
+@description
+This is the description.
+###
 'use strict'
 angular.module('angularCmsApp').factory('cmsNotify', ['$timeout', '$q', ($timeout, $q) ->
 	notices = []

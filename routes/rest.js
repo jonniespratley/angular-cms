@@ -942,10 +942,21 @@ exports.rest = {
 		console.log('password: admin1234'.verbose)
 		config = options;
 
-		app.use(express.static(config.staticDir));
-
-		var u = Uploader.init(app, {path: __dirname + '/public'});
+		
+		var PUBLIC_PATH = __dirname + '/public';
+		
+		//@TODO: Uploader usage
+		var u = Uploader.init(app, {path: PUBLIC_PATH});
 		app.route('/api/v2/upload').post( u.upload );
+		app.route('/api/v2/uploads?').get( u.getUploads );
+		
+		app.use(express.static(config.staticDir));
+		app.use(express.static(PUBLIC_PATH));
+		
+		
+		
+		
+		
 
 		// parse application/x-www-form-urlencoded
 		app.use(bodyParser.urlencoded({ extended: false }))

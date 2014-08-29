@@ -66,6 +66,18 @@ var Uploader = {
 				next();
 			});
 		});
+	},
+	getUploads: function(req, res, next){
+		console.log(req.query);
+		var path = ( req.query.path ? req.query.path : Uploader.options.path );
+		var result = fs.readdir(path, function (err, files) {
+			
+			res.send({
+				success: true,
+				path: path,
+				results: files
+			});
+		});
 	}
 };
 exports.Uploader = Uploader;
