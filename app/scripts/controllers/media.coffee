@@ -4,7 +4,7 @@ angular.module('angularCmsApp').controller 'MediaCtrl', ($scope, $http, DataServ
 
 	$scope.uploads = []
 	$scope.getUploads = () ->
-		$http.get('/api/upload').success((data)->
+		$http.get('/api/v2/uploads?path=routes/public').success((data)->
 			$scope.uploads = data
 		)
 
@@ -15,7 +15,7 @@ angular.module('angularCmsApp').controller 'MediaCtrl', ($scope, $http, DataServ
 			add: (e, data) ->
 				console.log(e, data)
 				
-				data.url = '/api/upload'
+				data.url = '/api/v2/upload'
 				data.context = $('<p/>').text('Uploading...').appendTo(document.body)
 				data.submit()
 			progressall: (e, data) ->

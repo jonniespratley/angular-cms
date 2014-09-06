@@ -34,6 +34,7 @@ var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 var bodyParser = require('body-parser');
 var DS = require('jps-ds').DS;
+var http = require('http');
 
 
 
@@ -825,10 +826,10 @@ var RestResource = {
 //### v2 API
 //v2 mongo rest api
 app.get('/api/v2', RestResource.v2index);
-app.post('/api/v1/imagecrop',  bodyParser.urlencoded(), RestResource.imageCrop);
-app.post('/api/v2/cloudupload',  bodyParser.urlencoded(), RestResource.cloudupload);
+app.post('/api/v1/imagecrop',  bodyParser.urlencoded({type: 'multipart'}), RestResource.imageCrop);
+app.post('/api/v2/cloudupload',  bodyParser.urlencoded({type: 'multipart'}), RestResource.cloudupload);
 
-app.post('/api/v2/upload', bodyParser.urlencoded(), RestResource.upload);
+
 
 //Always users table
 app.post('/api/v2/users/login', bodyParser.json(), RestResource.login);
@@ -928,6 +929,8 @@ var uploadsTmpDir = config.uploadsTmpDir;
 var uploadDestDir = config.uploadDestDir;
 
 
+var Uploader = require('./uploader.js').Uploader;
+
 //Export to public api
 exports.rest = {
 	RestResource: RestResource,
@@ -939,23 +942,35 @@ exports.rest = {
 		console.log('password: admin1234'.verbose)
 		config = options;
 
+		
+		var PUBLIC_PATH = __dirname + '/public';
+		
+		//@TODO: Uploader usage
+		var u = Uploader.init(app, {path: PUBLIC_PATH});
+		app.route('/api/v2/upload').post( u.upload );
+		app.route('/api/v2/uploads?').get( u.getUploads );
+		
 		app.use(express.static(config.staticDir));
+		app.use(express.static(PUBLIC_PATH));
+		
+		
+		
+		
+		
 
 		// parse application/x-www-form-urlencoded
 		app.use(bodyParser.urlencoded({ extended: false }))
 
 		// parse application/json
 		app.use(bodyParser.json())
-
+		app.use(bodyParser({defer: true}));
 		app.use(function (req, res, next) {
 			console.log('%s %s', req.method, req.body, req.url);
 			next();
 		});
 
-		app.listen(options.port || process.env.PORT, function(){
-			console.log(String('Node.js REST server listening on port: ' + options.port).verbose);
-		});
 
-		return app;
+
+		return http.createServer(app).listen(process.env.PORT || options.port);
 	}
 };

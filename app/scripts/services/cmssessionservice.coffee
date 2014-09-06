@@ -1,4 +1,10 @@
-# AngularJS will instantiate a singleton by calling "new" on this function
+###*
+@ngdoc service
+@name angularCmsApp.service:cmsSessionService
+@function
+@description
+This is the description.
+###
 angular.module('angularCmsApp').service 'cmsSessionService',[ '$q', '$rootScope', '$cookieStore', '$location', '$log', ($q, $rootScope, $cookieStore, $location, $log) ->
 	#Can use the sessionStorage in the browser
 	#userIsAuthenticated = window.sessionStorage.getItem('userIsAuthenticated')

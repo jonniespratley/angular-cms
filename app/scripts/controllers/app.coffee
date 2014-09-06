@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('angularCmsApp').controller 'AppCtrl', ($scope, $rootScope, $http, $log, $route, $location, $routeParams, $cookieStore, cmsSessionService) ->
-	
+
 	App = Config
 	App.route = $routeParams;
 	App.session = cmsSessionService.getSession()
@@ -11,9 +11,10 @@ angular.module('angularCmsApp').controller 'AppCtrl', ($scope, $rootScope, $http
 	App.routeParams = $routeParams
 	App.roles = [ 'guest', 'user', 'admin' ]
 	$scope.name = 'AppCtrl'
-	
+
+	App.socket = io() if window.io
 	window.App = $scope.App = $rootScope.App = App
-	
+
 	angular.element(document).ready(()->
 		angular.element('.nav').bind('click', 'a', (e)->
 			$log.info(e);
