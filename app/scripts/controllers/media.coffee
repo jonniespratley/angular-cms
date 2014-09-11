@@ -8,24 +8,7 @@ angular.module('angularCmsApp').controller 'MediaCtrl', ($scope, $http, DataServ
 			$scope.uploads = data
 		)
 
-	$ ->
-		$("#fileupload").fileupload(
-			dataType: 'json'
-			dropZone: $('.uploader-dropzone')
-			add: (e, data) ->
-				console.log(e, data)
-				
-				data.url = '/api/v2/upload'
-				data.context = $('<p/>').text('Uploading...').appendTo(document.body)
-				data.submit()
-			progressall: (e, data) ->
-				progress = parseInt(data.loaded / data.total * 100, 10)
-				$("#progress .bar").css "width", progress + "%"
-			done: (e, data) ->
-				$.each data.result.files, (index, file) ->
-					$("<p/>").text(file.name).appendTo document.body
-		)
-		
+	
 		$scope.uploader = {
 			files: []
 		};
