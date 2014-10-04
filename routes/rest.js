@@ -32,6 +32,9 @@ var easyimg = require('easyimage');
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
+var bodyParser = require('body-parser');
+var DS = require('jps-ds').DS;
+var http = require('http');
 
 
 
@@ -44,12 +47,6 @@ var MESSAGES = {
 };
 
 
-
-
-
-
-
-var DS = require('jps-ds').DS;
 
 var _ds = new DS({
 	host: 'localhost/angular-cms'
@@ -114,7 +111,6 @@ var RestResource = {
 		this.config = config;
 		return this;
 	},
-
 	useversion: 'v2',
 	urls: {
 		v1: 'https://www..com',
@@ -133,7 +129,7 @@ var RestResource = {
 		RestResource.useversion = 'v1';
 		request(RestResource.urls[RestResource.useversion], function (error, response, body) {
 			console.log(error, response, body);
-			res.json(JSON.parse(body));
+			res.status(200).json(JSON.parse(body));
 		});
 	},
 	//### v1get
@@ -159,10 +155,10 @@ var RestResource = {
 		request(options, function (error, response, body) {
 			if (!error) {
 				try {
-					res.json(JSON.parse(body).results);
+					res.status(200).json(JSON.parse(body).results);
 				} catch (e) {
 					console.log(e);
-					res.json(Array({
+					res.status(200).json(Array({
 						status: false,
 						message: 'There was an error parsing the data.'
 					}));
@@ -191,10 +187,10 @@ var RestResource = {
 		request(options, function (error, response, body) {
 			if (!error) {
 				try {
-					res.json(JSON.parse(body).results);
+					res.status(200).json(JSON.parse(body).results);
 				} catch (e) {
 					console.log(e);
-					res.json(Array({
+					res.status(200).json(Array({
 						status: false,
 						message: 'There was an error parsing the data.'
 					}));
@@ -303,14 +299,14 @@ var RestResource = {
 		var userFound = false;
 		RestResource.findOne(req, 'users', query, function (u) {
 			userFound = true;
-			res.jsonp(200, {
+			res.status(200).jsonp({
 				success: true,
 				result: u
 			});
 
 		}, function (error) {
 			userFound = false;
-			res.jsonp(404, {
+			res.status(404).jsonp( {
 				status: false,
 				error: true,
 				message: 'Invalid email/password.'
@@ -341,7 +337,7 @@ var RestResource = {
 
 		RestResource.findOne(req, 'users', query, function (u) {
 			user = u;
-			res.jsonp(404, {
+			res.status(404).jsonp( {
 				status: false,
 				message: MESSAGES.USER_REGISTRATION_EXISTS
 			});
@@ -355,13 +351,13 @@ var RestResource = {
 						console.log(err, docs);
 						if (!err) {
 							res.header('Content-Type', 'application/json');
-							res.jsonp(200, {
+							res.status(200).jsonp( {
 								status: true,
 								message: MESSAGES.USER_REGISTRATION_SUCCESS,
 								user: req.body
 							});
 						} else {
-							res.jsonp(404, {
+							res.status(404).jsonp({
 								status: false,
 								message: MESSAGES.USER_REGISTRATION_ERROR
 							});
@@ -446,7 +442,7 @@ var RestResource = {
 				if (err) {
 					console.error('File Rename Error:', err);
 				}
-				;
+
 
 				//Upload the original to cloudfiles
 				//rackspaceUpload(target_path, target_dir, filename);
@@ -497,7 +493,7 @@ var RestResource = {
 						};
 
 						//Output the results
-						res.send(json);
+						res.status(200).send(json);
 					});
 				});
 			});
@@ -542,7 +538,7 @@ var RestResource = {
 				if (err) {
 					console.error('File Rename Error:', err);
 				}
-				;
+
 
 				//Create the thumbnail from the default image
 				var imgOptions = {
@@ -586,7 +582,7 @@ var RestResource = {
 							results: req.files,
 							appid: appid
 						};
-						res.send(json);
+						res.status(200).send(json);
 					}
 				});
 			});
@@ -642,17 +638,16 @@ var RestResource = {
 									if (docs.length > 0) {
 										result = docs[0];
 										res.header('Content-Type', 'application/json');
-										res.jsonp(200, result);
+										res.status(200).jsonp(result);
 									} else {
-										res.jsonp(404, 'Not found');
+										res.status(404).jsonp('Not found');
 										//res.send(404);
 									}
 								} else {
 									docs.forEach(function (doc) {
 										result.push(doc);
 									});
-									res.header('Content-Type', 'application/json');
-									res.jsonp(200, result);
+									res.status(200).jsonp(result);
 								}
 								db.close();
 							}
@@ -668,6 +663,7 @@ var RestResource = {
 		var data = req.body;
 		var results = [];
 		var response = {};
+
 
 		if (data) {
 			var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
@@ -697,8 +693,8 @@ var RestResource = {
 							}
 							response.results = results;
 							db.close();
-							res.header('Content-Type', 'application/json');
-							res.jsonp(200, response);
+
+							res.status(200).jsonp(response);
 						} else {
 							collection.insert(req.body, function (err, docs) {
 								db.close();
@@ -706,8 +702,7 @@ var RestResource = {
 									response.status = 'ok';
 									response.data = docs[0];
 									//res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + docs[0]._id.toHexString());
-									res.header('Content-Type', 'application/json');
-									res.send(response, 201);
+									res.status(200).send(response);
 
 								}
 							});
@@ -717,7 +712,7 @@ var RestResource = {
 			});
 		} else {
 			res.header('Content-Type', 'application/json');
-			res.send('{"ok":0}', 200);
+			res.status(200).send('{"ok":0}');
 		}
 	},
 	//### edit
@@ -739,7 +734,7 @@ var RestResource = {
 				collection.update(spec, req.body, true, function (err, docs) {
 					res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id);
 					res.header('Content-Type', 'application/json');
-					res.send('{"ok":1}');
+					res.status(200).send('{"ok":1}');
 					db.close();
 					console.log('Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id);
 				});
@@ -767,7 +762,7 @@ var RestResource = {
 				collection.remove(params, function (err, docs) {
 					if (!err) {
 						res.header('Content-Type', 'application/json');
-						res.send('{"ok":1}');
+						res.status(200).send('{"ok":1}');
 						db.close();
 					} else {
 						console.log(err);
@@ -825,30 +820,30 @@ var RestResource = {
 	}
 };
 
-//# Routes
 
+
+//# Routes
 //### v2 API
 //v2 mongo rest api
 app.get('/api/v2', RestResource.v2index);
-app.post('/api/v1/imagecrop', RestResource.imageCrop);
-app.post('/api/v2/cloudupload', RestResource.cloudupload);
+app.post('/api/v1/imagecrop',  bodyParser.urlencoded({type: 'multipart'}), RestResource.imageCrop);
+app.post('/api/v2/cloudupload',  bodyParser.urlencoded({type: 'multipart'}), RestResource.cloudupload);
 
-app.post('/api/v2/upload', RestResource.upload);
+
 
 //Always users table
-app.post('/api/v2/users/login', express.bodyParser(), RestResource.login);
-app.post('/api/v2/users/register', express.bodyParser(), RestResource.register);
-app.post('/api/v2/users/session', express.bodyParser(), RestResource.session);
+app.post('/api/v2/users/login', bodyParser.json(), RestResource.login);
+app.post('/api/v2/users/register', bodyParser.json(), RestResource.register);
+app.post('/api/v2/users/session', RestResource.session);
 
 
-app.get('/api/v2/:db/:collection/:id?', RestResource.get);
-app.post('/api/v2/:db/:collection', express.bodyParser(), RestResource.add);
-app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
-app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
+app.get('/api/v2/:db/:collection/:id?', bodyParser.json(), RestResource.get);
+app.post('/api/v2/:db/:collection', bodyParser.json(), RestResource.add);
+app.put('/api/v2/:db/:collection/:id', bodyParser.json(), RestResource.edit);
+app.delete('/api/v2/:db/:collection/:id', bodyParser.json(),  RestResource.destroy);
 
 
 //Readme
-
 var markdown = require("markdown").markdown;
 app.get('/api/v2/README', function (res, req) {
 	var localPath = __dirname + '/../README.md';
@@ -934,6 +929,8 @@ var uploadsTmpDir = config.uploadsTmpDir;
 var uploadDestDir = config.uploadDestDir;
 
 
+var Uploader = require('./uploader.js').Uploader;
+
 //Export to public api
 exports.rest = {
 	RestResource: RestResource,
@@ -941,41 +938,39 @@ exports.rest = {
 	express: express,
 	init: function (options) {
 
-
-
-
-
 		console.log('email: admin@email.com '.verbose);
 		console.log('password: admin1234'.verbose)
-
 		config = options;
 
-		/*
-		 */
-		//### Express Config
-		//Configure the express app server.
-		app.configure(function () {
-			app.set("view options", { layout: false, pretty: true });
+		
+		var PUBLIC_PATH = __dirname + '/public';
+		
+		//@TODO: Uploader usage
+		var u = Uploader.init(app, {path: PUBLIC_PATH});
+		app.route('/api/v2/upload').post( u.upload );
+		app.route('/api/v2/uploads?').get( u.getUploads );
+		
+		app.use(express.static(config.staticDir));
+		app.use(express.static(PUBLIC_PATH));
+		
+		
+		
+		
+		
 
-			app.use(express.static(config.staticDir));
-			app.use(express.directory(config.publicDir));
-			app.use(express.methodOverride());
-			app.use(express.json());
-			app.use("jsonp callback", true);
-			app.use('/api/upload', upload.fileHandler());
-			app.use(express.bodyParser());
+		// parse application/x-www-form-urlencoded
+		app.use(bodyParser.urlencoded({ extended: false }))
 
-			app.use(function (req, res, next) {
-				console.log('%s %s', req.method, req.body, req.url);
-				next();
-			});
+		// parse application/json
+		app.use(bodyParser.json())
+		app.use(bodyParser({defer: true}));
+		app.use(function (req, res, next) {
+			console.log('%s %s', req.method, req.body, req.url);
+			next();
 		});
 
 
-		app.listen(options.port || process.env.PORT, function(){
-			console.log(String('Node.js REST server listening on port: ' + options.port).verbose);
-		});
 
-		return app;
+		return http.createServer(app).listen(process.env.PORT || options.port);
 	}
 };

@@ -1,5 +1,11 @@
+###*
+@ngdoc service
+@name angularCmsApp.service:DataService
+@function
+@description
+This is the description.
+###
 'use strict'
-
 angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resource', ($http, $q, $resource) ->
 
 

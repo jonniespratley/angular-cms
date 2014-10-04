@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2014 by jonniespratley (http://jsbin.com/laruzaqacope/10/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+
+<div class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">WebSockets</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+<div class="container">
+
+      <div class="starter-template jumbotron">
+        <h1>WebSockets</h1>
+        <p class="lead">Use this document as a way to quickly start a new WebSocket project.</p>
+      </div>
+  
+  <div class="messages"></div>
+  
+  <button class="btn btn-primary btn-connect">Connect</button>
+   <button class="btn btn-danger btn-disconnect">Disconnect </button>
+  
+  <br/>
+  <br/>
+  <div class="input-append">
+    <input id="ws-msg" type="text" class="form-control" placeholder="Enter message here..."/>
+  <button class="btn btn-default btn-message">Send</button>
+  </div>
+  <br/>
+  
+  <legend>Log</legend>
+  <textarea class="form-control" rows="10"></textarea>
+  
+
+    </div>
+<script id="jsbin-javascript">
+var WebSocketClient = function(options){
+  var _ws;
+      _ws = new WebSocket('ws://localhost:5050', 'update-protocol');
+      _ws.onmessage = function(e){
+        notify('info', e.data);
+          console.log(e.data);
+      };
+      _ws.onerror = function(e){
+        notify('danger', 'There was an error');
+        console.log(e);
+      };
+      _ws.onclose = function(e){
+        notify('danger', 'Socket is now closed');
+        console.log(e);
+      };
+      _ws.onopen = function(e) {
+        notify('success', 'Socket is now open');
+        _ws.send('update');
+      }; 
+  return {
+    instance: _ws,
+    close: function(){
+      return _ws.close();
+    },
+    send: function(obj){
+      try{
+        _ws.send(obj);
+      } catch(err){
+        throw err;
+      }
+    }
+  };
+};
+
+var s = '';
+function log(args){
+  s += '[' + Date.now()+ '] ' + args.toString() + "\n";
+  $('textarea').val(s);
+}
+function notify(type, msg){
+  var html = '<div class="alert in fade alert-'+type+' alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>'+msg+'</div>';
+  $('.messages').empty();
+  $('.messages').append(html);
+}
+
+
+//Document
+$(document).ready(function(){
+  var ws = null;
+  
+  //Open
+  $('.btn-connect').click(function(e){
+    ws = new WebSocketClient();
+    console.log(ws);
+    log('Connecting to socket');
+  });
+  
+  //Close
+  $('.btn-disconnect').click(function(e){
+    ws.close();
+    log('Disconnecting from socket');
+  });
+  
+  //Send
+  $('.btn-message').click(function(e){
+    var msg = $('#ws-msg').val();
+    log('Sending: ' + msg);
+    ws.send(msg);
+  });
+  
+});
+</script>
+</body>
+</html>

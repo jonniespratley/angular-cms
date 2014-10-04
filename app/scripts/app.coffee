@@ -19,6 +19,8 @@
 Parse.initialize "fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB", "QPFGBNHs0QQHFS54atV71oKppd3gTgaFfQIHP2VW"
 
 
+
+
 app = angular.module('angularCmsApp', [
 	'ngCookies'
 	'ngResource'
@@ -28,7 +30,7 @@ app = angular.module('angularCmsApp', [
 	'mgcrea.ngStrap'
 	#'cms.Templates'
 ])
-	.config ($routeProvider) ->	
+	.config ($routeProvider) ->
 		#Resolve routes
 		routeResolver =
 			# I will cause a 1 second delay
@@ -36,7 +38,7 @@ app = angular.module('angularCmsApp', [
 				delay = $q.defer()
 				$timeout delay.resolve, 1000
 				delay.promise
-			
+
 		#Router Config
 		$routeProvider
 			.when '/',
