@@ -32,6 +32,5 @@ angular.module('angularCmsApp').directive('cmsFormGroup', () ->
     label: '@'
     hint: '@'
   link: (scope, element, attrs) ->
-    console.log(scope, element)
     element.find('input').addClass('form-control')
 )

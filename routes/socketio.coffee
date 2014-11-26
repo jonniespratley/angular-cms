@@ -3,7 +3,7 @@ io = require 'socket.io'
 fs = require 'fs'
 
 #html page
-socketFile = fs.readFileSync('socketio.html')
+socketFile = fs.readFileSync(__dirname+'/socketio.html')
 
 #Create server
 server = http.createServer()

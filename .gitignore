@@ -5,8 +5,22 @@ node_modules
 .sass-cache
 .editorconfig
 .project
+
+
 app/bower_components
+<<<<<<< HEAD
 db/
 coverage/
+=======
+
+db/
+db/*
+db/angular-cms.0
+db/angular-cms.1
+db/angular-cms.ns
+
+>>>>>>> c03ec3eefdfd01ad8ca9e923dad3942f41324c68
 www/cms-content/uploads/
-dist/.htaccess
+coverage/
+.DS_Store
+atlassian-ide-plugin.xml

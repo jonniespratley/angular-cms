@@ -63,7 +63,8 @@ var SocketServer = {
 	//###init(app)
 	//I setup the socket server and listen for any routing requests from the express app.
 	init : function(app) {
-		var self = this, io = sio.listen(app);
+		var self = this,
+      io = sio.listen(app);
 		io.configure(function() {
 			io.set('authorization', function(handshakeData, callback) {
 				if(handshakeData.xdomain) {
@@ -91,8 +92,8 @@ var SocketServer = {
 			socket.on(CmsSocket.events.client.connected, function(msg) {
 				console.log(CmsSocket.events.client.connected, msg);
 			});
-			
-			
+
+
 			//Listen for any messages from the client
 			socket.on(CmsSocket.events.client.message, function(content) {
 
@@ -123,9 +124,9 @@ var SocketServer = {
 					'timestamp' : new Date()
 				});
 			});
-			
-			
-			
+
+
+
 			//handle disconnections
 			socket.on('disconnect', function() {
 				console.log("Socket disconnected");
@@ -136,6 +137,7 @@ var SocketServer = {
 
 			});
 		});
+    return this;
 	}
 };
 

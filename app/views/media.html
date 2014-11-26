@@ -1,9 +1,4 @@
-<style>
-    .bar {
-        height: 18px;
-        background: green;
-    }
-</style>
+
 <h1><i class="fa fa-1x fa-upload"></i> Media</h1>
 <hr>
   <div class="clearfix">
@@ -27,27 +22,6 @@
 
   <pre>$scope.uploads: {{uploads | json }}</pre>
 
-
-<form action="/api/upload" method="post">
-
-
-    <div class="uploader-dropzone">
-
-        <h4>Drop files here</h4>
-
-        <p>
-            <span>or</span>
-        </p>
-        <button id="uploader-btn" class="btn btn-default">
-            Select files
-        </button>
-        <div id="progress">
-            <div class="bar" style="width: 0%;"></div>
-        </div>
-        <input id="fileupload" type="file" name="files[]" data-url="/api/upload" multiple>
-        <input id="uploader-file-input" type="file" name="image" multiple >
-    </div>
-</form>
 
 <div id="uploads-list">
     <legend>Media List</legend>

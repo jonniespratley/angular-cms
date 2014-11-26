@@ -34,6 +34,21 @@ var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 
 
+
+//Strings for results
+var MESSAGES = {
+	USER_REGISTRATION_ERROR: 'There was an error, please try again.',
+	USER_REGISTRATION_SUCCESS: 'New user successfully registered.',
+	USER_REGISTRATION_EXISTS: 'User already in exists.'
+
+};
+
+
+
+
+
+
+
 var DS = require('jps-ds').DS;
 
 var _ds = new DS({
@@ -243,10 +258,7 @@ var RestResource = {
 
 	findOne: function (req, table, query, success, fail) {
 		//Open db
-		var db = new mongo.Db('angular-cms', new mongo.Server(config.db.host, config.db.port, {
-			'auto_reconnect': true,
-			'safe': true
-		}));
+		var db = new mongo.Db('angular-cms', new mongo.Server(config.db.host, config.db.port));
 		db.open(function (err, db) {
 			db.collection(table, function (err, collection) {
 				var options = req.params.options || {};
@@ -295,16 +307,16 @@ var RestResource = {
 				success: true,
 				result: u
 			});
-			
-		}, function(error){
+
+		}, function (error) {
 			userFound = false;
 			res.jsonp(404, {
 				status: false,
 				error: true,
-				message: error
+				message: 'Invalid email/password.'
 			});
-			
-			
+
+
 		});
 
 
@@ -321,22 +333,22 @@ var RestResource = {
 			query = {
 				email: req.body.email
 			};
-			
-			
-		data.password = hashPassword(req.body.password, req.body.email),
-		console.log(String("Register user").debug, req.body);
 
-		
+
+		data.password = hashPassword(req.body.password, req.body.email),
+			console.log(String("Register user").debug, req.body);
+
+
 		RestResource.findOne(req, 'users', query, function (u) {
 			user = u;
 			res.jsonp(404, {
 				status: false,
-				message: 'User already exists!'
+				message: MESSAGES.USER_REGISTRATION_EXISTS
 			});
-			
-		}, function(error){
+
+		}, function (error) {
 			user = null;
-			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
+			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: true}));
 			db.open(function (err, db) {
 				db.collection('users', function (err, collection) {
 					collection.insert(data, function (err, docs) {
@@ -345,13 +357,13 @@ var RestResource = {
 							res.header('Content-Type', 'application/json');
 							res.jsonp(200, {
 								status: true,
-								message: 'New user successfully registered.',
+								message: MESSAGES.USER_REGISTRATION_SUCCESS,
 								user: req.body
 							});
 						} else {
 							res.jsonp(404, {
 								status: false,
-								message: 'There was an error, please try again.'
+								message: MESSAGES.USER_REGISTRATION_ERROR
 							});
 							console.log(error.warn);
 						}
@@ -359,7 +371,7 @@ var RestResource = {
 					});
 				});
 			});
-			
+
 		});
 	},
 	session: function (req, res, next) {
@@ -393,6 +405,8 @@ var RestResource = {
 		if (req.param('appid')) {
 			appid = String(req.param('appid'));
 		}
+
+		console.log(req.files)
 
 		//Handle if dynamic filenames are enabled
 		var tmp_filename = req.files.file.name || 'tmp_name';
@@ -483,7 +497,7 @@ var RestResource = {
 						};
 
 						//Output the results
-						res.json(json);
+						res.send(json);
 					});
 				});
 			});
@@ -572,7 +586,7 @@ var RestResource = {
 							results: req.files,
 							appid: appid
 						};
-						res.json(json);
+						res.send(json);
 					}
 				});
 			});
@@ -819,6 +833,7 @@ app.get('/api/v2', RestResource.v2index);
 app.post('/api/v1/imagecrop', RestResource.imageCrop);
 app.post('/api/v2/cloudupload', RestResource.cloudupload);
 
+app.post('/api/v2/upload', RestResource.upload);
 
 //Always users table
 app.post('/api/v2/users/login', express.bodyParser(), RestResource.login);
@@ -904,6 +919,7 @@ app.get('/api/v2/modules', function (req, res) {
 		res.jsonp(200, files);
 	});
 });
+
 //Write the pass.json file to the file system
 app.get('/api/v2/smartpass/sign', function (req, res) {
 	var result = writeFile(req.params('path'), req.params('contents'));
@@ -924,10 +940,14 @@ exports.rest = {
 	app: app,
 	express: express,
 	init: function (options) {
-		console.log(options);
-		console.log(String('Default credentials: email: admin@email.com password: admin1234 - Hashed - '
-			+ hashPassword('admin1234', 'admin@email.com')
-			+ '').debug);
+
+
+
+
+
+		console.log('email: admin@email.com '.verbose);
+		console.log('password: admin1234'.verbose)
+
 		config = options;
 
 		/*
@@ -939,33 +959,23 @@ exports.rest = {
 
 			app.use(express.static(config.staticDir));
 			app.use(express.directory(config.publicDir));
-
+			app.use(express.methodOverride());
 			app.use(express.json());
 			app.use("jsonp callback", true);
-			app.use(express.urlencoded());
-
 			app.use('/api/upload', upload.fileHandler());
 			app.use(express.bodyParser());
+
 			app.use(function (req, res, next) {
 				console.log('%s %s', req.method, req.body, req.url);
 				next();
 			});
-
-			app.use(function (err, req, res, next) {
-				console.error(req.body, err);
-				res.send(500, req.body);
-			});
-
-
 		});
 
 
+		app.listen(options.port || process.env.PORT, function(){
+			console.log(String('Node.js REST server listening on port: ' + options.port).verbose);
+		});
 
-						app.listen(options.port || process.env.PORT);
-			console.log(String('Listening on port: ' + options.port).debug);
-			return app;
-
-
-
+		return app;
 	}
 };

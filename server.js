@@ -2,21 +2,23 @@
  * Server - This is the Node.js Server.
  * @object
  */
-var fs = require('fs'), util = require('util'), httpProxy = require('http-proxy');
+var fs = require('fs'),
+  util = require('util'),
+  httpProxy = require('http-proxy');
 
 var colors = require('colors');
-colors.setTheme({
-	silly : 'rainbow',
-	input : 'grey',
-	verbose : 'cyan',
-	prompt : 'grey',
-	info : 'green',
-	data : 'grey',
-	help : 'cyan',
-	warn : 'yellow',
-	debug : 'blue',
-	error : 'red'
-});
+    colors.setTheme({
+      silly : 'rainbow',
+      input : 'grey',
+      verbose : 'cyan',
+      prompt : 'grey',
+      info : 'green',
+      data : 'grey',
+      help : 'cyan',
+      warn : 'yellow',
+      debug : 'blue',
+      error : 'red'
+    });
 
 /*
 console.log("this is an silly".silly);
@@ -93,8 +95,14 @@ var config = {
 var rest = require('./routes/rest').rest;
 
 var socket = require('./routes/socketserver').SocketServer;
+    socket.init(rest.init(config));
 
-socket.init(rest.init(config));
+
+
+
+
+
+
 
 //Create proxy server and proxy requests
 proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
@@ -108,39 +116,25 @@ proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 			port : options.api.port
 		});
 		console.log('Routing request: API server'.warn);
- 
+
 	} else if(req.url.match(/^\/1\//)) {
 
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
 			host : 'api.parse.com'
 		});
-
 		console.log('Routing request: Parse Server'.warn);
 
 	} else {
+
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
 			host : '127.0.0.1',
 			port : options.api.port
 		});
-
 		console.log('Routing request: App Server'.warn);
 	}
 });
-// print process.argv - check if any options match options
-process.argv.forEach(function(val, index, array) {
-	if(array[index] === options[array[index]]) {
-		options[array[index]] = val;
-	}
-	//console.log(index + ': ' + val);
-});
-
-proxyServer.on('listening', function() {
-	console.log('ok, server is running');
-});
-
-
 
 //Start the proxy server
 proxyServer.listen(options.port);
@@ -154,19 +148,19 @@ proxyServer.listen(options.port);
  */
 var email   = require("emailjs");
 var server  = email.server.connect({
-   user:    config.email.username, 
-   password: config.email.password, 
-   host:    "smtp.gmail.com", 
+   user:    config.email.username,
+   password: config.email.password,
+   host:    "smtp.gmail.com",
    ssl:     false
 });
 
 var message = {
-   text:    "i hope this works", 
-   from:    "you <angular.cms@gmail.com>", 
+   text:    "i hope this works",
+   from:    "you <angular.cms@gmail.com>",
    to:      "jonniespratley <jonniespratley@gmail.com>",
    cc:      "angular.cms <angular.cms@gmail.com>",
    subject: "testing angular-cms emailjs",
-   attachment: 
+   attachment:
    [
       {data:"<html>i <i>hope</i> this works!</html>", alternative:true}
      // {path:"path/to/file.zip", type:"application/zip", name:"renamed.zip"}
@@ -176,10 +170,10 @@ var message = {
 // send the message and get a callback with an error or details of the message that was sent
 //server.send(message, function(err, message) { console.log(err || message); });
 
-// you can continue to send more messages with successive calls to 'server.send', 
+// you can continue to send more messages with successive calls to 'server.send',
 // they will be queued on the same smtp connection
 
-// or you can create a new server connection with 'email.server.connect' 
+// or you can create a new server connection with 'email.server.connect'
 // to asynchronously send individual emails instead of a queue
 
 
