@@ -1,86 +1,49 @@
 'use strict'
 
 angular.module('angularCmsApp').service('DataService', ['$http', '$q', '$resource', ($http, $q, $resource) ->
-
-
 	DataService =
 
 		#Endpoint location
-		endpoint: '/api/v2/angular-cms/'
+		endpoint: '/api/v2/angular-cms'
 
-		###
-		fetch - I fetch data from the angular-cms mongo backend api.
-		###
-		fetch: (collection, params) ->
-			defer = $q.defer()
-			options =
+		#Generic request method
+		request: (path, method, params, data) ->
+			defaults = {
+				method: method
+				url: @endpoint + path
 				cache: false
+				data: data
 				params: params
-			$http.get( @endpoint + collection, options ).success((data) ->
-				defer.resolve(data)
-			).error((err) ->
-				defer.reject(err)
-			)
-			return defer.promise
+			}
+			console.log(path, defaults )
+			return $http(defaults)
+
+		#fetch - I fetch data from the angular-cms mongo backend api.
+		fetch: (collection, params) ->
+			@request("/#{collection}", 'GET', params)
+
+		#get - GET a object by id on the backend
+		get: (collection, id, params) ->
+			@request("/#{collection}/#{id}", 'GET', params)
 
 		#save - PUT or POST if object has id
 		save: (collection, data) ->
 			if data._id
-				@update(collection, data)
+				return @_update(collection, data)
 			else
-				@create(collection, data)
-
-
-		#Save - POST a object to the backend
-		create: (collection, data) ->
-			defer = $q.defer()
-			$http.post( @endpoint + collection, data ).success((data) ->
-				defer.resolve(data)
-			).error((err) ->
-				defer.reject(err)
-			)
-			return defer.promise
+				return @_create(collection, data)
 
 		#remove - POST a object to the backend
 		destroy: (collection, data) ->
-			defer = $q.defer()
-			$http.delete( @endpoint + collection + '/' +  data._id ).success((data) ->
-				defer.resolve(data)
-			).error((err) ->
-				defer.reject(err)
-			)
-			return defer.promise
+			@request("/#{collection}/#{data._id}", 'DELETE')
+
+		#Save - POST a object to the backend
+		_create: (collection, data) ->
+			@request("/#{collection}", 'POST', null, data)
 
 		#update - PUT a object to the backend
-		update: (collection, data) ->
-			defer = $q.defer()
-			$http.put( @endpoint + collection + '/' + data._id, data ).success((data) ->
-				defer.resolve(data)
-			).error((err) ->
-				defer.reject(err)
-			)
-			return defer.promise
+		_update: (collection, data) ->
+			@request("/#{collection}/#{data._id}", 'PUT', null, data)
+
+	return DataService
 ])
-###
-DataService = (apiEndpoint) ->
-	@create = () ->
-	@update = () ->
-	@destroy = () ->
-	@fetch = () ->
-
-angular.module('angularCmsApp').provider( 'DataService', DataServiceProvider = ->
-		useApiEndpoint = '/api/v2/'
-
-		@useApiEndpoint = (value) ->
-			useApiEndpoint = !!value
-			return
-
-		@$get = [
-			"apiEndpoint", DataServiceFactory = (apiEndpoint) ->
-				return new DataService(apiEndpoint, useApiEndpoint)
-		]
-		@method = () ->
-
-		return
-)
-###
