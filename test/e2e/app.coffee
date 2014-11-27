@@ -13,7 +13,7 @@ LoginPage =
 		#Enter the test credentials
 		input('user.email').enter('admin@email.com')
 		input('user.password').enter('admin1234')
-		element('.login form input[type="submit"]', 'Click the Login submit button').click()
+		element('form button[type="submit"]', 'Click the Login submit button').click()
 
 
 

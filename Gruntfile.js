@@ -87,14 +87,20 @@ module.exports = function (grunt) {
 				middleware: function (connect, options) {
 					return [require('json-proxy').initialize(proxyConfig),
 						mountFolder(connect, '.grunt'),
-						mountFolder(connect, '.tmp'),
-						mountFolder(connect, 'app')];
+						mountFolder(connect, '.tmp')
+					];
 				}
 			},
 			livereload: {
 				options: {
 					open: true,
-					base: ['.tmp', '<%= yeoman.app %>']
+					base: ['.tmp', '<%= yeoman.app %>'],
+					middleware: function (connect, options) {
+						return [require('json-proxy').initialize(proxyConfig),
+						mountFolder(connect, '.tmp'),
+							mountFolder(connect, 'app')
+						];
+					}
 				}
 			},
 			test: {
@@ -105,7 +111,13 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				options: {
-					base: '<%= yeoman.dist %>'
+					livereload: false,
+					base: '<%= yeoman.dist %>',
+					middleware: function (connect, options) {
+						return [require('json-proxy').initialize(proxyConfig),
+							mountFolder(connect, 'dist')
+						];
+					}
 				}
 			},
 			docs: {
@@ -320,7 +332,8 @@ module.exports = function (grunt) {
 					 removeRedundantAttributes:      true,
 					 removeScriptTypeAttributes:     true,
 					 removeStyleLinkTypeAttributes:  true
-					 */
+					*/
+
 				},
 				files: [
 					{
@@ -415,9 +428,11 @@ module.exports = function (grunt) {
 			test: ['coffee',
 				//	'compass',
 				'copy:styles'],
-			dist: ['coffee',
+			dist: [
+				'coffee',
 				//	'compass:dist',
-				'ngtemplates', 'copy:styles', 'svgmin', 'htmlmin']
+				'ngtemplates',
+				'copy:styles', 'svgmin', 'htmlmin']
 		},
 
 		// By default, your `index.html`'s <!-- Usemin block --> will take care of
@@ -505,7 +520,7 @@ module.exports = function (grunt) {
 		//https://npmjs.org/package/grunt-angular-templates
 		ngtemplates: {
 			app: {
-				src: '<%=yeoman.app %>/views/**/*.html',
+				src: '<%= yeoman.app %>/views/**/*.html',
 				dest: '.tmp/scripts/templates.js',
 				options: {
 					module: 'angularCmsApp',
@@ -592,7 +607,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('test:protractor', 'coffee:test', 'protractor')
 
 	grunt.registerTask('build-docs', [ 'useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
-	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin']);
+	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', /*'cdnify',*/ 'cssmin', 'uglify', 'rev', 'usemin']);
 
 	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:ngdocs']);
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
