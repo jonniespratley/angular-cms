@@ -3,10 +3,10 @@
  @name angularCmsApp.directive:cmsWidget
  @element div
  @function
- 
+
  @description
  	Provides a widget component that acts as a container for other content.
- 
+
  @example
    <example module="angularCmsApp">
      <file name="index.html">
@@ -27,11 +27,10 @@ angular.module('angularCmsApp').directive "cmsWidget", ->
 		icon: "@"
 	require: '?^cmsWidgets'
 	template: '''
-		<div class="col-md-{{size}}">
+		<div class="col-md-{{size}} widget">
 		<div id="widget-{{$id}}" class="panel panel-default {{selected ? 'selected' : ''}}">
 			<header class="panel-heading clearfix">
-				<!--i class="fa fa-chevron-right toggle" ng-show="icon"></i-->
-				<i class="fa fa--{{icon}}" ng-show="icon"></i>
+				<i class="fa fa-chevron-right toggle" ng-show="icon"></i>
 				{{title}}
 			</header>
 			<section class="panel-body" ng-transclude></section>
@@ -47,7 +46,7 @@ angular.module('angularCmsApp').directive "cmsWidget", ->
 			element.find("section").slideToggle(()->
 					element.toggleClass (if opened then "closed" else "opened")
 			)
-			
+
 		widgetTitle = element.find("header")
 		widgetTitle.css(cursor: 'move')
 		opened = true

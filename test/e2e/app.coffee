@@ -13,7 +13,7 @@ LoginPage =
 		#Enter the test credentials
 		input('user.email').enter('admin@email.com')
 		input('user.password').enter('admin1234')
-		element('.login form button[type="submit"]', 'Click the Login submit button').click()
+		element('.login form input[type="submit"]', 'Click the Login submit button').click()
 
 
 
@@ -69,7 +69,7 @@ describe "Angular-CMS App", ->
 			expect(element('input[type="text"]', 'Username input').count()).toEqual 1
 			expect(element('input[type="password"]', 'Password input').count()).toEqual 2
 			expect(element('button[type="submit"]', 'Submit button').count()).toEqual 1
-		
+
 		it 'should allow the user to create a new account', ->
 			RegisterPage.register()
 			expect(browser().location().path()).toEqual '/register'
@@ -104,13 +104,12 @@ describe "Angular-CMS App", ->
 	#The dashboard implementation
 	describe 'Dashboard Story: viewing the dashboard...', ->
 		beforeEach ->
-			element('a[href="#/login"]', 'Login button').click()
 			LoginPage.login()
 			sleep 1
 
 		#Profile page
 		it 'should have a link to the profile page',  ->
-			expect(element('.panel', 'Widget Panel').count()).toEqual 2
+			expect(element('.widget', 'Widget Panel').count()).toEqual 2
 			expect(element('a[ng-href="#/profile"]', 'the Profile link').count()).toEqual 1
 			expect(element('.cms-sidebar-nav', 'Sidebar nav').count()).toEqual 1
 
