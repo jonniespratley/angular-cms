@@ -17,3 +17,8 @@ describe 'Controller: DashboardCtrl', () ->
 
   it 'should attach a list of awesomeThings to the scope', () ->
     expect(scope.awesomeThings.length).toBe 3
+
+  xit 'should toggle full screen when fullscreen button is clicked', () ->
+    spyOn(window, 'webkitRequestFullscreen')
+    $scope.fullscreen()
+    expect(window.webkitRequestFullscreen).toHaveBeenCalled()
