@@ -579,6 +579,20 @@ module.exports = function (grunt) {
 				force: true,
 				recursive: true
 			}
+		},
+		// Configure a mochaTest task
+		mochaTest: {
+			test: {
+				options: {
+					reporter: 'spec',
+					//captureFile: 'results.txt', // Optionally capture the reporter output to a file
+					quiet: false, // Optionally suppress output to standard out (defaults to false)
+					clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+				},
+				src: [
+					'.tmp/routes/*-spec.js'
+				]
+			}
 		}
 	});
 
@@ -603,7 +617,7 @@ module.exports = function (grunt) {
 			return grunt.task.run(['karma:unit', 'coveralls']);
 		}
 	});
-	grunt.registerTask('test:server', 'coffee', 'jasmine_node');
+	grunt.registerTask('test:server', 'coffee:test', 'mochaTest');
 	grunt.registerTask('test:protractor', 'coffee:test', 'protractor')
 
 	grunt.registerTask('build-docs', [ 'useminPrepare', 'autoprefixer', 'concat', 'ngmin']);

@@ -32,8 +32,7 @@ var easyimg = require('easyimage');
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
-
-
+var bodyParser = require('body-parser');
 
 //Strings for results
 var MESSAGES = {
@@ -42,11 +41,6 @@ var MESSAGES = {
 	USER_REGISTRATION_EXISTS: 'User already in exists.'
 
 };
-
-
-
-
-
 
 
 var DS = require('jps-ds').DS;
@@ -836,14 +830,14 @@ app.post('/api/v2/cloudupload', RestResource.cloudupload);
 app.post('/api/v2/upload', RestResource.upload);
 
 //Always users table
-app.post('/api/v2/users/login', express.bodyParser(), RestResource.login);
-app.post('/api/v2/users/register', express.bodyParser(), RestResource.register);
-app.post('/api/v2/users/session', express.bodyParser(), RestResource.session);
+app.post('/api/v2/users/login', bodyParser.json(), RestResource.login);
+app.post('/api/v2/users/register', bodyParser.json(), RestResource.register);
+app.post('/api/v2/users/session', bodyParser.json(), RestResource.session);
 
 
 app.get('/api/v2/:db/:collection/:id?', RestResource.get);
-app.post('/api/v2/:db/:collection', express.bodyParser(), RestResource.add);
-app.put('/api/v2/:db/:collection/:id', express.bodyParser(), RestResource.edit);
+app.post('/api/v2/:db/:collection', bodyParser.json(), RestResource.add);
+app.put('/api/v2/:db/:collection/:id', bodyParser.json(), RestResource.edit);
 app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 
@@ -941,10 +935,6 @@ exports.rest = {
 	express: express,
 	init: function (options) {
 
-
-
-
-
 		console.log('email: admin@email.com '.verbose);
 		console.log('password: admin1234'.verbose)
 
@@ -955,15 +945,18 @@ exports.rest = {
 		//### Express Config
 		//Configure the express app server.
 		app.configure(function () {
-			app.set("view options", { layout: false, pretty: true });
+			app.set("view options", {layout: false, pretty: true});
 
 			app.use(express.static(config.staticDir));
 			app.use(express.directory(config.publicDir));
-			app.use(express.methodOverride());
-			app.use(express.json());
+
+			app.use(bodyParser.urlencoded({ extended: false }));
+			// parse application/json
+			app.use(bodyParser.json());
+
 			app.use("jsonp callback", true);
 			app.use('/api/upload', upload.fileHandler());
-			app.use(express.bodyParser());
+
 
 			app.use(function (req, res, next) {
 				console.log('%s %s', req.method, req.body, req.url);
@@ -972,7 +965,7 @@ exports.rest = {
 		});
 
 
-		app.listen(options.port || process.env.PORT, function(){
+		app.listen(options.port || process.env.PORT, function () {
 			console.log(String('Node.js REST server listening on port: ' + options.port).verbose);
 		});
 

@@ -1,0 +1,22 @@
+{
+	"port": 8181,
+	"version": "v2",
+	"security": {"salt": ""},
+	"db": {
+		"name": "angular-cms",
+		"username": "amadmin",
+		"password": "fred",
+		"host": "localhost",
+		"port": 27017
+	},
+	"email": {
+		"username": "angular.cms@gmail.com",
+		"password": "isyourdaughter18?"
+	},
+	"staticDir": "/dist",
+	"publicDir": "/app",
+	"uploadsTmpDir": "/.tmp",
+	"uploadsDestDir": "/www/cms-content/uploads",
+	"uploadsUrl": ":8181/cms-content/",
+	"logFormat": "[:date] - [:method] - :url - :status - :response-time ms"
+}
