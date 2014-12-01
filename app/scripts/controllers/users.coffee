@@ -1,63 +1,62 @@
 'use strict'
 angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
-		$scope.awesomeThings = [
-			'HTML5 Boilerplate'
-			'AngularJS'
-			'Karma'
-		]
-		
-		$scope.user = 
-			username: null
-			email: null
-			password: null
-			role: null
-			created: new Date()
-			modified: new Date()
-			metadata: 
-				avatar: ''
-				name: null
-				aboue: null
-		
-		#Hold the users
-		$scope.users = []
-		
-		#Holds the user groups
-		$scope.groups = ['Admin', 'Member', 'Public']
+	$scope.awesomeThings = [
+		'HTML5 Boilerplate'
+		'AngularJS'
+		'Karma'
+	]
 
-		$scope.getGroups = () ->
-			DataService.fetch('groups').then((data) ->
-				$scope.groups = data
-				console.log(data)
-			)
+	$scope.user =
+		username: null
+		email: null
+		password: null
+		role: null
+		created: new Date()
+		modified: new Date()
+		metadata:
+			avatar: ''
+			name: null
+			aboue: null
 
-		#Select user
-		$scope.selectUser = (user) ->
-			$scope.user = user
+	#Hold the users
+	$scope.users = []
 
-		#Get users
-		$scope.getUsers = () ->
-			DataService.fetch('users').then((data) ->
-				$scope.users = data
-				$scope.getGroups() unless $scope.groups
-			)
+	#Holds the user groups
+	$scope.groups = ['Admin', 'Member', 'Public']
 
-		#Delete user
-		$scope.deleteUser = (index, user) ->
-			ask = confirm "Delete #{user.email}?"
+	$scope.getGroups = () ->
+		DataService.fetch('groups').then((results) ->
+			$scope.groups = results.data
+			console.log(data)
+		)
 
-			if ask
-				DataService.destroy('users', user).then((data) ->
-					$scope.users.pop(index)
-					$scope.getUsers()
-				)
+	#Select user
+	$scope.selectUser = (user) ->
+		$scope.user = user
 
-		#Add user to database
-		$scope.addUser = (user) ->
-			DataService.save('users', user).then((data) ->
+	#Get users
+	$scope.getUsers = () ->
+		DataService.fetch('users').then((results) ->
+			$scope.users = results.data
+			$scope.getGroups() unless $scope.groups
+		)
+
+	#Delete user
+	$scope.deleteUser = (index, user) ->
+		ask = confirm "Delete #{user.email}?"
+
+		if ask
+			DataService.destroy('users', user).then((data) ->
+				$scope.users.pop(index)
 				$scope.getUsers()
-				#$scope.users.push(user) unless user._id
-				$scope.user = {}
-				$('#user-modal').modal('hide')
 			)
-			
+
+	#Add user to database
+	$scope.addUser = (user) ->
+		DataService.save('users', user).then((data) ->
+			$scope.getUsers()
+			#$scope.users.push(user) unless user._id
+			$scope.user = {}
+			$('#user-modal').modal('hide')
+		)
 )

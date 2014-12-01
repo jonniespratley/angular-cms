@@ -78,10 +78,7 @@ var rest = require('./routes/rest').rest;
 //Socket server
 var socket = require('./routes/socketserver').SocketServer;
 
-//Initialize socket server and rest server
-socket.init(
-	rest.init(config)
-);
+
 
 
 //Create proxy server and proxy requests
@@ -116,6 +113,14 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 	}
 });
 
+//Initialize socket server and rest server
+socket.init(proxyServer);
+
+
+config.staticDir = __dirname + '/app';
+config.publicDir = __dirname + '/.tmp';
+//config.publicDir = __dirname + '/www';
+rest.init(config);
 
 //Start the proxy server
 proxyServer.listen(options.port);

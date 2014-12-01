@@ -3,11 +3,17 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 
 [![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
 
+[![Codacy Badge](https://www.codacy.com/project/badge/0825389c11854c23a05cc512385ec82d)](https://www.codacy.com/public/jonniespratley/angular-cms)
+
+[![Coverage Status](https://coveralls.io/repos/jonniespratley/angular-cms/badge.png)](https://coveralls.io/r/jonniespratley/angular-cms)
+
+
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
-[![Coverage Status](https://coveralls.io/repos/jonniespratley/angular-cms/badge.png)](https://coveralls.io/r/jonniespratley/angular-cms)
+
+
 
 ### Technologies
 Some featured technologies used in this project include the following:
@@ -65,8 +71,8 @@ To run the application on your local machine please take the following steps.
 To start mongodb execute the following command:
 
 	$ sh ./bin/db.sh
-	
-> **Note:** If errors when executing command remove the `db/mongod.lock` file. 
+
+> **Note:** If errors when executing command remove the `db/mongod.lock` file.
 
 #### Step 2 - Start REST server
 To start the server execute the following command:
@@ -133,7 +139,7 @@ $ grunt protractor
 ---
 
 ## RESTful Server
-The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s). 
+The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s).
 
 The base URL is `http://localhost:8181/api/v2`
 
@@ -194,7 +200,7 @@ my-theme/
 		sidebar.html
 		footer.html
 		content.html
-```		
+```
 
 
 
@@ -230,7 +236,7 @@ Please don't edit files in the `dist` subdirectory as they are generated via Gru
 ## Modifying the code
 First, ensure that you have the latest [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/) installed.
 
-Test that Grunt's CLI and Bower are installed by running `grunt --version` and `bower --version`. 
+Test that Grunt's CLI and Bower are installed by running `grunt --version` and `bower --version`.
 
 1. Fork and clone the repo.
 1. Run `npm install` to install all build dependencies (including Grunt).
@@ -275,4 +281,3 @@ The following list is features that are comming.
 * SEO consideration for duplicate content (e.g use of canonical tag)
 
 ---
-

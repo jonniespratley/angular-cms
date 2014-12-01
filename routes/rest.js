@@ -24,6 +24,7 @@ var path = require('path');
 var Db = mongo.Db;
 var BSON = mongo.BSONPure;
 var express = require('express');
+var utils = require('util');
 var fs = require('fs');
 var app = express();
 var request = require('request');
@@ -48,6 +49,8 @@ var DS = require('jps-ds').DS;
 var _ds = new DS({
 	host: 'localhost/angular-cms'
 });
+
+
 
 function delay(ms, value) {
 	// create a new Deferred
@@ -959,7 +962,7 @@ exports.rest = {
 
 
 			app.use(function (req, res, next) {
-				console.log('%s %s', req.method, req.body, req.url);
+				console.log('%s %s', req.method, utils.inspect(req.body, {colors: true}), req.url);
 				next();
 			});
 		});
