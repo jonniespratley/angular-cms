@@ -39,7 +39,7 @@ describe 'Service: DataService', () ->
 	it 'should have a destroy method', () ->
 		expect(ds.destroy).toBeDefined()
 
-	xit 'should invoke create method if _id is not on object', () ->
+	it 'should invoke create method if _id is not on object', () ->
 		$httpBackend.expectPOST("#{baseUrl}/posts").respond(200, [{}, {}])
 		spyOn(ds, '_create')
 		spyOn(ds, '_update')
@@ -50,7 +50,7 @@ describe 'Service: DataService', () ->
 		expect(ds._create).toHaveBeenCalled()
 		expect(ds._update).not.toHaveBeenCalled()
 
-	xit 'should invoke update method if _id is on object', () ->
+	it 'should invoke update method if _id is on object', () ->
 		$httpBackend.expectPUT("#{baseUrl}/posts/1").respond(200, {message: 'Success updating object'})
 		spyOn(ds, '_create')
 		spyOn(ds, '_update')
