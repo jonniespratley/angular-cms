@@ -41,12 +41,18 @@ var MESSAGES = {
 	USER_REGISTRATION_EXISTS: 'User already in exists.'
 
 };
-
-
 var DS = require('jps-ds').DS;
-
 var _ds = new DS({
-	host: 'localhost/angular-cms'
+	host: 'angularcms:angularcms@paulo.mongohq.com:10089/app19632340',
+	models: {
+		'users': 		{ username: String, email: String, password: String, active: Boolean,  meta: Object, token: String, created: Date, updated: Date },
+		'uploads': 	{ title: String, body: String, image: String, path: String, filename: String, meta: Object, created: Date, updated:Date, userid: String},
+		'posts': 		{ title: String, body: String, image: String, published: Boolean, created: Date, updated: Date, status: String, userid: String, meta: Object},
+		'pages': 		{ title: String, body: String, image: String, published: Boolean, created: Date, updated: Date, status: String, userid: String, meta: Object},
+		'themes': 	{  },
+		'widgets': 	{ title: String, body: String, path: String, filename: String, meta: Object, created: Date, updated:Date, userid: String, active: Boolean},
+		'plugins': 	{ title: String, body: String, path: String, filename: String, meta: Object, created: Date, updated:Date, userid: String, active: Boolean}
+	}
 });
 
 function delay(ms, value) {
@@ -121,6 +127,7 @@ var RestResource = {
 			message: 'REST API Server ' + RestResource.useversion
 		});
 	},
+
 	//### v1index
 	//I handle displaying a message with the version for v1 index.
 	v1index: function (req, res, next) {
@@ -130,117 +137,7 @@ var RestResource = {
 			res.json(JSON.parse(body));
 		});
 	},
-	//### v1get
-	//I handle forwarding requests to the www.myappmatrix.com v1 api server and handling the results.
-	v1get: function (req, res, next) {
-		var url = RestResource.urls[RestResource.useversion] + '/Api/getall/' + req.param('model') + '?appid=' + req.param('appid');
 
-		console.log('URL', url.debug);
-
-		var options = {
-			url: url,
-			qs: {
-				appid: req.param('appid')
-			},
-			headers: {
-				Authorization: 'Basic: bXk6ZnJlZA=='
-			}
-		};
-
-		if (req.param('appid')) {
-			options.qs['appid'] = String(req.param('appid'));
-		}
-		request(options, function (error, response, body) {
-			if (!error) {
-				try {
-					res.json(JSON.parse(body).results);
-				} catch (e) {
-					console.log(e);
-					res.json(Array({
-						status: false,
-						message: 'There was an error parsing the data.'
-					}));
-				}
-			}
-		});
-	},
-	//### v1method
-	//I handle forwarding method requests to a v1 api server and handling the results.
-	v1method: function (req, res, next) {
-		var url = RestResource.urls[RestResource.useversion] + '/' + req.param('method');
-
-		var options = {
-			url: url,
-			method: 'GET',
-			headers: {
-				Authorization: 'Basic: bXk6ZnJlZA=='
-			}
-		};
-
-		options.qs = {}
-
-		if (req.param('appid')) {
-			options.qs['appid'] = String(req.param('appid'));
-		}
-		request(options, function (error, response, body) {
-			if (!error) {
-				try {
-					res.json(JSON.parse(body).results);
-				} catch (e) {
-					console.log(e);
-					res.json(Array({
-						status: false,
-						message: 'There was an error parsing the data.'
-					}));
-				}
-			}
-		});
-	},
-	//### v1add
-	//I handle forwarding post requests to a v1 api server.
-	v1add: function (req, res, next) {
-		RestResource.version = 'v1';
-
-		var url = RestResource.urls[RestResource.useversion] + '/' + req.param('collection');
-		var method = 'POST';
-		if (req.param('id')) {
-			method = 'PUT';
-			url += '/' + req.param('id');
-		}
-
-		var options = {
-			url: url,
-			method: method,
-			json: req.body,
-			headers: {
-				Authorization: 'Basic: bXk6ZnJlZA=='
-			}
-		};
-
-		options.qs = {}
-
-		if (req.param('appid')) {
-			options.qs['appid'] = String(req.param('appid'));
-		}
-
-		console.log(url);
-
-		request(options, function (error, response, body) {
-			if (!error) {
-				try {
-
-					res.json(body);
-
-				} catch (e) {
-					console.log(e);
-					res.json(Array({
-						status: false,
-						message: 'There was an error parsing the data.'
-					}));
-				}
-			}
-		});
-	},
 	//### v2index
 	//I handle displaying a message for the v2 api index.
 	v2index: function (req, res, next) {
@@ -374,7 +271,7 @@ var RestResource = {
 	insert: function (collection, data) {
 		console.log(data);
 		var deferred = new Deferred();
-		//Open db
+
 		var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
 		db.open(function (err, db) {
 			db.collection('users', function (err, collection) {
@@ -589,155 +486,33 @@ var RestResource = {
 	//### get
 	//I handle gathering records dynamically from a call to the v2 api.
 	get: function (req, res, next) {
-		var query = req.query.query ? JSON.parse(req.query.query) : {};
-		var self = this;
-		// Providing an id overwrites giving a query in the URL
-		if (req.params.id) {
-			query = {
-				'_id': new BSON.ObjectID(req.params.id)
-			};
-		}
-		//Pass a appid param to get all records for that appid
-		if (req.param('appid')) {
-			query['appid'] = String(req.param('appid'));
-		}
-		var options = req.params.options || {};
-		//Test array of legal query params
-		var test = ['limit', 'sort', 'fields', 'skip', 'hint', 'explain', 'snapshot', 'timeout'];
-		//loop and test
-		for (o in req.query) {
-			if (test.indexOf(o) >= 0) {
-				options[o] = req.query[o];
-			}
-		}
-		//Log for interal usage
-		console.log('query', query, 'options', options);
-		//new database instance
-		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
-			auto_reconnect: true,
-			safe: true
-		}));
-		//open database
-		db.open(function (err, db) {
-			if (err) {
-				console.log(err);
-			} else {
-				//prep collection
-				db.collection(req.params.collection, function (err, collection) {
-					//query
-					collection.find(query, options, function (err, cursor) {
-						cursor.toArray(function (err, docs) {
-							console.log(docs);
-							if (err) {
-								console.log(err);
-							} else {
-								var result = [];
-								if (req.params.id) {
-									if (docs.length > 0) {
-										result = docs[0];
-										res.header('Content-Type', 'application/json');
-										res.jsonp(200, result);
-									} else {
-										res.jsonp(404, 'Not found');
-										//res.send(404);
-									}
-								} else {
-									docs.forEach(function (doc) {
-										result.push(doc);
-									});
-									res.header('Content-Type', 'application/json');
-									res.jsonp(200, result);
-								}
-								db.close();
-							}
-						});
-					});
-				});
-			}
+		console.warn('find all', req.params.collection);
+		_ds.findAll(req.params.collection).then(function(data){
+			res.send(data);
+		}, function(err){
+			res.send(err);
 		});
 	},
 	//### add
 	//I handle adding a record to the database.
 	add: function (req, res, next) {
-		var data = req.body;
-		var results = [];
-		var response = {};
-
-		if (data) {
-			var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
-				auto_reconnect: true,
-				safe: true
-			}));
-			db.open(function (err, db) {
-				if (err) {
-					console.log(err);
-				} else {
-					db.collection(req.params.collection, function (err, collection) {
-						collection.count(function (err, count) {
-							console.log("There are " + count + " records.");
-						});
-					});
-
-					db.collection(req.params.collection, function (err, collection) {
-						//Check if the posted data is an array, if it is, then loop and insert each document
-						if (data.length) {
-							//insert all docs
-							for (var i = 0; i < data.length; i++) {
-								var obj = data[i];
-								console.log(obj);
-								collection.insert(obj, function (err, docs) {
-									results.push(obj);
-								});
-							}
-							response.results = results;
-							db.close();
-							res.header('Content-Type', 'application/json');
-							res.jsonp(200, response);
-						} else {
-							collection.insert(req.body, function (err, docs) {
-								db.close();
-								if (!err) {
-									response.status = 'ok';
-									response.data = docs[0];
-									//res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + docs[0]._id.toHexString());
-									res.header('Content-Type', 'application/json');
-									res.send(response, 201);
-
-								}
-							});
-						}
-					});
-				}
-			});
-		} else {
-			res.header('Content-Type', 'application/json');
-			res.send('{"ok":0}', 200);
-		}
+		_ds.create(req.params.collection, req.body).then(function(data){
+			console.warn( 'create', data);
+			res.send(data);
+		}, function(err){
+			res.send(err);
+		});
 	},
 	//### edit
 	//I handle
 	edit: function (req, res, next) {
-		var spec = {
-			'_id': new BSON.ObjectID(req.params.id)
-		};
-		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
-			'auto_reconnect': true,
-			'safe': true
-		}));
-
-		console.log('Upating: ' + JSON.stringify(req.body).warn);
-
-
-		db.open(function (err, db) {
-			db.collection(req.params.collection, function (err, collection) {
-				collection.update(spec, req.body, true, function (err, docs) {
-					res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id);
-					res.header('Content-Type', 'application/json');
-					res.send('{"ok":1}');
-					db.close();
-					console.log('Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id);
-				});
-			});
+		var data = req.body;
+		delete data._id;
+		_ds.update(req.params.collection, req.params.id, data).then(function(data){
+			console.warn(data);
+			res.send(data);
+		}, function(err){
+			res.send(err);
 		});
 	},
 	//### view
@@ -747,27 +522,11 @@ var RestResource = {
 	//### destroy
 	//I handle
 	destroy: function (req, res, next) {
-		var params = {
-			_id: new BSON.ObjectID(req.params.id)
-		};
-		console.log('Delete by id ' + req.params);
-		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
-			auto_reconnect: true,
-			safe: true
-		}));
-		db.open(function (err, db) {
-			db.collection(req.params.collection, function (err, collection) {
-				console.log('found ', collection.collectionName, params);
-				collection.remove(params, function (err, docs) {
-					if (!err) {
-						res.header('Content-Type', 'application/json');
-						res.send('{"ok":1}');
-						db.close();
-					} else {
-						console.log(err);
-					}
-				});
-			});
+		_ds.destroy(req.params.collection, req.params.id).then(function(data){
+			console.warn(data);
+			res.send(data);
+		}, function(err){
+			res.send(err);
 		});
 	},
 	//### cloudupload
@@ -824,9 +583,8 @@ var RestResource = {
 //### v2 API
 //v2 mongo rest api
 app.get('/api/v2', RestResource.v2index);
-app.post('/api/v1/imagecrop', RestResource.imageCrop);
+app.post('/api/v2/imagecrop', RestResource.imageCrop);
 app.post('/api/v2/cloudupload', RestResource.cloudupload);
-
 app.post('/api/v2/upload', RestResource.upload);
 
 //Always users table
@@ -834,7 +592,7 @@ app.post('/api/v2/users/login', bodyParser.json(), RestResource.login);
 app.post('/api/v2/users/register', bodyParser.json(), RestResource.register);
 app.post('/api/v2/users/session', bodyParser.json(), RestResource.session);
 
-
+//Dynamic REST
 app.get('/api/v2/:db/:collection/:id?', RestResource.get);
 app.post('/api/v2/:db/:collection', bodyParser.json(), RestResource.add);
 app.put('/api/v2/:db/:collection/:id', bodyParser.json(), RestResource.edit);
@@ -842,11 +600,9 @@ app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
 
 
 //Readme
-
 var markdown = require("markdown").markdown;
 app.get('/api/v2/README', function (res, req) {
 	var localPath = __dirname + '/../README.md';
-
 	fs.readFile(localPath, 'utf8', function (err, data) {
 		if (err) {
 			req.end('There was an error.');
@@ -859,7 +615,6 @@ app.get('/api/v2/README', function (res, req) {
 			req.end(data);
 		}
 		console.log(data);
-
 	});
 });
 /* ======================[ @TODO: Other Rest Utility Methods ]====================== */

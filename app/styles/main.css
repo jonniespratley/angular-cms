@@ -10,7 +10,9 @@
   width: 100px;
   text-align: center;
 }
-
+.th-checkbox{
+  width: 20px;
+}
 .aside {
   width: 320px;
   z-index: 5000;

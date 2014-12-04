@@ -81,6 +81,11 @@ app = angular.module('angularCmsApp', [
 			.when '/pages',
 				templateUrl: 'views/pages.html'
 				controller: 'PagesCtrl'
+				resolve:
+					pages : (DataService) ->
+						DataService.fetch('pages').then((res)->
+							return res.data
+						)
 			.when '/help',
 			  templateUrl: 'views/help.html'
 			  controller: 'HelpCtrl'

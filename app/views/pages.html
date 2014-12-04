@@ -1,35 +1,32 @@
 
 <div class="page-container">
 	<div class="">
-<cms-header title="Pages" icon="folder-open"></cms-header>
-<button class="btn" ng-click="getPages()">Refresh</button>
+		<cms-header title="Pages" icon="folder-open"></cms-header>
       <section>
         <div class="row">
           <div class="col-md-12">
-						<ol class="breadcrumb">
-							<li>
-								<a href="#">Home</a>
-							</li>
-							<li class="active">Add Page</li>
-						</ol>
+
+
+
+
             <table class="table table-condensed table-hover table-striped clearfix">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Page</th>
-									<th>Body</th>
-									<th>Status</th>
-
+                  <th class="th-checkbox"><input type="checkbox" class="checkbox"></th>
+                  <th>Title</th>
+									<th>Date</th>
                 </tr>
               </thead>
               <tbody>
 
-                <tr ng-repeat="page in pages" ng-click="selectPage(page)">
-                  <td>{{page._id}}</td>
-                  <td>{{page.title}}</td>
-									<td>{{page.body}}</td>
-									<td><span class="label label-default">{{page.publish}}</span></td>
-									<td>{{page.visibility}}</td>
+                <tr ng-repeat="page in pages">
+                  <td><input type="checkbox" value="{{page._id}}"/></td>
+                  <td>
+										<a href="" ng-click="selectPage(page)" title="{{page.title}}">{{page.title}}</a>
+										<span class="label label-default">{{page.publish}}</span>
+									</td>
+									<td>{{page.created | date:'medium'}}</td>
+
                 </tr>
               </tbody>
             </table>
@@ -42,15 +39,13 @@
           <span class="help-block">
 						<strong>Permlink:</strong> http://{{App.baseurl}}/?page_id={{page.slug}}
 						</span>
-          <div class="btn-group"></div>
           <textarea class="form-control" rows="5" ng-model="page.body"></textarea>
         </div>
         <div class="col-sm-4">
-          <ul>
-						<li>Status: Published</li>
-						<li>Visibility: Public</li>
+          <ul class="list-unstyled">
+						<li>Status: {{page.status}}</li>
 					</ul>
-					<button href="#" class="btn btn-danger btn-block btn-xs" ng-click="remove(post)">Move to trash</button>
+					<button href="#" class="btn btn-danger btn-block btn-xs" ng-click="remove(page)">Move to trash</button>
 					<button class="btn pull-right btn-primary btn-block" ng-click="save(page)">Save</button>
         </div>
       </div>
