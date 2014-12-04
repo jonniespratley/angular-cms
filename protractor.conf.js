@@ -1,5 +1,6 @@
 // An example configuration file.
 exports.config = {
+	baseUrl: 'http://localhost:9000',
   // The address of a running selenium server.
   seleniumAddress: 'http://localhost:4444/wd/hub',
 

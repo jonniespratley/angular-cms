@@ -1,11 +1,10 @@
-
 /*
  App.coffee
 
  This is the protractor spec that will test the different areas of the application.
  */
 
-var UsersPage = function() {
+var UsersPage = function () {
 
 	this.newUserBtn = element(by.buttonText('New User'));
 	this.submitBtn = element(by.buttonText('Submit'));
@@ -18,11 +17,11 @@ var UsersPage = function() {
 		summary: element(protractor.By.model('user.meta.summary'))
 	};
 
-	this.get = function() {
+	this.get = function () {
 		browser.get('http://localhost:9000/#/users');
 	};
 
-	this.setForm = function(email, username, password, name, summary) {
+	this.setForm = function (email, username, password, name, summary) {
 		this.newUserBtn.click();
 		browser.sleep(500);
 		this.inputs.username.sendKeys(username);
@@ -37,18 +36,18 @@ var UsersPage = function() {
 
 };
 
-describe('Angular-CMS', function() {
+describe('Angular-CMS', function () {
 	var usersPage = null;
 
-	describe('Users Page:', function() {
-		beforeEach(function() {
+	describe('Users Page:', function () {
+		beforeEach(function () {
 			usersPage = new UsersPage();
 			usersPage.get();
 		});
 
-		it('should be able to create a new user', function() {
+		it('should be able to create a new user', function () {
 			var username = 'protractor' + Date.now();
-			usersPage.setForm(username+'@test.com', username, 'test', 'John Doe', 'This is an example user.');
+			usersPage.setForm(username + '@test.com', username, 'test', 'John Doe', 'This is an example user.');
 		});
 	});
 });

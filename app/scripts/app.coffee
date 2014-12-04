@@ -28,7 +28,7 @@ app = angular.module('angularCmsApp', [
 	'mgcrea.ngStrap'
 	#'cms.Templates'
 ])
-	.config ($routeProvider) ->	
+	.config ($routeProvider) ->
 		#Resolve routes
 		routeResolver =
 			# I will cause a 1 second delay
@@ -36,7 +36,7 @@ app = angular.module('angularCmsApp', [
 				delay = $q.defer()
 				$timeout delay.resolve, 1000
 				delay.promise
-			
+
 		#Router Config
 		$routeProvider
 			.when '/',

@@ -18,7 +18,7 @@ var proxyConfig = {
 	}
 };
 
-var LIVERELOAD_PORT = 35729;
+var LIVERELOAD_PORT = 35728;
 var SERVER_PORT = 9000;
 //var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
@@ -72,7 +72,11 @@ module.exports = function (grunt) {
 				options: {
 					livereload: '<%= connect.options.livereload %>'
 				},
-				files: ['<%= yeoman.app %>/{,**/}*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'],
+				files: [
+					'<%= yeoman.app %>/{,**/}*.html',
+					'.tmp/styles/{,*/}*.css',
+					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+				],
 				tasks: ['ngtemplates']
 			}
 		},

@@ -5,28 +5,28 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 			'AngularJS'
 			'Karma'
 		]
-		
-		$scope.user = 
+
+		$scope.user =
 			username: null
 			email: null
 			password: null
 			role: null
 			created: new Date()
 			modified: new Date()
-			metadata: 
+			metadata:
 				avatar: ''
 				name: null
 				aboue: null
-		
+
 		#Hold the users
 		$scope.users = []
-		
+
 		#Holds the user groups
 		$scope.groups = ['Admin', 'Member', 'Public']
 
 		$scope.getGroups = () ->
-			DataService.fetch('groups').then((data) ->
-				$scope.groups = data
+			DataService.fetch('groups').then((res) ->
+				$scope.groups = res.data
 				console.log(data)
 			)
 
@@ -36,8 +36,8 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 
 		#Get users
 		$scope.getUsers = () ->
-			DataService.fetch('users').then((data) ->
-				$scope.users = data
+			DataService.fetch('users').then((res) ->
+				$scope.users = res.data
 				$scope.getGroups() unless $scope.groups
 			)
 
@@ -46,7 +46,7 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 			ask = confirm "Delete #{user.email}?"
 
 			if ask
-				DataService.destroy('users', user).then((data) ->
+				DataService.destroy('users', user).then((res) ->
 					$scope.users.pop(index)
 					$scope.getUsers()
 				)
@@ -55,9 +55,10 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 		$scope.addUser = (user) ->
 			DataService.save('users', user).then((data) ->
 				$scope.getUsers()
-				#$scope.users.push(user) unless user._id
+				$scope.users.push(user) unless user._id
 				$scope.user = {}
+				console.log(data)
 				$('#user-modal').modal('hide')
 			)
-			
+
 )
