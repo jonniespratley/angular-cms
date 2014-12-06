@@ -18,3 +18,4 @@ coverage/
 atlassian-ide-plugin.xml
 docs
 dist
+.c9
