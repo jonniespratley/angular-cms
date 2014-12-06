@@ -1,5 +1,7 @@
 {
+	"host": "http://localhost",
 	"port": 8181,
+	"apiBase": "/api/v2",
 	"version": "v2",
 	"security": {"salt": ""},
 	"db": {

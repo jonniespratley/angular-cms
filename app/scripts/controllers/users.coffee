@@ -10,13 +10,13 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 			username: null
 			email: null
 			password: null
-			role: null
+			role: 'member'
 			created: new Date()
 			modified: new Date()
 			metadata:
 				avatar: ''
 				name: null
-				aboue: null
+				about: null
 
 		#Hold the users
 		$scope.users = []
