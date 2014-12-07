@@ -11,6 +11,8 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 
 [![Coverage Status](https://coveralls.io/repos/jonniespratley/angular-cms/badge.png)](https://coveralls.io/r/jonniespratley/angular-cms)[![Dependency Status](https://david-dm.org/jonniespratley/angular-cms.svg)](https://david-dm.org/jonniespratley/angular-cms)
 
+[![Dependency Status](https://david-dm.org/jonniespratley/angular-cms.svg)](https://david-dm.org/jonniespratley/angular-cms)
+
 ### Technologies
 
 Some featured technologies used in this project include the following:
