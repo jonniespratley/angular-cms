@@ -55,7 +55,7 @@ module.exports = function (grunt) {
 			},
 			coffeeTest: {
 				files: ['test/{,**/}*.{coffee,litcoffee,coffee.md}'],
-				tasks: ['coffee:test', 'newer:coffee:test', 'karma']
+				tasks: ['coffee:test', 'newer:coffee:test', 'karma:unit', 'protractor']
 			},
 			compass: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -553,12 +553,12 @@ module.exports = function (grunt) {
 			}
 		},
 
+		//Protractor webdriver & protractor
 		protractor_webdriver: {
-			options: {
-				// Task-specific options go here.
-			},
 			test: {
-				// Target-specific file lists and/or options go here.
+				options: {
+					command: 'webdriver-manager start'
+				}
 			}
 		},
 		protractor: {
@@ -575,6 +575,9 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+
+
+		//Coveralls code coverage
 		coveralls: {
 			options: {
 				debug: true,
@@ -616,13 +619,14 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', function (target) {
 		grunt.task.run(['clean:server', 'concurrent:test', 'autoprefixer', 'connect:test']);
 		if (target === 'e2e') {
-			return grunt.task.run(['karma']);
+			return grunt.task.run(['karma', 'protractor_webdriver', 'protractor', 'coveralls']);
+		} else if(target === 'server'){
+			return grunt.task.run(['coffee:test', 'mochaTest']);
 		} else {
 			return grunt.task.run(['karma:unit', 'coveralls']);
 		}
 	});
-	grunt.registerTask('test:server', 'coffee:test', 'mochaTest');
-	grunt.registerTask('test:protractor', 'coffee:test', 'protractor')
+
 
 	grunt.registerTask('build-docs', [ 'useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', /*'cdnify',*/ 'cssmin', 'uglify', 'rev', 'usemin']);

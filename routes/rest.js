@@ -207,10 +207,10 @@ var RestResource = {
 
 		console.log('Login Query: ', query);
 
-		_ds.findOne(req.params.collection, req.params.id).then(function (data) {
-			res.send(data);
+		_ds.findOne('users', query).then(function (data) {
+			res.json(200, data);
 		}, function (err) {
-			res.send(err);
+			res.json(400, err);
 		});
 
 
@@ -300,10 +300,6 @@ var RestResource = {
 					//Resize the image
 					easyimg.resize(imgOptions, function (e) {
 						console.log('easyimg', imgOptions, e);
-
-
-
-//set the  new path on the file
 						req.files.file.target_dir = target_dir;
 						req.files.file.target_path = target_path;
 						req.files.file.thumb_path = thumb_path;
@@ -478,15 +474,15 @@ var cmsRest = function (options) {
 	app.post(config.apiBase + '/upload', RestResource.upload);
 
 	//Always users table
-	app.post(config.apiBase + '/login', bodyParser.json(), RestResource.login);
-	app.post(config.apiBase + '/register', bodyParser.json(), RestResource.register);
-	app.post(config.apiBase + '/session', bodyParser.json(), RestResource.session);
+	app.post(config.apiBase + '/users/login', bodyParser.json(), RestResource.login);
+	app.post(config.apiBase + '/users/register', bodyParser.json(), RestResource.register);
+	app.post(config.apiBase + '/users/session', bodyParser.json(), RestResource.session);
 
 	//Dynamic REST
-	app.get(config.apiBase + '/:collection/:id?', RestResource.get);
-	app.post(config.apiBase + '/:collection', bodyParser.json(), RestResource.add);
-	app.put(config.apiBase + '/:collection/:id', bodyParser.json(), RestResource.edit);
-	app.delete(config.apiBase + '/:collection/:id', RestResource.destroy);
+	app.get(config.apiBase + '/:db/:collection/:id?', RestResource.get);
+	app.post(config.apiBase + '/:db/:collection', bodyParser.json(), RestResource.add);
+	app.put(config.apiBase + '/:db/:collection/:id', bodyParser.json(), RestResource.edit);
+	app.delete(config.apiBase + '/:db/:collection/:id', RestResource.destroy);
 
 
 	app.configure(function () {

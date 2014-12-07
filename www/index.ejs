@@ -1,6 +1,11 @@
 <% layout('layout') -%>
 <% if (!user) { %>
 	<h2>Welcome! Please log in.</h2>
+
+	<a href="/auth/facebook">Login with Facebook</a>
+	<a href="/auth/google">Login with Google</a>
+	<a href="/auth/twitter">Login with Twitter</a>
+<a href="/login">Login</a>
 <% } else { %>
 	<h2>Hello, <%= user.username %>.</h2>
 <% } %>

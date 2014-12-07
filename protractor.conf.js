@@ -9,16 +9,23 @@ exports.config = {
     'browserName': 'chrome'
   },
 
+	params: {
+		baseUrl: 'http://localhost:9000'
+	},
+
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-	  '.tmp/protractor/*.js',
-	  'test/protractor/*.js'
+	  '.tmp/protractor/*-spec.js',
+	  'test/protractor/*-spec.js'
   ],
 
   // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000
-  }
+  },
+	onPrepare: function(){
+		browser.driver.get(browser.params.baseUrl);
+	}
 };

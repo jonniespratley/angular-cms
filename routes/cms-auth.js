@@ -1,9 +1,11 @@
 var passport = require('passport'),
 	express = require('express'),
+	BasicStrategy = require('passport-http').Strategy,
 	LocalStrategy = require('passport-local').Strategy,
 	GoogleStrategy = require('passport-google').Strategy,
 	log = require('npmlog'),
 	path = require('path'),
+	q = require('q'),
 	flash = require('express-flash'),
 	DS = require('jps-ds').DS;
 
@@ -16,13 +18,9 @@ var users = [
 	{id: 1, username: 'admin', password: 'admin', email: 'admin@gmail.com'},
 	{id: 2, username: 'test', password: 'test', email: 'test@gmail.com'},
 	{id: 3, username: 'jonniespratley', password: 'fred', email: 'jonniespratley@gmail.com'}
-
 ];
 
-
-var User = function(){
-
-};
+var User = function(){};
 
 User.findOrCreate = function(profile, fn){
 	console.warn('findOrCreate', profile);
@@ -38,19 +36,20 @@ User.findById = function(id, fn) {
 	} else {
 		fn(new Error('User ' + id + ' does not exist'));
 	}
-}
-
+};
 User.findByUsername = function(username, fn) {
+	var defer = q.defer();
 	console.warn('findByUsername', username);
 	for (var i = 0, len = users.length; i < len; i++) {
 		var user = users[i];
 		if (user.username === username) {
-			return fn(null, user);
+			defer.resolve(user);
+		} else {
+			console.warn('user not found', username);
 		}
 	}
-	return fn(null, null);
-}
-
+	return defer.promise;
+};
 User.findByEmail = function(email, fn) {
 	console.warn('findByEmail', email);
 	for (var i = 0, len = users.length; i < len; i++) {
@@ -60,30 +59,14 @@ User.findByEmail = function(email, fn) {
 		}
 	}
 	return fn(null, null);
-}
-
-
-
+};
 
 function cmsAuth(options, app) {
 	var self = this;
+	var baseUrl = options.host + ':' + options.port;
 	if (!app) {
 		throw new Error('Must provide express application!');
 	}
-
-	console.warn('cmsAuth', options);
-
-	self._ds = DS;
-
-	var baseUrl = options.host + ':' + options.port;
-
-
-
-
-
-
-
-
 
 
 // Simple route middleware to ensure user is authenticated.
@@ -105,44 +88,37 @@ function cmsAuth(options, app) {
 //   the user by ID when deserializing.
 
 	passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
+	  done(null, user.id);
+	});
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-/*
-// Use the LocalStrategy within Passport.
+	passport.deserializeUser(function(id, done) {
+	  User.findById(id, function(err, user) {
+	    done(err, user);
+	  });
+	});
+
+
+/*	*/
+
 //   Strategies in passport require a `verify` function, which accept
 //   credentials (in this case, a username and password), and invoke a callback
 //   with a user object.  In the real world, this would query a database;
 //   however, in this example we are using a baked-in set of users.
-	passport.use(new LocalStrategy(function (username, password, done) {
-			// asynchronous verification, for effect...
+	passport.use(new LocalStrategy({
+			usernameField: 'email',
+			passwordField: 'password'
+		}, function (username, password, done) {
 			process.nextTick(function () {
-
-				// Find the user by username.  If there is no user with the given
-				// username, or the password is not correct, set the user to `false` to
-				// indicate failure and set a flash message.  Otherwise, return the
-				// authenticated `user`.
-				findByUsername(username, function (err, user) {
-					if (err) {
-						return done(err);
-					}
-					if (!user) {
-						return done(null, false, {message: 'Unknown user ' + username});
-					}
-					if (user.password != password) {
-						return done(null, false, {message: 'Invalid password'});
-					}
+				console.warn('find by username');
+				User.findByUsername(username).then(function(user){
 					return done(null, user);
-				})
+				}, function(err){
+					return done(null, false);
+				});
 			});
 		}
 	));
-	*/
+
 /**/
 	passport.use(new GoogleStrategy({
 			returnURL: 'http://localhost:8181/auth/google/return', realm: 'http://localhost:8181/'
@@ -155,6 +131,7 @@ passport.deserializeUser(function(id, done) {
     	});
 		}
 	));
+
 
 
 	//Setup
@@ -177,13 +154,14 @@ passport.deserializeUser(function(id, done) {
 		}));
 		app.use(passport.initialize());
 		app.use(passport.session());
-
 		app.use(app.router);
-
-
 	});
 
 
+
+	app.get('/api/me', passport.authenticate('basic', { session: false }), function(req, res) {
+    res.json(req.user);
+  });
 
 	app.all('*', function (req, res, next) {
 		console.warn('cmsAuth', req.params);
@@ -202,24 +180,12 @@ passport.deserializeUser(function(id, done) {
 	  res.render('login', { user: req.user, message: 'Please login', status: 'warning' });
 	});
 
-	app.post('/login', function(req, res, next) {
-	  passport.authenticate('local', function(err, user, info) {
-	    if (err) {
-				return next(err)
-			}
-	    if (!user) {
-	      //req.flash('error', info.message);
-	      return res.redirect('/login')
-	    }
-	    req.logIn(user, function(err) {
-	      if (err) {
-					return next(err);
-					}
-	      return res.redirect('/users/' + user.username);
-	    });
-	  })(req, res, next);
-	});
 
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: false })
+);
 
 	app.get('/auth/user', ensureAuthenticated, function (req, res) {
 		res.json(200, req.user);
