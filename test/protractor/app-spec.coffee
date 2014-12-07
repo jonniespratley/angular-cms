@@ -1,35 +1,33 @@
 ###*
- Helpers
+ J$ Helpers - I am test helpers
 ###
-
 j$ =
-	element: (selector) ->
-		$(selector)
+	element: (selector, label) ->
+    console.warn('finding', label) if label
+    $(selector)
 	input: (name) ->
 		$("input[name='#{name}']")
 
 
 ###*
-App Page
+App Page - I handle general actions in the app.
 ###
 AppPage = () ->
 	@get = ->
 		browser.get '/'
 
 ###*
- Login Page
+ Login Page - I handle actions on the login page.
 ###
 LoginPage = () ->
 	@get = ->
-		browser.get browser.params.baseUrl + '/#/login'
+		browser.get '/#/login'
 	@login = (u, p) ->
-		j$.input('username').sendKeys('test@gmail.com')
-		j$.input('password').sendKeys('test')
+		j$.input('username').sendKeys(u)
+		j$.input('password').sendKeys(p)
 		j$.element('button[type="submit"]').click()
-
-
 ###*
- Register Page
+ Register Page - I handle actions on the register page
 ###
 RegisterPage = () ->
 	email = j$.input('email')
@@ -47,12 +45,9 @@ RegisterPage = () ->
 		agree.click()
 		element(protractor.By.css('button[type="submit"]')).click()
 
-
-#
-# App.coffee
-#
-# This is the protractor spec that will test the different areas of the application.
-#
+###*
+UsersPage - I handle actions on the users page
+###
 UsersPage = ->
   @newUserBtn = element(protractor.By.buttonText("New User"))
   @submitBtn = element(protractor.By.buttonText("Submit"))
@@ -62,7 +57,6 @@ UsersPage = ->
     password: element(protractor.By.model("user.password"))
     name: element(protractor.By.model("user.meta.name"))
     summary: element(protractor.By.model("user.meta.summary"))
-
   @get = ->
     browser.get '/#/users'
 
@@ -77,6 +71,10 @@ UsersPage = ->
     @submitBtn.click()
     browser.sleep 1000
 
+App = null
+usersPage = null
+registerPage = null
+loginPage = null
 
 ###*
 Protractor e2e Tests
@@ -86,7 +84,7 @@ describe "Angular-CMS App", ->
   registerPage = new RegisterPage()
   loginPage = new LoginPage()
 
-	beforeEach ->
+  beforeEach ->
 		App.get()
 
 	#Welome Story: the initial page
@@ -113,23 +111,14 @@ describe "Angular-CMS App", ->
   Register - The user registration implementation
   ###
 	describe 'Register: ', ->
-		beforeEach ->
-			registerPage.get()
-
 		it 'should have email and password inputs with a button to submit the form', ->
-			expect(browser().location().path()).toEqual '/register'
-			expect(element('form', 'Login form').count()).toEqual 1
-			expect(element('input[name="email"]', 'Email input').count()).toEqual 1
-			expect(element('input[name="username"]', 'Username input').count()).toEqual 1
-			expect(element('input[name="password"]', 'Password input').count()).toEqual 2
-			expect(element('button[type="submit"]', 'Submit button').count()).toEqual 1
-
-		it 'should allow the user to create a new account', ->
-			registerPage.register()
-			expect(browser().location().path()).toEqual '/register'
-			sleep 1
-			expect(browser().location().path()).toEqual '/dashboard'
-
+      registerPage.get()
+			expect(driver.getCurrentUrl()).toContain 'register'
+			expect(j$.element('form', 'Login form').count()).toEqual 1
+			expect(j$.element('input[name="email"]', 'Email input').count()).toEqual 1
+			expect(j$.element('input[name="username"]', 'Username input').count()).toEqual 1
+			expect(j$.element('input[name="password"]', 'Password input').count()).toEqual 2
+			expect(j$.element('button[type="submit"]', 'Submit button').count()).toEqual 1
 
 	###*
 	 Login - The user login implementation
@@ -160,16 +149,13 @@ describe "Angular-CMS App", ->
 	#The dashboard implementation
 	describe 'Dashboard: viewing the dashboard...', ->
 		beforeEach ->
-			loginPage.login()
+			loginPage.login('test@gmail.com', 'test')
 			browser.sleep 1
-
-		#Profile page
 		it 'should have a link to the profile page', ->
 			expect(j$.element('.widget', 'Widget Panel').count()).toEqual 2
 			expect(j$.element('a[ng-href="#/profile"]', 'the Profile link').count()).toEqual 1
 			expect(j$.element('.cms-sidebar-nav', 'Sidebar nav').count()).toEqual 1
 
-  usersPage = null
   describe "Users Page:", ->
     beforeEach ->
       usersPage = new UsersPage()

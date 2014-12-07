@@ -54,8 +54,12 @@ module.exports = function (grunt) {
 				tasks: ['newer:coffee:dist']
 			},
 			coffeeTest: {
-				files: ['test/{,**/}*.{coffee,litcoffee,coffee.md}'],
-				tasks: ['coffee:test', 'newer:coffee:test', 'karma:unit', 'protractor']
+			files: ['test/spec/{,**/}*.{coffee,litcoffee,coffee.md}'],
+				tasks: ['coffee:test', 'newer:coffee:test', 'karma:unit']
+			},
+			coffeeProtractorTest: {
+			files: ['test/protractor/{,**/}*.{coffee,litcoffee,coffee.md}'],
+				tasks: ['coffee:test', 'newer:coffee:test', 'protractor']
 			},
 			compass: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
