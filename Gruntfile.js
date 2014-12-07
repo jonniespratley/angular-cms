@@ -631,7 +631,7 @@ module.exports = function (grunt) {
 		}
 	});
 
-
+grunt.registerTask('ptor', ['coffee:test', 'protractor_webdriver', 'protractor']);
 	grunt.registerTask('build-docs', [ 'useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', /*'cdnify',*/ 'cssmin', 'uglify', 'rev', 'usemin']);
 

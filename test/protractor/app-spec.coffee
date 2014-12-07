@@ -80,11 +80,8 @@ loginPage = null
 Protractor e2e Tests
 ###
 describe "Angular-CMS App", ->
-  App = new AppPage()
-  registerPage = new RegisterPage()
-  loginPage = new LoginPage()
-
   beforeEach ->
+    App = new AppPage()
 		App.get()
 
 	#Welome Story: the initial page
@@ -112,6 +109,7 @@ describe "Angular-CMS App", ->
   ###
 	describe 'Register: ', ->
 		it 'should have email and password inputs with a button to submit the form', ->
+      registerPage = new RegisterPage()
       registerPage.get()
 			expect(driver.getCurrentUrl()).toContain 'register'
 			expect(j$.element('form', 'Login form').count()).toEqual 1
@@ -127,6 +125,7 @@ describe "Angular-CMS App", ->
 
 		#Click the login button each time
 		beforeEach ->
+      loginPage = new LoginPage()
 			element('a[href="#/login"]', 'Login button').click()
 
 		#Make sure we end up at the login page to enter our credentials
@@ -149,6 +148,7 @@ describe "Angular-CMS App", ->
 	#The dashboard implementation
 	describe 'Dashboard: viewing the dashboard...', ->
 		beforeEach ->
+      loginPage = new LoginPage()
 			loginPage.login('test@gmail.com', 'test')
 			browser.sleep 1
 		it 'should have a link to the profile page', ->
