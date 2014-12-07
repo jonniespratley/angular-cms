@@ -5,7 +5,6 @@
  */
 
 var UsersPage = function () {
-
 	this.newUserBtn = element(by.buttonText('New User'));
 	this.submitBtn = element(by.buttonText('Submit'));
 
@@ -13,6 +12,7 @@ var UsersPage = function () {
 		email: element(protractor.By.model('user.email')),
 		username: element(protractor.By.model('user.username')),
 		password: element(protractor.By.model('user.password')),
+		active: element(protractor.By.model('user.active')),
 		name: element(protractor.By.model('user.meta.name')),
 		summary: element(protractor.By.model('user.meta.summary'))
 	};
@@ -23,15 +23,16 @@ var UsersPage = function () {
 
 	this.setForm = function (email, username, password, name, summary) {
 		this.newUserBtn.click();
-		browser.sleep(500);
+		browser.sleep(250);
+
 		this.inputs.username.sendKeys(username);
 		this.inputs.email.sendKeys(email);
 		this.inputs.password.sendKeys(password);
 		this.inputs.name.sendKeys(name);
 		this.inputs.summary.sendKeys(summary);
+		this.inputs.active.click();
+		return this.submitBtn.click();
 
-		this.submitBtn.click();
-		browser.sleep(1000);
 	};
 
 };

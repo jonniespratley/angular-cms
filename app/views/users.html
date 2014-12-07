@@ -14,6 +14,7 @@
 					<thead>
 					<tr>
 						<th class="tc"><input type="checkbox"></th>
+						<th>Username</th>
 						<th>E-mail</th>
 
 						<th>Active</th>
@@ -26,8 +27,9 @@
 						<td class="tc">
 							<input type="checkbox" value="{{user._id}}">
 						</td>
+						<td>		{{ user.username }}</td>
 						<td> {{user.email}}
-							{{ user.username }}
+
 							<span class="label label-primary" ng-repeat="group in user.groups">{{group}}</span>
 						</td>
 
