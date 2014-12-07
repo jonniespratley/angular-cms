@@ -2,25 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 	<title>Passport-Local Example</title>
 	<link rel="stylesheet" ng-href="http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com/angular-cms/bootswatch.com/default/bootstrap.min.css" href="http://a481ab4f6ea4dd65cff0-b2b68ced242ecf1cb9bc1021688e3775.r49.cf1.rackcdn.com/angular-cms/bootswatch.com/default/bootstrap.min.css">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="main.css">
 </head>
 <body class="container">
 	<section class="row">
-	<% if (!user) { %>
-	<p>
-		<a href="/">Home</a> |
-		<a href="/login">Log In</a>
-	</p>
-	<% } else { %>
-	<p>
-		<a href="/">Home</a> |
-		<a href="/account">Account</a> |
-		<a href="/logout">Log Out</a>
-	</p>
-	<% } %>
-	<%- body %>
+		<%- body %>
 	</div>
 </body>
 </html>

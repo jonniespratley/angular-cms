@@ -497,6 +497,8 @@ var cmsRest = function (options) {
 		app.use(bodyParser.json());
 		app.use("jsonp callback", true);
 		app.use(config.apiBase + '/upload2', upload.fileHandler());
+
+		app.use(app.router);
 		app.use(function (req, res, next) {
 			console.warn(req.param('db'), req.param('collection'))
 			console.log('%s %s', req.method, req.body, req.url);
