@@ -3,7 +3,8 @@ var passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	GoogleStrategy = require('passport-google').Strategy,
 	log = require('npmlog'),
-	flash = require('connect-flash'),
+	path = require('path'),
+	flash = require('express-flash'),
 	DS = require('jps-ds').DS;
 var cookieParser = require('cookie-parser');
 
@@ -114,32 +115,50 @@ function cmsAuth(options, app) {
 
 	//Setup
 	app.configure(function () {
-		app.set('views', __dirname + '/www');
-		app.use(flash());
-		app.use(cookieParser);
-		app.use(passport.initialize());
-		app.use(passport.session());
+		  app.set('views', path.resolve(__dirname, '../www'));
+  app.set('view engine', 'ejs');
+  app.engine('ejs', require('ejs-locals'));
+  app.use(express.logger());
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(express.session({secret: 'angular-cms'}));
+   app.use(express.session({ cookie: { maxAge: 60000 }}));
+  app.use(flash());
+  // Initialize Passport!  Also use passport.session() middleware, to support
+  // persistent login sessions (recommended).
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
 
-		app.use(express.session({secret: 'angular-cms'}));
+
 	});
+
+
+
 	app.all('*', function (req, res, next) {
 		console.warn('cmsAuth', req.params);
 		next();
 	});
-	app.get('/auth', function (req, res) {
-		if (!req.user) {
-		//	res.json(200, {message: 'Please login'});
-			res.render('login', { user: req.user, message: req.flash('error') });
-		}
+
+	app.get('/', function(req, res){
+	
+  	res.render('index', { user: req.user });
 	});
 
-	app.get('/account', ensureAuthenticated, function (req, res) {
-		res.json(200, {user: req.user});
-	});
+app.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user });
+});
 
-	app.get('auth/login', function (req, res) {
-		res.render('login', { user: req.user, message: req.flash('error') });
-	});
+app.get('/login', function(req, res){
+  res.render('login', { user: req.user, message: 'Please login' });
+});
+app.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: false }), function(req, res) {
+	res.redirect('/');
+});
+
+
+
 	app.get('/auth/user', ensureAuthenticated, function (req, res) {
 		res.json(200, req.user);
 	});
@@ -154,12 +173,6 @@ function cmsAuth(options, app) {
 	});
 
 
-
-	app.post('/auth/login',
-		passport.authenticate('local', { failureRedirect: '/auth/login', failureFlash: true }),
-		function(req, res) {
-			res.redirect('/');
-		});
 	return app;
 };
 
