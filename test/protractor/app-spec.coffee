@@ -1,75 +1,7 @@
-###*
- J$ Helpers - I am test helpers
-###
-j$ =
-	element: (selector, label) ->
-    console.warn('finding', label) if label
-    $(selector)
-	input: (name) ->
-		$("input[name='#{name}']")
-
-
-###*
-App Page - I handle general actions in the app.
-###
-AppPage = () ->
-	@get = ->
-		browser.get '/'
-
-###*
- Login Page - I handle actions on the login page.
-###
-LoginPage = () ->
-	@get = ->
-		browser.get '/#/login'
-	@login = (u, p) ->
-		j$.input('username').sendKeys(u)
-		j$.input('password').sendKeys(p)
-		j$.element('button[type="submit"]').click()
-###*
- Register Page - I handle actions on the register page
-###
-RegisterPage = () ->
-	email = j$.input('email')
-	username = j$.input('username')
-	password = j$.input('password')
-	password2 = j$.input('password2')
-	agree = j$.input('agree')
-	@get = ->
-    browser.get '/#/register'
-	@register = ->
-		email.sendKeys('test@email.com')
-		username.sendKeys('test')
-		password.sendKeys('test')
-		password2.sendKeys('test')
-		agree.click()
-		element(protractor.By.css('button[type="submit"]')).click()
-
-###*
-UsersPage - I handle actions on the users page
-###
-UsersPage = ->
-  @newUserBtn = element(protractor.By.buttonText("New User"))
-  @submitBtn = element(protractor.By.buttonText("Submit"))
-  @inputs =
-    email: element(protractor.By.model("user.email"))
-    username: element(protractor.By.model("user.username"))
-    password: element(protractor.By.model("user.password"))
-    name: element(protractor.By.model("user.meta.name"))
-    summary: element(protractor.By.model("user.meta.summary"))
-  @get = ->
-    browser.get '/#/users'
-
-  @setForm = (email, username, password, name, summary) ->
-    @newUserBtn.click()
-    browser.sleep 500
-    @inputs.username.sendKeys username
-    @inputs.email.sendKeys email
-    @inputs.password.sendKeys password
-    @inputs.name.sendKeys name
-    @inputs.summary.sendKeys summary
-    @submitBtn.click()
-    browser.sleep 1000
+AppPage = require('./app-page')
+UsersPage = require('./users-page')
+LoginPage = require('./login-page')
+RegisterPage = require('./register-page')
 
 App = null
 usersPage = null
@@ -83,11 +15,10 @@ describe "Angular-CMS App", ->
   beforeEach ->
     App = new AppPage()
 		App.get()
-
 	#Welome Story: the initial page
 	describe 'Index:', ->
 		it "should display the main index view as default", ->
-			expect(driver.getCurrentUrl()).toEqual '/'
+			expect(browser.getCurrentUrl()).toEqual '/'
 
 		it 'should have a .navbar-brand on the page', ->
 			expect(j$.element('.navbar-brand', 'Site title').count()).toEqual 1

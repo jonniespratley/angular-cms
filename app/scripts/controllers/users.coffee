@@ -53,6 +53,8 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 
 		#Add user to database
 		$scope.addUser = (user) ->
+			user.created_at = new Date()
+			user.updated_at = new Date()
 			DataService.save('users', user).then((data) ->
 				$scope.getUsers()
 				$scope.users.push(user) unless user._id
