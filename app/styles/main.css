@@ -2,10 +2,19 @@
 	http://127.0.0.1:9000/styles/main.css
 	http://localhost:9000/styles/main.css
 */
+@import url('https://cdn.rawgit.com/McNull/angular-form-gen/v0.0.1/dist/angular-form-gen.min.css');
+
 .navbar-avatar {
   height: 20px;
 }
 
+html {
+	overflow-y: scroll;
+}
+
+.needs-some-more-space {
+	margin-top: 20px;
+}
 .actions {
   width: 100px;
   text-align: center;

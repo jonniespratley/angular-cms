@@ -26,6 +26,7 @@ app = angular.module('angularCmsApp', [
 	'ngRoute'
 	'ngAnimate'
 	'mgcrea.ngStrap'
+	'fg'
 	#'cms.Templates'
 ])
 	.config ($routeProvider) ->

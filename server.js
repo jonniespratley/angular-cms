@@ -61,7 +61,7 @@ var cmsRest = require('./routes/rest');
 var rest = new cmsRest(config);
 var auth = new cmsAuth(config, rest);
 
-auth.listen(config.port || process.env.PORT, function () {
+var webapp = auth.listen(config.port || process.env.PORT, function () {
 	console.log(String('Node.js REST server listening on port: ' + config.port).verbose);
 });
 
@@ -70,7 +70,7 @@ auth.listen(config.port || process.env.PORT, function () {
 var socket = require('./routes/socketserver').SocketServer;
 
 //Initialize socket server and rest server
-socket.init(auth);
+socket.init(webapp);
 
 
 
