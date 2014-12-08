@@ -16,21 +16,21 @@
  */
 
 //## Required Modules
-var crypto = require('crypto');
-var path = require('path');
-var express = require('express');
-var path = require('path');     //used for file path
-var fs = require('fs-extra');       //File System - for file manipulatio
-var util = require('util');
-var request = require('request');
-var easyimage = require('easyimage');
-var upload = require('jquery-file-upload-middleware');
-var sio = require('socket.io');
-var Deferred = require("promised-io/promise").Deferred;
-var when = require("promised-io/promise");
-var bodyParser = require('body-parser');
-var markdown = require("markdown").markdown;
-var busboy = require('connect-busboy'); //middleware for form/file upload
+var crypto = require( 'crypto' );
+var path = require( 'path' );
+var express = require( 'express' );
+var path = require( 'path' );     //used for file path
+var fs = require( 'fs-extra' );       //File System - for file manipulatio
+var util = require( 'util' );
+var request = require( 'request' );
+var easyimage = require( 'easyimage' );
+var upload = require( 'jquery-file-upload-middleware' );
+var sio = require( 'socket.io' );
+var Deferred = require( "promised-io/promise" ).Deferred;
+var when = require( "promised-io/promise" );
+var bodyParser = require( 'body-parser' );
+var markdown = require( "markdown" ).markdown;
+var busboy = require( 'connect-busboy' ); //middleware for form/file upload
 
 //Strings for results
 var MESSAGES = {
@@ -39,8 +39,8 @@ var MESSAGES = {
 	USER_REGISTRATION_EXISTS: 'User already in exists.'
 
 };
-var DS = require('jps-ds').DS;
-var _ds = new DS({
+var DS = require( 'jps-ds' ).DS;
+var _ds = new DS( {
 	host: 'angularcms:angularcms@paulo.mongohq.com:10089/app19632340',
 	models: {
 		'groups': {
@@ -117,16 +117,16 @@ var _ds = new DS({
 			active: Boolean
 		}
 	}
-});
+} );
 
 function delay(ms, value) {
 	// create a new Deferred
 	var deferred = new Deferred();
-	setTimeout(function () {
+	setTimeout( function () {
 		// fulfill the deferred/promise, all listeners to the promise will be notified, and
 		// provided the value as the value of the promise
-		deferred.resolve(value);
-	}, ms);
+		deferred.resolve( value );
+	}, ms );
 	// return the promise that is associated with the Deferred object
 	return deferred.promise;
 }
@@ -134,18 +134,17 @@ function delay(ms, value) {
 //### hashPassword
 //Hash password using basic sha1 hash.
 var hashPassword = function (pass, salt) {
-	var shasum = crypto.createHash('sha1');
-	shasum.update(salt + pass);
+	var shasum = crypto.createHash( 'sha1' );
+	shasum.update( salt + pass );
 
-	return shasum.digest('hex');
+	return shasum.digest( 'hex' );
 }
 
 //## Configuration
 
-
 //### Colors Config
-var colors = require('colors');
-colors.setTheme({
+var colors = require( 'colors' );
+colors.setTheme( {
 	silly: 'rainbow',
 	input: 'grey',
 	verbose: 'cyan',
@@ -156,10 +155,9 @@ colors.setTheme({
 	warn: 'yellow',
 	debug: 'blue',
 	error: 'red'
-});
+} );
 
 //# Class Objects
-
 
 //## Rest Resource
 //I am a RESTful resource object for handling CRUD operations on v1 or v2 api.
@@ -174,16 +172,16 @@ var RestResource = {
 		v1: 'https://www..com',
 		v2: '/api/v2/'
 	},
-	log: function(){
-		console.log(util.inspect(arguments, {colors: true}));
+	log: function () {
+		console.log( util.inspect( arguments, {colors: true} ) );
 
 	},
 	//### index
 	//I handle displaying a message with the version for this api.
 	index: function (req, res, next) {
-		res.json({
+		res.json( {
 			message: 'REST API Server ' + RestResource.useversion
-		});
+		} );
 	},
 	/**
 	 * //### login
@@ -194,7 +192,7 @@ var RestResource = {
 	 */
 	login: function (req, res, next) {
 		var query = {};
-		console.log(req.body);
+		console.log( req.body );
 
 		//TODO: Need to make this externalized.
 		if (req.body.username) {
@@ -205,16 +203,15 @@ var RestResource = {
 		}
 
 		//TODO: Hashing on client side
-		query.password = hashPassword(req.body.password, req.body.email);
+		query.password = hashPassword( req.body.password, req.body.email );
 
-		console.log('Login Query: ', query);
+		console.log( 'Login Query: ', query );
 
-		_ds.findOne('users', query).then(function (data) {
-			res.json(200, data);
+		_ds.findOne( 'users', query ).then( function (data) {
+			res.json( 200, data );
 		}, function (err) {
-			res.json(400, err);
-		});
-
+			res.json( 400, err );
+		} );
 
 	},
 	/**
@@ -229,8 +226,8 @@ var RestResource = {
 			query = {
 				email: req.body.email
 			};
-		data.password = hashPassword(req.body.password, req.body.email),
-		console.log(String("Register user").debug, req.body);
+		data.password = hashPassword( req.body.password, req.body.email ),
+			console.log( String( "Register user" ).debug, req.body );
 	},
 	session: function (req, res, next) {
 	},
@@ -240,11 +237,11 @@ var RestResource = {
 	upload: function (req, res, next) {
 		var appid = 'public';
 
-		if (req.param('appid')) {
-			appid = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			appid = String( req.param( 'appid' ) );
 		}
 
-		console.log(util.inspect(req, {colors: true}));
+		console.log( util.inspect( req, {colors: true} ) );
 
 		//Handle if dynamic filenames are enabled
 		var tmp_filename = req.files.file.name || 'tmp_name';
@@ -263,30 +260,30 @@ var RestResource = {
 		}
 
 		//Log the vars
-		console.log(x1, x2, y1, y2, height, width, thumb_path);
+		console.log( x1, x2, y1, y2, height, width, thumb_path );
 
 		//Orignal image
-		console.log(String('Temp Path: ' + tmp_path).warn);
-		console.log(String('Target Dir: ' + target_dir).warn);
-		console.log(String('Target Path: ' + target_path).warn);
+		console.log( String( 'Temp Path: ' + tmp_path ).warn );
+		console.log( String( 'Target Dir: ' + target_dir ).warn );
+		console.log( String( 'Target Path: ' + target_path ).warn );
 
 		//Thumbnail image
-		console.log(String('Original File: ' + filename).debug);
-		console.log(String('Original File Path: ' + target_path).debug);
-		console.log(String('Thumb Dir: ' + thumb_dir).debug);
-		console.log(String('Thumb Path: ' + thumb_path).debug);
+		console.log( String( 'Original File: ' + filename ).debug );
+		console.log( String( 'Original File Path: ' + target_path ).debug );
+		console.log( String( 'Thumb Dir: ' + thumb_dir ).debug );
+		console.log( String( 'Thumb Path: ' + thumb_path ).debug );
 
 		//Create the directory and move the file to that directory
-		fs.mkdir(target_dir, 0777, function (e) {
+		fs.mkdir( target_dir, 0777, function (e) {
 
 			//Rename the file
-			fs.rename(tmp_path, target_path, function (err) {
+			fs.rename( tmp_path, target_path, function (err) {
 				if (err) {
-					console.error('File Rename Error:', err);
+					console.error( 'File Rename Error:', err );
 				}
 
 				//Create the thumb directory
-				fs.mkdir(thumb_dir, 0777, function (e) {
+				fs.mkdir( thumb_dir, 0777, function (e) {
 
 					//Create the thumbnail from the default image
 					var imgOptions = {
@@ -300,8 +297,8 @@ var RestResource = {
 					};
 
 					//Resize the image
-					easyimg.resize(imgOptions, function (e) {
-						console.log('easyimg', imgOptions, e);
+					easyimg.resize( imgOptions, function (e) {
+						console.log( 'easyimg', imgOptions, e );
 						req.files.file.target_dir = target_dir;
 						req.files.file.target_path = target_path;
 						req.files.file.thumb_path = thumb_path;
@@ -322,52 +319,52 @@ var RestResource = {
 						};
 
 						//Output the results
-						res.send(json);
-					});
-				});
-			});
-		});
+						res.send( json );
+					} );
+				} );
+			} );
+		} );
 	},
 
 	//### get
 	//I handle gathering records dynamically from a call to the v2 api.
 	get: function (req, res, next) {
-		if (req.param('id')) {
-			console.log('find one', req.params.id);
-			_ds.findOne(req.params.collection, req.params.id).then(function (data) {
-				res.send(data);
+		if (req.param( 'id' )) {
+			console.log( 'find one', req.params.id );
+			_ds.findOne( req.params.collection, req.params.id ).then( function (data) {
+				res.send( data );
 			}, function (err) {
-				res.send(err);
-			});
+				res.send( err );
+			} );
 		} else {
-			_ds.findAll(req.params.collection).then(function (data) {
-				res.send(data);
+			_ds.findAll( req.params.collection ).then( function (data) {
+				res.send( data );
 			}, function (err) {
-				res.send(err);
-			});
+				res.send( err );
+			} );
 		}
 	},
 	//### add
 	//I handle adding a record to the database.
 	add: function (req, res, next) {
-		_ds.create(req.params.collection, req.body).then(function (data) {
-			console.warn('create', data);
-			res.send(data);
+		_ds.create( req.params.collection, req.body ).then( function (data) {
+			console.warn( 'create', data );
+			res.send( data );
 		}, function (err) {
-			res.send(err);
-		});
+			res.send( err );
+		} );
 	},
 	//### edit
 	//I handle
 	edit: function (req, res, next) {
 		var data = req.body;
 		delete data._id;
-		_ds.update(req.params.collection, req.params.id, data).then(function (data) {
-			console.warn(data);
-			res.send(data);
+		_ds.update( req.params.collection, req.params.id, data ).then( function (data) {
+			console.warn( data );
+			res.send( data );
 		}, function (err) {
-			res.send(err);
-		});
+			res.send( err );
+		} );
 	},
 	//### view
 	//I handle
@@ -376,76 +373,70 @@ var RestResource = {
 	//### destroy
 	//I handle
 	destroy: function (req, res, next) {
-		_ds.destroy(req.params.collection, req.params.id).then(function (data) {
-			console.warn(data);
-			res.send(data);
+		_ds.destroy( req.params.collection, req.params.id ).then( function (data) {
+			console.warn( data );
+			res.send( data );
 		}, function (err) {
-			res.send(err);
-		});
+			res.send( err );
+		} );
 	},
 	readme: function (res, req) {
 		var localPath = __dirname + '/../README.md';
-		fs.readFile(localPath, 'utf8', function (err, data) {
+		fs.readFile( localPath, 'utf8', function (err, data) {
 			if (err) {
-				req.end('There was an error.');
-				return console.log(err);
+				req.end( 'There was an error.' );
+				return console.log( err );
 			} else {
-				req.writeHead(200, {
+				req.writeHead( 200, {
 					"Content-Type": 'utf8',
 					"Content-Length": data.length
-				});
-				req.end(data);
+				} );
+				req.end( data );
 			}
-			console.log(data);
-		});
+			console.log( data );
+		} );
 	},
 	plugins: function (req, res) {
-		var result = fs.readdir('./app/cms-plugins', function (err, files) {
-			console.log(files);
-			res.header('Content-Type', 'application/json');
-			res.jsonp(200, files);
-		});
+		var result = fs.readdir( './app/cms-plugins', function (err, files) {
+			console.log( files );
+			res.header( 'Content-Type', 'application/json' );
+			res.jsonp( 200, files );
+		} );
 	}
 };
-
-
-
-
 
 //### getFile
 //Get file contents from a file.
 function getFile(localPath, mimeType, res) {
 
-	fs.readFile(localPath, 'utf8', function (err, data) {
+	fs.readFile( localPath, 'utf8', function (err, data) {
 		if (err) {
-			res.end('There was an error.');
-			return console.log(err);
+			res.end( 'There was an error.' );
+			return console.log( err );
 		} else {
-			res.writeHead(200, {
+			res.writeHead( 200, {
 				"Content-Type": 'utf8',
 				"Content-Length": data.length
-			});
-			res.end(data);
+			} );
+			res.end( data );
 		}
-		console.log(data);
+		console.log( data );
 
-	});
+	} );
 };
 
 //### writeFile
 //Write contents to a file
 function writeFile(localPath, contents) {
 	// create a stream, and create the file if it doesn't exist
-	stream = fs.createWriteStream(localPath);
-	console.log('writeFile', localPath);
-	stream.on("open", function () {
+	stream = fs.createWriteStream( localPath );
+	console.log( 'writeFile', localPath );
+	stream.on( "open", function () {
 		// write to and close the stream at the same time
-		stream.end(contents, 'utf-8');
-		res.end(html);
-	});
+		stream.end( contents, 'utf-8' );
+		res.end( html );
+	} );
 };
-
-
 
 var config = {};
 var publicPath = config.publicDir;
@@ -457,74 +448,65 @@ var cmsRest = function (options) {
 
 	var app = express();
 
-	console.log('\n\n---------------------'.verbose);
-	console.log('cmsRest.js');
-	console.log('email: admin@email.com '.verbose);
-	console.log('password: admin1234'.verbose)
-	console.log('---------------------\n\n'.verbose);
-
+	console.log( '\n\n---------------------'.verbose );
+	console.log( 'cmsRest.js' );
+	console.log( 'email: admin@email.com '.verbose );
+	console.log( 'password: admin1234'.verbose )
+	console.log( '---------------------\n\n'.verbose );
 
 	config = options;
-
-
 
 	//### Express Config
 	//Configure the express app server.
 	//### modules
 	//Gather all of the files and folders in the app/modules directory
-	app.get(config.apiBase + '/plugins', RestResource.plugins);
+	app.get( config.apiBase + '/plugins', RestResource.plugins );
 	//# Routes
 	//### v2 API
-	app.get(config.apiBase + '/readme', RestResource.readme);
+	app.get( config.apiBase + '/readme', RestResource.readme );
 	//v2 mongo rest api
-	app.get(config.apiBase, RestResource.index);
-	app.post(config.apiBase + '/upload', RestResource.upload);
-	app.get(config.apiBase + '/upload', function(req, res, next){
-		res.send({message: 'Upload a file with a POST.'});
-	});
-
+	app.get( config.apiBase, RestResource.index );
+	app.post( config.apiBase + '/upload', RestResource.upload );
+	app.get( config.apiBase + '/upload', function (req, res, next) {
+		res.send( {message: 'Upload a file with a POST.'} );
+	} );
 
 	//Always users table
-	app.post(config.apiBase + '/users/login', bodyParser.json(), RestResource.login);
-	app.post(config.apiBase + '/users/register', bodyParser.json(), RestResource.register);
-	app.post(config.apiBase + '/users/session', bodyParser.json(), RestResource.session);
+	app.post( config.apiBase + '/users/login', bodyParser.json(), RestResource.login );
+	app.post( config.apiBase + '/users/register', bodyParser.json(), RestResource.register );
+	app.post( config.apiBase + '/users/session', bodyParser.json(), RestResource.session );
 
 	//Dynamic REST
-	app.get(config.apiBase + '/:db/:collection/:id?', RestResource.get);
-	app.post(config.apiBase + '/:db/:collection', bodyParser.json(), RestResource.add);
-	app.put(config.apiBase + '/:db/:collection/:id', bodyParser.json(), RestResource.edit);
-	app.delete(config.apiBase + '/:db/:collection/:id', RestResource.destroy);
+	app.get( config.apiBase + '/:db/:collection/:id?', RestResource.get );
+	app.post( config.apiBase + '/:db/:collection', bodyParser.json(), RestResource.add );
+	app.put( config.apiBase + '/:db/:collection/:id', bodyParser.json(), RestResource.edit );
+	app.delete( config.apiBase + '/:db/:collection/:id', RestResource.destroy );
 
+	app.configure( function () {
+		app.use( busboy( {immediate: true} ) );
+		app.use( function (req, res) {
+			if (req.busboy) {
+				req.busboy.on( 'file', function (fieldname, file, filename, encoding, mimetype) {
+					// ...
+					console.warn( fieldname, file, filename );
+				} );
+				req.busboy.on( 'field', function (key, value, keyTruncated, valueTruncated) {
+					// ...
+					console.log( key, value );
+				} );
+				// etc ...
+			}
+		} );
+		app.set( "view options", {layout: false, pretty: true} );
+		app.use( express.static( config.staticDir ) );
+		app.use( express.directory( config.publicDir ) );
+		app.use( bodyParser.json() );
+		app.use( bodyParser.urlencoded() );
+		app.use( "jsonp callback", true );
 
-	app.configure(function () {
-		app.set("view options", {layout: false, pretty: true});
-		app.use(express.static(config.staticDir));
-		app.use(express.directory(config.publicDir));
-		app.use(bodyParser.json());
-		app.use(bodyParser.urlencoded());
-		app.use("jsonp callback", true);
-
-		app.use(config.apiBase + '/upload2', upload.fileHandler());
-		app.use(app.router);
-	});
-
-	// default options, immediately start reading from the request stream and
-// parsing
-app.use(busboy({ immediate: true }));
-// ...
-app.use(function(req, res) {
-  if(req.busboy){
-		req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-			// ...
-			console.warn(fieldname, file, filename);
-		});
-		req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
-			// ...
-			console.log(key, value);
-		});
-		// etc ...
-	}
-});
+		app.use( config.apiBase + '/upload2', upload.fileHandler() );
+		app.use( app.router );
+	} );
 
 
 

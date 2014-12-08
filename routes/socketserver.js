@@ -80,6 +80,7 @@ var SocketServer = {
 
 		//Handle when a client is connected.
 		io.sockets.on( 'connection', function (socket) {
+			console.warn('connection', socket);
 
 			//push to connections array
 			self.connections.push( socket );
