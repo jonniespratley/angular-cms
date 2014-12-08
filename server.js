@@ -20,7 +20,7 @@ colors.setTheme({
 	error: 'red'
 });
 
-/*
+/* */
  console.log("this is an silly".silly);
  console.log("this is an input".input);
  console.log("this is an verbose".verbose);
@@ -31,7 +31,7 @@ colors.setTheme({
  console.log("this is an debug".debug);
  console.log("this is an error".error);
  console.log("this is a warning".warn);
- */
+
 
 /**
  * @TODO - HTTPS Key and Cert
@@ -40,6 +40,7 @@ colors.setTheme({
  */
 var httpsKey = fs.readFileSync('./config/apache.key').toString();
 var httpsCert = fs.readFileSync('./config/apache.crt').toString();
+
 
 /**
  * @TODO - Proxy Options
@@ -64,6 +65,8 @@ var options = {
 	hostncmsOnly: true,
 	router: {}
 };
+
+
 /**
  * @TODO - Externalize configuration for server and proxy, mongodb
  */
@@ -75,10 +78,7 @@ var rest = require('./routes/rest').rest;
 //Socket server
 var socket = require('./routes/socketserver').SocketServer;
 
-//Initialize socket server and rest server
-socket.init(
-	rest.init(config)
-);
+
 
 
 //Create proxy server and proxy requests
@@ -113,13 +113,22 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 	}
 });
 
+//Initialize socket server and rest server
+socket.init(proxyServer);
+
+
+config.staticDir = __dirname + '/app';
+config.publicDir = __dirname + '/.tmp';
+//config.publicDir = __dirname + '/www';
+rest.init(config);
+
 //Start the proxy server
 proxyServer.listen(options.port);
 
 
 /**
  * Test Email
- */
+
 var email = require("emailjs");
 var server = email.server.connect({
 	user: config.email.username,
@@ -140,21 +149,6 @@ var message = {
 	]
 };
 
-// send the message and get a callback with an error or details of the message that was sent
-//server.send(message, function(err, message) { console.log(err || message); });
 
-// you can continue to send more messages with successive calls to 'server.send',
-// they will be queued on the same smtp connection
-
-// or you can create a new server connection with 'email.server.connect'
-// to asynchronously send individual emails instead of a queue
-
-
-/*
- * fs.readFile(req.files.displayImage.path, function (err, data) {
- // ...
- var newPath = __dirname + "/uploads/uploadedFileName";
- fs.writeFile(newPath, data, function (err) {
- res.redirect("back");
- });
- });*/
+server.send(message, function(err, message) { console.log(err || message); });
+*/

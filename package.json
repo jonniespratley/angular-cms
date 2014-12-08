@@ -83,6 +83,7 @@
     "jasmine-node": "~1.14.5",
     "jasmine-reporters": "^1.0.1",
     "jshint-stylish": "~1.0.0",
+    "jasmine-spec-reporter": "^1.1.0",
     "karma": "^0.12.28",
     "karma-chrome-launcher": "^0.1.5",
     "karma-coverage": "^0.2.6",

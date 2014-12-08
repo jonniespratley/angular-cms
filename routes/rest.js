@@ -16,23 +16,24 @@
  */
 
 //## Required Modules
-var mongo = require('mongodb');
-var mongoose = require('mongoose');
-var crypto = require('crypto');
+var mongo = require( 'mongodb' );
+var mongoose = require( 'mongoose' );
+var crypto = require( 'crypto' );
 var Server = mongo.Server;
-var path = require('path');
+var path = require( 'path' );
 var Db = mongo.Db;
 var BSON = mongo.BSONPure;
-var express = require('express');
-var fs = require('fs');
+var express = require( 'express' );
+var utils = require( 'util' );
+var fs = require( 'fs' );
 var app = express();
-var request = require('request');
-var upload = require('jquery-file-upload-middleware');
-var easyimg = require('easyimage');
-var sio = require('socket.io');
-var Deferred = require("promised-io/promise").Deferred;
-var when = require("promised-io/promise");
-var bodyParser = require('body-parser');
+var request = require( 'request' );
+var upload = require( 'jquery-file-upload-middleware' );
+var easyimg = require( 'easyimage' );
+var sio = require( 'socket.io' );
+var Deferred = require( "promised-io/promise" ).Deferred;
+var when = require( "promised-io/promise" );
+var bodyParser = require( 'body-parser' );
 
 //Strings for results
 var MESSAGES = {
@@ -42,21 +43,25 @@ var MESSAGES = {
 
 };
 
+var DS = require( 'jps-ds' ).DS;
 
-var DS = require('jps-ds').DS;
+var _ds = new DS( {
+	host: 'localhost/angular-cms',
+	models: {
+		'users': {username: String, email: String, password: String, meta: Object},
+		'pages': {title: String, body: String, published: Boolean, created: Date}
+	}
+} );
 
-var _ds = new DS({
-	host: 'localhost/angular-cms'
-});
 
 function delay(ms, value) {
 	// create a new Deferred
 	var deferred = new Deferred();
-	setTimeout(function () {
+	setTimeout( function () {
 		// fulfill the deferred/promise, all listeners to the promise will be notified, and
 		// provided the value as the value of the promise
-		deferred.resolve(value);
-	}, ms);
+		deferred.resolve( value );
+	}, ms );
 	// return the promise that is associated with the Deferred object
 	return deferred.promise;
 }
@@ -64,10 +69,10 @@ function delay(ms, value) {
 //### hashPassword
 //Hash password using basic sha1 hash.
 var hashPassword = function (pass, salt) {
-	var shasum = crypto.createHash('sha1');
-	shasum.update(salt + pass);
+	var shasum = crypto.createHash( 'sha1' );
+	shasum.update( salt + pass );
 
-	return shasum.digest('hex');
+	return shasum.digest( 'hex' );
 }
 
 //## Configuration
@@ -83,8 +88,8 @@ var cloudfilesConfig = {
 };
 
 //### Colors Config
-var colors = require('colors');
-colors.setTheme({
+var colors = require( 'colors' );
+colors.setTheme( {
 	silly: 'rainbow',
 	input: 'grey',
 	verbose: 'cyan',
@@ -95,10 +100,9 @@ colors.setTheme({
 	warn: 'yellow',
 	debug: 'blue',
 	error: 'red'
-});
+} );
 
 //# Class Objects
-
 
 //## Rest Resource
 //I am a RESTful resource object for handling CRUD operations on v1 or v2 api.
@@ -117,57 +121,57 @@ var RestResource = {
 	//### index
 	//I handle displaying a message with the version for this api.
 	index: function (req, res, next) {
-		res.json({
+		res.json( {
 			message: 'REST API Server ' + RestResource.useversion
-		});
+		} );
 	},
 	//### v1index
 	//I handle displaying a message with the version for v1 index.
 	v1index: function (req, res, next) {
 		RestResource.useversion = 'v1';
-		request(RestResource.urls[RestResource.useversion], function (error, response, body) {
-			console.log(error, response, body);
-			res.json(JSON.parse(body));
-		});
+		request( RestResource.urls[RestResource.useversion], function (error, response, body) {
+			console.log( error, response, body );
+			res.json( JSON.parse( body ) );
+		} );
 	},
 	//### v1get
 	//I handle forwarding requests to the www.myappmatrix.com v1 api server and handling the results.
 	v1get: function (req, res, next) {
-		var url = RestResource.urls[RestResource.useversion] + '/Api/getall/' + req.param('model') + '?appid=' + req.param('appid');
+		var url = RestResource.urls[RestResource.useversion] + '/Api/getall/' + req.param( 'model' ) + '?appid=' + req.param( 'appid' );
 
-		console.log('URL', url.debug);
+		console.log( 'URL', url.debug );
 
 		var options = {
 			url: url,
 			qs: {
-				appid: req.param('appid')
+				appid: req.param( 'appid' )
 			},
 			headers: {
 				Authorization: 'Basic: bXk6ZnJlZA=='
 			}
 		};
 
-		if (req.param('appid')) {
-			options.qs['appid'] = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			options.qs['appid'] = String( req.param( 'appid' ) );
 		}
-		request(options, function (error, response, body) {
+		request( options, function (error, response, body) {
 			if (!error) {
 				try {
-					res.json(JSON.parse(body).results);
+					res.json( JSON.parse( body ).results );
 				} catch (e) {
-					console.log(e);
-					res.json(Array({
+					console.log( e );
+					res.json( Array( {
 						status: false,
 						message: 'There was an error parsing the data.'
-					}));
+					} ) );
 				}
 			}
-		});
+		} );
 	},
 	//### v1method
 	//I handle forwarding method requests to a v1 api server and handling the results.
 	v1method: function (req, res, next) {
-		var url = RestResource.urls[RestResource.useversion] + '/' + req.param('method');
+		var url = RestResource.urls[RestResource.useversion] + '/' + req.param( 'method' );
 
 		var options = {
 			url: url,
@@ -179,33 +183,33 @@ var RestResource = {
 
 		options.qs = {}
 
-		if (req.param('appid')) {
-			options.qs['appid'] = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			options.qs['appid'] = String( req.param( 'appid' ) );
 		}
-		request(options, function (error, response, body) {
+		request( options, function (error, response, body) {
 			if (!error) {
 				try {
-					res.json(JSON.parse(body).results);
+					res.json( JSON.parse( body ).results );
 				} catch (e) {
-					console.log(e);
-					res.json(Array({
+					console.log( e );
+					res.json( Array( {
 						status: false,
 						message: 'There was an error parsing the data.'
-					}));
+					} ) );
 				}
 			}
-		});
+		} );
 	},
 	//### v1add
 	//I handle forwarding post requests to a v1 api server.
 	v1add: function (req, res, next) {
 		RestResource.version = 'v1';
 
-		var url = RestResource.urls[RestResource.useversion] + '/' + req.param('collection');
+		var url = RestResource.urls[RestResource.useversion] + '/' + req.param( 'collection' );
 		var method = 'POST';
-		if (req.param('id')) {
+		if (req.param( 'id' )) {
 			method = 'PUT';
-			url += '/' + req.param('id');
+			url += '/' + req.param( 'id' );
 		}
 
 		var options = {
@@ -219,54 +223,54 @@ var RestResource = {
 
 		options.qs = {}
 
-		if (req.param('appid')) {
-			options.qs['appid'] = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			options.qs['appid'] = String( req.param( 'appid' ) );
 		}
 
-		console.log(url);
+		console.log( url );
 
-		request(options, function (error, response, body) {
+		request( options, function (error, response, body) {
 			if (!error) {
 				try {
 
-					res.json(body);
+					res.json( body );
 
 				} catch (e) {
-					console.log(e);
-					res.json(Array({
+					console.log( e );
+					res.json( Array( {
 						status: false,
 						message: 'There was an error parsing the data.'
-					}));
+					} ) );
 				}
 			}
-		});
+		} );
 	},
 	//### v2index
 	//I handle displaying a message for the v2 api index.
 	v2index: function (req, res, next) {
 		RestResource.version = 'v2';
-		res.json({
+		res.json( {
 			message: 'REST API Server ' + RestResource.useversion
-		});
+		} );
 	},
 
 	findOne: function (req, table, query, success, fail) {
 		//Open db
-		var db = new mongo.Db('angular-cms', new mongo.Server(config.db.host, config.db.port));
-		db.open(function (err, db) {
-			db.collection(table, function (err, collection) {
+		var db = new mongo.Db( 'angular-cms', new mongo.Server( config.db.host, config.db.port ) );
+		db.open( function (err, db) {
+			db.collection( table, function (err, collection) {
 				var options = req.params.options || {};
-				collection.findOne(query, options, function (err, cursor) {
+				collection.findOne( query, options, function (err, cursor) {
 					if (cursor != null) {
-						success(cursor);
+						success( cursor );
 					} else {
 						err = "No data found!";
-						fail(err);
+						fail( err );
 					}
 					db.close();
-				});
-			});
-		});
+				} );
+			} );
+		} );
 	},
 	/**
 	 * //### login
@@ -277,7 +281,7 @@ var RestResource = {
 	 */
 	login: function (req, res, next) {
 		var query = {};
-		console.log(req.body);
+		console.log( req.body );
 
 		//TODO: Need to make this externalized.
 		if (req.body.username) {
@@ -288,31 +292,29 @@ var RestResource = {
 		}
 
 		//TODO: Hashing on client side
-		query.password = hashPassword(req.body.password, req.body.email);
+		query.password = hashPassword( req.body.password, req.body.email );
 
-		console.log('Login Query: ', query);
+		console.log( 'Login Query: ', query );
 
 		var deferred = new Deferred();
 
 		var userFound = false;
-		RestResource.findOne(req, 'users', query, function (u) {
+		RestResource.findOne( req, 'users', query, function (u) {
 			userFound = true;
-			res.jsonp(200, {
+			res.jsonp( 200, {
 				success: true,
 				result: u
-			});
+			} );
 
 		}, function (error) {
 			userFound = false;
-			res.jsonp(404, {
+			res.jsonp( 404, {
 				status: false,
 				error: true,
 				message: 'Invalid email/password.'
-			});
+			} );
 
-
-		});
-
+		} );
 
 	},
 	/**
@@ -328,67 +330,65 @@ var RestResource = {
 				email: req.body.email
 			};
 
+		data.password = hashPassword( req.body.password, req.body.email ),
+			console.log( String( "Register user" ).debug, req.body );
 
-		data.password = hashPassword(req.body.password, req.body.email),
-			console.log(String("Register user").debug, req.body);
-
-
-		RestResource.findOne(req, 'users', query, function (u) {
+		RestResource.findOne( req, 'users', query, function (u) {
 			user = u;
-			res.jsonp(404, {
+			res.jsonp( 404, {
 				status: false,
 				message: MESSAGES.USER_REGISTRATION_EXISTS
-			});
+			} );
 
 		}, function (error) {
 			user = null;
-			var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: true}));
-			db.open(function (err, db) {
-				db.collection('users', function (err, collection) {
-					collection.insert(data, function (err, docs) {
-						console.log(err, docs);
+			var db = new mongo.Db( config.db.name, new mongo.Server( config.db.host, config.db.port, {safe: true} ) );
+			db.open( function (err, db) {
+				db.collection( 'users', function (err, collection) {
+					collection.insert( data, function (err, docs) {
+						console.log( err, docs );
 						if (!err) {
-							res.header('Content-Type', 'application/json');
-							res.jsonp(200, {
+							res.header( 'Content-Type', 'application/json' );
+							res.jsonp( 200, {
 								status: true,
 								message: MESSAGES.USER_REGISTRATION_SUCCESS,
 								user: req.body
-							});
+							} );
 						} else {
-							res.jsonp(404, {
+							res.jsonp( 404, {
 								status: false,
 								message: MESSAGES.USER_REGISTRATION_ERROR
-							});
-							console.log(error.warn);
+							} );
+							console.log( error.warn );
 						}
 						db.close();
-					});
-				});
-			});
+					} );
+				} );
+			} );
 
-		});
+		} );
 	},
 	session: function (req, res, next) {
 	},
 
 	insert: function (collection, data) {
-		console.log(data);
+		console.log( data );
 		var deferred = new Deferred();
 		//Open db
-		var db = new mongo.Db(config.db.name, new mongo.Server(config.db.host, config.db.port, {safe: false}));
-		db.open(function (err, db) {
-			db.collection('users', function (err, collection) {
-				collection.insert(data, function (err, docs) {
-					console.log(err, docs);
+		var db = new mongo.Db( config.db.name, new mongo.Server( config.db.host, config.db.port, {safe: false} ) );
+		db.open( function (err, db) {
+			db.collection( 'users', function (err, collection) {
+				collection.insert( data, function (err, docs) {
+					console.log( err, docs );
 					if (!err) {
-						deferred.resolve(true);
+						deferred.resolve( true );
 					} else {
-						deferred.reject(false);
+						deferred.reject( false );
 					}
 					db.close();
-				});
-			});
-		});
+				} );
+			} );
+		} );
 		return deferred.promise;
 	},
 	//### upload
@@ -396,11 +396,11 @@ var RestResource = {
 	upload: function (req, res, next) {
 		var appid = 'public';
 
-		if (req.param('appid')) {
-			appid = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			appid = String( req.param( 'appid' ) );
 		}
 
-		console.log(req.files)
+		console.log( req.files )
 
 		//Handle if dynamic filenames are enabled
 		var tmp_filename = req.files.file.name || 'tmp_name';
@@ -419,26 +419,26 @@ var RestResource = {
 		}
 
 		//Log the vars
-		console.log(x1, x2, y1, y2, height, width, thumb_path);
+		console.log( x1, x2, y1, y2, height, width, thumb_path );
 
 		//Orignal image
-		console.log(String('Temp Path: ' + tmp_path).warn);
-		console.log(String('Target Dir: ' + target_dir).warn);
-		console.log(String('Target Path: ' + target_path).warn);
+		console.log( String( 'Temp Path: ' + tmp_path ).warn );
+		console.log( String( 'Target Dir: ' + target_dir ).warn );
+		console.log( String( 'Target Path: ' + target_path ).warn );
 
 		//Thumbnail image
-		console.log(String('Original File: ' + filename).debug);
-		console.log(String('Original File Path: ' + target_path).debug);
-		console.log(String('Thumb Dir: ' + thumb_dir).debug);
-		console.log(String('Thumb Path: ' + thumb_path).debug);
+		console.log( String( 'Original File: ' + filename ).debug );
+		console.log( String( 'Original File Path: ' + target_path ).debug );
+		console.log( String( 'Thumb Dir: ' + thumb_dir ).debug );
+		console.log( String( 'Thumb Path: ' + thumb_path ).debug );
 
 		//Create the directory and move the file to that directory
-		fs.mkdir(target_dir, 0777, function (e) {
+		fs.mkdir( target_dir, 0777, function (e) {
 
 			//Rename the file
-			fs.rename(tmp_path, target_path, function (err) {
+			fs.rename( tmp_path, target_path, function (err) {
 				if (err) {
-					console.error('File Rename Error:', err);
+					console.error( 'File Rename Error:', err );
 				}
 				;
 
@@ -446,7 +446,7 @@ var RestResource = {
 				//rackspaceUpload(target_path, target_dir, filename);
 
 				//Create the thumb directory
-				fs.mkdir(thumb_dir, 0777, function (e) {
+				fs.mkdir( thumb_dir, 0777, function (e) {
 
 					//Create the thumbnail from the default image
 					var imgOptions = {
@@ -460,9 +460,8 @@ var RestResource = {
 					};
 
 					//Resize the image
-					easyimg.resize(imgOptions, function (e) {
-						console.log('easyimg', imgOptions, e);
-
+					easyimg.resize( imgOptions, function (e) {
+						console.log( 'easyimg', imgOptions, e );
 
 						//Upload thumb to rackspace
 						/*
@@ -491,19 +490,19 @@ var RestResource = {
 						};
 
 						//Output the results
-						res.send(json);
-					});
-				});
-			});
-		});
+						res.send( json );
+					} );
+				} );
+			} );
+		} );
 	},
 	//### imageCrop
 	//I handle processing a uploaded image, cropping it and moving it to the proper directory, and uploaded to Rackspace Cloud Files.
 	imageCrop: function (req, res, next) {
 		var appid = null;
 
-		if (req.param('appid')) {
-			appid = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			appid = String( req.param( 'appid' ) );
 		}
 
 		//Handle if dynamic filenames are enabled
@@ -523,18 +522,18 @@ var RestResource = {
 		}
 
 		//Dev logger
-		console.log(x1, x2, y1, y2, height, width, thumb_path);
-		console.log(String('Target Path: ' + target_path).warn);
-		console.log(String('Target Dir: ' + target_dir).warn);
-		console.log(String('Temp Path: ' + tmp_path).warn);
+		console.log( x1, x2, y1, y2, height, width, thumb_path );
+		console.log( String( 'Target Path: ' + target_path ).warn );
+		console.log( String( 'Target Dir: ' + target_dir ).warn );
+		console.log( String( 'Temp Path: ' + tmp_path ).warn );
 
 		//Create the directory and move the file to that directory
-		fs.mkdir(target_dir, 0777, function (e) {
+		fs.mkdir( target_dir, 0777, function (e) {
 
 			//Rename the file
-			fs.rename(tmp_path, target_path, function (err) {
+			fs.rename( tmp_path, target_path, function (err) {
 				if (err) {
-					console.error('File Rename Error:', err);
+					console.error( 'File Rename Error:', err );
 				}
 				;
 
@@ -550,17 +549,17 @@ var RestResource = {
 				};
 
 				//Create the thumb directory and resize the image
-				fs.mkdir(thumb_dir, 0777, function (e) {
+				fs.mkdir( thumb_dir, 0777, function (e) {
 					//Resize the image
-					easyimg.resize(imgOptions, function (e) {
-						console.log('easyimg', e);
-					});
-				});
+					easyimg.resize( imgOptions, function (e) {
+						console.log( 'easyimg', e );
+					} );
+				} );
 				//unlink the file
-				fs.unlink(tmp_path, function () {
+				fs.unlink( tmp_path, function () {
 					if (err) {
 
-						console.error('File Unlink Error: ', err);
+						console.error( 'File Unlink Error: ', err );
 
 					} else {
 
@@ -580,81 +579,81 @@ var RestResource = {
 							results: req.files,
 							appid: appid
 						};
-						res.send(json);
+						res.send( json );
 					}
-				});
-			});
-		});
+				} );
+			} );
+		} );
 	},
 	//### get
 	//I handle gathering records dynamically from a call to the v2 api.
 	get: function (req, res, next) {
-		var query = req.query.query ? JSON.parse(req.query.query) : {};
+		var query = req.query.query ? JSON.parse( req.query.query ) : {};
 		var self = this;
 		// Providing an id overwrites giving a query in the URL
 		if (req.params.id) {
 			query = {
-				'_id': new BSON.ObjectID(req.params.id)
+				'_id': new BSON.ObjectID( req.params.id )
 			};
 		}
 		//Pass a appid param to get all records for that appid
-		if (req.param('appid')) {
-			query['appid'] = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			query['appid'] = String( req.param( 'appid' ) );
 		}
 		var options = req.params.options || {};
 		//Test array of legal query params
 		var test = ['limit', 'sort', 'fields', 'skip', 'hint', 'explain', 'snapshot', 'timeout'];
 		//loop and test
 		for (o in req.query) {
-			if (test.indexOf(o) >= 0) {
+			if (test.indexOf( o ) >= 0) {
 				options[o] = req.query[o];
 			}
 		}
 		//Log for interal usage
-		console.log('query', query, 'options', options);
+		console.log( 'query', query, 'options', options );
 		//new database instance
-		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
+		var db = new mongo.Db( req.params.db, new mongo.Server( config.db.host, config.db.port, {
 			auto_reconnect: true,
 			safe: true
-		}));
+		} ) );
 		//open database
-		db.open(function (err, db) {
+		db.open( function (err, db) {
 			if (err) {
-				console.log(err);
+				console.log( err );
 			} else {
 				//prep collection
-				db.collection(req.params.collection, function (err, collection) {
+				db.collection( req.params.collection, function (err, collection) {
 					//query
-					collection.find(query, options, function (err, cursor) {
-						cursor.toArray(function (err, docs) {
-							console.log(docs);
+					collection.find( query, options, function (err, cursor) {
+						cursor.toArray( function (err, docs) {
+							console.log( docs );
 							if (err) {
-								console.log(err);
+								console.log( err );
 							} else {
 								var result = [];
 								if (req.params.id) {
 									if (docs.length > 0) {
 										result = docs[0];
-										res.header('Content-Type', 'application/json');
-										res.jsonp(200, result);
+										res.header( 'Content-Type', 'application/json' );
+										res.jsonp( 200, result );
 									} else {
-										res.jsonp(404, 'Not found');
+										res.jsonp( 404, 'Not found' );
 										//res.send(404);
 									}
 								} else {
-									docs.forEach(function (doc) {
-										result.push(doc);
-									});
-									res.header('Content-Type', 'application/json');
-									res.jsonp(200, result);
+									docs.forEach( function (doc) {
+										result.push( doc );
+									} );
+									res.header( 'Content-Type', 'application/json' );
+									res.jsonp( 200, result );
 								}
 								db.close();
 							}
-						});
-					});
-				});
+						} );
+					} );
+				} );
 			}
-		});
+		} );
 	},
 	//### add
 	//I handle adding a record to the database.
@@ -664,81 +663,80 @@ var RestResource = {
 		var response = {};
 
 		if (data) {
-			var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
+			var db = new mongo.Db( req.params.db, new mongo.Server( config.db.host, config.db.port, {
 				auto_reconnect: true,
 				safe: true
-			}));
-			db.open(function (err, db) {
+			} ) );
+			db.open( function (err, db) {
 				if (err) {
-					console.log(err);
+					console.log( err );
 				} else {
-					db.collection(req.params.collection, function (err, collection) {
-						collection.count(function (err, count) {
-							console.log("There are " + count + " records.");
-						});
-					});
+					db.collection( req.params.collection, function (err, collection) {
+						collection.count( function (err, count) {
+							console.log( "There are " + count + " records." );
+						} );
+					} );
 
-					db.collection(req.params.collection, function (err, collection) {
+					db.collection( req.params.collection, function (err, collection) {
 						//Check if the posted data is an array, if it is, then loop and insert each document
 						if (data.length) {
 							//insert all docs
 							for (var i = 0; i < data.length; i++) {
 								var obj = data[i];
-								console.log(obj);
-								collection.insert(obj, function (err, docs) {
-									results.push(obj);
-								});
+								console.log( obj );
+								collection.insert( obj, function (err, docs) {
+									results.push( obj );
+								} );
 							}
 							response.results = results;
 							db.close();
-							res.header('Content-Type', 'application/json');
-							res.jsonp(200, response);
+							res.header( 'Content-Type', 'application/json' );
+							res.jsonp( 200, response );
 						} else {
-							collection.insert(req.body, function (err, docs) {
+							collection.insert( req.body, function (err, docs) {
 								db.close();
 								if (!err) {
 									response.status = 'ok';
 									response.data = docs[0];
 									//res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + docs[0]._id.toHexString());
-									res.header('Content-Type', 'application/json');
-									res.send(response, 201);
+									res.header( 'Content-Type', 'application/json' );
+									res.send( response, 201 );
 
 								}
-							});
+							} );
 						}
-					});
+					} );
 				}
-			});
+			} );
 		} else {
-			res.header('Content-Type', 'application/json');
-			res.send('{"ok":0}', 200);
+			res.header( 'Content-Type', 'application/json' );
+			res.send( '{"ok":0}', 200 );
 		}
 	},
 	//### edit
 	//I handle
 	edit: function (req, res, next) {
 		var spec = {
-			'_id': new BSON.ObjectID(req.params.id)
+			'_id': new BSON.ObjectID( req.params.id )
 		};
-		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
+		var db = new mongo.Db( req.params.db, new mongo.Server( config.db.host, config.db.port, {
 			'auto_reconnect': true,
 			'safe': true
-		}));
+		} ) );
 
-		console.log('Upating: ' + JSON.stringify(req.body).warn);
+		console.log( 'Upating: ' + JSON.stringify( req.body ).warn );
 
-
-		db.open(function (err, db) {
-			db.collection(req.params.collection, function (err, collection) {
-				collection.update(spec, req.body, true, function (err, docs) {
-					res.header('Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id);
-					res.header('Content-Type', 'application/json');
-					res.send('{"ok":1}');
+		db.open( function (err, db) {
+			db.collection( req.params.collection, function (err, collection) {
+				collection.update( spec, req.body, true, function (err, docs) {
+					res.header( 'Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id );
+					res.header( 'Content-Type', 'application/json' );
+					res.send( '{"ok":1}' );
 					db.close();
-					console.log('Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id);
-				});
-			});
-		});
+					console.log( 'Location', '/' + req.params.db + '/' + req.params.collection + '/' + req.params.id );
+				} );
+			} );
+		} );
 	},
 	//### view
 	//I handle
@@ -748,37 +746,37 @@ var RestResource = {
 	//I handle
 	destroy: function (req, res, next) {
 		var params = {
-			_id: new BSON.ObjectID(req.params.id)
+			_id: req.params.id
 		};
-		console.log('Delete by id ' + req.params);
-		var db = new mongo.Db(req.params.db, new mongo.Server(config.db.host, config.db.port, {
+		console.log( 'Delete by id ' + req.params );
+		var db = new mongo.Db( req.params.db, new mongo.Server( config.db.host, config.db.port, {
 			auto_reconnect: true,
 			safe: true
-		}));
-		db.open(function (err, db) {
-			db.collection(req.params.collection, function (err, collection) {
-				console.log('found ', collection.collectionName, params);
-				collection.remove(params, function (err, docs) {
+		} ) );
+		db.open( function (err, db) {
+			db.collection( req.params.collection, function (err, collection) {
+				console.log( 'found ', collection.collectionName, params );
+				collection.remove( params, function (err, docs) {
 					if (!err) {
-						res.header('Content-Type', 'application/json');
-						res.send('{"ok":1}');
+						res.header( 'Content-Type', 'application/json' );
+						res.send( '{"ok":1}' );
 						db.close();
 					} else {
-						console.log(err);
+						console.log( err );
 					}
-				});
-			});
-		});
+				} );
+			} );
+		} );
 	},
 	//### cloudupload
 	//I handle
 	cloudupload: function (req, res, next) {
 		var appid = null, results = null;
-		if (req.param('appid')) {
-			appid = String(req.param('appid'));
+		if (req.param( 'appid' )) {
+			appid = String( req.param( 'appid' ) );
 		}
 
-		console.log(req.files);
+		console.log( req.files );
 
 	},
 	/*
@@ -823,45 +821,43 @@ var RestResource = {
 
 //### v2 API
 //v2 mongo rest api
-app.get('/api/v2', RestResource.v2index);
-app.post('/api/v1/imagecrop', RestResource.imageCrop);
-app.post('/api/v2/cloudupload', RestResource.cloudupload);
+app.get( '/api/v2', RestResource.v2index );
+app.post( '/api/v1/imagecrop', RestResource.imageCrop );
+app.post( '/api/v2/cloudupload', RestResource.cloudupload );
 
-app.post('/api/v2/upload', RestResource.upload);
+app.post( '/api/v2/upload', RestResource.upload );
 
 //Always users table
-app.post('/api/v2/users/login', bodyParser.json(), RestResource.login);
-app.post('/api/v2/users/register', bodyParser.json(), RestResource.register);
-app.post('/api/v2/users/session', bodyParser.json(), RestResource.session);
+app.post( '/api/v2/users/login', bodyParser.json(), RestResource.login );
+app.post( '/api/v2/users/register', bodyParser.json(), RestResource.register );
+app.post( '/api/v2/users/session', bodyParser.json(), RestResource.session );
 
-
-app.get('/api/v2/:db/:collection/:id?', RestResource.get);
-app.post('/api/v2/:db/:collection', bodyParser.json(), RestResource.add);
-app.put('/api/v2/:db/:collection/:id', bodyParser.json(), RestResource.edit);
-app.delete('/api/v2/:db/:collection/:id', RestResource.destroy);
-
+app.get( '/api/v2/:db/:collection/:id?', RestResource.get );
+app.post( '/api/v2/:db/:collection', bodyParser.json(), RestResource.add );
+app.put( '/api/v2/:db/:collection/:id', bodyParser.json(), RestResource.edit );
+app.delete( '/api/v2/:db/:collection/:id', RestResource.destroy );
 
 //Readme
 
-var markdown = require("markdown").markdown;
-app.get('/api/v2/README', function (res, req) {
+var markdown = require( "markdown" ).markdown;
+app.get( '/api/v2/README', function (res, req) {
 	var localPath = __dirname + '/../README.md';
 
-	fs.readFile(localPath, 'utf8', function (err, data) {
+	fs.readFile( localPath, 'utf8', function (err, data) {
 		if (err) {
-			req.end('There was an error.');
-			return console.log(err);
+			req.end( 'There was an error.' );
+			return console.log( err );
 		} else {
-			req.writeHead(200, {
+			req.writeHead( 200, {
 				"Content-Type": 'utf8',
 				"Content-Length": data.length
-			});
-			req.end(data);
+			} );
+			req.end( data );
 		}
-		console.log(data);
+		console.log( data );
 
-	});
-});
+	} );
+} );
 /* ======================[ @TODO: Other Rest Utility Methods ]====================== */
 
 //### rackspaceUpload
@@ -870,63 +866,60 @@ function rackspaceUpload(localPath, targetPath, filename, cb) {
 
 };
 
-
 //### getFile
 //Get file contents from a file.
 function getFile(localPath, mimeType, res) {
 
-	fs.readFile(localPath, 'utf8', function (err, data) {
+	fs.readFile( localPath, 'utf8', function (err, data) {
 		if (err) {
-			res.end('There was an error.');
-			return console.log(err);
+			res.end( 'There was an error.' );
+			return console.log( err );
 		} else {
-			res.writeHead(200, {
+			res.writeHead( 200, {
 				"Content-Type": 'utf8',
 				"Content-Length": data.length
-			});
-			res.end(data);
+			} );
+			res.end( data );
 		}
-		console.log(data);
+		console.log( data );
 
-	});
+	} );
 };
 
 //### writeFile
 //Write contents to a file
 function writeFile(localPath, contents) {
 	// create a stream, and create the file if it doesn't exist
-	stream = fs.createWriteStream(localPath);
-	console.log('writeFile', localPath);
-	stream.on("open", function () {
+	stream = fs.createWriteStream( localPath );
+	console.log( 'writeFile', localPath );
+	stream.on( "open", function () {
 		// write to and close the stream at the same time
-		stream.end(contents, 'utf-8');
-		res.end(html);
-	});
+		stream.end( contents, 'utf-8' );
+		res.end( html );
+	} );
 };
 
 //### modules
 //Gather all of the files and folders in the app/modules directory
-app.get('/api/v2/modules', function (req, res) {
-	var result = fs.readdir('./app/cms-content', function (err, files) {
-		console.log(files);
-		res.header('Content-Type', 'application/json');
-		res.jsonp(200, files);
-	});
-});
+app.get( '/api/v2/modules', function (req, res) {
+	var result = fs.readdir( './app/cms-content', function (err, files) {
+		console.log( files );
+		res.header( 'Content-Type', 'application/json' );
+		res.jsonp( 200, files );
+	} );
+} );
 
 //Write the pass.json file to the file system
-app.get('/api/v2/smartpass/sign', function (req, res) {
-	var result = writeFile(req.params('path'), req.params('contents'));
-	res.header('Content-Type', 'application/json');
-	res.jsonp(200, result);
-});
-
+app.get( '/api/v2/smartpass/sign', function (req, res) {
+	var result = writeFile( req.params( 'path' ), req.params( 'contents' ) );
+	res.header( 'Content-Type', 'application/json' );
+	res.jsonp( 200, result );
+} );
 
 var config = {};
 var publicPath = config.publicDir;
 var uploadsTmpDir = config.uploadsTmpDir;
 var uploadDestDir = config.uploadDestDir;
-
 
 //Export to public api
 exports.rest = {
@@ -935,8 +928,8 @@ exports.rest = {
 	express: express,
 	init: function (options) {
 
-		console.log('email: admin@email.com '.verbose);
-		console.log('password: admin1234'.verbose)
+		console.log( 'email: admin@email.com '.verbose );
+		console.log( 'password: admin1234'.verbose )
 
 		config = options;
 
@@ -944,30 +937,28 @@ exports.rest = {
 		 */
 		//### Express Config
 		//Configure the express app server.
-		app.configure(function () {
-			app.set("view options", {layout: false, pretty: true});
+		app.configure( function () {
+			app.set( "view options", {layout: false, pretty: true} );
 
-			app.use(express.static(config.staticDir));
-			app.use(express.directory(config.publicDir));
+			app.use( express.static( config.staticDir ) );
+			app.use( express.directory( config.publicDir ) );
 
-			app.use(bodyParser.urlencoded({ extended: false }));
+			app.use( bodyParser.urlencoded( {extended: false} ) );
 			// parse application/json
-			app.use(bodyParser.json());
+			app.use( bodyParser.json() );
 
-			app.use("jsonp callback", true);
-			app.use('/api/upload', upload.fileHandler());
+			app.use( "jsonp callback", true );
+			app.use( '/api/upload', upload.fileHandler() );
 
-
-			app.use(function (req, res, next) {
-				console.log('%s %s', req.method, req.body, req.url);
+			app.use( function (req, res, next) {
+				console.log( '%s %s', req.method, utils.inspect( req.body, {colors: true} ), req.url );
 				next();
-			});
-		});
+			} );
+		} );
 
-
-		app.listen(options.port || process.env.PORT, function () {
-			console.log(String('Node.js REST server listening on port: ' + options.port).verbose);
-		});
+		app.listen( options.port || process.env.PORT, function () {
+			console.log( String( 'Node.js REST server listening on port: ' + options.port ).verbose );
+		} );
 
 		return app;
 	}

@@ -1,9 +1,11 @@
 <div id="users" ng-init="getUsers()">
 
 	<h1><i class="fa fa-1x fa-group"></i> Users
-	<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#user-modal" ng-click="user = {}">
-		New User
-	</button></h1>
+		<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#user-modal" ng-click="user = {}">
+			New User
+		</button>
+		<button class="btn btn-default btn-sm" ng-click="getUsers()">Refresh</button>
+	</h1>
 	<hr>
 
 	<div class="row">
@@ -11,37 +13,39 @@
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-condensed">
 					<thead>
-						<tr>
-							<th class="tc"><input type="checkbox"></th>
-							<th>E-mail</th>
-							<th>Username</th>
-							<th>Active</th>
-							<th>Created</th>
-							<th class="actions">Actions</th>
-						</tr>
+					<tr>
+						<th class="tc"><input type="checkbox"></th>
+						<th>E-mail</th>
+						<th>Username</th>
+						<th>Active</th>
+						<th>Created</th>
+						<th class="actions">Actions</th>
+					</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="user in users">
-							<td class="tc">
-								<input type="checkbox" value="{{user._id}}">
-							</td>
-							<td> {{user.email}} </td>
-							<td>
-								{{ user.username }}
-								<!--span class="label label-primary" ng-repeat="group in user.groups">{{group}}</span-->
-							</td>
-							<td> {{user.active}} </td>
-							<td> {{user.created | date:'medium'}} </td>
-							<td class="actions">
+					<tr ng-repeat="user in users">
+						<td class="tc">
+							<input type="checkbox" value="{{user._id}}">
+						</td>
+						<td> {{user.email}}</td>
+						<td>
+							{{ user.username }}
+							<span class="label label-primary" ng-repeat="group in user.groups">{{group}}</span>
+						</td>
+						<td> {{user.active}}</td>
+						<td> {{user.created | date:'medium'}}</td>
+						<td class="actions">
 							<div class="btn-group">
-								<button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal" data-target="#user-modal">
+								<button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal"
+												data-target="#user-modal">
 									<i class="fa fa-edit"></i>
 								</button>
 								<button type="button" class="btn btn-default btn-sm" ng-click="deleteUser($index, user);">
 									<i class="fa fa-trash-o"></i>
 								</button>
-							</div></td>
-						</tr>
+							</div>
+						</td>
+					</tr>
 					</tbody>
 				</table>
 			</div>
@@ -63,80 +67,94 @@
 										<form name="UserForm" class="form-horizontal" ng-submit="addUser(user)">
 
 											<div class="form-group">
-											<label class="control-label col-sm-3 col-xs-3">Username:</label>
-											<div class="controls col-sm-9 col-xs-9">
-											<input type="text" class="form-control" placeholder="Username" ng-model="user.username" autofocus>
+												<label class="control-label col-sm-3 col-xs-3">Username:</label>
+
+												<div class="controls col-sm-9 col-xs-9">
+													<input type="text" class="form-control" placeholder="Username" ng-model="user.username"
+																 autofocus>
+												</div>
 											</div>
+
+
+											<div class="form-group">
+												<label class="control-label col-sm-3 col-xs-3">Email:</label>
+
+												<div class="controls col-sm-9 col-xs-9">
+													<input type="email" class="form-control" placeholder="Email" ng-model="user.email"
+																 ng-disabled="user._id">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-3 col-xs-3">Password:</label>
+
+												<div class="controls col-sm-9 col-xs-9">
+													<input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-3 col-xs-3">Group:</label>
+
+												<div class="controls col-sm-9 col-xs-9">
+													<select ng-model="user.groups" class="form-control" multiple=""
+																	ng-options="group for group in groups">
+
+													</select>
+
+												</div>
 											</div>
 
+											<div class="form-group">
+												<label class="control-label col-sm-3 col-xs-3">Name:</label>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3 col-xs-3">Email:</label>
-                                                <div class="controls col-sm-9 col-xs-9">
-                                                    <input type="email" class="form-control" placeholder="Email" ng-model="user.email" ng-disabled="user._id">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3 col-xs-3">Password:</label>
-                                                <div class="controls col-sm-9 col-xs-9">
-                                                    <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
-                                                </div>
-                                            </div>
-                                            <!--div class="form-group">
-                                                <label class="control-label col-sm-3 col-xs-3">Group:</label>
-                                                <div class="controls col-sm-9 col-xs-9">
-                                                    <select ng-model="user.groups" class="form-control" multiple="" ng-options="group for group in groups">
+												<div class="controls col-sm-9 col-xs-9">
+													<input type="text" class="form-control" placeholder="Name" ng-model="user.meta.name">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-3 col-xs-3">Summary:</label>
 
-                                                    </select>
+												<div class="controls col-sm-9 col-xs-9">
+													<textarea class="form-control" placeholder="Enter 50 words or less..."
+																		ng-model="user.meta.summary"></textarea>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-3 col-xs-3">Active:</label>
 
-                                                </div>
-                                            </div-->
+												<div class="controls col-sm-9 col-xs-9">
+													<input type="checkbox" class="form-control" placeholder="Name" ng-model="user.active">
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="col-sm-4 col-xs-5">
+										<aside class="profile-pic center">
 
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3 col-xs-3">Name:</label>
-                                                <div class="controls col-sm-9 col-xs-9">
-                                                    <input type="text" class="form-control" placeholder="Name" ng-model="user.meta.name">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3 col-xs-3">Summary:</label>
-                                                <div class="controls col-sm-9 col-xs-9">
-                                                    <textarea class="form-control" placeholder="Enter 50 words or less..."  ng-model="user.meta.summary"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label col-sm-3 col-xs-3">Active:</label>
-                                                <div class="controls col-sm-9 col-xs-9">
-                                                    <input type="checkbox" class="form-control" placeholder="Name" ng-model="user.active">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-sm-4 col-xs-5">
-                                        <aside class="profile-pic center">
+											<div class="well well-sm">
+												<img ng-src="{{ user.email | gravatar }}" alt="{{App.session.user.username}}"/>
 
-                                            <div class="well well-sm">
-                                                <img ng-src="{{ user.email | gravatar }}" alt="{{App.session.user.username}}"/>
-
-                                                <br/>
-                                                <small> To change visit <a href="gravatar.com" target="_blank">gravatar.com</a> </small>
-                                            </div>
-                                        </aside>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="button" class="btn btn-primary" ng-click="addUser(user)" ng-disabled="!UserForm.$valid">
-                                Submit
-                            </button>
-                        </div>
-                    </div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
+												<br/>
+												<small> To change visit <a href="gravatar.com" target="_blank">gravatar.com</a></small>
+											</div>
+										</aside>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button>
+							<button type="button" class="btn btn-primary" ng-click="addUser(user)" ng-disabled="!UserForm.$valid">
+								Submit
+							</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
 		</div>
 	</div>
 </div>
