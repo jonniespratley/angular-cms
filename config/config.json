@@ -16,6 +16,10 @@
 		"username": "angular.cms@gmail.com",
 		"password": "isyourdaughter18?"
 	},
+	"proxy": {
+		"hostname": "localhost",
+		"port": 5001
+	},
 	"staticDir": "/dist",
 	"publicDir": "/app",
 	"uploadsTmpDir": "/.tmp",

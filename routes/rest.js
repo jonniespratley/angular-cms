@@ -23,14 +23,14 @@ var path = require('path');     //used for file path
 var fs = require('fs-extra');       //File System - for file manipulatio
 var util = require('util');
 var request = require('request');
-var easyimage = require('easyimage');
-var upload = require('jquery-file-upload-middleware');
+
 var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 var bodyParser = require('body-parser');
-var markdown = require("markdown").markdown;
 var busboy = require('connect-busboy'); //middleware for form/file upload
+var markdown = require("markdown").markdown;
+
 
 //Strings for results
 var MESSAGES = {
@@ -257,99 +257,6 @@ var RestResource = {
 	session: function (req, res, next) {
 	},
 
-	//### upload
-	//I handled processing a uploaded file on the v2 server.
-	upload: function (req, res, next) {
-		var appid = 'public';
-
-		if (req.param('appid')) {
-			appid = String(req.param('appid'));
-		}
-
-		console.log(util.inspect(req, {colors: true}));
-
-		//Handle if dynamic filenames are enabled
-		var tmp_filename = req.files.file.name || 'tmp_name';
-		var filename = tmp_filename;
-		var tmp_path = req.files.file.path;
-		var target_dir = config.uploadsDestDir + '/' + appid + '/';
-		var target_path = config.uploadsDestDir + '/' + appid + '/' + filename;
-		var thumb_dir = config.uploadsDestDir + '/' + appid + '/thumbnail/';
-		var thumb_path = config.uploadsDestDir + '/' + appid + '/thumbnail/' + filename;
-
-		//Get the params for cropping an image
-		var x1 = req.body.x1, y1 = req.body.y1, x2 = req.body.x2, y2 = req.body.y2, height = req.body.height, width = req.body.width, filepath = target_path;
-
-		if (!width) {
-			width = 150;
-		}
-
-		//Log the vars
-		console.log(x1, x2, y1, y2, height, width, thumb_path);
-
-		//Orignal image
-		console.log(String('Temp Path: ' + tmp_path).warn);
-		console.log(String('Target Dir: ' + target_dir).warn);
-		console.log(String('Target Path: ' + target_path).warn);
-
-		//Thumbnail image
-		console.log(String('Original File: ' + filename).debug);
-		console.log(String('Original File Path: ' + target_path).debug);
-		console.log(String('Thumb Dir: ' + thumb_dir).debug);
-		console.log(String('Thumb Path: ' + thumb_path).debug);
-
-		//Create the directory and move the file to that directory
-		fs.mkdir(target_dir, 0777, function (e) {
-
-			//Rename the file
-			fs.rename(tmp_path, target_path, function (err) {
-				if (err) {
-					console.error('File Rename Error:', err);
-				}
-
-				//Create the thumb directory
-				fs.mkdir(thumb_dir, 0777, function (e) {
-
-					//Create the thumbnail from the default image
-					var imgOptions = {
-						src: target_path,
-						dst: thumb_path,
-						width: width,
-						height: height,
-						quality: 100,
-						x: x1,
-						y: y1
-					};
-
-					//Resize the image
-					easyimg.resize(imgOptions, function (e) {
-						console.log('easyimg', imgOptions, e);
-						req.files.file.target_dir = target_dir;
-						req.files.file.target_path = target_path;
-						req.files.file.thumb_path = thumb_path;
-						req.files.file.thumb_dir = thumb_dir;
-						req.files.file.filename = filename;
-
-						//build the response object
-						var json = {
-							status: true,
-							filename: filename,
-							targetDir: target_dir,
-							targetPath: target_path,
-							thumbDir: thumb_dir,
-							thumbPath: thumb_path,
-							msg: 'File Uploaded',
-							results: req.files,
-							appid: appid
-						};
-
-						//Output the results
-						res.send(json);
-					});
-				});
-			});
-		});
-	},
 
 	//### get
 	//I handle gathering records dynamically from a call to the v2 api.
@@ -465,84 +372,4 @@ function writeFile(localPath, contents) {
 };
 
 
-var config = {};
-var publicPath = config.publicDir;
-var uploadsTmpDir = config.uploadsTmpDir;
-var uploadDestDir = config.uploadDestDir;
-
-var cmsRest = function (options) {
-	"use strict";
-
-	var app = express();
-
-	console.log('\n\n---------------------'.verbose);
-	console.log('cmsRest.js');
-	console.log('email: admin@email.com '.verbose);
-	console.log('password: admin1234'.verbose)
-	console.log('---------------------\n\n'.verbose);
-
-
-	config = options;
-
-	var router = express.Router();
-
-	//### Express Config
-	//Configure the express app server.
-	//### modules
-	//Gather all of the files and folders in the app/modules directory
-	router.get(config.apiBase + '/plugins', RestResource.plugins);
-	//# Routes
-	//### v2 API
-	router.get(config.apiBase + '/readme', RestResource.readme);
-	//v2 mongo rest api
-	router.get(config.apiBase, RestResource.index);
-	router.post(config.apiBase + '/upload', RestResource.upload);
-	router.get(config.apiBase + '/upload', function (req, res, next) {
-		res.send({message: 'Upload a file with a POST.'});
-	});
-
-
-	//Always users table
-	router.post(config.apiBase + '/users/login', bodyParser.json(), RestResource.login);
-	router.post(config.apiBase + '/users/register', bodyParser.json(), RestResource.register);
-	router.post(config.apiBase + '/users/session', bodyParser.json(), RestResource.session);
-
-	//Dynamic REST
-	router.route(config.apiBase + '/:db/:collection/:id?')
-		.all(function (req, res, next) {
-			console.warn('REST ', req.param('collection'));
-		})
-		.get(RestResource.get)
-		.post(bodyParser.json(), RestResource.add)
-		.put(bodyParser.json(), RestResource.edit)
-		.delete(RestResource.destroy);
-
-	router.use(bodyParser.json());
-	router.use(bodyParser.urlencoded({extended: false}));
-	router.use(config.apiBase + '/upload2', upload.fileHandler());
-
-
-
-	// default options, immediately start reading from the request stream and
-// parsing
-	router.use(busboy({immediate: true}));
-// ...
-	router.use(function (req, res) {
-		if (req.busboy) {
-			req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
-				// ...
-				console.warn(fieldname, file, filename);
-			});
-			req.busboy.on('field', function (key, value, keyTruncated, valueTruncated) {
-				// ...
-				console.log(key, value);
-			});
-			// etc ...
-		}
-	});
-
-
-	return router;
-};
-
-module.exports = cmsRest;
+module.exports = RestResource;

@@ -4,21 +4,18 @@
  */
 var fs = require('fs'),
 	util = require('util'),
+	http = require('http'),
+	express = require('express'),
 	httpProxy = require('http-proxy'),
-	colors = require('colors');
+	colors = require('colors'),
+	app = express();
 
-colors.setTheme({
-	silly: 'rainbow',
-	input: 'grey',
-	verbose: 'cyan',
-	prompt: 'grey',
-	info: 'green',
-	data: 'grey',
-	help: 'cyan',
-	warn: 'yellow',
-	debug: 'blue',
-	error: 'red'
-});
+
+	/**
+	* @TODO - Externalize configuration for server and proxy, mongodb
+	*/
+	var config = JSON.parse(fs.readFileSync('./config/config.json'));
+
 
 /**
  * @TODO - HTTPS Key and Cert
@@ -51,28 +48,17 @@ var options = {
 	hostncmsOnly: true,
 	router: {}
 };
-/**
- * @TODO - Externalize configuration for server and proxy, mongodb
- */
-var config = JSON.parse(fs.readFileSync('./config/config.json'));
-var cmsAuth = require('./routes/cms-auth');
-var cmsRest = require('./routes/rest');
 
-var rest = new cmsRest(config);
-var auth = new cmsAuth(config, rest);
 
-var webapp = auth.listen(config.port || process.env.PORT, function () {
-	console.log(String('Node.js REST server listening on port: ' + config.port).verbose);
+
+
+var cmsRoutes = require('./routes/cms-routes');
+
+cmsRoutes.mount(config, app);
+
+var webapp = http.createServer(app).listen(config.port || process.env.PORT, function () {
+	util.log(String('App listening on port: ' + config.port).verbose);
 });
-
-
-//Socket server
-var socket = require('./routes/socketserver').SocketServer;
-
-//Initialize socket server and rest server
-socket.init(webapp);
-
-
 
 
 
@@ -87,7 +73,7 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 			host: '127.0.0.1',
 			port: options.api.port
 		});
-		console.log('Routing request: API server'.warn);
+		util.log('Routing request: API server'.warn);
 
 	} else if (req.url.match(/^\/1\//)) {
 
@@ -95,7 +81,7 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 		proxy.proxyRequest(req, res, {
 			host: 'api.parse.com'
 		});
-		console.log('Routing request: Parse Server'.warn);
+		util.log('Routing request: Parse Server'.warn);
 
 	} else {
 
@@ -104,9 +90,10 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 			host: '127.0.0.1',
 			port: options.api.port
 		});
-		console.log('Routing request: App Server'.warn);
+		util.log('Routing request: App Server'.warn);
 	}
 });
 
+
 //Start the proxy server
-proxyServer.listen(options.port);
+proxyServer.listen(config.proxy.port);

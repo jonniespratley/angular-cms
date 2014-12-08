@@ -23,7 +23,8 @@ var sio = require( 'socket.io' ), q = require( 'q' );
 var delay = function (fn, time) {
 	var defer = q.defer();
 	setTimeout( function () {
-		defer.resolve( fn() );
+		fn();
+		defer.resolve();
 	}, time );
 	return defer.promise;
 }
