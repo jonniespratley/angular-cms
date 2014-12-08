@@ -19,7 +19,9 @@
 var crypto = require('crypto');
 var path = require('path');
 var express = require('express');
-var fs = require('fs'), util = require('util');
+var path = require('path');     //used for file path
+var fs = require('fs-extra');       //File System - for file manipulatio
+var util = require('util');
 var request = require('request');
 var easyimage = require('easyimage');
 var upload = require('jquery-file-upload-middleware');
@@ -28,7 +30,7 @@ var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 var bodyParser = require('body-parser');
 var markdown = require("markdown").markdown;
-
+var busboy = require('connect-busboy'); //middleware for form/file upload
 
 //Strings for results
 var MESSAGES = {
@@ -242,7 +244,7 @@ var RestResource = {
 			appid = String(req.param('appid'));
 		}
 
-		console.log(req.files)
+		console.log(util.inspect(req, {colors: true}));
 
 		//Handle if dynamic filenames are enabled
 		var tmp_filename = req.files.file.name || 'tmp_name';
@@ -455,10 +457,15 @@ var cmsRest = function (options) {
 
 	var app = express();
 
-	console.warn('cmsRest - options', options);
+	console.log('\n\n---------------------'.verbose);
+	console.log('cmsRest.js');
 	console.log('email: admin@email.com '.verbose);
 	console.log('password: admin1234'.verbose)
+	console.log('---------------------\n\n'.verbose);
+
+
 	config = options;
+
 
 
 	//### Express Config
@@ -472,6 +479,10 @@ var cmsRest = function (options) {
 	//v2 mongo rest api
 	app.get(config.apiBase, RestResource.index);
 	app.post(config.apiBase + '/upload', RestResource.upload);
+	app.get(config.apiBase + '/upload', function(req, res, next){
+		res.send({message: 'Upload a file with a POST.'});
+	});
+
 
 	//Always users table
 	app.post(config.apiBase + '/users/login', bodyParser.json(), RestResource.login);
@@ -489,18 +500,34 @@ var cmsRest = function (options) {
 		app.set("view options", {layout: false, pretty: true});
 		app.use(express.static(config.staticDir));
 		app.use(express.directory(config.publicDir));
-		app.use(bodyParser.urlencoded({extended: false}));
 		app.use(bodyParser.json());
+		app.use(bodyParser.urlencoded());
 		app.use("jsonp callback", true);
-		app.use(config.apiBase + '/upload2', upload.fileHandler());
 
+		app.use(config.apiBase + '/upload2', upload.fileHandler());
 		app.use(app.router);
-		app.use(function (req, res, next) {
-			console.warn(req.param('db'), req.param('collection'))
-			console.log('%s %s', req.method, req.body, req.url);
-			next();
-		});
 	});
+
+	// default options, immediately start reading from the request stream and
+// parsing
+app.use(busboy({ immediate: true }));
+// ...
+app.use(function(req, res) {
+  if(req.busboy){
+		req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+			// ...
+			console.warn(fieldname, file, filename);
+		});
+		req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
+			// ...
+			console.log(key, value);
+		});
+		// etc ...
+	}
+});
+
+
+
 	return app;
 };
 

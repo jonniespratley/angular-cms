@@ -4,17 +4,18 @@
 		<cms-header title="Pages" icon="folder-open"></cms-header>
       <section>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-sm-12">
+						<div class="alerts"></div>
 
 
 
-
-            <table class="table table-condensed table-hover table-striped clearfix">
+            <table class="table table-condensed table-hover table-striped clearfix table-bordered">
               <thead>
                 <tr>
                   <th class="th-checkbox"><input type="checkbox" class="checkbox"></th>
                   <th>Title</th>
 									<th>Date</th>
+									<th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,7 +27,16 @@
 										<span class="label label-default">{{page.publish}}</span>
 									</td>
 									<td>{{page.created | date:'medium'}}</td>
-
+<td class="actions">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal" data-target="#user-modal">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm" ng-click="deleteUser($index, user);">
+                          <i class="fa fa-trash-o"></i>
+                        </button>
+                      </div>
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -34,19 +44,45 @@
         </div>
       </section>
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-7 col-xs-7">
           <input type="text" class="form-control" placeholder="Enter title here" ng-model="page.title">
           <span class="help-block">
 						<strong>Permlink:</strong> http://{{App.baseurl}}/?page_id={{page.slug}}
 						</span>
           <textarea class="form-control" rows="5" ng-model="page.body"></textarea>
         </div>
-        <div class="col-sm-4">
-          <ul class="list-unstyled">
-						<li>Status: {{page.status}}</li>
-					</ul>
-					<button href="#" class="btn btn-danger btn-block btn-xs" ng-click="remove(page)">Move to trash</button>
-					<button class="btn pull-right btn-primary btn-block" ng-click="save(page)">Save</button>
+        <div class="col-sm-5 col-xs-5">
+					<ul class="list-unstyled form-list">
+                <li class="form-group">
+                  <label class="col-sm-2 control-label">Published:</label>
+                  <input type="checkbox" ng-model="page.status" value="true">
+                </li>
+                <li class="form-group">
+                  <label class="col-sm-2 control-label">Order:</label>
+                  <input type="number">
+                </li>
+                <li class="form-group">
+                  <label class="col-sm-2 control-label">Parent:</label>
+                  <select>
+                    <option>Page 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select>
+                </li>
+                <li class="form-group">
+                  <label class="col-sm-2 control-label">Template:</label>
+                  <select>
+                    <option>Template 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                  </select>
+                </li>
+                <li class="form-actions">
+          <button href="#" class="btn btn-danger btn-block btn-xs" ng-click="remove(page)">Move to trash</button>
+							<button class="btn pull-right btn-primary btn-block" ng-click="save(page)">Save</button>
+                </li>
+              </ul>
+
         </div>
       </div>
     </div>
