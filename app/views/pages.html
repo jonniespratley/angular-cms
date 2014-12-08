@@ -29,10 +29,10 @@
 									<td>{{page.created | date:'medium'}}</td>
 <td class="actions">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal" data-target="#user-modal">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="selectPage(page);" data-toggle="modal" data-target="#user-modal">
                           <i class="fa fa-edit"></i>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm" ng-click="deleteUser($index, user);">
+                        <button type="button" class="btn btn-default btn-sm" ng-click="remove(page);">
                           <i class="fa fa-trash-o"></i>
                         </button>
                       </div>
