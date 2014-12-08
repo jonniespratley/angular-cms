@@ -9,13 +9,15 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 
 [![Coverage Status](https://coveralls.io/repos/jonniespratley/angular-cms/badge.png)](https://coveralls.io/r/jonniespratley/angular-cms)
 
-
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free)
 
-
 [![Dependency Status](https://david-dm.org/jonniespratley/angular-cms.svg)](https://david-dm.org/jonniespratley/angular-cms)
+
+[![Code Climate](https://codeclimate.com/github/jonniespratley/angular-cms/badges/gpa.svg)](https://codeclimate.com/github/jonniespratley/angular-cms)
+
+[![Test Coverage](https://codeclimate.com/github/jonniespratley/angular-cms/badges/coverage.svg)](https://codeclimate.com/github/jonniespratley/angular-cms)
 
 ### Technologies
 
@@ -75,13 +77,13 @@ To run the application on your local machine please take the following steps.
 
 To start mongodb execute the following command:
 
-<<<<<<< HEAD
+\<\<\<\<\<\<< HEAD
+
 ```
 $ sh ./bin/db.sh
 ```
-=======
-	$ sh ./bin/db.sh
->>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
+
+======= $ sh ./bin/db.sh >>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
 
 > **Note:** If errors when executing command remove the `db/mongod.lock` file.
 
@@ -140,13 +142,17 @@ $ grunt protractor
 
 ---
 
-<<<<<<< HEAD
+\<\<\<\<\<\<< HEAD
+
 RESTful Server
 --------------
+
 =======
-## RESTful Server
-The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s).
->>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
+
+RESTful Server
+--------------
+
+The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s). >>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
 
 The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s).
 
@@ -208,22 +214,23 @@ my-theme/
 		content.html
 ```
 
-
-
 ---
 
-## Plugins
+Plugins
+-------
+
 Plugins will be installed via `bower`, search and install themes searching by tag `angular-cms`.
 
 ### Structure of plugin
 
-
 ---
 
-## API Documentation
+API Documentation
+-----------------
+
 The API documentation will be in the form of ngDocs style. The files located in the `content` directory are tutorial specs for the different features in this project. Documentation can be generated and viewed by running the following command:
 
-```
+\`\`\`
 
 $ grunt docs\`\`\`
 
