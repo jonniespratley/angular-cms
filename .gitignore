@@ -3,7 +3,6 @@ node_modules
 .idea
 .grunt
 .sass-cache
-.editorconfig
 .project
 app/bower_components
 coverage/
