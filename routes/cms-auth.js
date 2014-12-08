@@ -16,7 +16,6 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 
-var router = express.Router();
 
 var users = [
 	{id: 1, username: 'admin', password: 'admin', email: 'admin@gmail.com'},
