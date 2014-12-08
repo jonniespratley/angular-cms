@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('angularCmsApp')
-  .controller 'PagesCtrl', ($scope, $log, pages, DataService) ->
+  .controller 'PagesCtrl', ($scope, $log, pages, DataService, cmsNotify) ->
     $scope.awesomeThings = [
       'HTML5 Boilerplate'
       'AngularJS'
@@ -28,6 +28,7 @@ angular.module('angularCmsApp')
       DataService.save('pages', p).then((res) ->
         $scope.getPages()
         $scope.page = {}
+        cmsNotify( '.alerts', 'success', 'Success!', "Page Update.", 5000)
         $log.info(res)
       )
 

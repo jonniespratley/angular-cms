@@ -5,11 +5,15 @@ This is a boilerplate CMS built with Angular, Twitter Bootstrap and Node; it is 
 
 [![Build Status](https://travis-ci.org/jonniespratley/angular-cms.png)](https://travis-ci.org/jonniespratley/angular-cms)
 
+[![Codacy Badge](https://www.codacy.com/project/badge/0825389c11854c23a05cc512385ec82d)](https://www.codacy.com/public/jonniespratley/angular-cms)
+
+[![Coverage Status](https://coveralls.io/repos/jonniespratley/angular-cms/badge.png)](https://coveralls.io/r/jonniespratley/angular-cms)
+
+
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonniespratley/angular-cms/trend.png)](https://bitdeli.com/free)
 
-[![Coverage Status](https://coveralls.io/repos/jonniespratley/angular-cms/badge.png)](https://coveralls.io/r/jonniespratley/angular-cms)[![Dependency Status](https://david-dm.org/jonniespratley/angular-cms.svg)](https://david-dm.org/jonniespratley/angular-cms)
 
 [![Dependency Status](https://david-dm.org/jonniespratley/angular-cms.svg)](https://david-dm.org/jonniespratley/angular-cms)
 
@@ -71,9 +75,13 @@ To run the application on your local machine please take the following steps.
 
 To start mongodb execute the following command:
 
+<<<<<<< HEAD
 ```
 $ sh ./bin/db.sh
 ```
+=======
+	$ sh ./bin/db.sh
+>>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
 
 > **Note:** If errors when executing command remove the `db/mongod.lock` file.
 
@@ -132,8 +140,13 @@ $ grunt protractor
 
 ---
 
+<<<<<<< HEAD
 RESTful Server
 --------------
+=======
+## RESTful Server
+The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s).
+>>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
 
 The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s).
 

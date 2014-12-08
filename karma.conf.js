@@ -72,8 +72,7 @@ module.exports = function (config) {
 		coverageReporter: {
 			reporters: [
 				{type: 'html', dir: 'coverage/'},
-				{type: 'lcov', dir: 'coverage/'},
-				{type: 'text-summary', dir: 'coverage/'}
+				{type: 'lcov', dir: 'coverage/', file: 'lcov.info'}
 			]
 		},
 		// Continuous Integration mode

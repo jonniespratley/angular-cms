@@ -1,7 +1,7 @@
 
 // An example configuration file.
 exports.config = {
-	baseUrl: 'http://localhost:9000',
+	baseUrl: 'http://127.0.0.1:9000',
   // The address of a running selenium server.
   seleniumAddress: 'http://localhost:4444/wd/hub',
 	// ---- 3. To use remote browsers via Sauce Labs -----------------------------
@@ -24,7 +24,7 @@ exports.config = {
   },
 
 	params: {
-		baseUrl: 'http://localhost:9000'
+		baseUrl: 'http://127.0.0.1:9000'
 	},
 
   // Spec patterns are relative to the current working directly when
@@ -40,7 +40,7 @@ exports.config = {
     defaultTimeoutInterval: 30000
   },
 	onPrepare: function(){
-		//browser.driver.get(browser.params.baseUrl);
+		browser.driver.get(browser.params.baseUrl);
 		var SpecReporter = require('jasmine-spec-reporter');
     jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: true}));
 	}
