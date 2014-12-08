@@ -601,7 +601,7 @@ module.exports = function (grunt) {
 					clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
 				},
 				src: [
-					'.tmp/routes/*-spec.js'
+					'test/routes/*-spec.js'
 				]
 			}
 		}

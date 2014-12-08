@@ -4,7 +4,7 @@
 	"apiBase": "/api/v2",
 	"version": "v2",
 	"security": {"salt": ""},
-	"mongodb": "angularcms:angularcms@paulo.mongohq.com:10089/app19632340",
+	"mongodb": "localhost:27017/angular-cms",
 	"db": {
 		"name": "angular-cms",
 		"username": "amadmin",

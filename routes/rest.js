@@ -42,6 +42,7 @@ var MESSAGES = {
 var DS = require('jps-ds').DS;
 var _ds = new DS({
 	host: 'angularcms:angularcms@paulo.mongohq.com:10089/app19632340',
+	//host: 'localhost:27017/angular-cms',
 	models: {
 		'groups': {
 			title: String,
@@ -51,6 +52,12 @@ var _ds = new DS({
 			updated: Date
 		},
 		'users': {
+			id: String,
+			provider: String,
+			displayName: String,
+			name: Object,
+			emails: Array,
+			photos: Array,
 			username: String,
 			email: String,
 			password: String,
@@ -174,7 +181,7 @@ var RestResource = {
 		v1: 'https://www..com',
 		v2: '/api/v2/'
 	},
-	log: function(){
+	log: function () {
 		console.log(util.inspect(arguments, {colors: true}));
 
 	},
@@ -194,25 +201,28 @@ var RestResource = {
 	 */
 	login: function (req, res, next) {
 		var query = {};
-		console.log(req.body);
-
 		//TODO: Need to make this externalized.
 		if (req.body.username) {
 			query.username = req.body.username;
 		}
 		if (req.body.email) {
-			query.email = req.body.email;
+			query.username = req.body.email;
 		}
 
 		//TODO: Hashing on client side
-		query.password = hashPassword(req.body.password, req.body.email);
+		query.password = hashPassword(req.body.password, query.username);
 
-		console.log('Login Query: ', query);
+		console.warn('Login Query: ' + JSON.stringify(query) + ''.verbose);
 
 		_ds.findOne('users', query).then(function (data) {
-			res.json(200, data);
+			if (data) {
+				res.jsonp(200, data);
+			} else {
+				res.jsonp(404, {message: 'Wrong username/password!'});
+			}
+
 		}, function (err) {
-			res.json(400, err);
+			res.jsonp(400, err);
 		});
 
 
@@ -224,13 +234,25 @@ var RestResource = {
 	 * @param next
 	 */
 	register: function (req, res, next) {
-		var data = req.body,
-			user = null,
-			query = {
-				email: req.body.email
-			};
-		data.password = hashPassword(req.body.password, req.body.email),
-		console.log(String("Register user").debug, req.body);
+		var data = req.body;
+
+		//TODO: Need to make this externalized.
+		if (req.body.username) {
+			data.username = req.body.username;
+		}
+		if (req.body.email) {
+			data.username = req.body.email;
+		}
+
+		//TODO: Hashing on client side
+		data.password = hashPassword(req.body.password, data.username);
+
+		_ds.create('users', data).then(function (user) {
+			res.json(201, user);
+		}, function (err) {
+			res.json(400, err);
+		});
+		//	console.log(String("Register user").debug, query);
 	},
 	session: function (req, res, next) {
 	},
@@ -409,9 +431,6 @@ var RestResource = {
 };
 
 
-
-
-
 //### getFile
 //Get file contents from a file.
 function getFile(localPath, mimeType, res) {
@@ -446,7 +465,6 @@ function writeFile(localPath, contents) {
 };
 
 
-
 var config = {};
 var publicPath = config.publicDir;
 var uploadsTmpDir = config.uploadsTmpDir;
@@ -466,69 +484,65 @@ var cmsRest = function (options) {
 
 	config = options;
 
-
+	var router = express.Router();
 
 	//### Express Config
 	//Configure the express app server.
 	//### modules
 	//Gather all of the files and folders in the app/modules directory
-	app.get(config.apiBase + '/plugins', RestResource.plugins);
+	router.get(config.apiBase + '/plugins', RestResource.plugins);
 	//# Routes
 	//### v2 API
-	app.get(config.apiBase + '/readme', RestResource.readme);
+	router.get(config.apiBase + '/readme', RestResource.readme);
 	//v2 mongo rest api
-	app.get(config.apiBase, RestResource.index);
-	app.post(config.apiBase + '/upload', RestResource.upload);
-	app.get(config.apiBase + '/upload', function(req, res, next){
+	router.get(config.apiBase, RestResource.index);
+	router.post(config.apiBase + '/upload', RestResource.upload);
+	router.get(config.apiBase + '/upload', function (req, res, next) {
 		res.send({message: 'Upload a file with a POST.'});
 	});
 
 
 	//Always users table
-	app.post(config.apiBase + '/users/login', bodyParser.json(), RestResource.login);
-	app.post(config.apiBase + '/users/register', bodyParser.json(), RestResource.register);
-	app.post(config.apiBase + '/users/session', bodyParser.json(), RestResource.session);
+	router.post(config.apiBase + '/users/login', bodyParser.json(), RestResource.login);
+	router.post(config.apiBase + '/users/register', bodyParser.json(), RestResource.register);
+	router.post(config.apiBase + '/users/session', bodyParser.json(), RestResource.session);
 
 	//Dynamic REST
-	app.get(config.apiBase + '/:db/:collection/:id?', RestResource.get);
-	app.post(config.apiBase + '/:db/:collection', bodyParser.json(), RestResource.add);
-	app.put(config.apiBase + '/:db/:collection/:id', bodyParser.json(), RestResource.edit);
-	app.delete(config.apiBase + '/:db/:collection/:id', RestResource.destroy);
+	router.route(config.apiBase + '/:db/:collection/:id?')
+		.all(function (req, res, next) {
+			console.warn('REST ', req.param('collection'));
+		})
+		.get(RestResource.get)
+		.post(bodyParser.json(), RestResource.add)
+		.put(bodyParser.json(), RestResource.edit)
+		.delete(RestResource.destroy);
+
+	router.use(bodyParser.json());
+	router.use(bodyParser.urlencoded({extended: false}));
+	router.use(config.apiBase + '/upload2', upload.fileHandler());
 
 
-	app.configure(function () {
-		app.set("view options", {layout: false, pretty: true});
-		app.use(express.static(config.staticDir));
-		app.use(express.directory(config.publicDir));
-		app.use(bodyParser.json());
-		app.use(bodyParser.urlencoded());
-		app.use("jsonp callback", true);
-
-		app.use(config.apiBase + '/upload2', upload.fileHandler());
-		app.use(app.router);
-	});
 
 	// default options, immediately start reading from the request stream and
 // parsing
-app.use(busboy({ immediate: true }));
+	router.use(busboy({immediate: true}));
 // ...
-app.use(function(req, res) {
-  if(req.busboy){
-		req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-			// ...
-			console.warn(fieldname, file, filename);
-		});
-		req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
-			// ...
-			console.log(key, value);
-		});
-		// etc ...
-	}
-});
+	router.use(function (req, res) {
+		if (req.busboy) {
+			req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+				// ...
+				console.warn(fieldname, file, filename);
+			});
+			req.busboy.on('field', function (key, value, keyTruncated, valueTruncated) {
+				// ...
+				console.log(key, value);
+			});
+			// etc ...
+		}
+	});
 
 
-
-	return app;
+	return router;
 };
 
 module.exports = cmsRest;
