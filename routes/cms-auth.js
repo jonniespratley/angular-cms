@@ -80,18 +80,18 @@ module.exports = function (config, app) {
 
 			//Try and find user
 			User.find( data, function (err, u) {
+				console.log(err, u);
 				if (u) {
 					res.json( 400, {message: 'Username already exists!'} );
-				} else {
-					user.save( function (err, ok) {
-						if (err) {
-							res.json( 400, {message: 'Problem registering!'} );
-						} else {
-							res.json( 200, ok );
-						}
-					} );
 				}
+			} );
 
+			user.save( function (err, ok) {
+				if (err) {
+					res.json( 400, {message: 'Problem registering!'} );
+				} else {
+					res.json( 200, ok );
+				}
 			} );
 
 		},
