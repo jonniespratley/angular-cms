@@ -192,70 +192,7 @@ var RestResource = {
 			message: 'REST API Server ' + RestResource.useversion
 		});
 	},
-	/**
-	 * //### login
-	 //I handle trying to authorized a user with the v1 api server.
-	 * @param req
-	 * @param res
-	 * @param next
-	 */
-	login: function (req, res, next) {
-		var query = {};
-		//TODO: Need to make this externalized.
-		if (req.body.username) {
-			query.username = req.body.username;
-		}
-		if (req.body.email) {
-			query.username = req.body.email;
-		}
 
-		//TODO: Hashing on client side
-		query.password = hashPassword(req.body.password, query.username);
-
-		console.warn('Login Query: ' + JSON.stringify(query) + ''.verbose);
-
-		_ds.findOne('users', query).then(function (data) {
-			if (data) {
-				res.jsonp(200, data);
-			} else {
-				res.jsonp(404, {message: 'Wrong username/password!'});
-			}
-
-		}, function (err) {
-			res.jsonp(400, err);
-		});
-
-
-	},
-	/**
-	 * Handle registering a new user
-	 * @param req
-	 * @param res
-	 * @param next
-	 */
-	register: function (req, res, next) {
-		var data = req.body;
-
-		//TODO: Need to make this externalized.
-		if (req.body.username) {
-			data.username = req.body.username;
-		}
-		if (req.body.email) {
-			data.username = req.body.email;
-		}
-
-		//TODO: Hashing on client side
-		data.password = hashPassword(req.body.password, data.username);
-
-		_ds.create('users', data).then(function (user) {
-			res.json(201, user);
-		}, function (err) {
-			res.json(400, err);
-		});
-		//	console.log(String("Register user").debug, query);
-	},
-	session: function (req, res, next) {
-	},
 
 
 	//### get

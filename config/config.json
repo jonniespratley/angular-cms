@@ -3,7 +3,7 @@
 	"port": 8181,
 	"apiBase": "/api/v2",
 	"version": "v2",
-	"security": {"salt": ""},
+	"security": {"salt": "angular-cms"},
 	"mongodb": "localhost:27017/angular-cms",
 	"db": {
 		"name": "angular-cms",
