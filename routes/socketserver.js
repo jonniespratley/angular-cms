@@ -18,7 +18,16 @@
 //Start the websocket server
 //SocketServer.init(proxyServer);
 
-var sio = require( 'socket.io' );
+var sio = require( 'socket.io' ), q = require( 'q' );
+
+var delay = function (fn, time) {
+	var defer = q.defer();
+	setTimeout( function () {
+		defer.resolve( fn() );
+	}, time );
+	return defer.promise;
+}
+
 //Hold the ncmss of events that this socket server listens for and emits
 var CmsSocket = {
 	events: {
@@ -40,6 +49,7 @@ var CmsSocket = {
 		}
 	}
 };
+var clients = [];
 var SocketServer = {
 	connections: [],
 	events: {
@@ -66,6 +76,62 @@ var SocketServer = {
 		var self = this;
 
 		io = sio.listen( app );
+		io.sockets.on( 'connection', function (socket) {
+			console.log( 'Client connected' );
+
+			clients.push( socket );
+
+			io.sockets.emit( 'this', {will: 'be received by everyone'} );
+
+			socket.on( 'disconnect', function () {
+				io.sockets.emit( 'user disconnected' );
+			} );
+
+			socket.emit( 'msg', {
+				datetime: new Date(),
+				id: socket.id,
+				message: "Welcome " + socket.id + " your the #" + clients.length + " socket."
+			} );
+
+			//Send custom event to client
+			socket.on( 'msgEvent', function (data, fn) {
+				console.log( 'Client message', data );
+				fn( {
+					id: socket.id,
+					datetime: new Date(),
+					message: data
+				} );
+			} );
+
+			socket.on( 'set nickname', function (name) {
+				socket.set( 'nickname', name, function () {
+					socket.emit( 'ready' );
+				} );
+			} );
+
+			socket.on( 'msg', function () {
+				socket.get( 'nickname', function (err, name) {
+					console.log( 'Chat message by ', name );
+				} );
+			} );
+
+			//Setup auto push after interval
+			var delayedSocketPush = delay( function (msg) {
+				socket.emit( 'msg', {
+					datetime: new Date(),
+					message: msg,
+					id: 'Server'
+				} );
+			}, 5000 );
+
+			var resultPromise = delayedSocketPush( 'Here is some streaming data....' );
+
+			resultPromise( function (value) {
+
+			} );
+
+		} );
+
 		io.configure( function () {
 			io.set( 'authorization', function (handshakeData, callback) {
 				if (handshakeData.xdomain) {
@@ -80,7 +146,7 @@ var SocketServer = {
 
 		//Handle when a client is connected.
 		io.sockets.on( 'connection', function (socket) {
-			console.warn('connection', socket);
+			console.warn( 'connection', socket );
 
 			//push to connections array
 			self.connections.push( socket );
