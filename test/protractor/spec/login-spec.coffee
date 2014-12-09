@@ -8,7 +8,7 @@ describe 'Login:', ->
 		loginPage.get()
 	afterEach ->
 		loginPage.logout()
-	it 'should have Username and password inputs with a button to submit the form', ->
+	it 'should allow a user to login', ->
 		loginPage.login('test@email.com', 'test').then(()->
 			expect(browser.getLocationAbsUrl()).toContain '/dashboard'
 		)

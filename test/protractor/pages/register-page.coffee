@@ -19,6 +19,7 @@ RegisterPage =
 		@password2.sendKeys(password)
 		@agree.click().then(()=>
 			@submit.click()
+			browser.sleep(1000)
 		)
 
 
