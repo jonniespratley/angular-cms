@@ -31,7 +31,13 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 			register - I handle register a user.
 		###
 		register: (user) ->
-			return $http.post(@endpoint + "/register", user)
+			$http.post(@endpoint + "/register", user).then(
+				(res)=>
+					@authorize(res.data)
+			, (err) ->
+				$log.error(err)
+				cmsNotify( '.message', 'danger', 'Error!', err.data.message, 4000)
+			)
 
 		###*
 			Logout method to clear the session.
@@ -65,6 +71,6 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 				#Change location
 				$rootScope.App.location.path('/dashboard')
 			, (err)->
-				console.error(err)
+				$log.error(err)
 				cmsNotify('.login-message', 'danger', 'Error!', err.data.message)
 			)
