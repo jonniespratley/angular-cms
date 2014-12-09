@@ -43,13 +43,18 @@ module.exports = function (config, app) {
 				if (err) {
 					res.jsonp( 400, err );
 				}
-				if (data && bcrypt.compareSync(req.body.password, data.password)) {
-					res.jsonp( 200, data );
-				} else {
-					res.jsonp( 404, {message: 'Wrong username/password!'} );
+
+				try {
+					if (data && bcrypt.compareSync(req.body.password, data.password)) {
+						req.session.user = data;
+						res.jsonp( 200, data );
+					} else {
+						res.jsonp( 404, {message: 'Wrong username/password!'} );
+					}
+				} catch (error) {
+					res.jsonp( 404, {message: error} );
 				}
 			} );
-
 		},
 		/**
 		 * Handle registering a new user
@@ -99,6 +104,12 @@ module.exports = function (config, app) {
 			} );
 		},
 		session: function (req, res, next) {
+			var user = req.session;
+			if(req.session && req.session.user){
+				user = req.session.user
+			}
+			console.warn(util.inspect(user, {colors: true}));
+			res.send({message: 'Your session', data: user});
 		}
 	};
 
@@ -108,7 +119,8 @@ module.exports = function (config, app) {
 		resave: true,
 		saveUninitialized: true
 	} ) );
-	app.post( config.apiBase + '/users/login', bodyParser.json(), cmsAuth.login );
-	app.post( config.apiBase + '/users/register', bodyParser.json(), cmsAuth.register );
-	app.post( config.apiBase + '/users/session', bodyParser.json(), cmsAuth.session );
+	app.get( config.apiBase + '/login', bodyParser.json(), cmsAuth.login );
+	app.post( config.apiBase + '/login', bodyParser.json(), cmsAuth.login );
+	app.post( config.apiBase + '/register', bodyParser.json(), cmsAuth.register );
+	app.get( config.apiBase + '/session', bodyParser.json(), cmsAuth.session );
 };

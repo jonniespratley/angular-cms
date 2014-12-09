@@ -35,7 +35,7 @@ describe('Testing: API Server', function () {
 
 	it('POST - /api/v2/users/register - should return user on successful registation', function (done) {
 		request(app)
-			.post('/api/v2/users/register')
+			.post('/api/v2/register')
 			.send(postData)
 			.expect("Content-Type", /json/)
 			.expect(201, done);
@@ -47,7 +47,7 @@ describe('Testing: API Server', function () {
 			password: 'test'
 		};
 		request(app)
-			.post('/api/v2/users/login')
+			.post('/api/v2/login')
 			.send(validUser)
 			.expect("Content-Type", /json/)
 			.expect(200, done);
@@ -58,7 +58,7 @@ describe('Testing: API Server', function () {
 			password: 'wrongpassword'
 		};
 		request(app)
-			.post('/api/v2/users/login')
+			.post('/api/v2/login')
 			.send(invalidUser)
 			.expect("Content-Type", /json/)
 			.expect(404, done);

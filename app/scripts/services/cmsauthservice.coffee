@@ -21,13 +21,19 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 		authorize - I handle authorizing a user.
 		###
 		authorize: (user) ->
-			return $http.post( @endpoint+"/users/login", user )
+			return $http.post( @endpoint+"/login", user )
+
+		###*
+		session - I handle getting a session.
+		###
+		session: () ->
+			return $http.get( @endpoint+"/session" )
 
 		###*
 			register - I handle register a user.
 		###
 		register: (user) ->
-			return $http.post( @endpoint+"/users/register", user )
+			return $http.post( @endpoint+"/register", user )
 
 		###*
 			Logout method to clear the session.

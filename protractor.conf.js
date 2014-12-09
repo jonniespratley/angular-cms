@@ -30,8 +30,8 @@ exports.config = {
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: [
-	  '.tmp/protractor/*-spec.js',
-	  'test/protractor/*-spec.js'
+	  '.tmp/protractor/**/*-spec.js',
+	  'test/protractor/**/*-spec.js'
   ],
 
   // Options to be passed to Jasmine-node.

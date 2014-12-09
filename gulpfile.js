@@ -5,14 +5,21 @@ coffee = require( 'gulp-coffee' );
 uglify = require( 'gulp-uglify' );
 
 gulp.task( 'js', function () {
-	return gulp
+	gulp
 		.src( './app/scripts/**/*.coffee' )
 		.pipe( coffee() )
 		.pipe( uglify() )
 		.pipe( gulp.dest( './.tmp/scripts' ) );
 } );
+gulp.task( 'js:test', function () {
+	gulp
+		.src( './test/**/*.coffee' )
+		.pipe( coffee() )
+		.pipe( uglify() )
+		.pipe( gulp.dest( './.tmp' ) );
+} );
 
 gulp.task( 'watch', function () {
-	return gulp
-		.watch( './app/scripts/**/*.coffee', ['js'] );
+	gulp.watch( './app/scripts/**/*.coffee', ['js'] );
+	gulp.watch( './test/**/*.coffee', ['js:test'] )
 } );
