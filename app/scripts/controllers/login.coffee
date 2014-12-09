@@ -39,7 +39,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 			,
 			(err)->
 				console.error(err)
-				cmsNotify( '.login-message', 'danger', 'Error!', err.data.message, 2500)
+				cmsNotify( '.login-message', 'danger', 'Error!', err.data.message)
 		)
 
 	###

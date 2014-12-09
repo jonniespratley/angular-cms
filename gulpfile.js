@@ -7,15 +7,18 @@ uglify = require( 'gulp-uglify' );
 gulp.task( 'js', function () {
 	gulp
 		.src( './app/scripts/**/*.coffee' )
-		.pipe( coffee() )
+		.pipe( coffee({
+			bare: true
+		}) )
 		.pipe( uglify() )
 		.pipe( gulp.dest( './.tmp/scripts' ) );
 } );
 gulp.task( 'js:test', function () {
 	gulp
 		.src( './test/**/*.coffee' )
-		.pipe( coffee() )
-		.pipe( uglify() )
+		.pipe( coffee({
+			bare: true
+		}) )
 		.pipe( gulp.dest( './.tmp' ) );
 } );
 

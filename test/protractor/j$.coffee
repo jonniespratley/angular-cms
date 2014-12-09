@@ -6,6 +6,6 @@ j$ =
     console.warn('finding', label) if label
     $(selector)
   input: (name) ->
-    $('#'+name)
+    element(protractor.By.css("[name=#{name}]")).getWebElement()
 
 module.exports = j$

@@ -1,5 +1,5 @@
 /* jshint camelcase:false */
-// Generated on 2013-12-06 using generator-angular 0.6.0-rc.2
+var fs = require('fs');
 'use strict';
 
 // # Globbing
@@ -7,7 +7,11 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
-
+/**
+* @TODO - Externalize configuration for server and proxy, mongodb
+*/
+var config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
+var cmsRoutes = require(__dirname + '/routes/cms-routes');
 var serverEndpoint = 'http://localhost:8181';
 var proxyConfig = {
 	proxy: {
@@ -31,10 +35,7 @@ module.exports = function (grunt) {
 	//Connect proxy to route requests to localhost:8181/api
 	grunt.loadNpmTasks('grunt-connect-proxy');
 	require('json-proxy').initialize({});
-	// Load grunt tasks automatically
 	require('load-grunt-tasks')(grunt);
-
-	// Time how long tasks take. Can help when optimizing build times
 	require('time-grunt')(grunt);
 
 	var GruntConfig = {
@@ -57,7 +58,7 @@ module.exports = function (grunt) {
 				files: ['test/spec/{,**/}*.{coffee,litcoffee,coffee.md}'],
 				tasks: ['coffee:test', 'newer:coffee:test', 'karma:unit']
 			},
-			
+
 			compass: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
 				tasks: ['compass:server', 'autoprefixer']
@@ -89,13 +90,7 @@ module.exports = function (grunt) {
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname: '127.0.0.1',
 				livereload: 35729,
-				middleware: function (connect, options) {
-					return [
-						require('json-proxy').initialize(proxyConfig),
-						mountFolder(connect, '.grunt'),
-						mountFolder(connect, '.tmp')
-					];
-				}
+				base: ['.tmp', '<%= yeoman.app %>']
 			},
 			livereload: {
 				options: {
@@ -103,8 +98,9 @@ module.exports = function (grunt) {
 					base: ['.tmp', '<%= yeoman.app %>'],
 					middleware: function (connect, options) {
 						return [
-							require('json-proxy').initialize(proxyConfig),
-							mountFolder(connect, '.tmp'),
+						require('json-proxy').initialize(proxyConfig),
+						mountFolder(connect, '.grunt'),
+						mountFolder(connect, '.tmp'),
 							mountFolder(connect, 'app')
 						];
 					}

@@ -8,21 +8,21 @@
 
 		</div>
 		<div class="form-group">
-			<input name="email" type="email" class="form-control" placeholder="Email" ng-model="user.email" required/>
+			<input id="email" name="email" type="email" class="form-control" placeholder="Email" ng-model="user.email" required/>
 		</div>
 		<div class="form-group">
-			<input name="username" type="text" class="form-control" placeholder="Username" ng-model="user.username" required/>
+			<input id="username" name="username" type="text" class="form-control" placeholder="Username" ng-model="user.username"/>
 		</div>
 		<div class="form-group">
-			<input name="password" type="password" class="form-control" placeholder="Password" ng-model="user.password" required/>
+			<input id="password" name="password" type="password" class="form-control" placeholder="Password" ng-model="user.password" required/>
 		</div>
 		<div class="form-group">
-			<input name="password2" type="password" class="form-control" placeholder="Confirm Password" ng-model="user.password2"
+			<input id="password2" name="password2" type="password" class="form-control" placeholder="Confirm Password" ng-model="user.password2"
 				   required/>
 		</div>
 		<div class="form-group">
 			<label>
-				<input name="agree" class="inline-checkbox" type="checkbox" ng-model="user.agree" required>
+				<input id="agree" name="agree" class="inline-checkbox" type="checkbox" ng-model="user.agree" required>
 				Agree to Terms of Use
 			</label>
 		</div>
@@ -34,6 +34,5 @@
 	</form>
 	<div class="clearfix">
 		<span class="pull-left"> Back to <a href="#/login">Login</a> </span>
-
 	</div>
 </div>

@@ -2,6 +2,9 @@
 ###*
 App Page - I handle general actions in the app.
 ###
-module.exports = AppPage = () ->
-  @get = ->
+AppPage =
+  title: $('.navbar-brand')
+  get: ->
     browser.get '/'
+
+module.exports = AppPage
