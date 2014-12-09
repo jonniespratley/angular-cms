@@ -1,5 +1,5 @@
 /* jshint camelcase:false */
-// Generated on 2013-12-06 using generator-angular 0.6.0-rc.2
+var fs = require('fs');
 'use strict';
 
 // # Globbing
@@ -7,18 +7,23 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
-
+/**
+* @TODO - Externalize configuration for server and proxy, mongodb
+*/
+var config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
+var cmsRoutes = require(__dirname + '/routes/cms-routes');
 var serverEndpoint = 'http://localhost:8181';
 var proxyConfig = {
 	proxy: {
 		forward: {
+			'/socket.io/*': serverEndpoint,
 			'/socket.io': serverEndpoint,
 			'/api': serverEndpoint
 		}
 	}
 };
 
-var LIVERELOAD_PORT = 35729;
+var LIVERELOAD_PORT = 35728;
 var SERVER_PORT = 9000;
 //var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
@@ -30,14 +35,10 @@ module.exports = function (grunt) {
 	//Connect proxy to route requests to localhost:8181/api
 	grunt.loadNpmTasks('grunt-connect-proxy');
 	require('json-proxy').initialize({});
-	// Load grunt tasks automatically
 	require('load-grunt-tasks')(grunt);
-
-	// Time how long tasks take. Can help when optimizing build times
 	require('time-grunt')(grunt);
 
-	// Define the configuration for all the tasks
-	grunt.initConfig({
+	var GruntConfig = {
 
 		// Project settings
 		yeoman: {
@@ -54,9 +55,10 @@ module.exports = function (grunt) {
 				tasks: ['newer:coffee:dist']
 			},
 			coffeeTest: {
-				files: ['test/{,**/}*.{coffee,litcoffee,coffee.md}'],
-				tasks: ['coffee:test', 'newer:coffee:test', 'karma']
+				files: ['test/spec/{,**/}*.{coffee,litcoffee,coffee.md}'],
+				tasks: ['coffee:test', 'newer:coffee:test', 'karma:unit']
 			},
+
 			compass: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
 				tasks: ['compass:server', 'autoprefixer']
@@ -72,7 +74,11 @@ module.exports = function (grunt) {
 				options: {
 					livereload: '<%= connect.options.livereload %>'
 				},
-				files: ['<%= yeoman.app %>/{,**/}*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'],
+				files: [
+					'<%= yeoman.app %>/{,**/}*.html',
+					'.tmp/styles/{,*/}*.css',
+					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+				],
 				tasks: ['ngtemplates']
 			}
 		},
@@ -84,19 +90,16 @@ module.exports = function (grunt) {
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname: '127.0.0.1',
 				livereload: 35729,
-				middleware: function (connect, options) {
-					return [require('json-proxy').initialize(proxyConfig),
-						mountFolder(connect, '.grunt'),
-						mountFolder(connect, '.tmp')
-					];
-				}
+				base: ['.tmp', '<%= yeoman.app %>']
 			},
 			livereload: {
 				options: {
 					open: true,
 					base: ['.tmp', '<%= yeoman.app %>'],
 					middleware: function (connect, options) {
-						return [require('json-proxy').initialize(proxyConfig),
+						return [
+						require('json-proxy').initialize(proxyConfig),
+						mountFolder(connect, '.grunt'),
 						mountFolder(connect, '.tmp'),
 							mountFolder(connect, 'app')
 						];
@@ -114,7 +117,8 @@ module.exports = function (grunt) {
 					livereload: false,
 					base: '<%= yeoman.dist %>',
 					middleware: function (connect, options) {
-						return [require('json-proxy').initialize(proxyConfig),
+						return [
+							require('json-proxy').initialize(proxyConfig),
 							mountFolder(connect, 'dist')
 						];
 					}
@@ -261,9 +265,11 @@ module.exports = function (grunt) {
 		rev: {
 			dist: {
 				files: {
-					src: ['<%= yeoman.dist %>/scripts/{,*/}*.js', '<%= yeoman.dist %>/styles/{,*/}*.css',
+					src: [
+						'<%= yeoman.dist %>/scripts/{,*/}*.js', '<%= yeoman.dist %>/styles/{,*/}*.css',
 						//'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-						'<%= yeoman.dist %>/styles/fonts/*']
+						'<%= yeoman.dist %>/styles/fonts/*'
+					]
 				}
 			}
 		},
@@ -332,7 +338,7 @@ module.exports = function (grunt) {
 					 removeRedundantAttributes:      true,
 					 removeScriptTypeAttributes:     true,
 					 removeStyleLinkTypeAttributes:  true
-					*/
+					 */
 
 				},
 				files: [
@@ -398,11 +404,13 @@ module.exports = function (grunt) {
 						dot: true,
 						cwd: '<%= yeoman.app %>',
 						dest: '<%= yeoman.dist %>',
-						src: ['*.{ico,png,txt}', '.htaccess',
+						src: [
+							'*.{ico,png,txt}', '.htaccess',
 							//'bower_components/**/*',
 							'scripts/libs/*',
 							'images/{,*/}*.{webp}',
-							'fonts/*']
+							'fonts/*'
+						]
 					},
 					{
 						expand: true,
@@ -422,17 +430,22 @@ module.exports = function (grunt) {
 
 		// Run some tasks in parallel to speed up the build process
 		concurrent: {
-			server: ['coffee:dist',
+			server: [
+				'coffee:dist',
 				//	'compass:server',
-				'ngtemplates', 'copy:styles'],
-			test: ['coffee',
+				'ngtemplates', 'copy:styles'
+			],
+			test: [
+				'coffee',
 				//	'compass',
-				'copy:styles'],
+				'copy:styles'
+			],
 			dist: [
 				'coffee',
 				//	'compass:dist',
 				'ngtemplates',
-				'copy:styles', 'svgmin', 'htmlmin']
+				'copy:styles', 'svgmin', 'htmlmin'
+			]
 		},
 
 		// By default, your `index.html`'s <!-- Usemin block --> will take care of
@@ -549,20 +562,19 @@ module.exports = function (grunt) {
 			}
 		},
 
+		//Protractor webdriver & protractor
 		protractor_webdriver: {
-			options: {
-				// Task-specific options go here.
-			},
 			test: {
-				// Target-specific file lists and/or options go here.
+				options: {
+					command: 'webdriver-manager start'
+				}
 			}
 		},
 		protractor: {
 			options: {
 				keepAlive: true, // If false, the grunt process stops when the test fails.
 				noColor: false, // If true, protractor will not use colors in its output.
-				args: {
-				}
+				args: {}
 			},
 			test: {
 				options: {
@@ -571,6 +583,8 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+
+		//Coveralls code coverage
 		coveralls: {
 			options: {
 				debug: true,
@@ -590,11 +604,14 @@ module.exports = function (grunt) {
 					clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
 				},
 				src: [
-					'.tmp/routes/*-spec.js'
+					'test/routes/*-spec.js'
 				]
 			}
 		}
-	});
+	};
+
+	// Define the configuration for all the tasks
+	grunt.initConfig(GruntConfig);
 
 	grunt.registerTask('serve', function (target) {
 		if (target === 'dist') {
@@ -612,16 +629,20 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', function (target) {
 		grunt.task.run(['clean:server', 'concurrent:test', 'autoprefixer', 'connect:test']);
 		if (target === 'e2e') {
-			return grunt.task.run(['karma']);
+			return grunt.task.run(['karma', 'protractor_webdriver', 'protractor', 'coveralls']);
+		} else if (target === 'server') {
+			return grunt.task.run(['coffee:test', 'mochaTest']);
 		} else {
 			return grunt.task.run(['karma:unit', 'coveralls']);
 		}
 	});
-	grunt.registerTask('test:server', 'coffee:test', 'mochaTest');
-	grunt.registerTask('test:protractor', 'coffee:test', 'protractor')
 
-	grunt.registerTask('build-docs', [ 'useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
-	grunt.registerTask('build', ['clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', /*'cdnify',*/ 'cssmin', 'uglify', 'rev', 'usemin']);
+	grunt.registerTask('ptor', ['coffee:test', 'protractor_webdriver', 'protractor']);
+	grunt.registerTask('build-docs', ['useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
+	grunt.registerTask('build', [
+		'clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', /*'cdnify',*/
+		'cssmin', 'uglify', 'rev', 'usemin'
+	]);
 
 	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:ngdocs']);
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);

@@ -2,15 +2,26 @@
 	http://127.0.0.1:9000/styles/main.css
 	http://localhost:9000/styles/main.css
 */
+@import url('../bower_components/angular-form-gen/dist/angular-form-gen.min.css');
+
 .navbar-avatar {
   height: 20px;
 }
 
+html {
+	overflow-y: scroll;
+}
+
+.needs-some-more-space {
+	margin-top: 20px;
+}
 .actions {
   width: 100px;
   text-align: center;
 }
-
+.th-checkbox{
+  width: 20px;
+}
 .aside {
   width: 320px;
   z-index: 5000;
@@ -163,7 +174,7 @@ html {
 }
 
 .cms-sidebar.closed .well {
-  width: 65px;
+  width: 62px;
 
 }
 

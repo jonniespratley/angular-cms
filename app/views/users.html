@@ -4,7 +4,6 @@
 		<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#user-modal" ng-click="user = {}">
 			New User
 		</button>
-		<button class="btn btn-default btn-sm" ng-click="getUsers()">Refresh</button>
 	</h1>
 	<hr>
 
@@ -15,10 +14,10 @@
 					<thead>
 					<tr>
 						<th class="tc"><input type="checkbox"></th>
-						<th>E-mail</th>
 						<th>Username</th>
+						<th>E-mail</th>
 						<th>Active</th>
-						<th>Created</th>
+						<th>Last Updated</th>
 						<th class="actions">Actions</th>
 					</tr>
 					</thead>
@@ -27,13 +26,14 @@
 						<td class="tc">
 							<input type="checkbox" value="{{user._id}}">
 						</td>
-						<td> {{user.email}}</td>
-						<td>
-							{{ user.username }}
+						<td>{{ user.username }}</td>
+						<td> {{user.email}}
+
 							<span class="label label-primary" ng-repeat="group in user.groups">{{group}}</span>
 						</td>
+
 						<td> {{user.active}}</td>
-						<td> {{user.created | date:'medium'}}</td>
+						<td> {{user.updated_at | date:'medium'}}</td>
 						<td class="actions">
 							<div class="btn-group">
 								<button type="button" class="btn btn-default btn-sm" ng-click="selectUser(user);" data-toggle="modal"
@@ -88,7 +88,7 @@
 												<label class="control-label col-sm-3 col-xs-3">Password:</label>
 
 												<div class="controls col-sm-9 col-xs-9">
-													<input type="password" class="form-control" placeholder="Password" ng-model="user.password">
+													<input type="password" class="form-control" placeholder="Password" value="{{user.password}}" disabled>
 												</div>
 											</div>
 											<div class="form-group">

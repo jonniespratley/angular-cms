@@ -17,29 +17,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 		setting the session and changing the location of the page.
 	###
 	$scope.login = (u) ->
-		cmsAuthService.authorize(u).then(
-			(res)->
-
-				#Welcome the user
-				cmsNotify( '.login-message', 'success', 'Success!', "Welcome back.", 5000)
-
-				#Set user session
-				session =
-					user: res.data.result
-					authorized: true
-
-				#Set user cookie
-				cmsSessionService.setSession(session)
-
-				#Set session on scope
-				$rootScope.App.session = session
-
-				#Change location
-				$rootScope.App.location.path('/dashboard')
-			,
-			(error)->
-				cmsNotify( '.login-message', 'danger', 'Error!', error.message, 2500)
-		)
+		cmsAuthService.login(u)
 
 	###
 	Login Method to set the session.
@@ -70,7 +48,6 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 	###
 
 	$scope.logout = (user) ->
-
 
 		#Clear cookie
 		$cookieStore.put('App.session', null)

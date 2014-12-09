@@ -26,9 +26,10 @@ app = angular.module('angularCmsApp', [
 	'ngRoute'
 	'ngAnimate'
 	'mgcrea.ngStrap'
+	'fg'
 	#'cms.Templates'
 ])
-	.config ($routeProvider) ->	
+	.config ($routeProvider) ->
 		#Resolve routes
 		routeResolver =
 			# I will cause a 1 second delay
@@ -36,7 +37,7 @@ app = angular.module('angularCmsApp', [
 				delay = $q.defer()
 				$timeout delay.resolve, 1000
 				delay.promise
-			
+
 		#Router Config
 		$routeProvider
 			.when '/',
@@ -81,6 +82,11 @@ app = angular.module('angularCmsApp', [
 			.when '/pages',
 				templateUrl: 'views/pages.html'
 				controller: 'PagesCtrl'
+				resolve:
+					pages : (DataService) ->
+						DataService.fetch('pages').then((res)->
+							return res.data
+						)
 			.when '/help',
 			  templateUrl: 'views/help.html'
 			  controller: 'HelpCtrl'

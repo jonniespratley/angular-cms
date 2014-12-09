@@ -22,30 +22,3 @@ angular.module('angularCmsApp').controller 'RegisterCtrl', ($scope, $location, $
 	$scope.register = (user)->
 		$log.info('register', user)
 
-		#Register the user
-		cmsAuthService.register(user).then(
-			(data)->
-				#Login the user
-				cmsAuthService.authorize(user).then(
-
-					$log.info(data)
-
-					#Welcome the user
-					cmsNotify( '.message', 'info', 'Registered!', "You have registered as #{data.user.email}")
-					
-					#Set user session
-					session =
-						user: data.user
-						authorized: true
-
-					#Set user cookie
-					cmsSessionService.setSession(session)
-
-					#Change location
-					$location.path('/dashboard')
-				)
-			,
-			(error) ->
-				$log.error(error)
-				cmsNotify( '.message', 'danger', 'Error!', error.message, 4000)
-		)

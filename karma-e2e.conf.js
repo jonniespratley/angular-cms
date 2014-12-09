@@ -15,7 +15,6 @@ module.exports = function(config) {
     ],
 
     preprocessors: {
-     'test/e2e/*.coffee': ['coffee'],
      'test/e2e/**/*.coffee': ['coffee']
     },
 
@@ -47,7 +46,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

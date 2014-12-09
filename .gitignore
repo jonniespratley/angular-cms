@@ -3,7 +3,6 @@ node_modules
 .idea
 .grunt
 .sass-cache
-.editorconfig
 .project
 app/bower_components
 coverage/
@@ -18,3 +17,4 @@ coverage/
 atlassian-ide-plugin.xml
 docs
 dist
+.c9

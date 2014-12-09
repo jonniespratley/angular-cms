@@ -1,12 +1,13 @@
 #Routes Spec
 request = require('supertest')
+path = require('path')
 expect = require('chai').expect
 
 #//Dynamic rest server
-rest = require(__dirname + '/routes/rest').rest
+rest = require(path.resolve(__dirname, '../../routes/rest.js')).rest
 
 console.log(__dirname)
-app = rest.init({port: 9191});
+app = new rest({port: 9191});
 
 endpoint = 'http://localhost:8181/api/v2'
 postData =

@@ -4,33 +4,17 @@
  */
 var fs = require('fs'),
 	util = require('util'),
-	httpProxy = require('http-proxy');
+	http = require('http'),
+	express = require('express'),
+	httpProxy = require('http-proxy'),
+	colors = require('colors'),
+	app = express();
 
-var colors = require('colors');
-colors.setTheme({
-	silly: 'rainbow',
-	input: 'grey',
-	verbose: 'cyan',
-	prompt: 'grey',
-	info: 'green',
-	data: 'grey',
-	help: 'cyan',
-	warn: 'yellow',
-	debug: 'blue',
-	error: 'red'
-});
 
-/* */
- console.log("this is an silly".silly);
- console.log("this is an input".input);
- console.log("this is an verbose".verbose);
- console.log("this is an prompt".prompt);
- console.log("this is an info".info);
- console.log("this is an data".data);
- console.log("this is an help".help);
- console.log("this is an debug".debug);
- console.log("this is an error".error);
- console.log("this is a warning".warn);
+	/**
+	* @TODO - Externalize configuration for server and proxy, mongodb
+	*/
+	var config = JSON.parse(fs.readFileSync('./config/config.json'));
 
 
 /**
@@ -40,7 +24,6 @@ colors.setTheme({
  */
 var httpsKey = fs.readFileSync('./config/apache.key').toString();
 var httpsCert = fs.readFileSync('./config/apache.crt').toString();
-
 
 /**
  * @TODO - Proxy Options
@@ -67,17 +50,15 @@ var options = {
 };
 
 
-/**
- * @TODO - Externalize configuration for server and proxy, mongodb
- */
-var config = JSON.parse(fs.readFileSync('./config/config.json'));
 
-//Dynamic rest server
-var rest = require('./routes/rest').rest;
 
-//Socket server
-var socket = require('./routes/socketserver').SocketServer;
+var cmsRoutes = require('./routes/cms-routes');
 
+cmsRoutes.mount(config, app);
+
+var webapp = http.createServer(app).listen(config.port || process.env.PORT, function () {
+	util.log(String('App listening on port: ' + config.port).verbose);
+});
 
 
 
@@ -92,7 +73,7 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 			host: '127.0.0.1',
 			port: options.api.port
 		});
-		console.log('Routing request: API server'.warn);
+		util.log('Routing request: API server'.warn);
 
 	} else if (req.url.match(/^\/1\//)) {
 
@@ -100,7 +81,7 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 		proxy.proxyRequest(req, res, {
 			host: 'api.parse.com'
 		});
-		console.log('Routing request: Parse Server'.warn);
+		util.log('Routing request: Parse Server'.warn);
 
 	} else {
 
@@ -109,46 +90,10 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 			host: '127.0.0.1',
 			port: options.api.port
 		});
-		console.log('Routing request: App Server'.warn);
+		util.log('Routing request: App Server'.warn);
 	}
 });
 
-//Initialize socket server and rest server
-socket.init(proxyServer);
-
-
-config.staticDir = __dirname + '/app';
-config.publicDir = __dirname + '/.tmp';
-//config.publicDir = __dirname + '/www';
-rest.init(config);
 
 //Start the proxy server
-proxyServer.listen(options.port);
-
-
-/**
- * Test Email
-
-var email = require("emailjs");
-var server = email.server.connect({
-	user: config.email.username,
-	password: config.email.password,
-	host: "smtp.gmail.com",
-	ssl: false
-});
-
-var message = {
-	text: "i hope this works",
-	from: "you <angular.cms@gmail.com>",
-	to: "jonniespratley <jonniespratley@gmail.com>",
-	cc: "angular.cms <angular.cms@gmail.com>",
-	subject: "testing angular-cms emailjs",
-	attachment: [
-		{data: "<html>i <i>hope</i> this works!</html>", alternative: true}
-		// {path:"path/to/file.zip", type:"application/zip", name:"renamed.zip"}
-	]
-};
-
-
-server.send(message, function(err, message) { console.log(err || message); });
-*/
+proxyServer.listen(config.proxy.port);
