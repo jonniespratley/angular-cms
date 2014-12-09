@@ -52,6 +52,7 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 
 		#Add user to database
 		$scope.addUser = (user) ->
+			delete user.password if user.password
 			user.updated_at = new Date()
 			DataService.save('users', user).then((data) ->
 				$scope.getUsers()
