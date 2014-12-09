@@ -11,8 +11,8 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 			email: null
 			password: null
 			role: 'member'
-			created: new Date()
-			modified: new Date()
+			created_at: new Date()
+			updated_at: new Date()
 			metadata:
 				avatar: ''
 				name: null
@@ -44,7 +44,6 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 		#Delete user
 		$scope.deleteUser = (index, user) ->
 			ask = confirm "Delete #{user.email}?"
-
 			if ask
 				DataService.destroy('users', user).then((res) ->
 					$scope.users.pop(index)
@@ -53,7 +52,6 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 
 		#Add user to database
 		$scope.addUser = (user) ->
-			user.created_at = new Date()
 			user.updated_at = new Date()
 			DataService.save('users', user).then((data) ->
 				$scope.getUsers()

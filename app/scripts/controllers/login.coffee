@@ -37,8 +37,9 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 				#Change location
 				$rootScope.App.location.path('/dashboard')
 			,
-			(error)->
-				cmsNotify( '.login-message', 'danger', 'Error!', error.message, 2500)
+			(err)->
+				console.error(err)
+				cmsNotify( '.login-message', 'danger', 'Error!', err.data.message, 2500)
 		)
 
 	###

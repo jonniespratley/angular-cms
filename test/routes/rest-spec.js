@@ -16,14 +16,13 @@ cmsRoutes.mount(config, app);
 app.listen(9292);
 
 var endpoint = 'http://localhost:8181/api/v2';
+var username =  "nodetest" + Date.now();
 var postData = {
-	"username": "nodetest" + Date.now(),
-	"email": "nodetest@email.com",
+	"username": username,
+	"email": username + "@email.com",
 	"password": "test",
 	"active": true,
 	"groups": ["member"],
-	"created": new Date(),
-	"modified": new Date(),
 	"metadata": {
 		"avatar": "",
 		"name": "Node Test User"
@@ -44,7 +43,7 @@ describe('Testing: API Server', function () {
 
 	it('POST - /api/v2/users/login - should return user on successful login', function (done) {
 		var validUser = {
-			username: 'nodetest',
+			username: 'test@email.com',
 			password: 'test'
 		};
 		request(app)

@@ -2,6 +2,7 @@
 // load the things we need
 var mongoose = require( 'mongoose' );
 var bcrypt = require( 'bcrypt-nodejs' );
+var hash = bcrypt.hashSync("bacon");
 
 // define the schema for our user model
 var UserSchema = mongoose.Schema( {

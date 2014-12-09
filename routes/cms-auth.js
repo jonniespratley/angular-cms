@@ -1,21 +1,25 @@
 var bodyParser = require( 'body-parser' ),
 	mongoose = require( 'mongoose' ),
+	util = require('util'),
 	User = require( './models/user' ),
 	session = require( 'express-session' ),
 	crypto = require( 'crypto' );
+
+var bcrypt = require( 'bcrypt-nodejs' );
+
+
 
 module.exports = function (config, app) {
 	console.warn( 'cms-auth' );
 
 	mongoose.connect( config.mongodb );
 
-//### hashPassword
-//Hash password using basic sha1 hash.
-	var hashPassword = function (pass) {
-		var shasum = crypto.createHash( 'sha1' );
-		shasum.update( config.security.salt + pass );
+	//### hashPassword
+	//Hash password using basic sha1 hash.
+	var hashPassword = function (pass, salt) {
+		var p = bcrypt.hashSync(pass);
 
-		return shasum.digest( 'hex' );
+		return p;
 	};
 
 	var cmsAuth = {
@@ -38,15 +42,16 @@ module.exports = function (config, app) {
 			}
 
 			//TODO: Hashing on client side
-			query.password = hashPassword( req.body.password );
+			query.password = hashPassword( req.body.password, query.username );
 
 			console.warn( 'Login Query: ' + JSON.stringify( query ) + ''.verbose );
 
-			User.findOne( query, function (err, data) {
+			User.findOne( {username: query.username}, function (err, data) {
 				if (err) {
 					res.jsonp( 400, err );
 				}
 				if (data) {
+					console.warn('found user', util.inspect(data, {colors: true}));
 					res.jsonp( 200, data );
 				} else {
 					res.jsonp( 404, {message: 'Wrong username/password!'} );
@@ -72,28 +77,33 @@ module.exports = function (config, app) {
 			}
 
 			//TODO: Hashing on client side
-			data.password = hashPassword( req.body.password );
+			data.password = hashPassword( req.body.password, data.username );
 
-			console.log( String( "Register user" ).debug, data );
+			data.created_at = new Date();
+			data.updated_at = new Date();
+			data.active = false;
+			data.groups = ['public'];
 
 			var user = new User( data );
 
 			//Try and find user
-			User.find( data, function (err, u) {
-				console.log(err, u);
-				if (u) {
-					res.json( 400, {message: 'Username already exists!'} );
-				}
-			} );
-
-			user.save( function (err, ok) {
-				if (err) {
+			User.find( {username: data.username}, function (err, u) {
+				console.log(err, util.inspect(u, {colors: true}));
+				if(err){
 					res.json( 400, {message: 'Problem registering!'} );
+				}
+				if (u.length > 0) {
+					res.json( 400, {message: 'Username already exists!'} );
 				} else {
-					res.json( 200, ok );
+					user.save( function (er, ok) {
+						if (er) {
+							res.json( 400, {message: 'Problem registering!'} );
+						} else {
+							res.json( 201, ok );
+						}
+					} );
 				}
 			} );
-
 		},
 		session: function (req, res, next) {
 		}
