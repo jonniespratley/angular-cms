@@ -23,6 +23,7 @@ module.exports = function (config) {
 			'app/bower_components/angular-route/angular-route.js',
 			'app/bower_components/angular-ui-utils/ui-utils.js',
 			'app/bower_components/angular-strap/dist/angular-strap.min.js',
+			'app/bower_components/angular-*/dist/angular-*.js',
 
 			//Libs
 			'app/scripts/libs/parse-1.2.17.min.js',
