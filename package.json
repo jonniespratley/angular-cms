@@ -64,6 +64,7 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "connect-proxy": "~1.0.2",
+    "del": "^1.1.0",
     "grunt": "~0.4.4",
     "grunt-angular-templates": "~0.5.1",
     "grunt-autoprefixer": "~0.4.0",
@@ -97,6 +98,7 @@
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~2.0.2",
     "gulp-ngmin": "^0.3.0",
+    "gulp-protractor": "0.0.11",
     "gulp-uglify": "^1.0.2",
     "jasmine-core": "^2.1.2",
     "jasmine-node": "~1.11.0",
@@ -111,7 +113,7 @@
     "karma-phantomjs-launcher": "~0.1",
     "load-grunt-tasks": "~0.2.0",
     "mocha": "^2.0.1",
-    "protractor": "^1.0.0",
+    "protractor": "^1.5.0",
     "supertest": "^0.15.0",
     "time-grunt": "~0.2.1"
   },

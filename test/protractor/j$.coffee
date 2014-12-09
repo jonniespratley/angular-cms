@@ -1,11 +1,9 @@
 ###*
  J$ Helpers - I am test helpers
 ###
-j$ =
-  element: (selector, label) ->
-    console.warn('finding', label) if label
-    $(selector)
-  input: (name) ->
-    element(protractor.By.css("[name=#{name}]")).getWebElement()
-
-module.exports = j$
+module.exports =
+	element: (selector, label) ->
+		console.warn('finding', label) if label
+		$(selector)
+	input: (name) ->
+		element(protractor.By.css("[name=#{name}]")).getWebElement()
