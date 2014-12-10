@@ -31,9 +31,11 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 			register - I handle register a user.
 		###
 		register: (user) ->
-			$http.post(@endpoint + "/register", user).then(
+			$log.info('trying to register', user);
+			return $http.post(@endpoint + "/register", user).then(
 				(res)=>
-					@authorize(res.data)
+					$log.info(res);
+					return @authorize(res.data)
 			, (err) ->
 				$log.error(err)
 				cmsNotify( '.message', 'danger', 'Error!', err.data.message, 4000)
@@ -59,7 +61,7 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 
 				#Set user session
 				session =
-					user: res.data.result
+					user: res.data
 					authorized: true
 
 				#Set user cookie
@@ -67,6 +69,8 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 
 				#Set session on scope
 				$rootScope.App.session = session
+
+				$log.info('login-result', res)
 
 				#Change location
 				$rootScope.App.location.path('/dashboard')

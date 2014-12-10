@@ -3,23 +3,20 @@ var bodyParser = require( 'body-parser' ),
 	util = require('util'),
 	User = require( './models/user' ),
 	session = require( 'express-session' ),
-	crypto = require( 'crypto' );
-
-var bcrypt = require( 'bcrypt-nodejs' );
-
+	crypto = require( 'crypto'),
+	bcrypt = require( 'bcrypt-nodejs' );
 
 
-module.exports = function (config, app) {
+
+var cmsAuth = function (config, app) {
 	console.warn( 'cms-auth' );
 
-	mongoose.connect( config.mongodb );
+
 
 	//### hashPassword
 	//Hash password using basic sha1 hash.
 	var hashPassword = function (pass, salt) {
-		var p = bcrypt.hashSync(pass);
-
-		return p;
+		return bcrypt.hashSync(pass);
 	};
 
 	var cmsAuth = {
@@ -39,20 +36,20 @@ module.exports = function (config, app) {
 				query.username = req.body.email;
 			}
 			query.password = hashPassword( req.body.password, query.username );
+			console.warn('trying to login', query);
 			User.findOne( {username: query.username}, function (err, data) {
 				if (err) {
-					res.jsonp( 400, err );
+					return res.jsonp( 400, err );
 				}
-
 				try {
 					if (data && bcrypt.compareSync(req.body.password, data.password)) {
 						req.session.user = data;
-						res.jsonp( 200, data );
+						return res.json( 200, data );
 					} else {
-						res.jsonp( 404, {message: 'Wrong username/password!'} );
+						return res.json( 404, {message: 'Wrong username/password!'} );
 					}
 				} catch (error) {
-					res.jsonp( 404, {message: error} );
+					return res.json( 404, {message: error} );
 				}
 			} );
 		},
@@ -70,37 +67,39 @@ module.exports = function (config, app) {
 				data.username = req.body.username;
 			}
 			if (req.body.email) {
-				data.username = req.body.email;
+				data.email = req.body.email;
 			}
+
 			data.password = hashPassword( req.body.password, data.username );
 			data.created_at = new Date();
 			data.updated_at = new Date();
 			data.active = false;
 			data.groups = ['public'];
 
-			var user = new User( data );
+			console.warn('trying to register', data);
+
+
 
 			//Try and find user
 			User.find( {username: data.username}, function (err, u) {
-				console.log(err, util.inspect(u, {colors: true}));
-
+				console.log( 'found user', err, util.inspect(u, {colors: true}));
+				var user = new User( data );
 				if(err){
-					res.json( 400, {message: 'Problem registering!'} );
+					res.jsonp( 400, {message: 'Problem registering!'} );
 				}
 
-				if (u.length > 0) {
-					res.json( 400, {message: 'Username already exists!'} );
-				}
-
-				if(!err){
+				if (u.length) {
+					res.jsonp( 400, {message: 'Username already exists!'} );
+				} else {
 					user.save( function (er, ok) {
 						if (er) {
-							res.json( 400, {message: 'Problem registering!'} );
+							return res.jsonp( 400, {message: 'Problem registering!'} );
 						} else {
-							res.json( 201, ok );
+							return res.jsonp( 201, ok );
 						}
 					} );
 				}
+
 			} );
 		},
 		session: function (req, res, next) {
@@ -109,7 +108,7 @@ module.exports = function (config, app) {
 				user = req.session.user
 			}
 			console.warn(util.inspect(user, {colors: true}));
-			res.send({message: 'Your session', data: user});
+			return res.send({message: 'Your session', data: user});
 		}
 	};
 
@@ -124,3 +123,5 @@ module.exports = function (config, app) {
 	app.post( config.apiBase + '/register', bodyParser.json(), cmsAuth.register );
 	app.get( config.apiBase + '/session', bodyParser.json(), cmsAuth.session );
 };
+
+module.exports = cmsAuth;

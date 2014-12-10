@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('angularCmsApp').controller 'RegisterCtrl', ($scope, $location, $log, cmsAuthService, cmsSessionService, cmsNotify) ->
+angular.module('angularCmsApp').controller 'RegisterCtrl', ($scope, $log, cmsAuthService) ->
 	$scope.awesomeThings = [
 		'HTML5 Boilerplate'
 		'AngularJS'
@@ -21,4 +21,5 @@ angular.module('angularCmsApp').controller 'RegisterCtrl', ($scope, $location, $
 	#Handle registering a user
 	$scope.register = (user)->
 		$log.info('register', user)
+		cmsAuthService.register(user)
 
