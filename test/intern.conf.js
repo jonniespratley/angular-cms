@@ -31,13 +31,7 @@ define({
 	// OnDemand. Options that will be permutated are browserName, version, platform, and platformVersion; any other
 	// capabilities options specified for an environment will be copied as-is
 	environments: [
-		{ browserName: 'internet explorer', version: '11', platform: 'Windows 8.1' },
-		{ browserName: 'internet explorer', version: '10', platform: 'Windows 8' },
-		{ browserName: 'internet explorer', version: '9', platform: 'Windows 7' },
-		{ browserName: 'firefox', version: '28', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
-		{ browserName: 'chrome', version: '34', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
-		{ browserName: 'safari', version: '6', platform: 'OS X 10.8' },
-		{ browserName: 'safari', version: '7', platform: 'OS X 10.9' }
+		{browserName: 'chrome'}
 	],
 
 	// Maximum number of simultaneous integration tests that should be executed on the remote WebDriver service
@@ -50,28 +44,38 @@ define({
 	// loader
 	useLoader: {
 		'host-node': 'dojo/dojo',
-		'host-browser': 'node_modules/dojo/dojo.js'
+		'host-browser': 'node_modules/dojo/dojo.js',
+		'supertest': 'node_modules/supertest/index.js',
+		'request': 'node_modules/request/index.js'
 	},
 
 	// Configuration options for the module loader; any AMD configuration options supported by the specified AMD loader
 	// can be used here
 	loader: {
 		// Packages that should be registered with the loader in each testing environment
-		packages: [ { name: 'myPackage', location: '.' } ]
+		packages: [
+			{ name: 'myPackage', location: '.' }
+		]
 	},
 
 	// Non-functional test suite(s) to run in each browser
 	suites: [
-		'tests/hello'
+		'test/routes/cms-auth-spec',
+		'test/routes/cms-passport-spec',
+		'test/routes/cms-proxy-spec',
+		'test/routes/cms-rest-spec',
+		'test/routes/cms-server-spec',
+		'test/routes/cms-sockets-spec',
+		'test/routes/cms-upload-spec'
 		/* 'myPackage/tests/foo',
 		'myPackage/tests/bar' */
 	],
 
 	// Functional test suite(s) to run in each browser once non-functional tests are completed
 	functionalSuites: [
-	'tests/functional/index'
+	//'tests/functional/index'
 	 /* 'myPackage/tests/functional' */ ],
 
 	// A regular expression matching URLs to files that should not be included in code coverage analysis
-	excludeInstrumentation: /^(?:tests|node_modules)\//
+	excludeInstrumentation: /^(?:tests|node_modules|app\/bower_components|www|config|bin)\//
 });

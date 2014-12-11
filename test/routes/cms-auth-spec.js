@@ -1,17 +1,20 @@
-
-
-describe('cms-auth', function(){
-	it('should have /auth/login route', function (done) {
-		//
-		done();
+/* global define */
+define([
+	'intern!object',
+	'intern/chai!assert',
+	'intern/dojo/node!request'
+], function (registerSuite, assert, request) {
+	'use strict';
+	registerSuite({
+		name: 'cms-auth',
+		'should have /auth/login route': function () {
+			this.skip();
+		},
+		'should have /auth/register route': function () {
+			this.skip();
+		},
+		'should have /auth/me route': function () {
+			this.skip();
+		}
 	});
-	it('should have /auth/register route', function (done) {
-		//
-		done();
-	});
-	it('should have /auth/me route', function (done) {
-		//
-		done();
-	});
-
 });
