@@ -10,13 +10,15 @@ config.port = 9191
 
 var cmsPassport = require(process.cwd() + '/routes/cms-passport')(config, app);
 describe('cms-passport', function () {
+
 	it('should have /account route', function (done) {
 		done();
 	});
 	it('should have /auth/login route', function (done) {
 		//
+	});
 
-		it('POST - /login - should return user on successful login', function (done) {
+	it('POST - /login - should return user on successful login', function (done) {
 			var validUser = {
 				username: 'test@email.com',
 				password: 'test'
@@ -27,7 +29,7 @@ describe('cms-passport', function () {
 			.expect("Content-Type", /json/)
 			.expect(200, done);
 		});
-	});
+
 
 	it('POST - /register - should return user on successful registation', function (done) {
 		request(app)
@@ -44,10 +46,14 @@ describe('cms-passport', function () {
 		.expect("Content-Type", /json/)
 		.expect(201, done);
 	});
+
+
+
 	it('should have /auth/register route', function (done) {
 		//
 		done();
 	});
+
 	it('should have /auth/me route', function (done) {
 		//
 		done();
