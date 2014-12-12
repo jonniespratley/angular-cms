@@ -614,7 +614,7 @@ module.exports = function (grunt) {
 				options: {
 					runType: 'client',
 					config: 'test/intern.conf',
-					reporters: [ 'console', 'pretty', 'lcov' ],
+					reporters: [ 'console' ],
 					suites: []
 				}
 			}

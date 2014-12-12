@@ -44,9 +44,7 @@ define({
 	// loader
 	useLoader: {
 		'host-node': 'dojo/dojo',
-		'host-browser': 'node_modules/dojo/dojo.js',
-		'supertest': 'node_modules/supertest/index.js',
-		'request': 'node_modules/request/index.js'
+		'host-browser': 'node_modules/dojo/dojo.js'
 	},
 
 	// Configuration options for the module loader; any AMD configuration options supported by the specified AMD loader
@@ -54,7 +52,7 @@ define({
 	loader: {
 		// Packages that should be registered with the loader in each testing environment
 		packages: [
-			{ name: 'myPackage', location: '.' }
+			{ name: 'routes', location: './routes' }
 		]
 	},
 
