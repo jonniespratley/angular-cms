@@ -1,5 +1,5 @@
 var passport = require('passport'),
-	BasicStrategy = require('passport-http').Strategy,
+	BasicStrategy = require('passport-http').BasicStrategy,
 	LocalStrategy = require('passport-local').Strategy,
 	GoogleStrategy = require('passport-google').Strategy,
 	express = require('express'),
@@ -38,10 +38,31 @@ var ensureAuthenticated = function (req, res, next) {
  */
 var cmsPassport = function (config, app) {
 
+var user = new User();
 
 	if (!app) {
 		throw new Error('Must provide express application!');
 	}
+
+	/*
+
+	*/
+	var findOrCreate = function(u, done){
+		console.log('find', u);
+
+		for (var i = 0; i < u.emails.length; i++) {
+			var email = u.emails[i].value
+			User.findOne({ email: email }, function (err, user) {
+				if (err) { return done(err); }
+				if (!user) {
+					console.warn('create user', u);
+					return done(null, false);
+				}
+					return done(null, user);
+				});
+		}
+
+	};
 
 	/**
 	 * I handle serializing a user.
@@ -49,7 +70,7 @@ var cmsPassport = function (config, app) {
 	 * @param done
 	 */
 	var serializeUser = function (user, done) {
-		done(null, user.id);
+		done(null, user._id);
 	};
 
 	/**
@@ -67,26 +88,18 @@ var cmsPassport = function (config, app) {
 
 	passport.deserializeUser(deserializeUser);
 
-	passport.use(new LocalStrategy({
-			usernameField: 'username',
-			passwordField: 'password',
-			passReqToCallback: true
-		}, function (username, password, done) {
-			console.warn('username', username, password);
-			process.nextTick(function () {
-				console.warn('find by username');
-				User.find({
-					username: username
-				}, function (err, user) {
-					console.warn(err, user);
-					if (err) {
-						return done(null, false);
-					}
+var strategy = function(username, password, done) {
+	console.warn('find user', username, password);
+	User.findOne({ username: username }, function (err, user) {
+		if (err) { return done(err); }
+			if (!user) { return done(null, false); }
+				if (!user.validPassword(password)) { return done(null, false); }
 					return done(null, user);
 				});
-			});
-		}
-	));
+			};
+
+	passport.use(new BasicStrategy(strategy));
+	passport.use(new LocalStrategy(strategy));
 
 	passport.use(new GoogleStrategy({
 			returnURL: 'http://localhost:8181/auth/google/return',
@@ -95,7 +108,7 @@ var cmsPassport = function (config, app) {
 		function (identifier, profile, done) {
 			console.warn('googleCallback', profile);
 			profile.openId = identifier;
-			User.findOrCreate(profile, function (err, user) {
+			findOrCreate(profile, function (err, user) {
 				done(err, user);
 			});
 		}
@@ -117,11 +130,13 @@ var cmsPassport = function (config, app) {
 	app.use(passport.session());
 	app.use(flash());
 
+
 	app.get('/api/me', passport.authenticate('basic', {session: false}), function (req, res) {
 		res.json(req.user);
 	});
 
 	app.all('*', function (req, res, next) {
+		req.config = JSON.stringify(config);
 		console.warn('cmsAuth', req.params);
 		next();
 	});
@@ -131,7 +146,10 @@ var cmsPassport = function (config, app) {
 	});
 
 	app.get('/account', ensureAuthenticated, function (req, res) {
-		res.render('account', {user: req.user});
+		res.render('account', {
+			user: req.user,
+			config: req.config
+		});
 	});
 
 	app.get('/login', function (req, res) {
@@ -140,7 +158,7 @@ var cmsPassport = function (config, app) {
 
 	app.post('/login',
 		passport.authenticate('local', {
-			successRedirect: '/',
+			successRedirect: '/account',
 			failureRedirect: '/login',
 			failureFlash: false
 		})

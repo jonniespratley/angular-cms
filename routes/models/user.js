@@ -65,7 +65,7 @@ UserSchema.method( 'findOrCreate', function (profile, fn) {
 
 UserSchema.method( 'findByUsername', function (username, fn) {
 	console.warn( 'findByUsername', username );
-	this.find( {username: username}, function (err, data) {
+	UserSchema.find( {username: username}, function (err, data) {
 		if (err) {
 			fn( false, err );
 		}

@@ -13,7 +13,7 @@ define([
 
 	var app = express();
 	var config = JSON.parse(fs.readFileSync(process.cwd() + '/config/config.json'));
-			config.port = 9191
+			config.port = 9191;
 
 	cmsPassport(config, app);
 
@@ -39,7 +39,7 @@ define([
 			this.skip();
 			var dfd = this.async();
 			request(app)
-				.post('/register')
+				.post('/auth/register')
 				.send({
 					"username": Date.now() + "test@email.com",
 					"email": Date.now() + "test@email.com",
@@ -53,17 +53,21 @@ define([
 				.expect(201, dfd.resolve());
 		},
 		'POST - /login - should return user on successful login': function () {
-			this.skip();
 			var dfd = this.async();
 			var validUser = {
-				username: 'test@email.com',
+				username: 'test@gmail.com',
 				password: 'test'
 			};
 			request(app)
-				.post('/login')
+				.post('/auth/login')
 				.send(validUser)
 				.expect("Content-Type", /json/)
-				.expect(200, dfd.resolve);
+				.expect(200)
+				.end(function(err, res){
+					if (err) {throw err;}
+						console.log(res.body);
+						dfd.callback(res);
+				});
 		}
 	});
 });

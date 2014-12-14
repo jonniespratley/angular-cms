@@ -56,10 +56,6 @@ var cmsRoutes = require('./routes/cms-routes');
 
 cmsRoutes.mount(config, app);
 
-var webapp = http.createServer(app).listen(config.port || process.env.PORT, function () {
-	util.log('App listening on port: ' + config.port + ''.verbose);
-	util.log(util.inspect(config, {colors: true}));
-});
 
 
 

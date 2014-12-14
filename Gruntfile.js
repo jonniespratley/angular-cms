@@ -91,7 +91,10 @@ module.exports = function (grunt) {
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname: '127.0.0.1',
 				livereload: 35729,
-				base: ['.tmp', '<%= yeoman.app %>']
+				base: ['.tmp', '<%= yeoman.app %>'],
+				onCreateServer: function(server, connect, options) {
+					console.warn('onCreateServer', options);
+				}
 			},
 			livereload: {
 				options: {
