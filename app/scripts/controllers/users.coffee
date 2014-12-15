@@ -55,11 +55,10 @@ angular.module('angularCmsApp').controller('UsersCtrl', ($scope, DataService) ->
 			delete user.password if user.password
 			user.updated_at = new Date()
 			DataService.save('users', user).then((data) ->
+				$('#user-modal').modal('hide')
 				$scope.getUsers()
 				$scope.users.push(user) unless user._id
 				$scope.user = {}
-				console.log(data)
-				$('#user-modal').modal('hide')
 			)
 
 )

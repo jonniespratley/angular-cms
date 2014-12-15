@@ -20,10 +20,10 @@
 		"hostname": "localhost",
 		"port": 5001
 	},
-	"staticDir": "/dist",
-	"publicDir": "/app",
-	"uploadsTmpDir": "/.tmp",
-	"uploadsDestDir": "/www/cms-content/uploads",
+	"staticDir": "www",
+	"publicDir": "www",
+	"uploadsTmpDir": ".tmp",
+	"uploadsDestDir": "www/cms-content/uploads",
 	"uploadsUrl": ":8181/cms-content/",
 	"logFormat": "[:date] - [:method] - :url - :status - :response-time ms"
 }

@@ -34,6 +34,7 @@ module.exports = function (grunt) {
 
 	//Connect proxy to route requests to localhost:8181/api
 	grunt.loadNpmTasks('grunt-connect-proxy');
+	grunt.loadNpmTasks('intern');
 	require('json-proxy').initialize({});
 	require('load-grunt-tasks')(grunt);
 	require('time-grunt')(grunt);
@@ -90,7 +91,10 @@ module.exports = function (grunt) {
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname: '127.0.0.1',
 				livereload: 35729,
-				base: ['.tmp', '<%= yeoman.app %>']
+				base: ['.tmp', '<%= yeoman.app %>'],
+				onCreateServer: function(server, connect, options) {
+					console.warn('onCreateServer', options);
+				}
 			},
 			livereload: {
 				options: {
@@ -606,6 +610,16 @@ module.exports = function (grunt) {
 				src: [
 					'test/routes/*-spec.js'
 				]
+			}
+		},
+		intern: {
+			test: {
+				options: {
+					runType: 'client',
+					config: 'test/intern.conf',
+					reporters: [ 'console' ],
+					suites: []
+				}
 			}
 		}
 	};

@@ -1,24 +1,14 @@
 var easyimage = require( 'easyimage' );
 var upload = require( 'jquery-file-upload-middleware' );
 var fs = require( 'fs-extra' );
+var path = require('path');
 var busboy = require( 'connect-busboy' ); //middleware for form/file upload
 
 module.exports = function (config, app) {
 
-	app.use( busboy( {immediate: true} ) );
-	app.use( function (req, res) {
-		if (req.busboy) {
-			req.busboy.on( 'file', function (fieldname, file, filename, encoding, mimetype) {
-				// ...
-				console.warn( fieldname, file, filename );
-			} );
-			req.busboy.on( 'field', function (key, value, keyTruncated, valueTruncated) {
-				// ...
-				console.log( key, value );
-			} );
-			// etc ...
-		}
-	} );
+	console.log('cms-upload intialized');
+
+
 
 	//### upload
 	//I handled processing a uploaded file on the v2 server.
@@ -29,7 +19,7 @@ module.exports = function (config, app) {
 			appid = String( req.param( 'appid' ) );
 		}
 
-		console.log( util.inspect( req, {colors: true} ) );
+		console.log( 'upload', util.inspect( req, {colors: true} ) );
 
 		//Handle if dynamic filenames are enabled
 		var tmp_filename = req.files.file.name || 'tmp_name';
@@ -107,16 +97,51 @@ module.exports = function (config, app) {
 						};
 
 						//Output the results
-						res.send( json );
+						res.json( json );
 					} );
 				} );
 			} );
 		} );
-	};
 
-	app.post( config.apiBase + '/upload', upload );
+		next();
+
+	};
+	app.use( busboy( {immediate: true} ) );
+	app.use( function (req, res) {
+
+
+
+		if (req.busboy) {
+			req.busboy.on( 'file', function (fieldname, file, filename, encoding, mimetype) {
+				var filePath = path.normalize(config.uploadsDestDir + path.sep + filename);
+				var fstream = fs.createWriteStream(filePath);
+				file.pipe(fstream);
+				fstream.on('close', function() {
+					fs.readFile(filePath, function (err, data) {
+						if(err){
+							throw err;
+							res.status(400 ).send(err);
+						}
+
+						res.status(200).json({
+							filename: filename,
+							path: filePath
+						});
+					});
+				});
+				console.warn('busboy', fieldname, file, filename );
+			} );
+			req.busboy.on( 'field', function (key, value, keyTruncated, valueTruncated) {
+				// ...
+				console.log( 'busboy', key, value );
+			} );
+			// etc ...
+		}
+	} );
+	app.post( config.apiBase + '/upload', busboy, upload );
 	app.get( config.apiBase + '/upload', function (req, res, next) {
-		res.send( {message: 'Upload a file with a POST.'} );
+		res.json( {message: 'Upload a file with a POST.'} );
+		next();
 	} );
 
 };

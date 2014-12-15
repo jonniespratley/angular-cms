@@ -1,3 +1,20 @@
+
 <% layout('layout') -%>
+
 <p>Username: <%= user.username %></p>
 <p>Email: <%= user.email %></p>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="well">
+      <a href="/auth/facebook" class="btn btn-primary">Connect with Facebook</a>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="well">
+      <a href="/auth/google" class="btn btn-primary">Connect with Google</a>
+    </div>
+  </div>
+</div>
+
+<%= user %>

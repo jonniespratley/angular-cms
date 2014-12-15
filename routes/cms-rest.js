@@ -1,20 +1,29 @@
-var bodyParser = require( 'body-parser' ),
+var express = require('express'),
+	bodyParser = require( 'body-parser' ),
 	session = require( 'express-session' ),
 	RestResource = require( './rest' );
 
 module.exports = function (config, app) {
 	'use strict';
+	var router = express.Router();
 
-	app.get( config.apiBase + '/plugins', RestResource.plugins );
-	app.get( config.apiBase + '/readme', RestResource.readme );
-	app.get( config.apiBase, RestResource.index );
+// a middleware with no mount path, gets executed for every request to the router
+	router.use(function (req, res, next) {
+		console.log('cms-rest Time:', Date.now());
+		next();
+	});
 
+	router.get( config.apiBase, RestResource.index );
+	router.get( config.apiBase + '/plugins', RestResource.plugins );
+	router.get( config.apiBase + '/readme', RestResource.readme );
 
 	//Dynamic REST
-	app.get( config.apiBase + '/:db/:collection/:id?', RestResource.get )
-	app.post( config.apiBase + '/:db/:collection/:id?', bodyParser.json(), RestResource.add )
-	app.put( config.apiBase + '/:db/:collection/:id?', bodyParser.json(), RestResource.edit )
-	app.delete( config.apiBase + '/:db/:collection/:id?', RestResource.destroy );
+	router.get( config.apiBase + '/:db/:collection/:id?', RestResource.get )
+	router.post( config.apiBase + '/:db/:collection/:id?', bodyParser.json(), RestResource.add )
+	router.put( config.apiBase + '/:db/:collection/:id?', bodyParser.json(), RestResource.edit )
+	router.delete( config.apiBase + '/:db/:collection/:id?', RestResource.destroy );
 
 	console.warn( 'cms-rest', 'initialized' );
+
+	app.use('/', router);
 };

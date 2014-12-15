@@ -1,5 +1,3 @@
-
-
 var request = require('supertest');
 var path = require('path');
 var fs = require('fs');
@@ -36,14 +34,22 @@ describe('Testing: API Server', function () {
 	it('POST - /api/v2/users/register - should return user on successful registation', function (done) {
 		request(app)
 			.post('/api/v2/register')
-			.send(postData)
+			.send({
+				"username": Date.now() + "test@email.com",
+				"email": Date.now() + "test@email.com",
+				"password": "test",
+				"metadata": {
+					"avatar": "",
+					"name": "Jonnie Dollas"
+				}
+			})
 			.expect("Content-Type", /json/)
 			.expect(201, done);
 	});
 
 	it('POST - /api/v2/users/login - should return user on successful login', function (done) {
 		var validUser = {
-			username: 'test@email.com',
+			username: 'test@gmail.com',
 			password: 'test'
 		};
 		request(app)

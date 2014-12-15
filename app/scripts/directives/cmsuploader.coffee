@@ -3,7 +3,7 @@
 @name angularCmsApp.directive:cmsUploader
 @element div
 @function
-@description 
+@description
 	This is an example uploader.
 ###
 'use strict'
@@ -56,7 +56,7 @@ angular.module('angularCmsApp').directive 'cmsUploader', ->
 				xhr.onload = () ->
 					console.log('Upload complete')
 
-				xhr.open('POST', '/api/v2/upload', true)
+				xhr.open('POST', $attrs.action, true)
 				xhr.send(form)
 
 				console.log('Upload ', file)

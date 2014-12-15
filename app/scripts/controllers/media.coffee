@@ -4,17 +4,17 @@ angular.module('angularCmsApp').controller 'MediaCtrl', ($scope, $http, DataServ
 
 	$scope.uploads = []
 	$scope.getUploads = () ->
-		$http.get('/api/upload').success((data)->
-			$scope.uploads = data
+		DataService.fetch('uploads').then((res)->
+			$scope.uploads = res.data
 		)
 
 	$ ->
 		$("#fileupload").fileupload(
 			dataType: 'json'
-			dropZone: $('.uploader-dropzone')
+			dropZone: $('.dropzone')
 			add: (e, data) ->
 				console.log(e, data)
-				
+
 				data.url = '/api/upload'
 				data.context = $('<p/>').text('Uploading...').appendTo(document.body)
 				data.submit()
@@ -25,7 +25,7 @@ angular.module('angularCmsApp').controller 'MediaCtrl', ($scope, $http, DataServ
 				$.each data.result.files, (index, file) ->
 					$("<p/>").text(file.name).appendTo document.body
 		)
-		
+
 		$scope.uploader = {
 			files: []
 		};
