@@ -41,8 +41,8 @@ var MESSAGES = {
 };
 var DS = require('jps-ds').DS;
 var _ds = new DS({
-	host: 'angularcms:angularcms@paulo.mongohq.com:10089/app19632340',
-	//host: 'localhost/angular-cms',
+	//host: 'angularcms:angularcms@paulo.mongohq.com:10089/app19632340',
+	host: 'localhost/angular-cms',
 	models: {
 		'groups': {
 			title: String,
@@ -192,8 +192,6 @@ var RestResource = {
 			message: 'REST API Server ' + RestResource.useversion
 		});
 	},
-
-
 
 	//### get
 	//I handle gathering records dynamically from a call to the v2 api.
