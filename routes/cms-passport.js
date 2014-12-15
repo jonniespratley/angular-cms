@@ -102,8 +102,8 @@ var strategy = function(username, password, done) {
 	passport.use(new LocalStrategy(strategy));
 
 	passport.use(new GoogleStrategy({
-			returnURL: 'http://localhost:8181/auth/google/return',
-			realm: 'http://localhost:8181/'
+			returnURL: config.host + config.port + '/auth/google/return',
+			realm: config.host + config.port
 		},
 		function (identifier, profile, done) {
 			console.warn('googleCallback', profile);
@@ -114,8 +114,8 @@ var strategy = function(username, password, done) {
 		}
 	));
 
-	app.use(express.static(path.resolve(__dirname, '../www')));
-	app.set('views', path.resolve(__dirname, '../www'));
+	app.use(express.static(path.resolve(config.publicDir)));
+	app.set('views', path.resolve(config.staticDir));
 	app.set('view engine', 'ejs');
 	app.engine('ejs', require('ejs-locals'));
 	app.use(cookieParser());

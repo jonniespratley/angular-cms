@@ -47,7 +47,7 @@ angular.module('angularCmsApp').service 'cmsAuthService', ($q, $http, $log, $roo
 		###
 		logout: (user) ->
 			#Clear cookie
-			cmsSessionService.logout(null)
+			cmsSessionService.setUserAuthenticated(null)
 			$rootScope.apply(()->
 				$location.reload()
 			)

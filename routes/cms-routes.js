@@ -9,7 +9,7 @@ module.exports.mount = function (config, app) {
 	// CONNECTION EVENTS
 // When successfully connected
 	mongoose.connection.on('connected', function () {
-		console.log('Mongoose default connection open to ' + dbURI);
+		console.log('Mongoose default connection open to ' + config.mongodb);
 	});
 
 // If the connection throws an error

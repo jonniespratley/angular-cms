@@ -48,15 +48,7 @@ angular.module('angularCmsApp').controller 'LoginCtrl', ($scope, $rootScope, $co
 	###
 
 	$scope.logout = (user) ->
-
-		#Clear cookie
-		$cookieStore.put('App.session', null)
-
-		#Clear session
-		$rootScope.App.session = null
-
-		#Change location
-		$rootScope.App.location.path($rootScope.App.logout.redirect)
+		cmsAuthService.logout(user)
 
 
 	#Controller name

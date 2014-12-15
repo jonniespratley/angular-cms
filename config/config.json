@@ -20,7 +20,7 @@
 		"hostname": "localhost",
 		"port": 5001
 	},
-	"staticDir": "dist",
+	"staticDir": "www",
 	"publicDir": "www",
 	"uploadsTmpDir": ".tmp",
 	"uploadsDestDir": "www/cms-content/uploads",
