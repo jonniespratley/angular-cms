@@ -18,6 +18,7 @@ var proxyConfig = {
 		forward: {
 			'/socket.io/*': serverEndpoint,
 			'/socket.io': serverEndpoint,
+			'/cms-content': serverEndpoint,
 			'/api': serverEndpoint
 		}
 	}

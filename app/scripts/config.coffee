@@ -6,13 +6,19 @@ window.Config =
 	sitecopy: "2014 "
 	version: '0.1'
 	email: "jonniespratley@me.com"
+	"staticDir": "www/cms-content"
+	"publicDir": "www"
+	"uploadsTmpDir": ".tmp"
+	"uploadsDestDir": "www/cms-content/uploads"
+	"uploadsUrl": ":8181/cms-content/"
+	"logFormat": "[:date] - [:method] - :url - :status - :response-time ms"
 	debug: true
 
 	#I hold the home page feature content
-	feature: 
+	feature:
 	  title: 'angular-cms'
 	  body: 'A content management system of some sort.'
-	
+
 	features: [
 		id: 1
 		title: "HTML5"
@@ -44,12 +50,12 @@ window.Config =
 		body: "The database of choice is Mongo, its fast and scalable."
 		image: "/images/feature-mongodb.png"
 	]
-	
-	session: 
+
+	session:
 		authorized: false
 		user: null
-	
-	layout: 
+
+	layout:
     	header: "views/_header.html"
     	sidebar: "views/_sidebar.html"
     	content:"views/_content.html"
@@ -125,13 +131,13 @@ window.Config =
 		currentdate: new Date()
 		dateformats: ["medium", "short", "fullDate", "longDate", "mediumDate", "shortDate"]
 		timeformats: ["mediumTime", "shortTime"]
-		
+
 		#Default date format
 		dateformat: "medium"
-		
+
 		#Default time format
 		timeformat: "shortTime"
-		
+
 		#Default timezone
 		timezone: null
 		servers: [
@@ -145,26 +151,26 @@ window.Config =
 			port: 3000
 			body: "This is the v2 api server"
 		]
-		
+
 		#SocketIO configuration
 		socketio:
 			host: "127.1.0.1"
 			port: 8081
 
-		
+
 		#Network configuration
 		network:
 			online: true
 			cache: true
 
-		
+
 		#Database configuration
 		database:
 			host: "127.1.0.1"
 			port: 27017
 			name: "angular-cms"
 
-		
+
 		#API configuration.
 		api:
 			url: ""
