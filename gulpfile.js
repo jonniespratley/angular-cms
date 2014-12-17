@@ -6,6 +6,18 @@ var coffee = require('gulp-coffee');
 var uglify = require('gulp-uglify');
 var protractor = require('gulp-protractor').protractor;
 
+var server = require('gulp-server-livereload');
+
+gulp.task('webserver', function() {
+	gulp.src('app')
+		.pipe(server({
+			livereload: true,
+			defaultFile: 'index.html',
+			directoryListing: true,
+			open: true
+		}));
+});
+
 
 gulp.task('clean', function(cb) {
 	del(['build'], cb);
@@ -40,9 +52,7 @@ gulp.task('watch', function () {
 });
 
 
-
-
-gulp.task('test', ['js:test'], function(){
+gulp.task('test:e2e', ['js:test'], function(){
 	gulp.src(['./.tmp/protractor/**/*-spec.js'])
 		.pipe(protractor({
 			configFile: 'protractor.conf.js'
