@@ -77,15 +77,12 @@ To run the application on your local machine please take the following steps.
 
 To start mongodb execute the following command:
 
-\<\<\<\<\<\<< HEAD
-
 ```
-$ sh ./bin/db.sh
+$ sh bin/db.sh
 ```
-
-======= $ sh ./bin/db.sh >>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
 
 > **Note:** If errors when executing command remove the `db/mongod.lock` file.
+
 
 #### Step 2 - Start REST server
 
@@ -96,6 +93,8 @@ $ node server
 ```
 
 > **Note:** The REST server is running at [http://localhost:8181/api/v2](http://localhost:8181/api/v2)
+
+
 
 Development
 -----------
@@ -142,19 +141,10 @@ $ grunt protractor
 
 ---
 
-\<\<\<\<\<\<< HEAD
-
-RESTful Server
---------------
-
-=======
-
 RESTful Server
 --------------
 
 The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s). >>>>>>> fe4af0e14ef3596c823d4777d672ba00406ddb90
-
-The server is a Node.js server that supports dynamic RESTful API calls to resource endpoints. It will automatically create a database if it does not exist and collection(s).
 
 The base URL is `http://localhost:8181/api/v2`
 
@@ -228,7 +218,9 @@ Plugins will be installed via `bower`, search and install themes searching by ta
 API Documentation
 -----------------
 
-The API documentation will be in the form of ngDocs style. The files located in the `content` directory are tutorial specs for the different features in this project. Documentation can be generated and viewed by running the following command:
+The API documentation will be in the form of ngDocs style. 
+The files located in the `content` directory are tutorial specs for the different features in this project. 
+Documentation can be generated and viewed by running the following command:
 
 \`\`\`
 
@@ -279,19 +271,10 @@ The following list is features that are comming.
 -	user management & user roles
 -	action and view permissions
 -	content versioning and audit
--	some form of workflow and notifications
 -	i18n support on literals and object versions
--	normalized database schema design
 -	some form of content import-export
 -	assets management and thumbnail generation for uploads
--	Valid XHTML (compressed with GZIP)
 -	Rich text editing (e.g FCKeditor) which generates accessible markup
--	Valid and minified CSS and javascript (e.g using YUI)
--	automatically generated sitemaps.org document
--	integration with Google Analytics
--	automatic RSS feeds
--	open search support
 -	print css and/or print versions of content
--	SEO consideration for duplicate content (e.g use of canonical tag)
 
 ---
