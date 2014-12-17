@@ -91,4 +91,4 @@ var proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 
 
 //Start the proxy server
-proxyServer.listen(config.proxy.port);
+proxyServer.listen(process.env.PORT, process.env.IP);
