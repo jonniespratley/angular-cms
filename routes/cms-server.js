@@ -20,8 +20,12 @@ module.exports = function (config, app) {
 	};
 
 	router.use(express.static(config.staticDir, options));
-	
-	router.use('/', function(res, req, next){
+	app.all('/', function(req, res, next) {
+		res.header('Access-Control-Allow-Origin', '*');
+		res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+		next();
+	});
+	app.get('/', function(res, req, next){
 		req.send(config.publicDir + path.sep + 'index.html');
 		next();
 	});

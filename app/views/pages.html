@@ -1,90 +1,117 @@
-
 <div class="page-container">
-	<div class="">
-		<cms-header title="Pages" icon="folder-open"></cms-header>
-      <section>
-        <div class="row">
-          <div class="col-sm-12">
-						<div class="alerts"></div>
+		<div class="">
+				<cms-header title="Pages" icon="folder-open"></cms-header>
+				<section>
+						<div class="row">
+								<div class="col-sm-12">
+										<div class="alerts"></div>
 
 
 
-            <table class="table table-condensed table-hover table-striped clearfix table-bordered">
-              <thead>
-                <tr>
-                  <th class="th-checkbox"><input type="checkbox" class="checkbox"></th>
-                  <th>Title</th>
-									<th>Date</th>
-									<th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
+										<table class="table table-condensed table-hover table-striped clearfix table-bordered">
+												<thead>
+														<tr>
+																<th class="th-checkbox">
+																		<input type="checkbox" class="checkbox">
+																</th>
+																<th>Title</th>
+																<th>Date</th>
+																<th>Actions</th>
+														</tr>
+												</thead>
+												<tbody>
 
-                <tr ng-repeat="page in pages">
-                  <td><input type="checkbox" value="{{page._id}}"/></td>
-                  <td>
-										<a href="" ng-click="selectPage(page)" title="{{page.title}}">{{page.title}}</a>
-										<span class="label label-default">{{page.publish}}</span>
-									</td>
-									<td>{{page.created | date:'medium'}}</td>
-<td class="actions">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm" ng-click="selectPage(page);" data-toggle="modal" data-target="#user-modal">
-                          <i class="fa fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm" ng-click="remove(page);">
-                          <i class="fa fa-trash-o"></i>
-                        </button>
-                      </div>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-      <div class="row">
-        <div class="col-sm-7 col-xs-7">
-          <input type="text" class="form-control" placeholder="Enter title here" ng-model="page.title">
-          <span class="help-block">
-						<strong>Permlink:</strong> http://{{App.baseurl}}/?page_id={{page.slug}}
-						</span>
-          <textarea class="form-control" rows="5" ng-model="page.body"></textarea>
-        </div>
-        <div class="col-sm-5 col-xs-5">
-					<ul class="list-unstyled form-list">
-                <li class="form-group">
-                  <label class="col-sm-2 control-label">Published:</label>
-                  <input type="checkbox" ng-model="page.status" value="true">
-                </li>
-                <li class="form-group">
-                  <label class="col-sm-2 control-label">Order:</label>
-                  <input type="number">
-                </li>
-                <li class="form-group">
-                  <label class="col-sm-2 control-label">Parent:</label>
-                  <select>
-                    <option>Page 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
-                </li>
-                <li class="form-group">
-                  <label class="col-sm-2 control-label">Template:</label>
-                  <select>
-                    <option>Template 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
-                </li>
-                <li class="form-actions">
-          <button href="#" class="btn btn-danger btn-block btn-xs" ng-click="remove(page)">Move to trash</button>
-							<button class="btn pull-right btn-primary btn-block" ng-click="save(page)">Save</button>
-                </li>
-              </ul>
+														<tr ng-repeat="page in pages">
+																<td>
+																		<input type="checkbox" value="{{page._id}}" />
+																</td>
+																<td>
+																		<a href="" ng-click="selectPage(page)" title="{{page.title}}">{{page.title}}</a>
+																		<span class="label label-default">{{page.publish}}</span>
+																</td>
+																<td>{{page.created | date:'medium'}}</td>
+																<td class="actions">
+																		<div class="btn-group">
+																				<button type="button" class="btn btn-default btn-sm" ng-click="selectPage(page);" data-toggle="modal" data-target="#user-modal">
+																						<i class="fa fa-edit"></i>
+																				</button>
+																				<button type="button" class="btn btn-default btn-sm" ng-click="remove(page);">
+																						<i class="fa fa-trash-o"></i>
+																				</button>
+																		</div>
+																</td>
+														</tr>
+												</tbody>
+										</table>
 
-        </div>
-      </div>
-    </div>
-    <!--/span-->
-    <!--/row-->
+
+
+
+
+
+
+								</div>
+						</div>
+				</section>
+				<div class="row ">
+
+
+
+
+					<!-- Create normal bootstrap form element -->
+					<form class="form-horizontal" ng-submit="save(page)">
+
+
+						<div class="col-sm-7 col-xs-7">
+
+								<!-- Embed the schema editor on the form -->
+								<div
+								fg-form
+								fg-form-data="page"
+								fg-schema="pageSchema"></div>
+
+
+						</div>
+						<div class="col-sm-5 col-xs-5">
+							<span class="help-block">
+								<strong>Permlink:</strong> http://{{App.baseurl}}/?page_id={{page.slug}}
+							</span>
+								<ul class="list-unstyled form-list">
+										<li class="form-group">
+												<label class="col-sm-2 control-label">Published:</label>
+												<input type="checkbox" ng-model="page.status" value="true">
+										</li>
+										<li class="form-group">
+												<label class="col-sm-2 control-label">Order:</label>
+												<input type="number">
+										</li>
+										<li class="form-group">
+												<label class="col-sm-2 control-label">Parent:</label>
+												<select>
+														<option>Page 1</option>
+														<option>Option 2</option>
+														<option>Option 3</option>
+												</select>
+										</li>
+										<li class="form-group">
+												<label class="col-sm-2 control-label">Template:</label>
+												<select>
+														<option>Template 1</option>
+														<option>Option 2</option>
+														<option>Option 3</option>
+												</select>
+										</li>
+										<li class="form-actions">
+												<button href="#" class="btn btn-danger btn-block" ng-click="remove(page)">Move to trash</button>
+												<button class="btn pull-right btn-primary btn-block">Save</button>
+										</li>
+								</ul>
+
+						</div>
+				</div>
+
+			</form>
+
+		</div>
+		<!--/span-->
+		<!--/row-->
