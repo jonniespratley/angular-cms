@@ -103,9 +103,9 @@ module.exports = function (grunt) {
 					base: ['.tmp', '<%= yeoman.app %>'],
 					middleware: function (connect, options) {
 						return [
-						require('json-proxy').initialize(proxyConfig),
-						mountFolder(connect, '.grunt'),
-						mountFolder(connect, '.tmp'),
+							require('json-proxy').initialize(proxyConfig),
+							mountFolder(connect, '.grunt'),
+							mountFolder(connect, '.tmp'),
 							mountFolder(connect, 'app')
 						];
 					}
@@ -495,7 +495,7 @@ module.exports = function (grunt) {
 				coffee: true,
 				match: '.',
 				matchall: true,
-				extensions: '.coffee',
+				extensions: '.js',
 				specNameMatcher: 'Spec', // load only specs containing specNameMatcher
 				projectRoot: '.',
 				requirejs: false,
@@ -524,7 +524,7 @@ module.exports = function (grunt) {
 			},
 			api: {
 				src: [
-					'.tmp/scripts/**/*.js',
+					'<%= yeoman.app %>/scripts/**/*.js',
 					'!.tmp/spec/**/*.js'
 				],
 				title: 'API'
@@ -559,7 +559,7 @@ module.exports = function (grunt) {
 		/* ======================[ @TODO: Bower Install ]====================== */
 		'bower-install': {
 			app: {
-				src: ['app/index.html'],
+				src: ['<%= yeoman.app %>/index.html'],
 				cwd: '',
 				ignorePath: '',
 				exclude: [],
@@ -605,8 +605,8 @@ module.exports = function (grunt) {
 				options: {
 					reporter: 'spec',
 					//captureFile: 'results.txt', // Optionally capture the reporter output to a file
-					quiet: false, // Optionally suppress output to standard out (defaults to false)
-					clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+					quiet: false,
+					clearRequireCache: false
 				},
 				src: [
 					'test/routes/*-spec.js'

@@ -2,6 +2,7 @@
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
 module.exports = function (config) {
+	'use strict';
 	config.set({
 		// base path, that will be used to resolve files and exclude
 		basePath: '.',
@@ -34,9 +35,9 @@ module.exports = function (config) {
 			//'app/scripts/**/*.coffee',
 			//'test/spec/**/*.coffee'
 
-			//Compile source
-			'.tmp/scripts/**/*.js',
-			'.tmp/spec/**/*.js'
+			//JavaScript Source
+			'app/scripts/**/*.js',
+			'test/spec/**/*.js'
 		],
 
 		// list of files / patterns to exclude
@@ -63,9 +64,7 @@ module.exports = function (config) {
 		// - IE (only Windows)
 		browsers: ['PhantomJS'],
 		preprocessors: {
-			//'app/scripts/**/*.coffee': ['coverage'],
-			//'test/spec/**/*.coffee': ['coffee']
-			'.tmp/scripts/**/*.js': ['coverage']
+			'app/scripts/**/*.js': ['coverage']
 		},
 
 
@@ -78,6 +77,6 @@ module.exports = function (config) {
 		},
 		// Continuous Integration mode
 		// if true, it capture browsers, run tests and exit
-		singleRun: false
+		singleRun: true
 	});
 };
