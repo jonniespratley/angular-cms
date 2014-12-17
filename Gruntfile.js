@@ -52,15 +52,6 @@ module.exports = function (grunt) {
 
 		// Watches files for changes and runs tasks based on the changed files
 		watch: {
-			coffee: {
-				files: ['<%= yeoman.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
-				tasks: ['newer:coffee:dist']
-			},
-			coffeeTest: {
-				files: ['test/spec/{,**/}*.{coffee,litcoffee,coffee.md}'],
-				tasks: ['coffee:test', 'newer:coffee:test', 'karma:unit']
-			},
-
 			compass: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
 				tasks: ['compass:server', 'autoprefixer']
@@ -68,6 +59,10 @@ module.exports = function (grunt) {
 			styles: {
 				files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
 				tasks: ['newer:copy:styles', 'autoprefixer']
+			},
+			scripts: {
+				files: ['<%= yeoman.app %>/scripts/{,**/}*.js'],
+				tasks: ['jshint:app']
 			},
 			gruntfile: {
 				files: ['Gruntfile.js']
@@ -77,9 +72,9 @@ module.exports = function (grunt) {
 					livereload: '<%= connect.options.livereload %>'
 				},
 				files: [
-				//	'<%= yeoman.app %>/{,**/}*.html',
-					'.tmp/styles/{,*/}*.css',
-					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+					'<%= yeoman.app %>/*.html',
+					'<%= yeoman.app %>/views/*.html',
+					'.tmp/styles/{,*/}*.css'
 				],
 				tasks: ['ngtemplates']
 			}
@@ -94,7 +89,7 @@ module.exports = function (grunt) {
 				livereload: 35729,
 				base: ['.tmp', '<%= yeoman.app %>'],
 				onCreateServer: function(server, connect, options) {
-					console.warn('onCreateServer', options);
+					grunt.util.log('onCreateServer', options);
 				}
 			},
 			livereload: {
@@ -152,6 +147,10 @@ module.exports = function (grunt) {
 			},
 			all: [
 				//'Gruntfile.js'
+			],
+			app: [
+			'<%= yeoman.app %>/scripts',
+			'!<%= yeoman.app %>/scripts/libs'
 			]
 		},
 
@@ -435,6 +434,10 @@ module.exports = function (grunt) {
 
 		// Run some tasks in parallel to speed up the build process
 		concurrent: {
+			options: {
+				limit: 10,
+				logConcurrentOutput: true
+			},
 			server: [
 				'coffee:dist',
 				//	'compass:server',
