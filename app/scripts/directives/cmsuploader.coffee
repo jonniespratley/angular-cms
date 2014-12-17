@@ -53,9 +53,28 @@ angular.module('angularCmsApp').directive 'cmsUploader', ->
 				form.append('files[]', file)
 
 				xhr = new XMLHttpRequest()
+
+				# progress on transfers from the server to the client (downloads)
+				updateProgress = (oEvent) ->
+					console.log(oEvent.loaded, oEvent.total)
+					if oEvent.lengthComputable
+						percentComplete = oEvent.loaded / oEvent.total
+						console.log(percentComplete)
+					else
+						console.log(event)
+				# Unable to compute progress information since the total size is unknown
+				transferComplete = (evt) ->
+					console.warn "The transfer is complete."
+				transferFailed = (evt) ->
+					console.error "An error occurred while transferring the file."
+				transferCanceled = (evt) ->
+					console.warn "The transfer has been canceled by the user."
+				xhr.addEventListener "progress", updateProgress, false
+				xhr.addEventListener "load", transferComplete, false
+				xhr.addEventListener "error", transferFailed, false
+				xhr.addEventListener "abort", transferCanceled, false
 				xhr.onload = () ->
 					console.log('Upload complete')
-
 				xhr.open('POST', $attrs.action, true)
 				xhr.send(form)
 

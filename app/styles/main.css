@@ -8,6 +8,27 @@
   height: 20px;
 }
 
+.uploads img{
+
+}
+.thumbnail a{
+		cursor: pointer;
+}
+.thumbnail:hover{
+	opacity: 1;
+}
+.thumbnail img{
+	width: 100%;
+}
+.thumbnail {
+	margin: 5px;
+	padding: 2px;
+	cursor: pointer;
+	opacity: .9;
+	height: 100px;
+	overflow: hidden;
+}
+
 html {
 	overflow-y: scroll;
 }

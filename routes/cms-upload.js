@@ -3,7 +3,7 @@ var upload = require( 'jquery-file-upload-middleware' );
 var fs = require( 'fs-extra' );
 var path = require('path');
 var busboy = require( 'connect-busboy' ); //middleware for form/file upload
-
+var Upload = require('./models/upload');
 module.exports = function (config, app) {
 
 	console.log('cms-upload intialized');
@@ -107,10 +107,8 @@ module.exports = function (config, app) {
 
 	};
 	app.use( busboy( {immediate: true} ) );
+
 	app.use( function (req, res) {
-
-
-
 		if (req.busboy) {
 			req.busboy.on( 'file', function (fieldname, file, filename, encoding, mimetype) {
 				var filePath = path.normalize(config.uploadsDestDir + path.sep + filename);
@@ -122,6 +120,20 @@ module.exports = function (config, app) {
 							throw err;
 							res.status(400 ).send(err);
 						}
+
+						var newFilename = filename.replace(/\W/, '-');
+
+						//Save upload
+						var u = new Upload({
+							filename: path.basename(newFilename),
+							type: mimetype,
+							name: newFilename,
+							created: new Date(),
+							updated: new Date(),
+							extension: path.extname(newFilename)
+						});
+						u.save();
+
 
 						res.status(200).json({
 							filename: filename,

@@ -18,6 +18,7 @@ var proxyConfig = {
 		forward: {
 			'/socket.io/*': serverEndpoint,
 			'/socket.io': serverEndpoint,
+			'/cms-content': serverEndpoint,
 			'/api': serverEndpoint
 		}
 	}
@@ -76,7 +77,7 @@ module.exports = function (grunt) {
 					livereload: '<%= connect.options.livereload %>'
 				},
 				files: [
-					'<%= yeoman.app %>/{,**/}*.html',
+				//	'<%= yeoman.app %>/{,**/}*.html',
 					'.tmp/styles/{,*/}*.css',
 					'<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
 				],

@@ -4,12 +4,12 @@ module.exports.mount = function (config, app) {
 	'use strict';
 
 	//Connect to database
-	mongoose.connect(config.mongodb);
+	mongoose.connect(config.db.url);
 
 	// CONNECTION EVENTS
 // When successfully connected
 	mongoose.connection.on('connected', function () {
-		console.log('Mongoose default connection open to ' + config.mongodb);
+		console.log('Mongoose default connection open to ', config.db);
 	});
 
 // If the connection throws an error
