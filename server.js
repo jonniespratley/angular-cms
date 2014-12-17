@@ -7,14 +7,13 @@ var fs = require('fs'),
 	http = require('http'),
 	express = require('express'),
 	httpProxy = require('http-proxy'),
-	colors = require('colors'),
 	app = express();
 
 
-	/**
-	* @TODO - Externalize configuration for server and proxy, mongodb
-	*/
-	var config = JSON.parse(fs.readFileSync('./config/config.json'));
+/**
+ * @TODO - Externalize configuration for server and proxy, mongodb
+ */
+var config = JSON.parse(fs.readFileSync('./config/config.json'));
 
 
 /**
@@ -53,14 +52,13 @@ var options = {
 
 
 var cmsRoutes = require('./routes/cms-routes');
-
-cmsRoutes.mount(config, app);
+	cmsRoutes.mount(config, app);
 
 
 
 
 //Create proxy server and proxy requests
-proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
+var proxyServer = httpProxy.createServer(options, function(req, res, proxy) {
 
 	console.log('Proxy server started on port: ' + options.host.port);
 
@@ -71,8 +69,8 @@ proxyServer = httpProxy.createServer(options, function (req, res, proxy) {
 			port: options.api.port
 		});
 		util.log('Routing request: API server'.warn);
-
-	} else if (req.url.match(/^\/1\//)) {
+	}
+	else if (req.url.match(/^\/1\//)) {
 
 		/* Default express server */
 		proxy.proxyRequest(req, res, {
