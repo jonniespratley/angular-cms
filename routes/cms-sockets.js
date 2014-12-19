@@ -1,9 +1,9 @@
+var events = require('events'),
+	util = require('util'),
+	q = require('q'),
+	WebSocketServer = require('websocket').server,
+	WebSocketRouter = require('websocket').router;
 
-const events = require('events'), util = require('util');
-
-var q = require( 'q' ),
-WebSocketServer = require('websocket').server,
-WebSocketRouter = require('websocket').router;
 ////////////////////////////
 //## Socket Server
 //This is a socket server implementation for 'real' time analytics and other data.
@@ -23,52 +23,52 @@ WebSocketRouter = require('websocket').router;
 module.exports = function (config, app) {
 	'use strict';
 	events.EventEmitter.call(this);
-	console.warn( 'cms-sockts initialized' );
+	console.warn('cms-socket initialized');
 
 	//Start the websocket server
 	//SocketServer.init(proxyServer);
 	var cmsSockets = {},
-			connections, wsserver, wsclient, router, self = cmsSockets;
+		connections, wsserver, wsclient, router, self = cmsSockets;
 
 
 	var delay = function (fn, time) {
 		var defer = q.defer();
-		setTimeout( function () {
+		setTimeout(function () {
 			fn();
 			defer.resolve();
-		}, time );
+		}, time);
 		return defer.promise;
 	};
 
-	var delayedSocketPush = function(socket, time){
-		return delay( function (msg) {
-			socket.emit( 'msg', {
+	var delayedSocketPush = function (socket, time) {
+		return delay(function (msg) {
+			socket.emit('msg', {
 				datetime: new Date(),
 				message: msg,
 				id: 'Server'
-			} );
-		}, time );
+			});
+		}, time);
 	};
 
 	//Hold the names of events that this socket server listens for and emits
 	self.events = {
-			session: {
-				pageView: 'cms:session:pageView',
-				hashChange: 'cms:session:hashChange',
-				login: 'cms:session:login',
-				logout: 'cms:session:logout'
-			},
-			server: {
-				message: 'cms:server:message',
-				connected: 'cms:server:connect',
-				disconnected: 'cms:server:disconnect'
-			},
-			client: {
-				message: 'cms:client:message',
-				connected: 'cms:client:connect',
-				disconnected: 'cms:client:disconnect'
-			}
-		};
+		session: {
+			pageView: 'cms:session:pageView',
+			hashChange: 'cms:session:hashChange',
+			login: 'cms:session:login',
+			logout: 'cms:session:logout'
+		},
+		server: {
+			message: 'cms:server:message',
+			connected: 'cms:server:connect',
+			disconnected: 'cms:server:disconnect'
+		},
+		client: {
+			message: 'cms:client:message',
+			connected: 'cms:client:connect',
+			disconnected: 'cms:client:disconnect'
+		}
+	};
 
 
 	//Store a list of the connected clients
@@ -84,21 +84,30 @@ module.exports = function (config, app) {
 	router = new WebSocketRouter();
 	router.attachServer(wsserver);
 
-	router.mount('*', 'echo-protocol', function(request) {
+	/**
+	 * Echo Protocol
+	 */
+	router.mount('*', 'echo-protocol', function (request) {
 		console.log('mounted to echo protocol');
+
 		var conn = request.accept(request.origin);
-		conn.on('message', function(message) {
-			console.log('routed message', message);
+
+		conn.on('message', function (message) {
+			console.log('routed message', util.inspect(message, {colors: true}));
 		});
 		conn.send('hey');
 	});
 
-	router.mount('*', 'update-protocol', function(request) {
+	/**
+	 * Update Protocol
+	 */
+	router.mount('*', 'update-protocol', function (request) {
 		console.log('mounted to update protocol');
 		var conn = request.accept(request.origin);
-		conn.on('message', function(message) {
+		conn.on('message', function (message) {
 			console.log('update all the things', message);
-		}); });
+		});
+	});
 
 	util.inherits(cmsSockets, events.EventEmitter);
 

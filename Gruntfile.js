@@ -1,5 +1,7 @@
 /* jshint camelcase:false */
 var fs = require('fs');
+var express = require('express');
+var cmsRouter = require('./routes/cms-router.js');
 'use strict';
 
 // # Globbing
@@ -11,13 +13,18 @@ var fs = require('fs');
 * @TODO - Externalize configuration for server and proxy, mongodb
 */
 
+var startNodeServer = function(options, app){
+	var app = express();
+	var config = JSON.parse(fs.readFileSync('./config/config.json'));
+	var server = new cmsRouter.mount(config, app);
+};
+
 var serverEndpoint = 'http://localhost:8181';
 var proxyConfig = {
 	proxy: {
 		forward: {
 			'/socket.io/*': serverEndpoint,
 			'/socket.io': serverEndpoint,
-			'/cms-content': serverEndpoint,
 			'/api': serverEndpoint
 		}
 	}
@@ -60,7 +67,7 @@ module.exports = function (grunt) {
 				tasks: ['newer:copy:styles', 'autoprefixer']
 			},
 			scripts: {
-				files: ['<%= yeoman.app %>/scripts/{,**/}*.js'],
+				files: ['<%= yeoman.app %>/scripts/{,** /}*.js'],
 				tasks: ['jshint:app']
 			},
 			gruntfile: {
@@ -96,12 +103,7 @@ module.exports = function (grunt) {
 					open: true,
 					base: ['.tmp', '<%= yeoman.app %>'],
 					middleware: function (connect, options) {
-						var express = require('express');
-						var fs = require('fs');
-						var cmsRouter = require('./routes/cms-router.js');
-						var app = express();
-						var config = JSON.parse(fs.readFileSync('./config/config.json'));
-						var server = new cmsRouter.mount(config, app);
+						startNodeServer(options, connect);
 						return [
 							require('json-proxy').initialize(proxyConfig),
 							mountFolder(connect, '.grunt'),

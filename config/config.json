@@ -24,7 +24,7 @@
 		"password":"fred",
 		"host":"localhost",
 		"port":27017,
-		"url":"angularcms:angularcms@paulo.mongohq.com:10089/app19632340"
+		"url":"localhost/angular-cms"
 	},
 	"email":{
 		"username":"angular.cms@gmail.com",
