@@ -38,7 +38,7 @@ var ensureAuthenticated = function (req, res, next) {
  */
 var cmsPassport = function (config, app) {
 
-var user = new User();
+	var user = new User();
 
 	if (!app) {
 		throw new Error('Must provide express application!');
@@ -46,20 +46,22 @@ var user = new User();
 
 	/*
 
-	*/
-	var findOrCreate = function(u, done){
+	 */
+	var findOrCreate = function (u, done) {
 		console.log('find', u);
 
 		for (var i = 0; i < u.emails.length; i++) {
 			var email = u.emails[i].value
-			User.findOne({ email: email }, function (err, user) {
-				if (err) { return done(err); }
+			User.findOne({email: email}, function (err, user) {
+				if (err) {
+					return done(err);
+				}
 				if (!user) {
 					console.warn('create user', u);
 					return done(null, false);
 				}
-					return done(null, user);
-				});
+				return done(null, user);
+			});
 		}
 
 	};
@@ -88,15 +90,21 @@ var user = new User();
 
 	passport.deserializeUser(deserializeUser);
 
-var strategy = function(username, password, done) {
-	console.warn('find user', username, password);
-	User.findOne({ username: username }, function (err, user) {
-		if (err) { return done(err); }
-			if (!user) { return done(null, false); }
-				if (!user.validPassword(password)) { return done(null, false); }
-					return done(null, user);
-				});
-			};
+	var strategy = function (username, password, done) {
+		console.warn('find user', username, password);
+		User.findOne({username: username}, function (err, user) {
+			if (err) {
+				return done(err);
+			}
+			if (!user) {
+				return done(null, false);
+			}
+			if (!user.validPassword(password)) {
+				return done(null, false);
+			}
+			return done(null, user);
+		});
+	};
 
 	passport.use(new BasicStrategy(strategy));
 	passport.use(new LocalStrategy(strategy));

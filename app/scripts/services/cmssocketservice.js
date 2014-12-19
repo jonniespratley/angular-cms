@@ -23,7 +23,7 @@ angular.module('angularCmsApp').service('cmsSocketService', function() {
       return console.log(e);
     };
     _ws.onopen = function(e) {
-      _ws.send("update");
+      _ws.send('update');
     };
     return {
       instance: _ws,

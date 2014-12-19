@@ -1,16 +1,14 @@
-var bodyParser = require( 'body-parser' ),
-	mongoose = require( 'mongoose' ),
+var bodyParser = require('body-parser'),
+	mongoose = require('mongoose'),
 	util = require('util'),
-	User = require( './models/user' ),
-	session = require( 'express-session' ),
-	crypto = require( 'crypto'),
-	bcrypt = require( 'bcrypt-nodejs' );
-
+	User = require('./models/user'),
+	session = require('express-session'),
+	crypto = require('crypto'),
+	bcrypt = require('bcrypt-nodejs');
 
 
 var cmsAuth = function (config, app) {
-	console.warn( 'cms-auth' );
-
+	console.warn('cms-auth');
 
 
 	//### hashPassword
@@ -35,23 +33,23 @@ var cmsAuth = function (config, app) {
 			if (req.body.email) {
 				query.username = req.body.email;
 			}
-			query.password = hashPassword( req.body.password, query.username );
+			query.password = hashPassword(req.body.password, query.username);
 			console.warn('trying to login', query);
-			User.findOne( {username: query.username}, function (err, data) {
+			User.findOne({username: query.username}, function (err, data) {
 				if (err) {
-					return res.jsonp( 400, err );
+					return res.jsonp(400, err);
 				}
 				try {
 					if (data && bcrypt.compareSync(req.body.password, data.password)) {
 						req.session.user = data;
-						return res.json( 200, data );
+						return res.json(200, data);
 					} else {
-						return res.json( 404, {message: 'Wrong username/password!'} );
+						return res.json(404, {message: 'Wrong username/password!'});
 					}
 				} catch (error) {
-					return res.json( 404, {message: error} );
+					return res.json(404, {message: error});
 				}
-			} );
+			});
 		},
 		/**
 		 * Handle registering a new user
@@ -70,7 +68,7 @@ var cmsAuth = function (config, app) {
 				data.email = req.body.email;
 			}
 
-			data.password = hashPassword( req.body.password, data.username );
+			data.password = hashPassword(req.body.password, data.username);
 			data.created_at = new Date();
 			data.updated_at = new Date();
 			data.active = false;
@@ -79,32 +77,31 @@ var cmsAuth = function (config, app) {
 			console.warn('trying to register', data);
 
 
-
 			//Try and find user
-			User.find( {username: data.username}, function (err, u) {
-				console.log( 'found user', err, util.inspect(u, {colors: true}));
-				var user = new User( data );
-				if(err){
-					res.jsonp( 400, {message: 'Problem registering!'} );
+			User.find({username: data.username}, function (err, u) {
+				console.log('found user', err, util.inspect(u, {colors: true}));
+				var user = new User(data);
+				if (err) {
+					res.jsonp(400, {message: 'Problem registering!'});
 				}
 
 				if (u.length) {
-					res.jsonp( 400, {message: 'Username already exists!'} );
+					res.jsonp(400, {message: 'Username already exists!'});
 				} else {
-					user.save( function (er, ok) {
+					user.save(function (er, ok) {
 						if (er) {
-							return res.jsonp( 400, {message: 'Problem registering!'} );
+							return res.jsonp(400, {message: 'Problem registering!'});
 						} else {
-							return res.jsonp( 201, ok );
+							return res.jsonp(201, ok);
 						}
-					} );
+					});
 				}
 
-			} );
+			});
 		},
 		session: function (req, res, next) {
 			var user = req.session;
-			if(req.session && req.session.user){
+			if (req.session && req.session.user) {
 				user = req.session.user
 			}
 			console.warn(util.inspect(user, {colors: true}));
@@ -113,15 +110,15 @@ var cmsAuth = function (config, app) {
 	};
 
 	//Always users table
-	app.use( session( {
+	app.use(session({
 		secret: 'angular-cms',
 		resave: true,
 		saveUninitialized: true
-	} ) );
-	app.get( config.apiBase + '/login', bodyParser.json(), cmsAuth.login );
-	app.post( config.apiBase + '/login', bodyParser.json(), cmsAuth.login );
-	app.post( config.apiBase + '/register', bodyParser.json(), cmsAuth.register );
-	app.get( config.apiBase + '/session', bodyParser.json(), cmsAuth.session );
+	}));
+	app.get(config.apiBase + '/login', bodyParser.json(), cmsAuth.login);
+	app.post(config.apiBase + '/login', bodyParser.json(), cmsAuth.login);
+	app.post(config.apiBase + '/register', bodyParser.json(), cmsAuth.register);
+	app.get(config.apiBase + '/session', bodyParser.json(), cmsAuth.session);
 };
 
 module.exports = cmsAuth;

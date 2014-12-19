@@ -10,16 +10,16 @@
  * Resize textarea automatically to the size of its text content.
  *
  * @example
-	 <example module="rfx">
-		 <file name="index.html">
-				 <textarea ng-model="text" r-autogrow class="input-block-level"></textarea>
+	 <example module='rfx'>
+		 <file name='index.html'>
+				 <textarea ng-model='text' r-autogrow class='input-block-level'></textarea>
 				 <pre>{{text}}</pre>
 		 </file>
 	 </example>
  */
 var app;
 
-Parse.initialize("fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB", "QPFGBNHs0QQHFS54atV71oKppd3gTgaFfQIHP2VW");
+Parse.initialize('fYHs4Flnj7vgVHm9vaFiFTSKt5Mj2Bxf9e93mTOB', 'QPFGBNHs0QQHFS54atV71oKppd3gTgaFfQIHP2VW');
 
 app = angular.module('angularCmsApp', ['ngCookies', 'ngResource', 'ngSanitize', 'ngRoute', 'ngAnimate', 'mgcrea.ngStrap', 'fg']).config(function($routeProvider) {
   var routeResolver;

@@ -1,6 +1,6 @@
 'use strict';
 angular.module('angularCmsApp').service('DataService', [
-  '$http', '$q', '$resource', function($http, $q, $resource) {
+  '$http', '$q', '$resource', function($http) {
     var DataService;
     DataService = {
       endpoint: '/api/v2/angular-cms',
@@ -17,10 +17,10 @@ angular.module('angularCmsApp').service('DataService', [
         return $http(defaults);
       },
       fetch: function(collection, params) {
-        return this.request("/" + collection, 'GET', params);
+        return this.request('/' + collection, 'GET', params);
       },
       get: function(collection, id, params) {
-        return this.request("/" + collection + "/" + id, 'GET', params);
+        return this.request('/' + collection + '/' + id, 'GET', params);
       },
       save: function(collection, data) {
         if (data._id) {
@@ -30,13 +30,13 @@ angular.module('angularCmsApp').service('DataService', [
         }
       },
       destroy: function(collection, data) {
-        return this.request("/" + collection + "/" + data._id, 'DELETE');
+        return this.request('/' + collection + '/' + data._id, 'DELETE');
       },
       _create: function(collection, data) {
-        return this.request("/" + collection, 'POST', null, data);
+        return this.request('/' + collection, 'POST', null, data);
       },
       _update: function(collection, data) {
-        return this.request("/" + collection + "/" + data._id, 'PUT', null, data);
+        return this.request('/' + collection + '/' + data._id, 'PUT', null, data);
       }
     };
     return DataService;

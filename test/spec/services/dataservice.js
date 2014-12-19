@@ -101,7 +101,7 @@ describe('Service: DataService', function() {
     expect(successCallback).toHaveBeenCalled();
     return expect(errorCallback).not.toHaveBeenCalled();
   });
-  return it('DELETE - /collection/id - should reject promise on error', function() {
+  it('DELETE - /collection/id - should reject promise on error', function() {
     $httpBackend.expectDELETE("" + baseUrl + "/posts/1").respond(404, {
       message: 'Error deleting object'
     });
