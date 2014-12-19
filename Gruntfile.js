@@ -10,8 +10,7 @@ var fs = require('fs');
 /**
 * @TODO - Externalize configuration for server and proxy, mongodb
 */
-var config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
-var cmsRoutes = require(__dirname + '/routes/cms-routes');
+
 var serverEndpoint = 'http://localhost:8181';
 var proxyConfig = {
 	proxy: {
@@ -97,6 +96,12 @@ module.exports = function (grunt) {
 					open: true,
 					base: ['.tmp', '<%= yeoman.app %>'],
 					middleware: function (connect, options) {
+						var express = require('express');
+						var fs = require('fs');
+						var cmsRouter = require('./routes/cms-router.js');
+						var app = express();
+						var config = JSON.parse(fs.readFileSync('./config/config.json'));
+						var server = new cmsRouter.mount(config, app);
 						return [
 							require('json-proxy').initialize(proxyConfig),
 							mountFolder(connect, '.grunt'),

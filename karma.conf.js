@@ -27,9 +27,9 @@ module.exports = function (config) {
 			'app/bower_components/angular-*/dist/angular-*.js',
 
 			//Libs
-			'app/scripts/libs/parse-1.2.17.min.js',
-			'app/scripts/libs/md5.js',
-			'app/scripts/libs/markdown.js',
+			'app/libs/parse-1.2.17.min.js',
+			'app/libs/md5.js',
+			'app/libs/markdown.js',
 
 			//Coffee source
 			//'app/scripts/**/*.coffee',
