@@ -13,6 +13,11 @@
 	"security":{
 		"salt":"angular-cms"
 	},
+	"https":{
+		"key": "./config/apache.key",
+		"cert":"./config/apache.crt"
+	},
+
 	"db":{
 		"name":"angular-cms",
 		"username":"amadmin",

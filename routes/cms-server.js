@@ -2,6 +2,7 @@ var express = require('express'),
 		path = require('path'),
 		bodyParser = require( 'body-parser' );
 
+
 module.exports = function (config, app) {
 	console.warn( 'cms-server initialized');
 
@@ -18,6 +19,8 @@ module.exports = function (config, app) {
 			res.set('x-timestamp', Date.now())
 		}
 	};
+
+
 
 	router.use(express.static(config.staticDir, options));
 	app.all('/', function(req, res, next) {
