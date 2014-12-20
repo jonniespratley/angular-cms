@@ -17,7 +17,6 @@ var proxyConfig = {
 		forward: {
 			'/socket.io/*': serverEndpoint,
 			'/socket.io': serverEndpoint,
-			'/cms-content': serverEndpoint,
 			'/api': serverEndpoint
 		}
 	}
@@ -106,6 +105,8 @@ module.exports = function (grunt) {
 							require('json-proxy').initialize(proxyConfig),
 							mountFolder(connect, '.grunt'),
 							mountFolder(connect, '.tmp'),
+							mountFolder(connect, config.publicDir),
+							mountFolder(connect, config.staticDir),
 							mountFolder(connect, 'app')
 						];
 					}
