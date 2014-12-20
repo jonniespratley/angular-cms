@@ -36,7 +36,7 @@ define([
 			this.skip();
 		},
 		'POST - /register - should return user on successful registration': function () {
-			this.skip();
+
 			var dfd = this.async();
 			request(app)
 				.post('/auth/register')
@@ -49,7 +49,8 @@ define([
 						"name": "Jonnie Dollas"
 					}
 				})
-				.expect("Content-Type", /json/)
+				.set('Accept', 'application/json')
+				.expect('Content-Type', /json/)
 				.expect(201, dfd.resolve());
 		},
 		'POST - /login - should return user on successful login': function () {
@@ -61,7 +62,8 @@ define([
 			request(app)
 				.post('/auth/login')
 				.send(validUser)
-				.expect("Content-Type", /json/)
+				.set('Accept', 'application/json')
+				.expect('Content-Type', /json/)
 				.expect(200)
 				.end(function(err, res){
 					if (err) {throw err;}

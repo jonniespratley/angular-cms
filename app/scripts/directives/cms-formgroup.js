@@ -4,11 +4,11 @@
  @name angularCmsApp.directive:cmsFormGroup
  @element div
  @function
- 
+
  @description
  	Resize textarea automatically to the size of its text content.
  	**Note:** ie<9 needs pollyfill for window.getComputedStyle
- 
+
  @example
    <example module="angularCmsApp">
      <file name="index.html">
@@ -20,7 +20,7 @@
 'use strict';
 angular.module('angularCmsApp').directive('cmsFormGroup', function() {
   return {
-    template: "<div class=\"form-group\">\n  <label class=\"control-label col-sm-3 col-xs-3\">{{label}}</label>\n  <div class=\"controls col-sm-9 col-xs-9\" ng-transclude>\n  </div>\n</div>",
+    template: '<div class="form-group"><label class="control-label col-sm-3 col-xs-3">{{label}}</label><div class="controls col-sm-9 col-xs-9" ng-transclude></div></div>',
     restrict: 'E',
     replace: true,
     transclude: true,
@@ -29,6 +29,7 @@ angular.module('angularCmsApp').directive('cmsFormGroup', function() {
       hint: '@'
     },
     link: function(scope, element, attrs) {
+      console.log(attrs);
       return element.find('input').addClass('form-control');
     }
   };
