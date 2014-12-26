@@ -1,22 +1,17 @@
+
 /* jshint camelcase:false */
-var fs = require('fs');
-var express = require('express');
-var cmsRouter = require('./routes/cms-router.js');
 'use strict';
+var fs = require('fs'),
+		express = require('express'),
+		cmsRouter = require('./routes/cms-router.js'),
+		config = JSON.parse(fs.readFileSync('./config/config.json')),
+		LIVERELOAD_PORT = 35729,
+		SERVER_PORT = 9000;
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-/**
-* @TODO - Externalize configuration for server and proxy, mongodb
-*/
 
-var startNodeServer = function(options, app){
-	var app = express();
-	var config = JSON.parse(fs.readFileSync('./config/config.json'));
-	var server = new cmsRouter.mount(config, app);
+var startNodeServer = function(){
+	var _app = express();
+	var server = new cmsRouter.mount(config, _app);
 };
 
 var serverEndpoint = 'http://localhost:8181';
@@ -30,8 +25,7 @@ var proxyConfig = {
 	}
 };
 
-var LIVERELOAD_PORT = 35728;
-var SERVER_PORT = 9000;
+
 //var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function (connect, dir) {
 	return connect.static(require('path').resolve(dir));
@@ -89,10 +83,10 @@ module.exports = function (grunt) {
 		// The actual grunt server settings
 		connect: {
 			options: {
-				port: 9000,
+				port: SERVER_PORT,
 				// Change this to '0.0.0.0' to access the server from outside.
 				hostname: '127.0.0.1',
-				livereload: 35729,
+				livereload: LIVERELOAD_PORT,
 				base: ['.tmp', '<%= yeoman.app %>'],
 				onCreateServer: function(server, connect, options) {
 					grunt.util.log('onCreateServer', options);
@@ -124,6 +118,8 @@ module.exports = function (grunt) {
 			dist: {
 				options: {
 					livereload: false,
+					keepAlive: true,
+					open: true,
 					base: '<%= yeoman.dist %>',
 					middleware: function (connect, options) {
 						return [
@@ -279,7 +275,9 @@ module.exports = function (grunt) {
 			dist: {
 				files: {
 					src: [
-						'<%= yeoman.dist %>/scripts/{,*/}*.js', '<%= yeoman.dist %>/styles/{,*/}*.css',
+						'<%= yeoman.dist %>/scripts/{,*/}*.js',
+						'<%= yeoman.dist %>/libs/{,*/}*.js',
+						'<%= yeoman.dist %>/styles/{,*/}*.css',
 						//'<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
 						'<%= yeoman.dist %>/styles/fonts/*'
 					]
@@ -420,7 +418,7 @@ module.exports = function (grunt) {
 						src: [
 							'*.{ico,png,txt}', '.htaccess',
 							//'bower_components/**/*',
-							'scripts/libs/*',
+							'libs/*',
 							'images/{,*/}*.{webp}',
 							'fonts/*'
 						]
@@ -444,24 +442,25 @@ module.exports = function (grunt) {
 		// Run some tasks in parallel to speed up the build process
 		concurrent: {
 			options: {
-				limit: 10,
+				limit: 15,
 				logConcurrentOutput: true
 			},
 			server: [
 				'coffee:dist',
 				//	'compass:server',
-				'ngtemplates', 'copy:styles'
+				'ngtemplates',
+				'copy:styles'
 			],
 			test: [
 				'coffee',
-				//	'compass',
 				'copy:styles'
 			],
 			dist: [
 				'coffee',
-				//	'compass:dist',
 				'ngtemplates',
-				'copy:styles', 'svgmin', 'htmlmin'
+				'copy:styles',
+				'svgmin',
+				'htmlmin'
 			]
 		},
 
@@ -528,11 +527,9 @@ module.exports = function (grunt) {
 				dest: 'docs',
 				html5Mode: false,
 				startPage: '/api',
-				title: "AngularCMS Docs",
-				//imageLink: "http://my-domain.com",
-
-				titleLink: "/api",
-				bestMatch: true,
+				title: 'AngularCMS Docs',
+				titleLink: '/api',
+				bestMatch: true
 			},
 			api: {
 				src: [
@@ -554,7 +551,6 @@ module.exports = function (grunt) {
 				dest: '.tmp/scripts/templates.js',
 				options: {
 					module: 'angularCmsApp',
-					//url: 'views',
 					url: function (url) {
 						return url.replace('app/', '');
 					},
@@ -667,8 +663,19 @@ module.exports = function (grunt) {
 	grunt.registerTask('ptor', ['coffee:test', 'protractor_webdriver', 'protractor']);
 	grunt.registerTask('build-docs', ['useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('build', [
-		'clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', /*'cdnify',*/
-		'cssmin', 'uglify', 'rev', 'usemin'
+		'clean:dist',
+		'useminPrepare',
+		'concurrent:dist',
+		'autoprefixer',
+		'concat',
+		'ngtemplates',
+		'ngmin',
+		'copy:dist',
+		'cdnify',
+		'cssmin',
+		'uglify',
+		'rev',
+		'usemin'
 	]);
 
 	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:ngdocs']);
