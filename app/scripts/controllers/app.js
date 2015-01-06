@@ -3,7 +3,9 @@ angular.module('angularCmsApp').controller('AppCtrl', function ($scope, $rootSco
 	var App;
 	App = angular.copy(Config);
 	App.ds = DataService;
-	App.socket = cmsSocketService;
+
+
+	App.socket = new cmsSocketService({endpoint: Config.settings.socket.endpoint, protocol:Config.settings.socket.protocol});
 
 
 	App.route = $routeParams;

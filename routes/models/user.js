@@ -18,6 +18,7 @@ var UserSchema = mongoose.Schema( {
 	active: Boolean,
 	meta: Object,
 	token: String,
+	group: Object,
 	created_at: Date,
 	updated_at: Date,
 	local: {

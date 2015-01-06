@@ -50,6 +50,8 @@ module.exports.mount = function(config, app) {
 	require('./cms-upload')(config, app);
 	require('./cms-sockets')(config, server);
 	require('./cms-server')(config, app);
+	require('./socketserver').init(app);
+
 
 
 	var serverPort = process.env.PORT || config.port;

@@ -207,4 +207,4 @@ var SocketServer = {
 	}
 };
 
-exports.SocketServer = SocketServer;
+module.exports = SocketServer;

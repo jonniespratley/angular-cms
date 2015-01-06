@@ -1,26 +1,21 @@
-
-<div class="starter-template jumbotron">
-	<h1>WebSockets</h1>
-	<p class="lead">Use this document as a way to quickly start a new WebSocket project.</p>
-</div>
 <div class="messages"></div>
 <button class="btn btn-primary btn-connect">Connect</button>
-<button class="btn btn-danger btn-disconnect">Disconnect </button>
-<br />
-<br />
+<button class="btn btn-danger btn-disconnect">Disconnect</button>
+<br/>
+<br/>
 <form class="form-inline" role="form">
 	<div class="form-group">
-		<input id="ws-endpoint" type="text" class="form-control" placeholder="ws://endpoint" value="ws://localhost:8181" />
+		<input id="ws-endpoint" type="text" class="form-control" placeholder="ws://endpoint" ng-model="App.settings.socket.endpoint"/>
 	</div>
 	<div class="form-group">
-		<input id="ws-protocol" type="text" class="form-control" placeholder="Protocol" value="update-protocol" />
+		<input id="ws-protocol" type="text" class="form-control" placeholder="Protocol"  ng-model="App.settings.socket.protocol"/>
 	</div>
 	<div class="form-group">
-		<input id="ws-msg" type="text" class="form-control" placeholder="Enter message here..." />
+		<input id="ws-msg" type="text" class="form-control" placeholder="Enter message here..." ng-model="msg"/>
 	</div>
-	<button class="btn btn-success btn-message" type="button">Send</button>
+	<button class="btn btn-success btn-message" type="button" ng-click="send(msg)">Send</button>
 </form>
-<br />
+<br/>
 <legend>Log</legend>
 <textarea class="form-control" rows="10"></textarea>
 
@@ -45,7 +40,7 @@
 	</div>
 
 	<div class="input-group">
-		<input type="text" class="form-control" name="input" id="input" ng-model="App.input" />
+		<input type="text" class="form-control" name="input" id="input" ng-model="App.input"/>
 		<a class="input-group-addon btn btn-primary" ng-click="App.send(App.input)">Send</a>
 	</div>
 	<br/>

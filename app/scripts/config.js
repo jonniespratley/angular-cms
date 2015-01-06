@@ -138,9 +138,11 @@ window.Config = {
         body: 'This is the v2 api server'
       }
     ],
-    socketio: {
+    socket: {
+	    endpoint: 'ws://'+document.location.hostname+ ':8181',
+	    protocol: 'angular-cms',
       host: '127.1.0.1',
-      port: 8081
+      port: 8181
     },
     network: {
       online: true,

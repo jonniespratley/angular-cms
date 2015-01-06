@@ -66,65 +66,11 @@
 									<div class="col-sm-8 col-xs-7">
 										<form name="UserForm" class="form-horizontal" ng-submit="addUser(user)">
 
-											<div class="form-group">
-												<label class="control-label col-sm-3 col-xs-3">Username:</label>
-
-												<div class="controls col-sm-9 col-xs-9">
-													<input type="text" class="form-control" placeholder="Username" ng-model="user.username"
-																 autofocus>
-												</div>
+											<div fg-form
+													 fg-form-data="user"
+													 fg-schema="userSchema">
 											</div>
 
-
-											<div class="form-group">
-												<label class="control-label col-sm-3 col-xs-3">Email:</label>
-
-												<div class="controls col-sm-9 col-xs-9">
-													<input type="email" class="form-control" placeholder="Email" ng-model="user.email"
-																 ng-disabled="user._id">
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="control-label col-sm-3 col-xs-3">Password:</label>
-
-												<div class="controls col-sm-9 col-xs-9">
-													<input type="password" class="form-control" placeholder="Password" value="{{user.password}}" disabled>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="control-label col-sm-3 col-xs-3">Group:</label>
-
-												<div class="controls col-sm-9 col-xs-9">
-													<select ng-model="user.groups" class="form-control" multiple=""
-																	ng-options="group for group in groups">
-
-													</select>
-
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="control-label col-sm-3 col-xs-3">Name:</label>
-
-												<div class="controls col-sm-9 col-xs-9">
-													<input type="text" class="form-control" placeholder="Name" ng-model="user.meta.name">
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="control-label col-sm-3 col-xs-3">Summary:</label>
-
-												<div class="controls col-sm-9 col-xs-9">
-													<textarea class="form-control" placeholder="Enter 50 words or less..."
-																		ng-model="user.meta.summary"></textarea>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="control-label col-sm-3 col-xs-3">Active:</label>
-
-												<div class="controls col-sm-9 col-xs-9">
-													<input type="checkbox" class="form-control" placeholder="Name" ng-model="user.active">
-												</div>
-											</div>
 										</form>
 									</div>
 									<div class="col-sm-4 col-xs-5">

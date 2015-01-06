@@ -64,8 +64,31 @@ var _ds = new DS({
 			active: Boolean,
 			meta: Object,
 			token: String,
-			created: Date,
-			updated: Date
+			group: Object,
+			created_at: Date,
+			updated_at: Date,
+			local: {
+				email: String,
+				password: String,
+			},
+			facebook: {
+				id: String,
+				token: String,
+				email: String,
+				name: String
+			},
+			twitter: {
+				id: String,
+				token: String,
+				displayName: String,
+				username: String
+			},
+			google: {
+				id: String,
+				token: String,
+				email: String,
+				name: String
+			}
 		},
 		'uploads': {
 			title: String,

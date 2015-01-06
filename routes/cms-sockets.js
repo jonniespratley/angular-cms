@@ -85,6 +85,21 @@ module.exports = function (config, app) {
 	router.attachServer(wsserver);
 
 	/**
+	 * Angular-CMS Protocol
+	 */
+	router.mount('*', 'angular-cms', function (request) {
+		console.log('mounted to angular-cms protocol');
+
+		var conn = request.accept(request.origin);
+
+		conn.on('message', function (message) {
+			console.log('routed message', util.inspect(message, {colors: true}));
+
+			conn.send('Recieved by server');
+		});
+		conn.send('hey');
+	});
+	/**
 	 * Echo Protocol
 	 */
 	router.mount('*', 'echo-protocol', function (request) {
