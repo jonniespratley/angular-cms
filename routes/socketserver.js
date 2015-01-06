@@ -18,16 +18,17 @@
 //Start the websocket server
 //SocketServer.init(proxyServer);
 
-var sio = require( 'socket.io' ), q = require( 'q' );
+var sio = require('socket.io'), q = require('q');
 
 var delay = function (fn, time) {
 	var defer = q.defer();
-	setTimeout( function () {
+	setTimeout(function () {
 		fn();
 		defer.resolve();
-	}, time );
+	}, time);
 	return defer.promise;
-}
+};
+
 
 //Hold the ncmss of events that this socket server listens for and emits
 var CmsSocket = {
@@ -76,133 +77,136 @@ var SocketServer = {
 	init: function (app) {
 		var self = this;
 
-		io = sio.listen( app );
-		io.sockets.on( 'connection', function (socket) {
-			console.log( 'Client connected' );
+		io = sio.listen(app);
+		io.sockets.on('connection', function (socket) {
+			console.log('Client connected');
 
-			clients.push( socket );
+			clients.push(socket);
 
-			io.sockets.emit( 'this', {will: 'be received by everyone'} );
+			io.sockets.emit('this', {will: 'be received by everyone'});
 
-			socket.on( 'disconnect', function () {
-				io.sockets.emit( 'user disconnected' );
-			} );
+			socket.on('disconnect', function () {
+				io.sockets.emit('user disconnected');
+			});
 
-			socket.emit( 'msg', {
+			socket.emit('msg', {
 				datetime: new Date(),
 				id: socket.id,
 				message: "Welcome " + socket.id + " your the #" + clients.length + " socket."
-			} );
+			});
 
 			//Send custom event to client
-			socket.on( 'msgEvent', function (data, fn) {
-				console.log( 'Client message', data );
-				fn( {
+			socket.on('msgEvent', function (data, fn) {
+				console.log('Client message', data);
+				fn({
 					id: socket.id,
 					datetime: new Date(),
 					message: data
-				} );
-			} );
+				});
+			});
 
-			socket.on( 'set nickname', function (name) {
-				socket.set( 'nickname', name, function () {
-					socket.emit( 'ready' );
-				} );
-			} );
+			socket.on('set nickname', function (name) {
+				socket.set('nickname', name, function () {
+					socket.emit('ready');
+				});
+			});
 
-			socket.on( 'msg', function () {
-				socket.get( 'nickname', function (err, name) {
-					console.log( 'Chat message by ', name );
-				} );
-			} );
+			socket.on('msg', function () {
+				socket.get('nickname', function (err, name) {
+					console.log('Chat message by ', name);
+				});
+			});
 
 			//Setup auto push after interval
-			var delayedSocketPush = delay( function (msg) {
-				socket.emit( 'msg', {
-					datetime: new Date(),
-					message: msg,
-					id: 'Server'
-				} );
-			}, 5000 );
+			var delayedSocketPush = function (msg) {
 
-			var resultPromise = delayedSocketPush( 'Here is some streaming data....' );
+				console.warn('sending delayed socket message', msg);
 
-			resultPromise( function (value) {
+				return delay(function (msg) {
+					socket.emit('msg', {
+						datetime: new Date(),
+						message: msg,
+						id: 'Server'
+					});
+				}, 1000);
+			};
 
-			} );
 
-		} );
+			var resultPromise = delayedSocketPush('Here is some streaming data....');
 
-		io.configure( function () {
-			io.set( 'authorization', function (handshakeData, callback) {
+
+		});
+
+		io.configure(function () {
+			io.set('authorization', function (handshakeData, callback) {
 				if (handshakeData.xdomain) {
-					callback( 'Cross-domain connections are not allowed' );
+					callback('Cross-domain connections are not allowed');
 				} else {
-					callback( null, true );
+					callback(null, true);
 				}
-			} );
-		} );
+			});
+		});
 		//Store a list of the connected clients
 		var connections = [];
 
 		//Handle when a client is connected.
-		io.sockets.on( 'connection', function (socket) {
-			console.warn( 'connection', socket );
+		io.sockets.on('connection', function (socket) {
+			console.warn('connection', socket);
 
 			//push to connections array
-			self.connections.push( socket );
+			self.connections.push(socket);
 
 			//Publish the server connected event
-			io.sockets.emit( CmsSocket.events.server.connected, {
+			io.sockets.emit(CmsSocket.events.server.connected, {
 				data: self.connections.length
-			} );
+			});
 
 			//Listen for client connected
-			socket.on( CmsSocket.events.client.connected, function (msg) {
-				console.log( CmsSocket.events.client.connected, msg );
-			} );
+			socket.on(CmsSocket.events.client.connected, function (msg) {
+				console.log(CmsSocket.events.client.connected, msg);
+			});
 
 			//Listen for any messages from the client
-			socket.on( CmsSocket.events.client.message, function (content) {
+			socket.on(CmsSocket.events.client.message, function (content) {
 
-				console.log( CmsSocket.events.client.message, JSON.stringify( content ).debug );
+				console.log(CmsSocket.events.client.message, JSON.stringify(content).debug);
 
 				//Broadcast the event
-				socket.emit( CmsSocket.events.server.message, {
+				socket.emit(CmsSocket.events.server.message, {
 					id: socket.id,
 					data: content
-				} );
-				socket.broadcast.emit( CmsSocket.events.server.message, {
+				});
+				socket.broadcast.emit(CmsSocket.events.server.message, {
 					id: socket.id,
 					data: content
-				} );
-			} );
+				});
+			});
 			//Listen for any pageView events from the client
-			socket.on( CmsSocket.events.session.pageView, function (message) {
-				console.log( CmsSocket.events.session.pageView + message );
+			socket.on(CmsSocket.events.session.pageView, function (message) {
+				console.log(CmsSocket.events.session.pageView + message);
 				ip = socket.handshake.address.address;
 				url = message;
 
 				//Broadcast the event
-				io.sockets.emit( CmsSocket.events.session.pageView, {
-					'connections': Object.keys( io.connected ).length,
+				io.sockets.emit(CmsSocket.events.session.pageView, {
+					'connections': Object.keys(io.connected).length,
 					'ip': ip,
 					'url': url,
 					'xdomain': socket.handshake.xdomain,
 					'timestamp': new Date()
-				} );
-			} );
+				});
+			});
 
 			//handle disconnections
-			socket.on( 'disconnect', function () {
-				console.log( "Socket disconnected" );
+			socket.on('disconnect', function () {
+				console.log("Socket disconnected");
 
-				io.sockets.emit( 'cms:session:pageview', {
-					'connections': Object.keys( io.connected ).length
-				} );
+				io.sockets.emit('cms:session:pageview', {
+					'connections': Object.keys(io.connected).length
+				});
 
-			} );
-		} );
+			});
+		});
 		return this;
 	}
 };

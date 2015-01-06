@@ -87,21 +87,31 @@ var cmsPassport = function (config, app) {
 	};
 
 	passport.serializeUser(serializeUser);
-
 	passport.deserializeUser(deserializeUser);
+
 
 	var strategy = function (username, password, done) {
 		console.warn('find user', username, password);
 		User.findOne({username: username}, function (err, user) {
+
+			//If error
 			if (err) {
 				return done(err);
 			}
+
+			//If no user found
 			if (!user) {
 				return done(null, false);
 			}
+
+			console.warn('found user and now validating password', user.password);
+
+			//If password is not valid
 			if (!user.validPassword(password)) {
 				return done(null, false);
 			}
+
+			//Password is valid
 			return done(null, user);
 		});
 	};
@@ -109,9 +119,12 @@ var cmsPassport = function (config, app) {
 	passport.use(new BasicStrategy(strategy));
 	passport.use(new LocalStrategy(strategy));
 
+
+	console.warn('setting up google callback', config.baseurl);
+
 	passport.use(new GoogleStrategy({
-			returnURL: config.host + config.port + '/auth/google/return',
-			realm: config.host + config.port
+			returnURL: config.baseurl + '/auth/google/return',
+			realm: config.baseurl
 		},
 		function (identifier, profile, done) {
 			console.warn('googleCallback', profile);
@@ -121,6 +134,9 @@ var cmsPassport = function (config, app) {
 			});
 		}
 	));
+
+
+
 
 	app.use(express.static(path.resolve(config.publicDir)));
 	app.set('views', path.resolve(config.staticDir));
@@ -137,6 +153,15 @@ var cmsPassport = function (config, app) {
 	app.use(passport.initialize());
 	app.use(passport.session());
 	app.use(flash());
+
+
+	app.get('/auth/google', passport.authenticate('google'));
+	app.get('/auth/google/return',
+		passport.authenticate('google', {
+			successRedirect: '/account',
+			failureRedirect: '/login'
+		}));
+
 
 
 	app.get('/api/me', passport.authenticate('basic', {session: false}), function (req, res) {
@@ -180,13 +205,6 @@ var cmsPassport = function (config, app) {
 		req.logout();
 		res.redirect(options.apiBase);
 	});
-
-	app.get('/auth/google', passport.authenticate('google'));
-	app.get('/auth/google/return',
-		passport.authenticate('google', {
-			successRedirect: '/',
-			failureRedirect: '/login'
-		}));
 
 
 };

@@ -1,5 +1,5 @@
 {
-	"baseurl":"http://js2coffee.org",
+	"baseurl":"http://localhost:8181",
 	"sitetitle":"angular-cms",
 	"sitedesc":"This is the description",
 	"sitebrand":"/images/angular-cms-brand.png",

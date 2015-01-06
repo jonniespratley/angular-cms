@@ -49,8 +49,10 @@ module.exports.mount = function(config, app) {
 	require('./cms-proxy')(config, app);
 	require('./cms-upload')(config, app);
 	require('./cms-sockets')(config, server);
+	require('./socketserver').init(server);
+
 	require('./cms-server')(config, app);
-	require('./socketserver').init(app);
+
 
 
 
