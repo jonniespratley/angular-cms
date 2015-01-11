@@ -9,8 +9,10 @@
 node_modules
 atlassian-ide-plugin.xml
 app/bower_components
-coverage/
-db/
-www/cms-content/uploads
+coverage
+content
+db
 docs
 dist
+test
+www/cms-content
