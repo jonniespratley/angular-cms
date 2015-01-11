@@ -1,0 +1,5 @@
+---
+applications:
+- name: angular-cms
+  command: node server.js
+  buildpack: https://github.com/cloudfoundry/heroku-buildpack-nodejs.git
