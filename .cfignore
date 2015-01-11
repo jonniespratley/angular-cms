@@ -1,0 +1,16 @@
+.tmp
+.idea
+.grunt
+.sass-cache
+.project
+.DS_Store
+.c9
+
+node_modules
+atlassian-ide-plugin.xml
+app/bower_components
+coverage/
+db/
+www/cms-content/uploads
+docs
+dist
