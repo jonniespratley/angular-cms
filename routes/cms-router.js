@@ -2,6 +2,12 @@ var http = require('http'), util = require('util');
 
 module.exports.mount = function(config, app) {
 	'use strict';
+	
+	//Fix for cloud foundry
+	if(process.env.VCAP_APP_PORT ){
+		config.port = process.env.VCAP_APP_PORT;
+	}
+	
 
 	var server = http.createServer(app);
 	var serverPort = process.env.PORT || config.port;

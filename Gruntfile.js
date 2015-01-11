@@ -102,8 +102,6 @@ module.exports = function (grunt) {
 							require('json-proxy').initialize(proxyConfig),
 							mountFolder(connect, '.grunt'),
 							mountFolder(connect, '.tmp'),
-							mountFolder(connect, config.publicDir),
-							mountFolder(connect, config.staticDir),
 							mountFolder(connect, 'app')
 						];
 					}
@@ -418,7 +416,6 @@ module.exports = function (grunt) {
 						src: [
 							'*.{ico,png,txt}', '.htaccess',
 							//'bower_components/**/*',
-							'libs/*',
 							'images/{,*/}*.{webp}',
 							'fonts/*'
 						]
@@ -666,7 +663,7 @@ module.exports = function (grunt) {
 		'concurrent:dist',
 		'autoprefixer',
 		'concat',
-		//'ngmin',
+		'ngmin',
 		'ngtemplates',
 		'copy:dist',
 		//'cdnify',

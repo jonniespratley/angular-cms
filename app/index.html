@@ -46,7 +46,7 @@
   <meta name="msapplication-square310x310logo" content="images/mstile-310x310.png">
   <meta name="msapplication-wide310x150logo" content="images/mstile-310x150.png">
 
-  <!-- build:css({.tmp,app}) styles/main.css -->
+  <!-- build:css({.tmp,app}) styles/app.css -->
   <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css">
   <link rel="stylesheet" href="bower_components/bootstrap-additions/dist/bootstrap-additions.min.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
@@ -55,6 +55,10 @@
   <!-- endbuild -->
   <link rel="stylesheet" ng-href="{{App.settings.cdn}}/bootswatch.com/{{App.theme | lowercase}}/bootstrap.min.css"/>
 
+	<!--[if lt IE 9]>
+	<script src="bower_components/es5-shim/es5-shim.js"></script>
+	<script src="bower_components/json3/lib/json3.min.js"></script>
+	<![endif]-->
 </head>
 <body data-ng-class="App.route.current.scope.name">
 
@@ -62,10 +66,6 @@
 	<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
-	<!--[if lt IE 9]>
-	<script src="bower_components/es5-shim/es5-shim.js"></script>
-	<script src="bower_components/json3/lib/json3.min.js"></script>
-	<![endif]-->
 
 	<div id="app" class="app" data-ng-controller="AppCtrl" data-ng-cloak>
 	  <header id="header" data-ng-include="App.layout.header">
@@ -98,6 +98,12 @@
 	<script src="bower_components/es5-shim/es5-shim.js"></script>
 	<script src="bower_components/json3/lib/json3.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="libs/parse-1.2.17.min.js"></script>
+  <script src="libs/md5.js"></script>
+  <script src="libs/markdown.js"></script>
+	<!-- endbuild -->
+	
+  <!-- build:js({.tmp,app}) scripts/modules.js -->
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-ui-utils/ui-utils.js"></script>
 	<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
@@ -108,12 +114,9 @@
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="bower_components/angular-form-gen/dist/angular-form-gen.js"></script>
-	<!-- endbower -->
-  <!-- Dependent libs -->
-  <script src="libs/parse-1.2.17.min.js"></script>
-  <script src="libs/md5.js"></script>
-  <script src="libs/markdown.js"></script>
-	<!-- endbuild -->
+  <!-- endbuild -->
+  
+  <!-- endbower -->
 
 	<!-- build:js({.tmp,app}) scripts/scripts.js -->
 	<script src="scripts/config.js"></script>
