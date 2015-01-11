@@ -4,7 +4,7 @@ var fs = require('fs'),
 
 
 module.exports = function (config, app) {
-	console.warn( 'cms-proxy', 'initialized' );
+	console.warn( 'cms-proxy', 'initialized', config.proxy );
 
 	/**
 	* @TODO - HTTPS Key and Cert
@@ -20,7 +20,7 @@ module.exports = function (config, app) {
 	* This object holds options used for creating a proxy server.
 	*/
 	var options = {
-		port: null,
+		port: 8080,
 		host: {
 			hostname: 'localhost',
 			port: 8181
@@ -73,5 +73,7 @@ module.exports = function (config, app) {
 
 
 	//Start the proxy server
-	proxyServer.listen(config.proxy.port);
+	proxyServer.listen(config.proxy.port, function(){
+		console.log('cms-proxy server listening on ', config.proxy.port);
+	});
 };

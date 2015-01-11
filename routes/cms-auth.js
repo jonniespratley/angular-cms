@@ -1,19 +1,13 @@
-var bodyParser = require('body-parser'),
-	mongoose = require('mongoose'),
-	util = require('util'),
-	User = require('./models/user'),
-	session = require('express-session'),
-	crypto = require('crypto'),
-	bcrypt = require('bcrypt-nodejs');
+var bodyParser = require('body-parser'), mongoose = require('mongoose'), util = require('util'), User = require('./models/user'), session = require('express-session'), 
+crypto = require('crypto'), 
+bcrypt = require('bcrypt-nodejs');
 
-
-var cmsAuth = function (config, app) {
+var cmsAuth = function(config, app) {
 	console.warn('cms-auth');
-
 
 	//### hashPassword
 	//Hash password using basic sha1 hash.
-	var hashPassword = function (pass, salt) {
+	var hashPassword = function(pass, salt) {
 		return bcrypt.hashSync(pass);
 	};
 
@@ -25,7 +19,7 @@ var cmsAuth = function (config, app) {
 		 * @param res
 		 * @param next
 		 */
-		login: function (req, res, next) {
+		login : function(req, res, next) {
 			var query = {};
 			if (req.body.username) {
 				query.username = req.body.username;
@@ -35,7 +29,9 @@ var cmsAuth = function (config, app) {
 			}
 			query.password = hashPassword(req.body.password, query.username);
 			console.warn('trying to login', query);
-			User.findOne({username: query.username}, function (err, data) {
+			User.findOne({
+				username : query.username
+			}, function(err, data) {
 				if (err) {
 					return res.jsonp(400, err);
 				}
@@ -44,10 +40,14 @@ var cmsAuth = function (config, app) {
 						req.session.user = data;
 						return res.json(200, data);
 					} else {
-						return res.json(404, {message: 'Wrong username/password!'});
+						return res.json(404, {
+							message : 'Wrong username/password!'
+						});
 					}
 				} catch (error) {
-					return res.json(404, {message: error});
+					return res.json(404, {
+						message : error
+					});
 				}
 			});
 		},
@@ -57,7 +57,7 @@ var cmsAuth = function (config, app) {
 		 * @param res
 		 * @param next
 		 */
-		register: function (req, res, next) {
+		register : function(req, res, next) {
 			var data = req.body;
 
 			//TODO: Need to make this externalized.
@@ -76,21 +76,30 @@ var cmsAuth = function (config, app) {
 
 			console.warn('trying to register', data);
 
-
 			//Try and find user
-			User.find({username: data.username}, function (err, u) {
-				console.log('found user', err, util.inspect(u, {colors: true}));
+			User.find({
+				username : data.username
+			}, function(err, u) {
+				console.log('found user', err, util.inspect(u, {
+					colors : true
+				}));
 				var user = new User(data);
 				if (err) {
-					res.jsonp(400, {message: 'Problem registering!'});
+					res.jsonp(400, {
+						message : 'Problem registering!'
+					});
 				}
 
 				if (u.length) {
-					res.jsonp(400, {message: 'Username already exists!'});
+					res.jsonp(400, {
+						message : 'Username already exists!'
+					});
 				} else {
-					user.save(function (er, ok) {
+					user.save(function(er, ok) {
 						if (er) {
-							return res.jsonp(400, {message: 'Problem registering!'});
+							return res.jsonp(400, {
+								message : 'Problem registering!'
+							});
 						} else {
 							return res.jsonp(201, ok);
 						}
@@ -99,21 +108,26 @@ var cmsAuth = function (config, app) {
 
 			});
 		},
-		session: function (req, res, next) {
+		session : function(req, res, next) {
 			var user = req.session;
 			if (req.session && req.session.user) {
-				user = req.session.user
+				user = req.session.user;
 			}
-			console.warn(util.inspect(user, {colors: true}));
-			return res.send({message: 'Your session', data: user});
+			console.warn(util.inspect(user, {
+				colors : true
+			}));
+			return res.send({
+				message : 'Your session',
+				data : user
+			});
 		}
 	};
 
 	//Always users table
 	app.use(session({
-		secret: 'angular-cms',
-		resave: true,
-		saveUninitialized: true
+		secret : 'angular-cms',
+		resave : true,
+		saveUninitialized : true
 	}));
 	app.get(config.apiBase + '/login', bodyParser.json(), cmsAuth.login);
 	app.post(config.apiBase + '/login', bodyParser.json(), cmsAuth.login);

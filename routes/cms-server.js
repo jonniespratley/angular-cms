@@ -1,5 +1,7 @@
 var express = require('express'),
 		path = require('path'),
+		serveStatic = require('serve-static'),
+		finalhandler = require('finalhandler'),
 		bodyParser = require( 'body-parser' );
 
 
@@ -11,24 +13,33 @@ module.exports = function (config, app) {
 	var options = {
 		dotfiles: 'ignore',
 		etag: false,
-		extensions: ['png', 'html', 'jpeg', 'jpg', 'gif', 'css'],
+		extensions: [
+			'js',
+			'png', 
+			'html', 'jpeg', 'jpg', 'gif', 
+			'css'
+		],
 		index: true,
 		maxAge: '1d',
 		redirect: false,
 		setHeaders: function (res, path) {
-			res.set('x-timestamp', Date.now())
+			res.set('x-timestamp', Date.now());
 		}
 	};
 
-
-
-	router.use(express.static(config.staticDir, options));
-	app.all('/', function(req, res, next) {
+	
+	
+	app.use(express.static(config.publicDir, options));
+	app.use(express.static(config.staticDir, options));
+	
+	
+	router.all('/', function(req, res, next) {
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 		next();
+		console.log('cms-server', req.method);
 	});
-	app.get('/', function(res, req, next){
+	router.get('/', function(res, req, next){
 		req.send(config.publicDir + path.sep + 'index.html');
 		next();
 	});

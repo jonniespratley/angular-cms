@@ -1,5 +1,5 @@
 {
-	"baseurl":"http://js2coffee.org",
+	"baseurl":"http://localhost:8181",
 	"sitetitle":"angular-cms",
 	"sitedesc":"This is the description",
 	"sitebrand":"/images/angular-cms-brand.png",
@@ -17,14 +17,13 @@
 		"key": "./config/apache.key",
 		"cert":"./config/apache.crt"
 	},
-
 	"db":{
 		"name":"angular-cms",
-		"username":"amadmin",
-		"password":"fred",
-		"host":"localhost",
-		"port":27017,
-		"url":"localhost/angular-cms"
+		"username":"angularcms-dev",
+		"password":"angularcms-dev",
+		"host":"paulo.mongohq.com:10089",
+		"port":31711,
+		"url":"angularcms-dev:angularcms-dev@paulo.mongohq.com:10089/app19632340"
 	},
 	"email":{
 		"username":"angular.cms@gmail.com",
@@ -34,7 +33,7 @@
 		"hostname":"localhost",
 		"port":5001
 	},
-	"staticDir":"www",
+	"staticDir":"dist",
 	"publicDir":"www",
 	"uploadsTmpDir":".tmp",
 	"uploadsDestDir":"www/cms-content/uploads",

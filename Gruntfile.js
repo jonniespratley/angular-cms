@@ -6,7 +6,7 @@ var fs = require('fs'),
 		cmsRouter = require('./routes/cms-router.js'),
 		config = JSON.parse(fs.readFileSync('./config/config.json')),
 		LIVERELOAD_PORT = 35729,
-		SERVER_PORT = 9000;
+		SERVER_PORT = process.env.PORT || 9000;
 
 
 var startNodeServer = function(){
@@ -678,7 +678,7 @@ module.exports = function (grunt) {
 		'usemin'
 	]);
 
-	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:ngdocs']);
+	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:scripts']);
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
 
 	grunt.registerTask('heroku:production', 'build');

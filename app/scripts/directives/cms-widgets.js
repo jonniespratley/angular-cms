@@ -9,7 +9,7 @@
 	This is the container for widgets.
 
 @example
-<example module="angularCmsApp" > 
+<example module="angularCmsApp" >
 
     <file name="jdx.html" >
         HTML example come here ==> `<div class="lior" ></div >`
@@ -17,9 +17,9 @@
 
 </example >
  */
-'use strict';
+
 angular.module('angularCmsApp').directive('cmsWidgets', function() {
-  var postLink;
+  'use strict';
   return {
     restrict: 'EMA',
     replace: true,
@@ -35,13 +35,12 @@ angular.module('angularCmsApp').directive('cmsWidgets', function() {
         }
         return widgets.push(widget);
       };
-      return $scope.select = function(widget) {
+      $scope.select = function(widget) {
         angular.forEach(widgets, function(widget) {
-          return widget.selected = false;
+          widget.selected = false;
         });
-        return widget.selected = true;
+        widget.selected = true;
       };
-    },
-    link: postLink = function(scope, element, attrs) {}
+    }
   };
 });

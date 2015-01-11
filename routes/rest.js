@@ -28,7 +28,7 @@ var sio = require('socket.io');
 var Deferred = require("promised-io/promise").Deferred;
 var when = require("promised-io/promise");
 var bodyParser = require('body-parser');
-var busboy = require('connect-busboy'); //middleware for form/file upload
+var busboy = require('connect-busboy');
 var markdown = require("markdown").markdown;
 
 
@@ -39,9 +39,10 @@ var MESSAGES = {
 	USER_REGISTRATION_EXISTS: 'User already in exists.'
 
 };
+var config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config/config.json')));
 var DS = require('jps-ds').DS;
 var _ds = new DS({
-	host: 'angularcms:angularcms@paulo.mongohq.com:10089/app19632340',
+	host: config.db.url,
 	//host: 'localhost/angular-cms',
 	models: {
 		'groups': {
