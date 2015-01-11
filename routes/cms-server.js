@@ -40,7 +40,7 @@ module.exports = function (config, app) {
 		console.log('cms-server', req.method);
 	});
 	router.get('/', function(res, req, next){
-		req.send(config.publicDir + path.sep + 'index.html');
+		req.send(config.staticDir + path.sep + 'index.html');
 		next();
 	});
 

@@ -40,26 +40,28 @@ var cmsPassport = function(config, app) {
 
 		for (var i = 0; i < u.emails.length; i++) {
 			var email = u.emails[i].value;
-			
+
 			User.findOne({
 				email : email
 			}, function(err, user) {
 				if (err) {
 					return done(err);
 				}
-				
+
 				if (!user) {
 					console.warn('create user', u);
 					return done(null, false);
 				} else {
 					user.google = u;
-					user.update( { username: user.username }, user, function(){
+					user.update({
+						username : user.username
+					}, user, function() {
 						console.warn('update user', u);
-						done(null, user);	
-					} );
-						
+						done(null, user);
+					});
+
 				}
-				
+
 			});
 		}
 
@@ -181,8 +183,12 @@ var cmsPassport = function(config, app) {
 	app.use(express.static(path.resolve(config.staticDir)));
 	app.use(express.static(path.resolve(config.publicDir)));
 	//app.set('views', path.resolve(__dirname + path.sep + 'views'));
-	app.set('views', path.resolve(config.publicDir));
+	//app.set('views', path.resolve(config.staticDir + path.sep + 'views'));
 	//app.set('view engine', 'ejs');
+	//app.set('view engine', 'html');
+	
+	//app.set('views', __dirname + '/views');
+	//app.engine('html', require('ejs').renderFile);
 	//app.engine('ejs', require('ejs-locals'));
 
 	app.use(cookieParser());
@@ -217,6 +223,7 @@ var cmsPassport = function(config, app) {
 			message : 'Please login',
 			status : 'info'
 		});
+		next();
 	});
 
 	app.get('/account', ensureAuthenticated, function(req, res) {
@@ -227,7 +234,7 @@ var cmsPassport = function(config, app) {
 	});
 
 	app.get('/login', function(req, res) {
-		res.render('login', {
+		res.json(200, {
 			user : req.user,
 			message : 'Please login',
 			status : 'warning'

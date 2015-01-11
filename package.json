@@ -41,6 +41,7 @@
     "finalhandler": "^0.3.3",
     "fs-extra": "^0.12.0",
     "http-proxy": "^1.3.0",
+    "jade": "^1.8.2",
     "jps-ds": "~0.0.2",
     "jquery": "~2.1.0",
     "jquery-file-upload-middleware": "~0.1.1",
