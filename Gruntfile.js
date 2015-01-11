@@ -85,7 +85,7 @@ module.exports = function (grunt) {
 			options: {
 				port: SERVER_PORT,
 				// Change this to '0.0.0.0' to access the server from outside.
-				hostname: '127.0.0.1',
+				hostname: config.host,
 				livereload: LIVERELOAD_PORT,
 				base: ['.tmp', '<%= yeoman.app %>'],
 				onCreateServer: function(server, connect, options) {
@@ -659,9 +659,7 @@ module.exports = function (grunt) {
 			return grunt.task.run(['karma:unit', 'coveralls']);
 		}
 	});
-
-	grunt.registerTask('ptor', ['coffee:test', 'protractor_webdriver', 'protractor']);
-	grunt.registerTask('build-docs', ['useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
+	
 	grunt.registerTask('build', [
 		'clean:dist',
 		'useminPrepare',
@@ -671,13 +669,15 @@ module.exports = function (grunt) {
 		'ngtemplates',
 		'ngmin',
 		'copy:dist',
-		'cdnify',
+		//'cdnify',
 		'cssmin',
 		'uglify',
 		'rev',
 		'usemin'
 	]);
 
+	grunt.registerTask('ptor', ['coffee:test', 'protractor_webdriver', 'protractor']);
+	grunt.registerTask('build-docs', ['useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:scripts']);
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
 

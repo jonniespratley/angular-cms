@@ -6,7 +6,7 @@
 	"sitecopy":"2014 ",
 	"version":"0.1",
 	"email":"jonniespratley@me.com",
-	"host":"http://localhost",
+	"host":"localhost",
 	"port":8181,
 	"apiBase":"/api/v2",
 	"version":"v2",

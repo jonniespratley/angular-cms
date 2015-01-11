@@ -178,10 +178,12 @@ var cmsPassport = function(config, app) {
 	 * TODO: Handle configuring passport
 	 *
 	 */
-	app.use(express.static(path.resolve(__dirname + path.sep + 'views')));
-	app.set('views', path.resolve(__dirname + path.sep + 'views'));
-	app.set('view engine', 'ejs');
-	app.engine('ejs', require('ejs-locals'));
+	app.use(express.static(path.resolve(config.staticDir)));
+	app.use(express.static(path.resolve(config.publicDir)));
+	//app.set('views', path.resolve(__dirname + path.sep + 'views'));
+	app.set('views', path.resolve(config.publicDir));
+	//app.set('view engine', 'ejs');
+	//app.engine('ejs', require('ejs-locals'));
 
 	app.use(cookieParser());
 	app.use(bodyParser.urlencoded({
