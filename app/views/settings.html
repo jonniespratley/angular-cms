@@ -3,15 +3,12 @@
 <div class="row">
 	<div class="col-sm-12">
 
-
-
 		<div fg-tabs class="needs-some-more-space">
 
 			<div fg-tabs-pane="Schema Editor">
 				<form class="form-horizontal" name="myForm.$state">
 					<div fg-edit
-							 fg-schema="myForm.schema">
-					</div>
+					fg-schema="myForm.schema"></div>
 				</form>
 			</div>
 
@@ -25,23 +22,23 @@
 
 		</div>
 
-
 		<form novalidate class="form-horizontal" name="previewForm" ng-init="myForm.$data = {}">
 
 			<fieldset>
 
 				<legend>
 					<div class="row">
-						<div class="col-sm-offset-3 col-sm-3">Example Form</div>
+						<div class="col-sm-offset-3 col-sm-3">
+							Example Form
+						</div>
 					</div>
 				</legend>
 
 				<!-- Magic starts here -->
 
 				<div fg-form
-						 fg-form-data="myForm.$data"
-						 fg-schema="myForm.schema">
-				</div>
+				fg-form-data="myForm.$data"
+				fg-schema="myForm.schema"></div>
 
 				<!-- Magic ends here -->
 
@@ -53,34 +50,30 @@
 
 		<script id="form-status.html" type="text/ng-template">
 			<div class="form-group">
-				<label class="control-label col-sm-3">Form status</label>
+			<label class="control-label col-sm-3">Form status</label>
 
-				<div class="col-sm-9">
-					<div class="form-control-static">
-						<span ng-if="previewForm.$invalid" class="text-danger">Invalid <span class="glyphicon glyphicon-thumbs-down"></span></span>
-						<span ng-if="previewForm.$valid" class="text-success">Valid <span class="glyphicon glyphicon-thumbs-up"></span></span>
-					</div>
-				</div>
+			<div class="col-sm-9">
+			<div class="form-control-static">
+			<span ng-if="previewForm.$invalid" class="text-danger">Invalid <span class="glyphicon glyphicon-thumbs-down"></span></span>
+			<span ng-if="previewForm.$valid" class="text-success">Valid <span class="glyphicon glyphicon-thumbs-up"></span></span>
+			</div>
+			</div>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-sm-3">Form data</label>
+			<label class="control-label col-sm-3">Form data</label>
 
-				<div class="col-sm-9">
-					<div jsonify="myForm.$data"></div>
-				</div>
+			<div class="col-sm-9">
+			<div jsonify="myForm.$data"></div>
+			</div>
 			</div>
 		</script>
 
-
-
-
-
-
-
 		<form class="form-horizontal" ng-submit="update(App)">
 
-			<legend>General</legend>
+			<legend>
+				General
+			</legend>
 			<cms-form-group label="Site Title:">
 				<input type="text" ng-model="App.sitetitle"/>
 			</cms-form-group>
@@ -88,13 +81,13 @@
 				<input type="text" ng-model="App.baseurl"/>
 			</cms-form-group>
 
-			<legend>Network</legend>
-
+			<legend>
+				Network
+			</legend>
 
 			<cms-form-group label="{{key}}" ng-repeat="(key, value) in config">
 				<input type="text" ng-model="App[key]" value="{{ angular.isObject(App[key]) }}"/>
 			</cms-form-group>
-
 
 			<div class="form-group tr">
 				<button class="btn btn-default">

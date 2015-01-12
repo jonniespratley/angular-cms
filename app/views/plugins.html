@@ -3,82 +3,91 @@
 	<div class="col-12">
 		<cms-header title="Plugins" icon="folder-open"></cms-header>
 
+		<div class="row">
+			<div class="col-sm-9">
+				<!-- Single button -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						Action <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">Action</a>
+						</li>
+						<li>
+							<a href="#">Another action</a>
+						</li>
+						<li>
+							<a href="#">Something else here</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="#">Separated link</a>
+						</li>
+					</ul>
+				</div>
+				<button class="btn btn-default">
+					Apply
+				</button>
+			</div>
+			<div class="col-sm-3">
 
+				<input type="text" class="form-control" ng-model="query">
 
-		   <div class="row">
-		   <div class="col-sm-9">
-		     <!-- Single button -->
-		<div class="btn-group">
-		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-		    Action <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu" role="menu">
-		    <li><a href="#">Action</a></li>
-		    <li><a href="#">Another action</a></li>
-		    <li><a href="#">Something else here</a></li>
-		    <li class="divider"></li>
-		    <li><a href="#">Separated link</a></li>
-		  </ul>
+			</div>
 		</div>
-		<button class="btn btn-default">Apply</button>
-		   </div>
-		     <div class="col-sm-3">
+		<br/>
+		<table class="table table-bordered table-condensed table-hover">
+			<thead>
+				<tr>
+					<th>
+					<input type="checkbox">
+					</th>
+					<th>Plugin</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="plugin in plugins | filter: query">
+					<td>
+					<input type="checkbox" ng-model="plugin.id">
+					</td>
+					<td>{{plugin.title}}</td>
+					<td>{{plugin.description}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="col-sm-6">
+				<p>
+					1 - 10 of 146 items 10 Per Page
+				</p>
+			</div>
+			<div class="col-sm-6 tr">
+				<ul class="pagination margin-none">
+					<li>
+						<a href="#">Prev</a>
+					</li>
+					<li>
+						<a href="#">1</a>
+					</li>
+					<li>
+						<a href="#">2</a>
+					</li>
+					<li>
+						<a href="#">3</a>
+					</li>
+					<li>
+						<a href="#">4</a>
+					</li>
+					<li>
+						<a href="#">Next</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-		      <input type="text" class="form-control" ng-model="query">
-
-		     </div>
-		   </div>
-		   <br/>
-		 <table class="table table-bordered table-condensed table-hover">
-		            <thead>
-		              <tr>
-		                <th>
-		                  <input type="checkbox">
-		                </th>
-		                <th>Plugin</th>
-		                <th>Description</th>
-		              </tr>
-		            </thead>
-		            <tbody>
-		              <tr ng-repeat="plugin in plugins | filter: query">
-		                <td>
-		                  <input type="checkbox" ng-model="plugin.id">
-		                </td>
-		                <td>{{plugin.title}}</td>
-		                <td>{{plugin.description}}</td>
-		              </tr>
-		            </tbody>
-		          </table>
-		          <div class="row">
-		            <div class="col-sm-6">
-		              <p>1 - 10 of 146 items 10 Per Page</p>
-		            </div>
-		            <div class="col-sm-6 tr">
-		              <ul class="pagination margin-none">
-		                <li>
-		                  <a href="#">Prev</a>
-		                </li>
-		                <li>
-		                  <a href="#">1</a>
-		                </li>
-		                <li>
-		                  <a href="#">2</a>
-		                </li>
-		                <li>
-		                  <a href="#">3</a>
-		                </li>
-		                <li>
-		                  <a href="#">4</a>
-		                </li>
-		                <li>
-		                  <a href="#">Next</a>
-		                </li>
-		              </ul>
-		            </div>
-		          </div>
-		
 	</div>
 
 </div>
 <!--/span-->
- 

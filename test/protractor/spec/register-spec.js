@@ -9,7 +9,7 @@ describe('Register: ', function () {
 		registerPage.get();
 		expect(browser.getCurrentUrl()).toContain('register');
 		return registerPage.register(testEmail, 'test').then(function () {
-			return expect(browser.getCurrentUrl()).toContain('dashboard');
+			return expect(browser.getCurrentUrl()).toContain('login');
 		});
 	});
 });

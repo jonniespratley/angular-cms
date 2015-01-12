@@ -30,7 +30,7 @@
 		"password":"isyourdaughter18?"
 	},
 	"proxy":{
-		"hostname":"localhost",
+		"hostname":"127.0.0.1",
 		"port":5001
 	},
 	"staticDir":"dist",

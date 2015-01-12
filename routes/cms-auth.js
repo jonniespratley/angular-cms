@@ -123,12 +123,7 @@ var cmsAuth = function(config, app) {
 		}
 	};
 
-	//Always users table
-	app.use(session({
-		secret : 'angular-cms',
-		resave : true,
-		saveUninitialized : true
-	}));
+	
 	app.get(config.apiBase + '/login', bodyParser.json(), cmsAuth.login);
 	app.post(config.apiBase + '/login', bodyParser.json(), cmsAuth.login);
 	app.post(config.apiBase + '/register', bodyParser.json(), cmsAuth.register);

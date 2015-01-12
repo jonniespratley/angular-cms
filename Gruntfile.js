@@ -14,7 +14,7 @@ var startNodeServer = function(){
 	var server = new cmsRouter.mount(config, _app);
 };
 
-var serverEndpoint = 'http://localhost:8181';
+var serverEndpoint = 'http://127.0.0.1:8181';
 var proxyConfig = {
 	proxy: {
 		forward: {
@@ -456,7 +456,9 @@ module.exports = function (grunt) {
 				'coffee',
 				'ngtemplates',
 				'copy:styles',
+				//'copy:dist',
 				'svgmin',
+				'imagemin',
 				'htmlmin'
 			]
 		},

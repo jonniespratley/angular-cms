@@ -2,7 +2,7 @@ window.Config = {
   baseurl: document.location.origin,
   sitetitle: 'angular-cms',
   sitedesc: 'This is the description',
-  sitebrand: '/images/angular-cms-brand.png',
+  sitebrand: 'images/angular-cms-brand.png',
   sitecopy: '2014 ',
   version: '0.1',
   email: 'jonniespratley@me.com',
@@ -16,32 +16,32 @@ window.Config = {
       id: 1,
       title: 'HTML5',
       body: 'Using HTML5 in every way to make a better user experience.',
-      image: '/images/feature-html5.png'
+      image: 'images/feature-html5.png'
     }, {
       id: 2,
       title: 'AngularJS',
       body: 'The client-side framework of choice is Angular, its a full-stack.',
-      image: '/images/feature-angular.png'
+      image: 'images/feature-angular.png'
     }, {
       id: 3,
       title: 'Twitter Bootstrap',
       body: 'The client-side UI of choice is Twitter Bootstrap 3.0.',
-      image: '/images/feature-bootstrap.png'
+      image: 'images/feature-bootstrap.png'
     }, {
       id: 4,
       title: 'PhantomJS',
       body: 'Fully testable with Jasmine Karma Runner Unit e2e with PhantomJS.',
-      image: '/images/feature-phantomjs.png'
+      image: 'images/feature-phantomjs.png'
     }, {
       id: 5,
       title: 'NodeJS',
       body: 'The server of choice is NodeJS, its fast and scalable.',
-      image: '/images/feature-nodejs.png'
+      image: 'images/feature-nodejs.png'
     }, {
       id: 6,
       title: 'MongoDB',
       body: 'The database of choice is Mongo, its fast and scalable.',
-      image: '/images/feature-mongodb.png'
+      image: 'images/feature-mongodb.png'
     }
   ],
   session: {
