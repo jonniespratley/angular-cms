@@ -1,5 +1,17 @@
----
-applications:
-- name: angular-cms
-  command: node server.js
-  buildpack: https://github.com/cloudfoundry/heroku-buildpack-nodejs.git
+name: angular-cms
+framework: node
+instances: 1
+mem: 256
+processes:
+  web: node server.js
+ignores: ['.git', 'node_modules', 'app/bower_components']
+hooks:
+#  pre-push:
+    #- gulp test
+  pre-staging:
+    - bower install
+    - grunt
+#  post-staging:
+    #- python manage.py syncdb --noinput
+#  pre-running:
+    #- python prerunsetup.py
