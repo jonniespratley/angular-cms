@@ -1,0 +1,22 @@
+app-dir: /WWW/2015Projects/angular-cms
+applications:
+  /WWW/2015Projects/angular-cms:
+    name: angular-cms
+    url: angular-cms.jsapps.io
+autoscale:
+  cpu:
+    max: 80
+    min: 20
+  enabled: no
+  instances:
+    max: 2
+    min: 1
+buildpack: https://github.com/cloudfoundry/heroku-buildpack-nodejs.git
+command: node server.js
+disk: 2048
+instances: 1
+memory: 256
+name: angular-cms
+placement-zone: default
+sso-enabled: no
+stack: lucid64
