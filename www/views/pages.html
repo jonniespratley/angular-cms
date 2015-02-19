@@ -1,0 +1,56 @@
+<div class="page-container">
+	<div class="">
+		<cms-header title="Pages" icon="folder-open"></cms-header>
+		<section>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="alerts"></div>
+
+					<table class="table table-condensed table-hover table-striped clearfix table-bordered">
+						<thead>
+							<tr>
+								<th class="th-checkbox">
+								<input type="checkbox" class="checkbox">
+								</th>
+								<th>Title</th>
+								<th>Date</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr ng-repeat="page in pages">
+								<td>
+								<input type="checkbox" value="{{page._id}}">
+								</td>
+								<td><a href="" ng-click="selectPage(page)" title="{{page.title}}">{{page.title}}</a><span class="label label-default">{{page.publish}}</span></td>
+								<td>{{page.created | date:'medium'}}</td>
+								<td class="actions">
+								<div class="btn-group">
+									<button type="button" class="btn btn-default btn-sm" ng-click="selectPage(page);" data-toggle="modal" data-target="#user-modal">
+										<i class="fa fa-edit"></i>
+									</button>
+									<button type="button" class="btn btn-default btn-sm" ng-click="remove(page);">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</section>
+		<div class="row">
+			<form class="form-horizontal" ng-submit="save(page)">
+				<div class="col-sm-12">
+					<div fg-form="" fg-form-data="page" fg-schema="pageSchema"></div>
+					<button href="#" class="btn btn-danger btn-block" ng-click="remove(page)">
+						Move to trash
+					</button>
+					<button class="btn pull-right btn-primary btn-block">
+						Save
+					</button>
+				</div>
+			</form>
+		</div></div></div>
