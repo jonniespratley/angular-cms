@@ -15,8 +15,12 @@ RUN apt-get update && apt-get install -y \
 
 RUN ln -s /usr/bin/nodejs /usr/local/bin/node
 
-RUN cd /angular-cms \
-	npm install
+RUN npm install -g grunt-cli bower
 
+RUN cd /angular-cms \
+	npm install \
+	bower install \
+	grunt -v
+	
 EXPOSE  1339
 CMD ["npm", "start"]
