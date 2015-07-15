@@ -16,20 +16,17 @@
  */
 
 //## Required Modules
-var crypto = require('crypto');
-var path = require('path');
-var express = require('express');
-var path = require('path');     //used for file path
-var fs = require('fs-extra');       //File System - for file manipulatio
-var util = require('util');
-var request = require('request');
-
-var sio = require('socket.io');
-var Deferred = require("promised-io/promise").Deferred;
-var when = require("promised-io/promise");
-var bodyParser = require('body-parser');
-var busboy = require('connect-busboy');
-var markdown = require("markdown").markdown;
+var crypto = require('crypto'),
+	express = require('express'),
+	path = require('path'),
+	fs = require('fs-extra'),
+	util = require('util'),
+	request = require('request');
+var Deferred = require("promised-io/promise").Deferred,
+	when = require("promised-io/promise"),
+	bodyParser = require('body-parser'),
+	busboy = require('connect-busboy'),
+	markdown = require("markdown").markdown;
 
 
 //Strings for results
@@ -40,114 +37,49 @@ var MESSAGES = {
 
 };
 var config = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config/config.json')));
-var DS = require('jps-ds').DS;
-var _ds = new DS({
-	host: config.db.url,
-	//host: 'localhost/angular-cms',
-	models: {
-		'groups': {
-			title: String,
-			body: String,
-			slug: String,
-			created: Date,
-			updated: Date
-		},
-		'users': {
-			id: String,
-			provider: String,
-			displayName: String,
-			name: Object,
-			emails: Array,
-			photos: Array,
-			username: String,
-			email: String,
-			password: String,
-			active: Boolean,
-			meta: Object,
-			token: String,
-			created: Date,
-			updated: Date
-		},
-		'uploads': {
-			title: String,
-			body: String,
-			image: String,
-			path: String,
-			filename: String,
-			meta: Object,
-			created: Date,
-			updated: Date,
-			userid: String
-		},
-		'posts': {
-			title: String,
-			body: String,
-			image: Object,
-			type: String,
-			published: Boolean,
-			created: Date,
-			updated: Date,
-			status: Object,
-			parent: Object,
-			template: Object,
-			order: Number,
-			meta: Object
-		},
-		'pages': {
-			title: String,
-			body: String,
-			image: Object,
-			type: String,
-			published: Boolean,
-			created: Date,
-			updated: Date,
-			status: Object,
-			parent: Object,
-			template: Object,
-			order: Number,
-			meta: Object
-		},
-		'themes': {},
-		'widgets': {
-			title: String,
-			body: String,
-			path: String,
-			filename: String,
-			meta: Object,
-			created: Date,
-			updated: Date,
-			userid: String,
-			active: Boolean
-		},
-		'plugins': {
-			title: String,
-			body: String,
-			path: String,
-			filename: String,
-			meta: Object,
-			created: Date,
-			updated: Date,
-			userid: String,
-			active: Boolean
-		}
+
+
+
+// TODO: Using pouchdb
+var PouchDB = require('pouchdb');
+PouchDB.debug('*');
+var db = new PouchDB(config.db.local);
+var _ds = {
+	findOne: function(id, params) {
+		return db.get(id, params);
+	},
+	findAll: function(params) {
+		return db.allDocs(params);
+	},
+	create: function(id, data) {
+		return db.put(data, id);
+	},
+	update: function(id, data) {
+		return db.get(id).then(function(resp) {
+			data._rev = resp._rev;
+			return db.put(data, id);
+		})
+	},
+	remove: function(id) {
+		return db.get(id).then(function(resp) {
+			return db.remove(resp);
+		})
 	}
-});
+};
+
+
 
 function delay(ms, value) {
-	// create a new Deferred
 	var deferred = new Deferred();
-	setTimeout(function () {
-		// fulfill the deferred/promise, all listeners to the promise will be notified, and
-		// provided the value as the value of the promise
+	setTimeout(function() {
 		deferred.resolve(value);
 	}, ms);
-	// return the promise that is associated with the Deferred object
 	return deferred.promise;
 }
 
 //### hashPassword
 //Hash password using basic sha1 hash.
-var hashPassword = function (pass, salt) {
+var hashPassword = function(pass, salt) {
 	var shasum = crypto.createHash('sha1');
 	shasum.update(salt + pass);
 
@@ -179,7 +111,7 @@ colors.setTheme({
 //I am a RESTful resource object for handling CRUD operations on v1 or v2 api.
 var RestResource = {
 	config: null,
-	init: function (config) {
+	init: function(config) {
 		this.config = config;
 		return this;
 	},
@@ -188,13 +120,15 @@ var RestResource = {
 		v1: 'https://www..com',
 		v2: '/api/v2/'
 	},
-	log: function () {
-		console.log(util.inspect(arguments, {colors: true}));
+	log: function() {
+		console.log(util.inspect(arguments, {
+			colors: true
+		}));
 
 	},
 	//### index
 	//I handle displaying a message with the version for this api.
-	index: function (req, res, next) {
+	index: function(req, res, next) {
 		res.json({
 			message: 'REST API Server ' + RestResource.useversion
 		});
@@ -202,61 +136,60 @@ var RestResource = {
 
 	//### get
 	//I handle gathering records dynamically from a call to the v2 api.
-	get: function (req, res, next) {
-		if (req.param('id')) {
+	get: function(req, res, next) {
+		if (req.params.id) {
 			console.log('find one', req.params.id);
-			_ds.findOne(req.params.collection, req.params.id).then(function (data) {
+			_ds.findOne(req.params.id, req.params).then(function(data) {
 				res.send(data);
-			}, function (err) {
+			}, function(err) {
 				res.send(err);
 			});
 		} else {
-			_ds.findAll(req.params.collection).then(function (data) {
+			_ds.findAll(req.params).then(function(data) {
 				res.send(data);
-			}, function (err) {
+			}, function(err) {
 				res.send(err);
 			});
 		}
 	},
 	//### add
 	//I handle adding a record to the database.
-	add: function (req, res, next) {
-		_ds.create(req.params.collection, req.body).then(function (data) {
+	add: function(req, res, next) {
+		_ds.create(req.body).then(function(data) {
 			console.warn('create', data);
 			res.send(data);
-		}, function (err) {
+		}, function(err) {
 			res.send(err);
 		});
 	},
 	//### edit
 	//I handle
-	edit: function (req, res, next) {
+	edit: function(req, res, next) {
 		var data = req.body;
 		delete data._id;
-		_ds.update(req.params.collection, req.params.id, data).then(function (data) {
+		_ds.update(req.params.id, data).then(function(data) {
 			console.warn(data);
 			res.send(data);
-		}, function (err) {
+		}, function(err) {
 			res.send(err);
 		});
 	},
 	//### view
 	//I handle
-	view: function (req, res, next) {
-	},
+	view: function(req, res, next) {},
 	//### destroy
 	//I handle
-	destroy: function (req, res, next) {
-		_ds.destroy(req.params.collection, req.params.id).then(function (data) {
+	destroy: function(req, res, next) {
+		_ds.destroy(req.params.id).then(function(data) {
 			console.warn(data);
 			res.send(data);
-		}, function (err) {
+		}, function(err) {
 			res.send(err);
 		});
 	},
-	readme: function (res, req) {
+	readme: function(res, req) {
 		var localPath = __dirname + '/../README.md';
-		fs.readFile(localPath, 'utf8', function (err, data) {
+		fs.readFile(localPath, 'utf8', function(err, data) {
 			if (err) {
 				req.end('There was an error.');
 				return console.log(err);
@@ -270,8 +203,8 @@ var RestResource = {
 			console.log(data);
 		});
 	},
-	plugins: function (req, res) {
-		var result = fs.readdir('./app/cms-plugins', function (err, files) {
+	plugins: function(req, res) {
+		var result = fs.readdir('./app/cms-plugins', function(err, files) {
 			console.log(files);
 			res.header('Content-Type', 'application/json');
 			res.jsonp(200, files);
@@ -283,8 +216,7 @@ var RestResource = {
 //### getFile
 //Get file contents from a file.
 function getFile(localPath, mimeType, res) {
-
-	fs.readFile(localPath, 'utf8', function (err, data) {
+	fs.readFile(localPath, 'utf8', function(err, data) {
 		if (err) {
 			res.end('There was an error.');
 			return console.log(err);
@@ -303,10 +235,9 @@ function getFile(localPath, mimeType, res) {
 //### writeFile
 //Write contents to a file
 function writeFile(localPath, contents) {
-	// create a stream, and create the file if it doesn't exist
 	stream = fs.createWriteStream(localPath);
 	console.log('writeFile', localPath);
-	stream.on("open", function () {
+	stream.on("open", function() {
 		// write to and close the stream at the same time
 		stream.end(contents, 'utf-8');
 		res.end(html);

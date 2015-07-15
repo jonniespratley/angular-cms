@@ -1,20 +1,26 @@
-
 /* jshint camelcase:false */
 'use strict';
 var fs = require('fs'),
-		express = require('express'),
-		cmsRouter = require('./routes/cms-router.js'),
-		config = JSON.parse(fs.readFileSync('./config/config.json')),
-		LIVERELOAD_PORT = 35729,
-		SERVER_PORT = process.env.PORT || 9000;
+	express = require('express'),
+	cmsRouter = require('./routes/cms-router.js'),
+	config = JSON.parse(fs.readFileSync('./config/config.json')),
+	LIVERELOAD_PORT = 35329,
+	SERVER_PORT = process.env.PORT || 9005;
 
 
-var startNodeServer = function(){
-	var _app = express();
-	var server = new cmsRouter.mount(config, _app);
+var startNodeServer = function() {
+
+	var app = express();
+	var router = new cmsRouter(config, app);
+	router.mount();
+
+	app.listen(config.port, function() {
+		console.log('express server listening on port: ' + config.port);
+	});
+
 };
 
-var serverEndpoint = 'http://127.0.0.1:8181';
+var serverEndpoint = 'http://127.0.0.1:' + config.port;
 var proxyConfig = {
 	proxy: {
 		forward: {
@@ -27,16 +33,14 @@ var proxyConfig = {
 
 
 //var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
-var mountFolder = function (connect, dir) {
+var mountFolder = function(connect, dir) {
 	return connect.static(require('path').resolve(dir));
 };
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
 	//Connect proxy to route requests to localhost:8181/api
-	grunt.loadNpmTasks('grunt-connect-proxy');
-	grunt.loadNpmTasks('intern');
-	require('json-proxy').initialize({});
+	//require('json-proxy').initialize({});
 	require('load-grunt-tasks')(grunt);
 	require('time-grunt')(grunt);
 
@@ -96,7 +100,7 @@ module.exports = function (grunt) {
 				options: {
 					open: true,
 					base: ['.tmp', '<%= yeoman.app %>'],
-					middleware: function (connect, options) {
+					middleware: function(connect, options) {
 						startNodeServer(options, connect);
 						return [
 							require('json-proxy').initialize(proxyConfig),
@@ -119,7 +123,7 @@ module.exports = function (grunt) {
 					keepAlive: true,
 					open: true,
 					base: '<%= yeoman.dist %>',
-					middleware: function (connect, options) {
+					middleware: function(connect, options) {
 						return [
 							require('json-proxy').initialize(proxyConfig),
 							mountFolder(connect, 'dist')
@@ -131,7 +135,7 @@ module.exports = function (grunt) {
 				options: {
 					port: 9191,
 					open: true,
-					middleware: function (connect, options) {
+					middleware: function(connect, options) {
 						return [
 							mountFolder(connect, '.grunt'),
 							mountFolder(connect, '.tmp'),
@@ -152,20 +156,18 @@ module.exports = function (grunt) {
 				//'Gruntfile.js'
 			],
 			app: [
-			'<%= yeoman.app %>/scripts',
-			'!<%= yeoman.app %>/scripts/libs'
+				'<%= yeoman.app %>/scripts',
+				'!<%= yeoman.app %>/scripts/libs'
 			]
 		},
 
 		// Empties folders to start fresh
 		clean: {
 			dist: {
-				files: [
-					{
-						dot: true,
-						src: ['.tmp', '<%= yeoman.dist %>/*', '!<%= yeoman.dist %>/.git*']
-					}
-				]
+				files: [{
+					dot: true,
+					src: ['.tmp', '<%= yeoman.dist %>/*', '!<%= yeoman.dist %>/.git*']
+				}]
 			},
 			server: '.tmp'
 		},
@@ -176,14 +178,12 @@ module.exports = function (grunt) {
 				browsers: ['last 1 version']
 			},
 			dist: {
-				files: [
-					{
-						expand: true,
-						cwd: '.tmp/styles/',
-						src: '{,*/}*.css',
-						dest: '.tmp/styles/'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: '.tmp/styles/',
+					src: '{,*/}*.css',
+					dest: '.tmp/styles/'
+				}]
 			}
 		},
 
@@ -195,48 +195,40 @@ module.exports = function (grunt) {
 				sourceRoot: ''
 			},
 			dist: {
-				files: [
-					{
-						expand: true,
-						cwd: '<%= yeoman.app %>/scripts',
-						src: '{,*/}*.coffee',
-						dest: '.tmp/scripts',
-						ext: '.js'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: '<%= yeoman.app %>/scripts',
+					src: '{,*/}*.coffee',
+					dest: '.tmp/scripts',
+					ext: '.js'
+				}]
 			},
 			test: {
-				files: [
-					{
-						expand: true,
-						cwd: 'test',
-						src: '{,**/}*.{coffee,litcoffee,coffee.md}',
-						dest: '.tmp',
-						ext: '.js'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: 'test',
+					src: '{,**/}*.{coffee,litcoffee,coffee.md}',
+					dest: '.tmp',
+					ext: '.js'
+				}]
 			},
 			e2e: {
-				files: [
-					{
-						expand: true,
-						cwd: 'test/e2e',
-						src: '{,*/}*.coffee',
-						dest: '.tmp/e2e',
-						ext: '.js'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: 'test/e2e',
+					src: '{,*/}*.coffee',
+					dest: '.tmp/e2e',
+					ext: '.js'
+				}]
 			},
 			routes: {
-				files: [
-					{
-						expand: true,
-						cwd: 'routes',
-						src: '{,*/}*.coffee',
-						dest: '.tmp/routes',
-						ext: '.js'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: 'routes',
+					src: '{,*/}*.coffee',
+					dest: '.tmp/routes',
+					ext: '.js'
+				}]
 			}
 		},
 
@@ -305,26 +297,22 @@ module.exports = function (grunt) {
 		// The following *-min tasks produce minified files in the dist folder
 		imagemin: {
 			dist: {
-				files: [
-					{
-						expand: true,
-						cwd: '<%= yeoman.app %>/images',
-						src: '{,*/}*.{png,jpg,jpeg,gif}',
-						dest: '<%= yeoman.dist %>/images'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: '<%= yeoman.app %>/images',
+					src: '{,*/}*.{png,jpg,jpeg,gif}',
+					dest: '<%= yeoman.dist %>/images'
+				}]
 			}
 		},
 		svgmin: {
 			dist: {
-				files: [
-					{
-						expand: true,
-						cwd: '<%= yeoman.app %>/images',
-						src: '{,*/}*.svg',
-						dest: '<%= yeoman.dist %>/images'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: '<%= yeoman.app %>/images',
+					src: '{,*/}*.svg',
+					dest: '<%= yeoman.dist %>/images'
+				}]
 			}
 		},
 		htmlmin: {
@@ -350,14 +338,12 @@ module.exports = function (grunt) {
 					 */
 
 				},
-				files: [
-					{
-						expand: true,
-						cwd: '<%= yeoman.app %>',
-						src: ['*.html', 'views/*.html'],
-						dest: '<%= yeoman.dist %>'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: '<%= yeoman.app %>',
+					src: ['*.html', 'views/*.html'],
+					dest: '<%= yeoman.dist %>'
+				}]
 			}
 		},
 
@@ -386,14 +372,12 @@ module.exports = function (grunt) {
 		// minsafe compatible so Uglify does not destroy the ng references
 		ngmin: {
 			dist: {
-				files: [
-					{
-						expand: true,
-						cwd: '.tmp/concat/scripts',
-						src: '*.js',
-						dest: '.tmp/concat/scripts'
-					}
-				]
+				files: [{
+					expand: true,
+					cwd: '.tmp/concat/scripts',
+					src: '*.js',
+					dest: '.tmp/concat/scripts'
+				}]
 			}
 		},
 
@@ -407,26 +391,23 @@ module.exports = function (grunt) {
 		// Copies remaining files to places other tasks can use
 		copy: {
 			dist: {
-				files: [
-					{
-						expand: true,
-						dot: true,
-						cwd: '<%= yeoman.app %>',
-						dest: '<%= yeoman.dist %>',
-						src: [
-							'*.{ico,png,txt}', '.htaccess',
-							//'bower_components/**/*',
-							'images/{,*/}*.{webp}',
-							'fonts/*'
-						]
-					},
-					{
-						expand: true,
-						cwd: '.tmp/images',
-						dest: '<%= yeoman.dist %>/images',
-						src: ['generated/*']
-					}
-				]
+				files: [{
+					expand: true,
+					dot: true,
+					cwd: '<%= yeoman.app %>',
+					dest: '<%= yeoman.dist %>',
+					src: [
+						'*.{ico,png,txt}', '.htaccess',
+						//'bower_components/**/*',
+						'images/{,*/}*.{webp}',
+						'fonts/*'
+					]
+				}, {
+					expand: true,
+					cwd: '.tmp/images',
+					dest: '<%= yeoman.dist %>/images',
+					src: ['generated/*']
+				}]
 			},
 			styles: {
 				expand: true,
@@ -550,7 +531,7 @@ module.exports = function (grunt) {
 				dest: '.tmp/scripts/templates.js',
 				options: {
 					module: 'angularCmsApp',
-					url: function (url) {
+					url: function(url) {
 						return url.replace('app/', '');
 					},
 					prefix: '',
@@ -619,23 +600,13 @@ module.exports = function (grunt) {
 					'test/routes/*-spec.js'
 				]
 			}
-		},
-		intern: {
-			test: {
-				options: {
-					runType: 'client',
-					config: 'test/intern.conf',
-					reporters: [ 'console' ],
-					suites: []
-				}
-			}
 		}
 	};
 
 	// Define the configuration for all the tasks
 	grunt.initConfig(GruntConfig);
 
-	grunt.registerTask('serve', function (target) {
+	grunt.registerTask('serve', function(target) {
 		if (target === 'dist') {
 			return grunt.task.run(['build', 'connect:dist:keepalive']);
 		}
@@ -643,12 +614,12 @@ module.exports = function (grunt) {
 		grunt.task.run(['clean:server', 'concurrent:server', 'autoprefixer', 'connect:livereload', 'watch']);
 	});
 
-	grunt.registerTask('server', function () {
+	grunt.registerTask('server', function() {
 		grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
 		grunt.task.run(['serve']);
 	});
 
-	grunt.registerTask('test', function (target) {
+	grunt.registerTask('test', function(target) {
 		grunt.task.run(['clean:server', 'concurrent:test', 'autoprefixer', 'connect:test']);
 		if (target === 'e2e') {
 			return grunt.task.run(['karma', 'protractor_webdriver', 'protractor', 'coveralls']);
@@ -658,7 +629,7 @@ module.exports = function (grunt) {
 			return grunt.task.run(['karma:unit', 'coveralls']);
 		}
 	});
-	
+
 	grunt.registerTask('build', [
 		'clean:dist',
 		'useminPrepare',
@@ -669,7 +640,7 @@ module.exports = function (grunt) {
 		'ngtemplates',
 		'copy:dist',
 		//'cdnify',
-		'cssmin',
+		//'cssmin',
 		'uglify',
 		'rev',
 		'usemin'
@@ -678,8 +649,8 @@ module.exports = function (grunt) {
 	grunt.registerTask('ptor', ['coffee:test', 'protractor_webdriver', 'protractor']);
 	grunt.registerTask('build-docs', ['useminPrepare', 'autoprefixer', 'concat', 'ngmin']);
 	grunt.registerTask('docs', ['coffee', 'ngdocs', 'connect:docs', 'watch:scripts']);
+	grunt.registerTask('dist', ['docs', 'build']);
 	grunt.registerTask('default', ['newer:jshint', 'test', 'build']);
-
 	grunt.registerTask('heroku:production', 'build');
 	grunt.registerTask('heroku:development', 'build');
 };

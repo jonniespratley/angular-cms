@@ -4,7 +4,7 @@ node_js:
 before_script:
   - 'npm install -g bower grunt-cli'
   - 'bower install'
-  - 'grunt --force'
+  - 'grunt -f -v'
   #- sleep 2
   #- 'grunt serve'
 after_script:

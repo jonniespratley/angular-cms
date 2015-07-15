@@ -3,22 +3,22 @@ var fs = require('fs'),
 	httpProxy = require('http-proxy');
 
 
-module.exports = function (config, app) {
-	console.warn( 'cms-proxy', 'initialized', config.proxy );
+module.exports = function(config, app) {
+	console.warn('cms-proxy', 'initialized', config.proxy);
 
 	/**
-	* @TODO - HTTPS Key and Cert
-	*
-	* This is the location of your https cert and key.
-	*/
+	 * @TODO - HTTPS Key and Cert
+	 *
+	 * This is the location of your https cert and key.
+	 */
 	var httpsKey = fs.readFileSync(config.https.key).toString();
 	var httpsCert = fs.readFileSync(config.https.cert).toString();
 
 
 	/**
-	* @TODO - Proxy Options
-	* This object holds options used for creating a proxy server.
-	*/
+	 * @TODO - Proxy Options
+	 * This object holds options used for creating a proxy server.
+	 */
 	var options = {
 		port: 8080,
 		host: {
@@ -51,15 +51,6 @@ module.exports = function (config, app) {
 				port: options.api.port
 			});
 			util.log('Routing request: API server'.warn);
-		}
-		else if (req.url.match(/^\/1\//)) {
-
-			/* Default express server */
-			proxy.proxyRequest(req, res, {
-				host: 'api.parse.com'
-			});
-			util.log('Routing request: Parse Server'.warn);
-
 		} else {
 
 			/* Default express server */
@@ -73,7 +64,7 @@ module.exports = function (config, app) {
 
 
 	//Start the proxy server
-	proxyServer.listen(config.proxy.port, function(){
+	proxyServer.listen(config.proxy.port, function() {
 		console.log('cms-proxy server listening on ', config.proxy.port);
 	});
 };
