@@ -1,7 +1,6 @@
 var bodyParser = require('body-parser'),
-	mongoose = require('mongoose'),
+
 	util = require('util'),
-	User = require('./models/user'),
 	session = require('express-session'),
 	crypto = require('crypto'),
 	bcrypt = require('bcrypt-nodejs');
@@ -15,6 +14,8 @@ var cmsAuth = function(config, app) {
 		return bcrypt.hashSync(pass);
 	};
 
+	var UserModel = require('./models/user');
+var User = new UserModel(config, app);
 	var cmsAuth = {
 		/**
 		 * //### login
@@ -33,11 +34,25 @@ var cmsAuth = function(config, app) {
 			}
 			query.password = hashPassword(req.body.password, query.username);
 			console.warn('trying to login', query);
+
+			query._id = 'user-'+ query.username;
+
+			app.locals.db.get(query._id).then(function(resp){
+				console.log('found user', resp);
+				res.status(200).json(resp);
+			}).catch(function(err){
+				console.log('No user so creating');
+				res.status(404).json(err);
+			});
+
+
+			/*
+
 			User.findOne({
 				username: query.username
 			}, function(err, data) {
 				if (err) {
-					return res.jsonp(400, err);
+					return res.json(400, err);
 				}
 				try {
 					if (data && bcrypt.compareSync(req.body.password, data.password)) {
@@ -54,6 +69,7 @@ var cmsAuth = function(config, app) {
 					});
 				}
 			});
+			*/
 		},
 		/**
 		 * Handle registering a new user
@@ -71,7 +87,7 @@ var cmsAuth = function(config, app) {
 			if (req.body.email) {
 				data.email = req.body.email;
 			}
-
+			data._id = 'user-'+ data.username;
 			data.password = hashPassword(req.body.password, data.username);
 			data.created_at = new Date();
 			data.updated_at = new Date();
@@ -80,6 +96,22 @@ var cmsAuth = function(config, app) {
 
 			console.warn('trying to register', data);
 
+			app.locals.db.get(data._id).then(function(resp){
+				console.log('found user', resp);
+				res.status(404).json({
+					message: 'User already exists'
+				});
+			}).catch(function(err){
+				console.log('No user so creating');
+				app.locals.db.put(data).then(function(resp){
+					res.status(201).json(resp);
+				});
+			})
+
+
+
+
+/*
 			//Try and find user
 			User.find({
 				username: data.username
@@ -89,7 +121,7 @@ var cmsAuth = function(config, app) {
 				}));
 				var user = new User(data);
 				if (err) {
-					res.jsonp(400, {
+					res.json(400, {
 						message: 'Problem registering!'
 					});
 				}
@@ -101,7 +133,7 @@ var cmsAuth = function(config, app) {
 				} else {
 					user.save(function(er, ok) {
 						if (er) {
-							return res.jsonp(400, {
+							return res.json(400, {
 								message: 'Problem registering!'
 							});
 						} else {
@@ -111,7 +143,11 @@ var cmsAuth = function(config, app) {
 				}
 
 			});
+			*/
 		},
+
+
+
 		session: function(req, res, next) {
 			var user = req.session;
 			if (req.session && req.session.user) {

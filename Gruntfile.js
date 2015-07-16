@@ -32,7 +32,7 @@ var proxyConfig = {
 };
 
 
-//var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
 var mountFolder = function(connect, dir) {
 	return connect.static(require('path').resolve(dir));
 };
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
 					open: true,
 					base: ['.tmp', '<%= yeoman.app %>'],
 					middleware: function(connect, options) {
-						startNodeServer(options, connect);
+						//startNodeServer(options, connect);
 						return [
 							require('json-proxy').initialize(proxyConfig),
 							mountFolder(connect, '.grunt'),

@@ -8,7 +8,7 @@ module.exports = function(config, app) {
 	var router = express.Router();
 
 	router.use(function(req, res, next) {
-		console.log('cms-rest Time:', Date.now());
+		console.log('cms-rest Time:', Date.now(), req.params, req.method, req.body);
 		next();
 	});
 

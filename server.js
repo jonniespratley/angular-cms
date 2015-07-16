@@ -46,7 +46,14 @@ var options = {
 var staticDir = config.publicDir;
 
 console.log('staticDir', staticDir);
-app.use(express.static(staticDir, options));
+
+
+//app.use(express.static(config.publicDir));
+//app.use(express.static(config.staticDir));
+//app.use(express.static('www'));
+app.use(express.static('app'));
+
+app.use('/www', express.static('./www'));
 app.use(express.static(path.resolve(__dirname, config.staticDir), options));
 app.all('/', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -57,8 +64,9 @@ app.all('/', function(req, res, next) {
 
 app.get('/', function(res, req, next) {
   var indexFile = config.publicDir + path.sep + 'index.html';
-  console.warn('Loading index', indexFile);
-  req.send(indexFile);
+  console.log('Loading index', indexFile);
+  req.sendFile(indexFile);
+  next();
 });
 
 app.listen(port, function() {

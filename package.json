@@ -1,14 +1,24 @@
 {
   "name": "angular-cms",
+  "productName": "angular-cms-app",
   "version": "0.0.2",
   "description": "This is a lightweight CMS built with Angular.js, Twitter Bootstrap and Node.js.",
   "author": "Jonnie Spratley",
   "license": "MIT",
   "readmeFilename": "README.md",
+    "main": "index.js",
   "homepage": "https://github.com/jonniespratley/angular-cms",
-  "main": "Gruntfile.js",
   "bugs": {
     "url": "https://github.com/jonniespratley/angular-cms/issues"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "start": "electron .",
+    "build": "electron-packager . $npm_package_productName --prune --asar --all --version=0.29.1"
   },
   "directories": {
     "doc": "docs",
@@ -64,11 +74,12 @@
     "request": "~2.34.0",
     "serve-static": "^1.8.0",
     "socket.io": "~0.9.16",
-    "websocket": "^1.0.14"
+    "websocket": "^1.0.14",
+    "electron-debug": "^0.1.1"
   },
   "devDependencies": {
     "chai": "^1.10.0",
-    "connect-proxy": "~1.0.2",
+
     "del": "^1.1.0",
     "grunt": "~0.4.4",
     "grunt-angular-templates": "~0.5.1",
@@ -127,18 +138,12 @@
     "mocha": "^2.0.1",
     "protractor": "^1.5.0",
     "supertest": "^0.15.0",
-    "time-grunt": "~0.2.1"
+    "time-grunt": "~0.2.1",
+    "electron-packager": "^5.0.0",
+    "electron-prebuilt": "^0.29.1"
   },
   "peerDependencies": {
     "grunt": "0.4.x",
     "karma": "~0.12.0"
-  },
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.3.x"
-  },
-  "scripts": {
-    "start": "node server.js",
-    "test": "grunt test"
   }
 }

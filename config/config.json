@@ -36,7 +36,7 @@
 		"port": 5001
 	},
 	"staticDir": "./app",
-	"publicDir": "./www",
+	"publicDir": "./app",
 	"uploadsTmpDir": "./.tmp",
 	"uploadsDestDir": "./www/cms-content/uploads",
 	"uploadsUrl": "/cms-content/",
