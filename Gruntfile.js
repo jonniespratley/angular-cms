@@ -640,7 +640,7 @@ module.exports = function(grunt) {
 		'ngtemplates',
 		'copy:dist',
 		//'cdnify',
-		//'cssmin',
+		'cssmin',
 		'uglify',
 		'rev',
 		'usemin'

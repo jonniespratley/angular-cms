@@ -21,10 +21,8 @@ module.exports = function(config, app) {
 	var db = new PouchDB(config.db.local);
 	app.locals.db = db;
 
+	console.log('Connected to', config.db.local);
 
-	db.info().then(function(resp) {
-		console.log('Connected to', config.db.local, resp);
-	});
 
 
 	var serverPort = process.env.PORT || config.port;
@@ -33,11 +31,11 @@ module.exports = function(config, app) {
 
 	require('./cms-db')(config);
 	require('./cms-auth')(config, app);
-	require('./cms-passport')(config, app);
+	//	require('./cms-passport')(config, app);
 	require('./cms-upload')(config, app);
 	require('./cms-server')(config, app);
 	require('./cms-rest')(config, app);
-	require('./cms-proxy')(config, app);
+	//require('./cms-proxy')(config, app);
 	//require('./cms-sockets')(config, server);
 
 	this.mount = function() {
