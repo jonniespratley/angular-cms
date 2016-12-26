@@ -1,17 +1,13 @@
-name: angular-cms
-framework: node
-instances: 1
-mem: 256
-processes:
-  web: node server.js
-ignores: ['.git', 'node_modules', 'app/bower_components']
-hooks:
-#  pre-push:
-    #- gulp test
-  pre-staging:
-    - bower install
-    - grunt
-#  post-staging:
-    #- python manage.py syncdb --noinput
-#  pre-running:
-    #- python prerunsetup.py
+---
+applications:
+  - name: angular-cms
+    buildpack: https://github.com/cloudfoundry/heroku-buildpack-nodejs.git
+    #memory: 256MB
+    stack: cflinuxfs2
+    path: .
+    command: node server.js
+    services:
+      - my_uaa_instance
+    env:
+      NODE_ENV: 'production'
+      DEBUG: '*'

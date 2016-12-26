@@ -1,19 +1,14 @@
 language: node_js
 node_js:
-  - '0.10'
+  - 'v7.0.0'
 before_script:
-  - 'npm install -g bower grunt-cli'
+#  - 'npm install -g bower grunt-cli'
   - 'bower install'
   - 'grunt -f -v'
   #- sleep 2
   #- 'grunt serve'
 after_script:
   - cat coverage/**/lcov.info | codeclimate
-deploy:
-  provider: heroku
-  api_key: '6ac65b88-dd6d-421f-9fc7-c9ae18f71cb4'
-  on:
-    all_branches: true
 addons:
   code_climate:
     repo_token: 0c38fe0d4c6cc50053304b8cd4859d74624619e2707280ac9287be548e905404
