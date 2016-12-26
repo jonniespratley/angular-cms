@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 'v7.0.0'
 before_script:
-#  - 'npm install -g bower grunt-cli'
+  - 'npm install -g bower grunt-cli'
   - 'bower install'
   - 'grunt -f -v'
   #- sleep 2
