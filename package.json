@@ -11,12 +11,10 @@
   "bugs": {
     "url": "https://github.com/jonniespratley/angular-cms/issues"
   },
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.3.x"
-  },
   "scripts": {
+    "build": "grunt",
     "test": "grunt test",
+    "serve": "grunt server",
     "start": "electron .",
     "build": "electron-packager . $npm_package_productName --prune --asar --all --version=0.29.1"
   },
